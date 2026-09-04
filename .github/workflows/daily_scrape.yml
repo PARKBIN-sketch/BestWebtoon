@@ -1,0 +1,40 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/daily_scrape.yml
+# (GitHub이 이 경로에 있는 .yml 파일만 자동으로 인식합니다)
+
+name: Daily Webtoon Scraping
+
+on:
+  schedule:
+    # UTC 기준 17:00 = 한국시간(KST) 새벽 2:00
+    # 원하는 시간으로 바꾸려면: 한국시간 - 9시간 = UTC 시간
+    - cron: "0 17 * * *"
+  workflow_dispatch:  # "Run workflow" 버튼으로 수동 실행도 가능하게 함
+
+permissions:
+  contents: write  # 자동 커밋/푸시를 위해 쓰기 권한 명시
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: 의존성 설치
+        run: pip install requests
+
+      - name: 크롤러 실행
+        run: python scouting_desk_crawler.py
+
+      - name: 수집 결과 커밋 및 푸시
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --quiet --cached || git commit -m "chore: 자동 수집 $(date +'%Y-%m-%d')"
+          git push
