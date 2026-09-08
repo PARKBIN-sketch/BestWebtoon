@@ -20,6 +20,21 @@
        해당 작품 항목에 signals/episodeCount/keywords 등이 그대로 들어있어서
        스카우팅 데스크 화면에서 바로 배지로 보여줄 수 있음)
     5. 승격/삭제 검증 결과는 별도로 promotion_log.jsonl 에도 누적 기록
+    6. ⭐ 순환 스캔(round robin): 위 세 트랙에 안 걸린 나머지 작품들도 버리지 않고,
+       "한 번도 확인 안 된 작품" → "가장 오래전에 확인한 작품" 순으로 하루 최대
+       ROUND_ROBIN_DAILY_QUOTA개씩 야금야금 딥체크합니다. 서버에 부담 주지
+       않으려고 하루 커버리지를 낮게 잡은 대신, 며칠~몇 주에 걸쳐 결국 전체
+       작품을 한 바퀴 다 훑는 걸 목표로 합니다. 확인 이력은
+       data/deep_check_state.json 에 titleId별로 저장해서 다음 실행 때
+       이어서 진행합니다.
+    7. ⭐ 연재 주기가 비정상적으로 길면(HIATUS_CADENCE_DAYS 이상) 키워드에
+       안 걸려도 자동으로 "hiatus_suspect"(장기휴재 의심) 신호를 붙입니다.
+       (실제로 "감사 인사 + 특별편" 같은 제목은 키워드 목록에 없어서 못 잡았는데,
+       연재주기 116일이라는 수치로는 잡을 수 있었던 사례가 있었습니다.)
+    8. ⭐ 트랙 C(업데이트순 활용, API 호출 0회): 목록 자체가 order=UPDATE라서
+       각 작품이 그 장르 안에서 몇 번째로 나왔는지(updateRank)를 기록해두면,
+       회차 API를 따로 안 불러도 "최근에 업데이트했고 반응도 괜찮은 작품"을
+       공짜로 찾을 수 있습니다. (updateRank 상위 + 장르 내 별점 상위 조합)
 
 ⚠️ 중요한 교훈 (실제로 겪은 실패 사례들):
     - "베스트도전 목록에서 사라짐 = 정식연재 승격"이라고 가정했다가 틀렸습니다.
@@ -34,6 +49,10 @@
       즉시확인/육성관찰은 화수만 확인하고 회차 부제(키워드)는 아예 안 봤기
       때문입니다. → 이번 버전은 fetch_deep_info() 하나로 통합해서, 어느
       트랙에서 후보가 되든 키워드 감지가 항상 같이 이뤄지도록 했습니다.
+    - 세 트랙(즉시확인/육성관찰/성장신호) 모두 "1차 필터를 통과한 소수"만
+      딥체크했기 때문에, 애초에 필터에 안 걸리는 작품(예: 이미 유명하지만
+      더 이상 안 오르는 작품)은 영원히 확인이 안 되는 사각지대가 있었습니다.
+      → 순환 스캔으로 결국 모든 작품이 언젠가는 한 번씩 확인되도록 보완했습니다.
 
 ✅ 확인된 API:
     - 목록: https://comic.naver.com/api/bestChallenge/list?genre={genre}&order=UPDATE&page={page}
@@ -101,6 +120,24 @@ NURTURE_MIN_EPISODES = 10
 NURTURE_MAX_EPISODES = 100
 NURTURE_MAX_PER_GENRE = 3
 
+# ── 순환 스캔 설정: 결국 전체 작품을 다 훑기 위한 저속 배치 ──────────
+# 하루에 많이 보려 하지 않고, 대신 "한 번도 안 본 작품"부터 우선순위를 둬서
+# 매일 조금씩 커버리지를 넓혀갑니다. 진행 상황은 파일로 저장해 이어서 진행.
+ROUND_ROBIN_DAILY_QUOTA = 100
+DEEP_CHECK_STATE_PATH = Path("data") / "deep_check_state.json"
+
+# 연재 주기가 이 값(일) 이상이면, 키워드가 안 걸려도 장기휴재 의심으로 표시
+HIATUS_CADENCE_DAYS = 60
+
+# ── 트랙 C: 업데이트순 기반 "최근 활동 + 양질" 감지 (API 호출 0회) ──────
+# 목록 자체가 order=UPDATE라서, updateRank가 낮을수록 그 장르에서 최근에
+# 올라온 작품이라는 뜻. 여기에 별점 조건만 더하면 회차 API를 전혀 안 불러도
+# "최근에 활동했고 반응도 괜찮은 작품"을 매일 공짜로 잡아낼 수 있음.
+# 다만 "updateRank가 낮다"가 "오늘 업데이트했다"를 100% 보장하진 않음
+# (그 장르에 그날 올라온 글이 적으면 며칠 전 것도 상위에 남아있을 수 있음).
+FRESH_RANK_THRESHOLD = 10        # 장르 내 업데이트순 상위 10위 이내
+FRESH_STAR_PERCENTILE = 0.20     # 장르 내 별점 상위 20% 이내
+
 SPECIAL_KEYWORDS = ["연재공지", "연재 공지", "휴재", "완결", "수상", "후기", "작가의 말", "이벤트"]
 
 
@@ -118,9 +155,15 @@ def fetch_genre_page(genre: str | None, page: int) -> list[dict]:
 
 
 def collect_snapshot() -> list[dict]:
-    """모든 장르(+전체 탭)를 순회하며 오늘 자 스냅샷을 수집합니다."""
+    """모든 장르(+전체 탭)를 순회하며 오늘 자 스냅샷을 수집합니다.
+
+    목록 자체가 order=UPDATE(최근 업데이트순)라서, 그 안에서 몇 번째로
+    나왔는지(updateRank)를 같이 기록해두면 별도 API 호출 없이도
+    "최근에 업데이트한 작품"을 알 수 있습니다.
+    """
     snapshot: list[dict] = []
     seen_title_ids: set[int] = set()
+    rank_counters: dict[str, int] = {}
 
     genres_to_crawl: list[str | None] = list(GENRES)
     if INCLUDE_ALL_TAB:
@@ -143,6 +186,7 @@ def collect_snapshot() -> list[dict]:
                 if title_id in seen_title_ids:
                     continue
                 seen_title_ids.add(title_id)
+                rank_counters[genre_label] = rank_counters.get(genre_label, 0) + 1
                 snapshot.append(
                     {
                         "titleId": title_id,
@@ -155,6 +199,7 @@ def collect_snapshot() -> list[dict]:
                         "bestChallengeLevelUp": item.get("bestChallengeLevelUp"),
                         "webtoonLevelCode": item.get("webtoonLevelCode"),
                         "finish": item.get("finish"),
+                        "updateRank": rank_counters[genre_label],  # 이 장르 안에서 최근 업데이트순 몇 위인지
                         # 아래 필드들은 딥체크 대상이 됐을 때만 채워짐 (기본은 비어있음)
                         "signals": [],       # 어떤 트랙이 이 작품을 후보로 뽑았는지
                         "episodeCount": None,
@@ -283,6 +328,10 @@ class DeepInfoCache:
             time.sleep(REQUEST_DELAY_SEC)
         return self._cache[title_id]
 
+    def checked_ids(self) -> set[int]:
+        """오늘 이 캐시를 통해 실제로 딥체크가 이뤄진 titleId 목록."""
+        return set(self._cache.keys())
+
 
 def attach_signal(item: dict, signal: str, extra: dict) -> None:
     """딥체크 결과를 작품 항목 자체에 붙여서, 메인 스냅샷 저장 시 같이 남도록 합니다."""
@@ -299,6 +348,21 @@ def attach_signal(item: dict, signal: str, extra: dict) -> None:
     for key, value in extra.items():
         if key not in common_fields:
             item[key] = value
+
+    maybe_flag_hiatus(item)
+
+
+def maybe_flag_hiatus(item: dict) -> None:
+    """연재 간격이 비정상적으로 길면, 키워드에 안 걸려도 장기휴재 의심으로 표시합니다.
+
+    실제로 "감사 인사 + 특별편"처럼 키워드 목록에 없는 제목으로 사실상
+    연재를 멈춘 사례가 있었음 — 하지만 그 작품의 연재 주기는 116일로
+    비정상적으로 길었음. 텍스트 키워드보다 이 수치 기반 판정이 더 안전함.
+    """
+    cadence = item.get("cadenceDays")
+    if cadence is not None and cadence >= HIATUS_CADENCE_DAYS:
+        if "hiatus_suspect" not in item["signals"]:
+            item["signals"].append("hiatus_suspect")
 
 
 # ── 3) 승격/삭제 검증 ────────────────────────────────────
@@ -468,6 +532,91 @@ def check_nurture_candidates(today_snapshot: list[dict], cache: DeepInfoCache) -
           + ("" if not confirmed else " (⚠ 화당 조회수 기준선은 아직 잠정치입니다)"))
 
 
+# ── 7) 순환 스캔: 결국 전체 작품을 다 훑기 ──────────────────
+def load_check_state() -> dict[int, str]:
+    """titleId별 '마지막으로 딥체크한 날짜'를 불러옵니다."""
+    if not DEEP_CHECK_STATE_PATH.exists():
+        return {}
+    with DEEP_CHECK_STATE_PATH.open(encoding="utf-8") as f:
+        raw = json.load(f)
+    return {int(k): v for k, v in raw.items()}
+
+
+def save_check_state(state: dict[int, str]) -> None:
+    DEEP_CHECK_STATE_PATH.parent.mkdir(exist_ok=True)
+    with DEEP_CHECK_STATE_PATH.open("w", encoding="utf-8") as f:
+        json.dump({str(k): v for k, v in state.items()}, f, ensure_ascii=False)
+
+
+def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: dict[int, str]) -> None:
+    """다른 트랙에서 안 걸린 작품들도, 느리더라도 결국 한 번씩은 다 훑습니다.
+
+    '한 번도 확인 안 된 작품'(state에 기록 없음)이 최우선이고, 그다음은
+    '가장 오래전에 확인한 작품' 순서입니다. 하루 확인량을 낮게 잡은 대신
+    (ROUND_ROBIN_DAILY_QUOTA), 매일 실행되니 며칠~몇 주면 전체를 한 바퀴 돕니다.
+    """
+    ongoing = [
+        item for item in today_snapshot
+        if item.get("finish") is False and item.get("genre") != "ALL"
+    ]
+    already_today = cache.checked_ids()
+    remaining = [item for item in ongoing if item["titleId"] not in already_today]
+
+    # 한 번도 확인 안 된 작품(state에 없음)이 먼저 오도록: 빈 문자열이 제일 작음
+    remaining.sort(key=lambda item: state.get(item["titleId"], ""))
+    batch = remaining[:ROUND_ROBIN_DAILY_QUOTA]
+
+    print(f"[순환스캔] 연재중 {len(ongoing)}개 중 오늘 다른 트랙에서 이미 확인: {len(already_today & {i['titleId'] for i in ongoing})}개")
+    print(f"[순환스캔] 이번에 새로 확인: {len(batch)}개 (누적 미확인 {len(remaining)}개 중)")
+
+    hiatus_found = 0
+    for item in batch:
+        info = cache.get(item["titleId"])
+        if not item["signals"]:
+            # 다른 트랙이 이미 신호를 붙인 작품이면 값을 덮어쓰지 않음
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords"):
+                if info.get(key) is not None:
+                    item[key] = info[key]
+        maybe_flag_hiatus(item)
+        if "hiatus_suspect" in item["signals"]:
+            hiatus_found += 1
+
+    today_str = date.today().isoformat()
+    for title_id in cache.checked_ids():
+        state[title_id] = today_str
+
+    covered = len(state)
+    print(f"[순환스캔] 이번 실행에서 새로 발견한 장기휴재 의심: {hiatus_found}건")
+    print(f"[순환스캔] 누적 확인 이력: {covered} / {len(ongoing)}개 작품 "
+          f"({covered/len(ongoing)*100:.1f}% 커버리지, 전체 한 바퀴 도는 데 대략 "
+          f"{max(1, (len(ongoing)-covered)//max(ROUND_ROBIN_DAILY_QUOTA,1))}일 더 소요 예상)")
+
+
+# ── 8) 트랙 C: 업데이트순 기반 무료 신호 (API 호출 없음) ──────────────
+def check_fresh_updates(today_snapshot: list[dict]) -> None:
+    """목록이 이미 order=UPDATE라는 걸 활용해서, 회차 API 없이도
+    '최근에 업데이트했고 반응도 괜찮은 작품'을 찾습니다.
+    """
+    by_genre: dict[str, list[dict]] = {}
+    for item in today_snapshot:
+        if item.get("finish") is False and item.get("genre") != "ALL":
+            by_genre.setdefault(item["genre"], []).append(item)
+
+    found = 0
+    for genre, items in by_genre.items():
+        star_sorted = sorted(items, key=lambda x: x.get("starScore") or 0, reverse=True)
+        cutoff_idx = max(1, int(len(star_sorted) * FRESH_STAR_PERCENTILE))
+        star_cutoff = star_sorted[cutoff_idx - 1].get("starScore") or 0
+
+        for item in items:
+            if item.get("updateRank", 999) <= FRESH_RANK_THRESHOLD and (item.get("starScore") or 0) >= star_cutoff:
+                reason = f"업데이트순 {item['updateRank']}위 · 장르 내 별점 상위 {FRESH_STAR_PERCENTILE*100:.0f}% 이내"
+                attach_signal(item, "fresh_update", {"freshReason": reason})
+                found += 1
+
+    print(f"[최근업데이트] API 호출 없이 감지한 '최근 활동+양질' 작품: {found}건")
+
+
 def main() -> None:
     print(f"=== {date.today().isoformat()} 스냅샷 수집 시작 ===")
     snapshot = collect_snapshot()
@@ -475,11 +624,16 @@ def main() -> None:
     prev_date, prev_map = load_previous_snapshot()
 
     check_promotions(prev_map, prev_date, today_map)
+    check_fresh_updates(snapshot)  # API 호출 없음 — 제일 먼저 해도 무방
 
     cache = DeepInfoCache()  # 같은 작품이 여러 트랙에 겹쳐도 딥체크는 한 번만
     check_rising_signal(snapshot, prev_map, cache)
     check_immediate_candidates(snapshot, cache)
     check_nurture_candidates(snapshot, cache)
+
+    state = load_check_state()
+    check_round_robin(snapshot, cache, state)
+    save_check_state(state)
 
     # 딥체크로 보강된 뒤에 최종 저장 — 사이트에서 signals/키워드를 바로 쓸 수 있음
     out_path = save_snapshot(snapshot)
