@@ -35,6 +35,15 @@
        각 작품이 그 장르 안에서 몇 번째로 나왔는지(updateRank)를 기록해두면,
        회차 API를 따로 안 불러도 "최근에 업데이트했고 반응도 괜찮은 작품"을
        공짜로 찾을 수 있습니다. (updateRank 상위 + 장르 내 별점 상위 조합)
+    9. ⭐ data/history.json — titleId별로 여러 날의 조회수(viewHistory)와
+       날짜(viewDates)가 계속 이어붙는 영구 누적 파일입니다. 예전에는 이걸
+       사람이 대화창에서 파이썬으로 매번 수동 병합했는데, 이제 크롤러가
+       매일 알아서 이어붙입니다. 사이트는 이 파일 하나만 그대로 가져다
+       쓰면 됩니다.
+    10. ⭐ 목록 API에 이미 포함돼 있던 썸네일 이미지(thumbnailUrl)와, 클릭 시
+        네이버 베스트도전 상세페이지로 이동할 링크(titleUrl)도 같이 수집합니다
+        (추가 API 호출 없음). 사이트에 썸네일 표시 및 클릭 이동 기능을 붙일 때
+        바로 쓸 수 있습니다.
 
 ⚠️ 중요한 교훈 (실제로 겪은 실패 사례들):
     - "베스트도전 목록에서 사라짐 = 정식연재 승격"이라고 가정했다가 틀렸습니다.
@@ -75,6 +84,10 @@ LIST_URL_TEMPLATE = (
     "?genre={genre}&order=UPDATE&page={page}"
 )
 INFO_URL_TEMPLATE = "https://comic.naver.com/api/article/list/info?titleId={title_id}"
+
+# ✅ 실제로 클릭해서 확인 완료: 베스트도전 목차 페이지는 이 패턴이 맞음
+# (참고: 개별 회차는 .../bestChallenge/detail?titleId=X&no=Y 형태)
+TITLE_URL_TEMPLATE = "https://comic.naver.com/bestChallenge/list?titleId={title_id}"
 EPISODE_LIST_URL_TEMPLATE = (
     "https://comic.naver.com/api/article/list?titleId={title_id}&page={page}&sort=ASC"
 )
@@ -138,7 +151,7 @@ HIATUS_CADENCE_DAYS = 60
 FRESH_RANK_THRESHOLD = 10        # 장르 내 업데이트순 상위 10위 이내
 FRESH_STAR_PERCENTILE = 0.20     # 장르 내 별점 상위 20% 이내
 
-SPECIAL_KEYWORDS = ["연재공지", "연재 공지", "휴재", "완결", "수상", "후기", "작가의 말", "이벤트"]
+SPECIAL_KEYWORDS = ["연재공지", "연재 공지", "휴재", "완결", "수상", "후기", "작가의 말", "이벤트", "확정"]
 
 
 # ── 1) 기본 목록 수집 ────────────────────────────────────
@@ -200,6 +213,8 @@ def collect_snapshot() -> list[dict]:
                         "webtoonLevelCode": item.get("webtoonLevelCode"),
                         "finish": item.get("finish"),
                         "updateRank": rank_counters[genre_label],  # 이 장르 안에서 최근 업데이트순 몇 위인지
+                        "thumbnailUrl": item.get("thumbnailUrl"),  # 목록 API에 이미 포함된 썸네일 (API 호출 추가 없음)
+                        "titleUrl": TITLE_URL_TEMPLATE.format(title_id=title_id),  # 클릭 시 이동할 상세페이지
                         # 아래 필드들은 딥체크 대상이 됐을 때만 채워짐 (기본은 비어있음)
                         "signals": [],       # 어떤 트랙이 이 작품을 후보로 뽑았는지
                         "episodeCount": None,
@@ -358,7 +373,13 @@ def maybe_flag_hiatus(item: dict) -> None:
     실제로 "감사 인사 + 특별편"처럼 키워드 목록에 없는 제목으로 사실상
     연재를 멈춘 사례가 있었음 — 하지만 그 작품의 연재 주기는 116일로
     비정상적으로 길었음. 텍스트 키워드보다 이 수치 기반 판정이 더 안전함.
+
+    단, 최신 회차 제목에 "확정"이 있으면(예: "연재 확정 공지") 장기휴재로 보지
+    않습니다 — 정식연재가 확정돼서 베스트도전 업데이트가 끊긴 것뿐일 수 있고,
+    이건 오히려 좋은 소식이기 때문입니다.
     """
+    if "확정" in (item.get("latestSubtitle") or ""):
+        return
     cadence = item.get("cadenceDays")
     if cadence is not None and cadence >= HIATUS_CADENCE_DAYS:
         if "hiatus_suspect" not in item["signals"]:
@@ -617,6 +638,65 @@ def check_fresh_updates(today_snapshot: list[dict]) -> None:
     print(f"[최근업데이트] API 호출 없이 감지한 '최근 활동+양질' 작품: {found}건")
 
 
+# ── 9) 영구 누적 이력 (history.json) ──────────────────────────
+# 지금까지는 사이트에 넣을 여러 날치 이력을, 매번 사람이 대화창에서
+# 파이썬으로 수동 병합했음(실수도 나고, 세션마다 끊김). 이제 크롤러가
+# 스스로 "titleId별 누적 이력" 파일을 매일 갱신하도록 해서, 사이트는
+# 이 파일 하나만 그대로 가져다 쓰면 되게 만듦.
+HISTORY_PATH = Path("data") / "history.json"
+MAX_HISTORY_DAYS = 120  # 파일이 무한정 커지지 않도록 최근 120일치만 보관
+
+HISTORY_FIELDS = [
+    "titleName", "author", "genre", "webtoonLevelCode", "finish",
+    "thumbnailUrl", "titleUrl", "signals", "episodeCount", "cadenceDays",
+    "latestSubtitle", "latestDate", "keywords", "updateRank",
+]
+
+
+def load_history() -> dict[str, dict]:
+    if not HISTORY_PATH.exists():
+        return {}
+    with HISTORY_PATH.open(encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_history(history: dict[str, dict]) -> None:
+    HISTORY_PATH.parent.mkdir(exist_ok=True)
+    with HISTORY_PATH.open("w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, separators=(",", ":"))
+
+
+def update_history(history: dict[str, dict], snapshot: list[dict]) -> None:
+    """오늘 스냅샷을 titleId별 누적 이력에 이어붙입니다.
+
+    각 작품마다 viewHistory/viewDates 배열이 계속 자라나고, 그 외 필드는
+    가장 최근 값으로 덮어씁니다. 오늘 목록에 없는 작품(승격/삭제/순위밖)은
+    이력을 지우지 않고 그대로 둡니다 — 그 지점만 비어있는 셈입니다.
+    """
+    today_str = date.today().isoformat()
+
+    for item in snapshot:
+        key = str(item["titleId"])
+        entry = history.setdefault(key, {"viewHistory": [], "viewDates": []})
+
+        # 같은 날 두 번 실행해도 중복 기록되지 않도록, 오늘 날짜가 이미
+        # 마지막 지점이면 값만 갱신하고 새 지점을 추가하지 않음
+        if entry["viewDates"] and entry["viewDates"][-1] == today_str:
+            entry["viewHistory"][-1] = item["viewCount"]
+        else:
+            entry["viewHistory"].append(item["viewCount"])
+            entry["viewDates"].append(today_str)
+
+        if len(entry["viewHistory"]) > MAX_HISTORY_DAYS:
+            entry["viewHistory"] = entry["viewHistory"][-MAX_HISTORY_DAYS:]
+            entry["viewDates"] = entry["viewDates"][-MAX_HISTORY_DAYS:]
+
+        for field in HISTORY_FIELDS:
+            entry[field] = item.get(field)
+
+    print(f"[누적이력] history.json 갱신 완료 — 누적 작품 수 {len(history)}개")
+
+
 def main() -> None:
     print(f"=== {date.today().isoformat()} 스냅샷 수집 시작 ===")
     snapshot = collect_snapshot()
@@ -639,6 +719,10 @@ def main() -> None:
     out_path = save_snapshot(snapshot)
     flagged = sum(1 for item in snapshot if item["signals"])
     print(f"완료: 총 {len(snapshot)}개 작품 (신호 부착 {flagged}개) → {out_path}")
+
+    history = load_history()
+    update_history(history, snapshot)
+    save_history(history)
 
 
 if __name__ == "__main__":
