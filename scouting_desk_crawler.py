@@ -34,7 +34,9 @@
     8. ⭐ 트랙 C(업데이트순 활용, API 호출 0회): 목록 자체가 order=UPDATE라서
        각 작품이 그 장르 안에서 몇 번째로 나왔는지(updateRank)를 기록해두면,
        회차 API를 따로 안 불러도 "최근에 업데이트했고 반응도 괜찮은 작품"을
-       공짜로 찾을 수 있습니다. (updateRank 상위 + 장르 내 별점 상위 조합)
+       공짜로 찾을 수 있습니다. (1차: updateRank 상위 5위 → 2차: 그 소수만 실제
+       latestDate 확인). "최근 활동" 배지 여부는 사이트가 latestDate와 오늘
+       날짜 차이로 계산하므로, 화수 하나 올릴 때마다 며칠간 자연스럽게 유지됩니다.
     9. ⭐ data/history.json — titleId별로 여러 날의 조회수(viewHistory)와
        날짜(viewDates)가 계속 이어붙는 영구 누적 파일입니다. 예전에는 이걸
        사람이 대화창에서 파이썬으로 매번 수동 병합했는데, 이제 크롤러가
@@ -136,20 +138,26 @@ NURTURE_MAX_PER_GENRE = 3
 # ── 순환 스캔 설정: 결국 전체 작품을 다 훑기 위한 저속 배치 ──────────
 # 하루에 많이 보려 하지 않고, 대신 "한 번도 안 본 작품"부터 우선순위를 둬서
 # 매일 조금씩 커버리지를 넓혀갑니다. 진행 상황은 파일로 저장해 이어서 진행.
-ROUND_ROBIN_DAILY_QUOTA = 100
+ROUND_ROBIN_DAILY_QUOTA = 175
 DEEP_CHECK_STATE_PATH = Path("data") / "deep_check_state.json"
 
 # 연재 주기가 이 값(일) 이상이면, 키워드가 안 걸려도 장기휴재 의심으로 표시
 HIATUS_CADENCE_DAYS = 60
 
-# ── 트랙 C: 업데이트순 기반 "최근 활동 + 양질" 감지 (API 호출 0회) ──────
+# ── 트랙 C: 업데이트순 기반 "최근 활동" 감지 ──────────────────────
 # 목록 자체가 order=UPDATE라서, updateRank가 낮을수록 그 장르에서 최근에
-# 올라온 작품이라는 뜻. 여기에 별점 조건만 더하면 회차 API를 전혀 안 불러도
-# "최근에 활동했고 반응도 괜찮은 작품"을 매일 공짜로 잡아낼 수 있음.
-# 다만 "updateRank가 낮다"가 "오늘 업데이트했다"를 100% 보장하진 않음
-# (그 장르에 그날 올라온 글이 적으면 며칠 전 것도 상위에 남아있을 수 있음).
-FRESH_RANK_THRESHOLD = 10        # 장르 내 업데이트순 상위 10위 이내
-FRESH_STAR_PERCENTILE = 0.20     # 장르 내 별점 상위 20% 이내
+# 올라온 작품이라는 뜻. 별점 조건은 뺐음 — "최근 활동"은 순수하게 "최근에
+# 올렸다"만 보는 지표이지, 품질 지표가 아니기 때문 (품질은 육성관찰/초반강세가 담당).
+#
+# 1차(공짜): updateRank로 후보를 장르당 5개(하루 최대 50개)로 좁힘
+# 2차(거의 공짜): 그 50개만 실제 latestDate를 확인해서, 순위만으론 못 걸러내는
+#   오탐(그 장르에 그날 올라온 게 적어서 며칠 전 것도 상위에 남아있는 경우)을 제거
+#
+# 화면에 "최근 활동"으로 표시되는 기준은 이 신호 자체가 아니라
+# latestDate가 오늘로부터 FRESH_WINDOW_DAYS 이내인지로 사이트에서 계산함 —
+# 그래야 화수 하나 올릴 때마다 며칠간 자연스럽게 배지가 유지됨
+# (예: 7일 주기로 연재하는 성실한 작가는 그 주기 내내 표시되는 게 맞음).
+FRESH_RANK_THRESHOLD = 5  # 장르 내 업데이트순 상위 5위까지만 1차 후보로
 
 SPECIAL_KEYWORDS = ["연재공지", "연재 공지", "휴재", "완결", "수상", "후기", "작가의 말", "이벤트", "확정"]
 
@@ -316,12 +324,20 @@ def parse_service_date(desc: str | None):
 
 
 def compute_cadence_days(episodes: list[dict]) -> float | None:
-    """최근 회차들의 연재 간격(평균 며칠에 한 번 올라오는지)을 계산합니다."""
+    """최근 회차들의 연재 간격(며칠에 한 번 올라오는지)을 계산합니다.
+
+    평균(mean) 대신 중앙값(median)을 씁니다 — 신작이 1~2화를 몰아서 올리거나,
+    한 번 길게 쉬었다가 다시 정상 주기로 돌아온 경우처럼 "가끔 튀는 값" 하나에
+    전체 성실도 판단이 왜곡되는 걸 막기 위해서입니다.
+    """
     dates = sorted(d for d in (parse_service_date(e.get("serviceDateDescription")) for e in episodes) if d)
     if len(dates) < 2:
         return None
-    gaps = [(dates[i + 1] - dates[i]).days for i in range(len(dates) - 1)]
-    return round(sum(gaps) / len(gaps), 1)
+    gaps = sorted((dates[i + 1] - dates[i]).days for i in range(len(dates) - 1))
+    n = len(gaps)
+    mid = n // 2
+    median = gaps[mid] if n % 2 == 1 else (gaps[mid - 1] + gaps[mid]) / 2
+    return round(median, 1)
 
 
 def detect_keywords(subtitle: str | None) -> list[str]:
@@ -613,29 +629,33 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
           f"{max(1, (len(ongoing)-covered)//max(ROUND_ROBIN_DAILY_QUOTA,1))}일 더 소요 예상)")
 
 
-# ── 8) 트랙 C: 업데이트순 기반 무료 신호 (API 호출 없음) ──────────────
-def check_fresh_updates(today_snapshot: list[dict]) -> None:
-    """목록이 이미 order=UPDATE라는 걸 활용해서, 회차 API 없이도
-    '최근에 업데이트했고 반응도 괜찮은 작품'을 찾습니다.
+# ── 8) 트랙 C: 업데이트순 기반 최근 활동 감지 (1차 무료 + 2차 소수 검증) ──
+def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> None:
+    """장르 내 업데이트순 상위 5개를 1차로 무료로 뽑고, 그 소수만 실제
+    latestDate를 확인합니다. '최근 활동' 배지 자체는 이 신호가 아니라
+    latestDate와 오늘 날짜의 차이로 사이트에서 계산합니다 — 여기서 하는 일은
+    그 판단에 쓸 latestDate를 가능한 한 최신으로 갱신해주는 것입니다.
     """
     by_genre: dict[str, list[dict]] = {}
     for item in today_snapshot:
         if item.get("finish") is False and item.get("genre") != "ALL":
             by_genre.setdefault(item["genre"], []).append(item)
 
-    found = 0
+    candidates = []
     for genre, items in by_genre.items():
-        star_sorted = sorted(items, key=lambda x: x.get("starScore") or 0, reverse=True)
-        cutoff_idx = max(1, int(len(star_sorted) * FRESH_STAR_PERCENTILE))
-        star_cutoff = star_sorted[cutoff_idx - 1].get("starScore") or 0
+        candidates.extend(i for i in items if i.get("updateRank", 999) <= FRESH_RANK_THRESHOLD)
 
-        for item in items:
-            if item.get("updateRank", 999) <= FRESH_RANK_THRESHOLD and (item.get("starScore") or 0) >= star_cutoff:
-                reason = f"업데이트순 {item['updateRank']}위 · 장르 내 별점 상위 {FRESH_STAR_PERCENTILE*100:.0f}% 이내"
-                attach_signal(item, "fresh_update", {"freshReason": reason})
-                found += 1
+    print(f"[최근활동] 1차 후보(장르별 업데이트순 상위 {FRESH_RANK_THRESHOLD}위): {len(candidates)}개 → 실제 날짜 검증 중")
 
-    print(f"[최근업데이트] API 호출 없이 감지한 '최근 활동+양질' 작품: {found}건")
+    for item in candidates:
+        info = cache.get(item["titleId"])
+        if not item["signals"]:
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords"):
+                if info.get(key) is not None:
+                    item[key] = info[key]
+        maybe_flag_hiatus(item)
+
+    print(f"[최근활동] {len(candidates)}개 작품의 최신 회차 날짜를 갱신했습니다.")
 
 
 # ── 9) 영구 누적 이력 (history.json) ──────────────────────────
@@ -650,6 +670,7 @@ HISTORY_FIELDS = [
     "titleName", "author", "genre", "webtoonLevelCode", "finish",
     "thumbnailUrl", "titleUrl", "signals", "episodeCount", "cadenceDays",
     "latestSubtitle", "latestDate", "keywords", "updateRank",
+    "starScore", "up", "bestChallengeLevelUp",  # 처음 만들 때 빠뜨렸던 필드들
 ]
 
 
@@ -704,9 +725,9 @@ def main() -> None:
     prev_date, prev_map = load_previous_snapshot()
 
     check_promotions(prev_map, prev_date, today_map)
-    check_fresh_updates(snapshot)  # API 호출 없음 — 제일 먼저 해도 무방
 
     cache = DeepInfoCache()  # 같은 작품이 여러 트랙에 겹쳐도 딥체크는 한 번만
+    check_fresh_updates(snapshot, cache)
     check_rising_signal(snapshot, prev_map, cache)
     check_immediate_candidates(snapshot, cache)
     check_nurture_candidates(snapshot, cache)
