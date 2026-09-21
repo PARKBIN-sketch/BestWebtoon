@@ -31,10 +31,17 @@ jobs:
       - name: 크롤러 실행
         run: python scouting_desk_crawler.py
 
+      - name: 사이트 자동 빌드 (history.json → scouting_desk_mockup.html)
+        # 예전엔 이 병합을 사람이 대화창에서 매번 손으로 했음.
+        # build_site.py가 REAL_DATA 부분만 갈아끼우고 나머지(디자인/로직)는
+        # 그대로 두므로, UI를 바꾼 뒤엔 새 scouting_desk_mockup.html을
+        # 저장소에 한 번 다시 올려두면 그다음부턴 계속 이 위에 자동 반영됨.
+        run: python build_site.py
+
       - name: 수집 결과 커밋 및 푸시
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --quiet --cached || git commit -m "chore: 자동 수집 $(date +'%Y-%m-%d')"
+          git add data/ scouting_desk_mockup.html
+          git diff --quiet --cached || git commit -m "chore: 자동 수집 및 사이트 반영 $(date +'%Y-%m-%d')"
           git push

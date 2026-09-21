@@ -1,0 +1,94 @@
+"""
+build_site.py — history.json을 scouting_desk_mockup.html의 REAL_DATA에 자동으로 병합합니다.
+
+지금까지 새 데이터가 쌓일 때마다 사람이 대화창에서 파일을 올리고,
+Claude가 파이썬으로 손수 병합해서 새 HTML을 만들어주던 작업을
+그대로 스크립트로 옮긴 것입니다. GitHub Actions에서 크롤러가 끝난
+직후 이 스크립트가 자동으로 실행되어, 사람이 손 델 일이 없어집니다.
+
+사용법: python build_site.py
+  - data/history.json 을 읽어서
+  - scouting_desk_mockup.html 안의 "const REAL_DATA = [...]" 부분만 통째로 교체하고
+  - 나머지(디자인, 로직, CSS 등)는 전혀 건드리지 않습니다.
+
+주의: 이 스크립트는 REAL_DATA "값"만 갈아끼웁니다. 신호 배지 구조, 색상,
+정렬 로직 같은 사이트 자체의 기능 변경은 여전히 Claude와 상의해서
+scouting_desk_mockup.html 코드를 직접 고치는 방식으로 진행해야 합니다.
+"""
+import json
+import re
+from pathlib import Path
+
+HISTORY_PATH = Path("data") / "history.json"
+SITE_PATH = Path("scouting_desk_mockup.html")
+
+
+def build_real_data(history: dict) -> list[dict]:
+    """history.json의 titleId별 누적 이력을, 사이트가 바로 쓸 수 있는
+    REAL_DATA 배열 형태로 변환합니다. (지금까지 대화창에서 반복했던
+    병합 스크립트와 동일한 로직입니다.)
+    """
+    result = []
+    for tid, entry in history.items():
+        view_history = entry.get("viewHistory", [])
+        view_dates = entry.get("viewDates", [])
+
+        growth_pct = None
+        if len(view_history) >= 2 and view_history[0] > 0:
+            growth_pct = round(
+                (view_history[-1] - view_history[0]) / view_history[0] * 100, 1
+            )
+
+        result.append({
+            "titleId": int(tid),
+            "titleName": entry.get("titleName"),
+            "author": entry.get("author"),
+            "genre": entry.get("genre"),
+            "viewCount": view_history[-1] if view_history else 0,
+            "starScore": round(entry.get("starScore") or 0, 2),
+            "up": entry.get("up", False),
+            "bestChallengeLevelUp": entry.get("bestChallengeLevelUp", False),
+            "finish": entry.get("finish"),
+            "webtoonLevelCode": entry.get("webtoonLevelCode"),
+            "thumbnailUrl": entry.get("thumbnailUrl"),
+            "titleUrl": entry.get("titleUrl"),
+            "signals": entry.get("signals", []),
+            "episodeCount": entry.get("episodeCount"),
+            "cadenceDays": entry.get("cadenceDays"),
+            "latestSubtitle": entry.get("latestSubtitle"),
+            "latestDate": entry.get("latestDate"),
+            "keywords": entry.get("keywords", []),
+            "updateRank": entry.get("updateRank"),
+            "viewHistory": view_history,
+            "viewDates": view_dates,
+            "growthPct": growth_pct,
+        })
+    return result
+
+
+def main() -> None:
+    if not HISTORY_PATH.exists():
+        print(f"[build_site] {HISTORY_PATH}가 없습니다 — 크롤러가 먼저 실행돼야 합니다.")
+        return
+    if not SITE_PATH.exists():
+        print(f"[build_site] {SITE_PATH}가 저장소 루트에 없습니다 — 한 번은 직접 올려둬야 합니다.")
+        return
+
+    history = json.loads(HISTORY_PATH.read_text(encoding="utf-8"))
+    real_data = build_real_data(history)
+    data_literal = json.dumps(real_data, ensure_ascii=False, separators=(",", ":"))
+
+    html = SITE_PATH.read_text(encoding="utf-8")
+    pattern = re.compile(r"  const REAL_DATA = \[.*?\];\n", re.DOTALL)
+    match = pattern.search(html)
+    if not match:
+        print("[build_site] REAL_DATA 선언부를 못 찾았습니다 — HTML 구조가 바뀐 것 같습니다.")
+        return
+
+    new_html = html[:match.start()] + f"  const REAL_DATA = {data_literal};\n" + html[match.end():]
+    SITE_PATH.write_text(new_html, encoding="utf-8")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품 반영, {SITE_PATH} 갱신됨")
+
+
+if __name__ == "__main__":
+    main()
