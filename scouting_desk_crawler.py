@@ -230,6 +230,8 @@ def collect_snapshot() -> list[dict]:
                         "latestSubtitle": None,
                         "latestDate": None,
                         "keywords": [],
+                        "firstEpisodeDate": None,
+                        "posterThumbnailUrl": None,
                     }
                 )
 
@@ -274,6 +276,7 @@ def fetch_deep_info(title_id: int) -> dict:
     empty = {
         "episodeCount": None, "cadenceDays": None,
         "latestSubtitle": None, "latestDate": None, "keywords": [],
+        "firstEpisodeDate": None, "posterThumbnailUrl": None,
     }
 
     first_url = EPISODE_LIST_URL_TEMPLATE.format(title_id=title_id, page=1)
@@ -289,6 +292,9 @@ def fetch_deep_info(title_id: int) -> dict:
     total_pages = page_info.get("totalPages", 1)
     episodes = first_page.get("articleList", [])
 
+    # 1페이지(sort=ASC)의 첫 항목이 곧 1화라서, 추가 호출 없이 연재 시작일을 얻을 수 있음
+    first_episode_date = episodes[0].get("serviceDateDescription") if episodes else None
+
     if total_pages and total_pages > 1:
         time.sleep(0.5)
         last_url = EPISODE_LIST_URL_TEMPLATE.format(title_id=title_id, page=total_pages)
@@ -300,7 +306,7 @@ def fetch_deep_info(title_id: int) -> dict:
             pass  # 마지막 페이지 조회 실패 시 1페이지 것으로라도 대체
 
     if not episodes:
-        return {**empty, "episodeCount": episode_count}
+        return {**empty, "episodeCount": episode_count, "firstEpisodeDate": first_episode_date}
 
     latest = episodes[-1]
     return {
@@ -309,6 +315,7 @@ def fetch_deep_info(title_id: int) -> dict:
         "latestSubtitle": latest.get("subtitle"),
         "latestDate": latest.get("serviceDateDescription"),
         "keywords": detect_keywords(latest.get("subtitle")),
+        "firstEpisodeDate": first_episode_date,
     }
 
 
@@ -355,8 +362,18 @@ class DeepInfoCache:
 
     def get(self, title_id: int) -> dict:
         if title_id not in self._cache:
-            self._cache[title_id] = fetch_deep_info(title_id)
+            info = fetch_deep_info(title_id)
             time.sleep(REQUEST_DELAY_SEC)
+
+            # 포스터 이미지(posterThumbnailUrl)는 회차목록 API가 아니라 개별 작품
+            # 정보 API에만 있어서, 호출이 하나 더 필요함(공짜 아님 — 서버 부담 고려해서
+            # 어차피 딥체크되는 작품에만 한정해서 받아옴).
+            title_info = fetch_title_info(title_id)
+            time.sleep(REQUEST_DELAY_SEC)
+            if title_info.get("status") == "ok":
+                info["posterThumbnailUrl"] = title_info.get("posterThumbnailUrl")
+
+            self._cache[title_id] = info
         return self._cache[title_id]
 
     def checked_ids(self) -> set[int]:
@@ -369,7 +386,7 @@ def attach_signal(item: dict, signal: str, extra: dict) -> None:
     if signal not in item["signals"]:
         item["signals"].append(signal)
 
-    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords")
+    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl")
     for key in common_fields:
         if extra.get(key) is not None:
             item[key] = extra[key]
@@ -423,6 +440,7 @@ def fetch_title_info(title_id: int) -> dict:
         "status": "ok",
         "webtoonLevelCode": data.get("webtoonLevelCode"),
         "finished": data.get("finished"),
+        "posterThumbnailUrl": data.get("posterThumbnailUrl"),
     }
 
 
@@ -611,7 +629,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
         info = cache.get(item["titleId"])
         if not item["signals"]:
             # 다른 트랙이 이미 신호를 붙인 작품이면 값을 덮어쓰지 않음
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -650,7 +668,7 @@ def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> Non
     for item in candidates:
         info = cache.get(item["titleId"])
         if not item["signals"]:
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -671,6 +689,8 @@ HISTORY_FIELDS = [
     "thumbnailUrl", "titleUrl", "signals", "episodeCount", "cadenceDays",
     "latestSubtitle", "latestDate", "keywords", "updateRank",
     "starScore", "up", "bestChallengeLevelUp",  # 처음 만들 때 빠뜨렸던 필드들
+    "firstEpisodeDate",  # 1화 날짜 — 딥체크된 작품만 채워짐 (추가 호출 없음)
+    "posterThumbnailUrl",  # 세로형 포스터 이미지 — 딥체크된 작품만, 호출 1회 추가됨
 ]
 
 

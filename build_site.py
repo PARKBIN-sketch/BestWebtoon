@@ -57,6 +57,8 @@ def build_real_data(history: dict) -> list[dict]:
             "cadenceDays": entry.get("cadenceDays"),
             "latestSubtitle": entry.get("latestSubtitle"),
             "latestDate": entry.get("latestDate"),
+            "firstEpisodeDate": entry.get("firstEpisodeDate"),
+            "posterThumbnailUrl": entry.get("posterThumbnailUrl"),
             "keywords": entry.get("keywords", []),
             "updateRank": entry.get("updateRank"),
             "viewHistory": view_history,
