@@ -20,6 +20,8 @@ import re
 from pathlib import Path
 
 HISTORY_PATH = Path("data") / "history.json"
+# 사이트의 [분류 내보내기]로 받은 파일을 이 경로에 올리면, 다음 빌드부터 사이트에 기본값으로 포함됨
+LABELS_PATH = Path("data") / "labels.json"
 SITE_PATH = Path("scouting_desk_mockup.html")
 
 
@@ -59,6 +61,7 @@ def build_real_data(history: dict) -> list[dict]:
             "latestDate": entry.get("latestDate"),
             "firstEpisodeDate": entry.get("firstEpisodeDate"),
             "posterThumbnailUrl": entry.get("posterThumbnailUrl"),
+            "deepCheckedAt": entry.get("deepCheckedAt"),
             "keywords": entry.get("keywords", []),
             "updateRank": entry.get("updateRank"),
             "viewHistory": view_history,
@@ -66,6 +69,24 @@ def build_real_data(history: dict) -> list[dict]:
             "growthPct": growth_pct,
         })
     return result
+
+
+def load_labels() -> dict:
+    """사이트에서 수동으로 분류한 결과(data/labels.json)를 읽습니다. 없거나 깨졌으면 빈 값."""
+    if not LABELS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        print("[build_site] labels.json을 읽지 못했습니다 — 분류 없이 진행합니다.")
+        return {}
+    labels = payload.get("labels", payload) if isinstance(payload, dict) else {}
+    return labels if isinstance(labels, dict) else {}
+
+
+def to_js_literal(obj) -> str:
+    """JSON을 <script> 안에 안전하게 넣을 문자열로 만듭니다 (</script> 방지)."""
+    return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
 def main() -> None:
@@ -78,7 +99,7 @@ def main() -> None:
 
     history = json.loads(HISTORY_PATH.read_text(encoding="utf-8"))
     real_data = build_real_data(history)
-    data_literal = json.dumps(real_data, ensure_ascii=False, separators=(",", ":"))
+    data_literal = to_js_literal(real_data)
 
     html = SITE_PATH.read_text(encoding="utf-8")
     pattern = re.compile(r"  const REAL_DATA = \[.*?\];\n", re.DOTALL)
@@ -88,8 +109,19 @@ def main() -> None:
         return
 
     new_html = html[:match.start()] + f"  const REAL_DATA = {data_literal};\n" + html[match.end():]
+
+    # 수동 분류 결과(data/labels.json)를 사이트 기본값(SAVED_LABELS)으로 포함
+    labels = load_labels()
+    labels_match = re.compile(r"  const SAVED_LABELS = \{.*?\};\n", re.DOTALL).search(new_html)
+    if labels_match:
+        new_html = (new_html[:labels_match.start()]
+                    + f"  const SAVED_LABELS = {to_js_literal(labels)};\n"
+                    + new_html[labels_match.end():])
+    else:
+        print("[build_site] SAVED_LABELS 선언부를 못 찾아 분류 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":

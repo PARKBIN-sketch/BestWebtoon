@@ -232,6 +232,7 @@ def collect_snapshot() -> list[dict]:
                         "keywords": [],
                         "firstEpisodeDate": None,
                         "posterThumbnailUrl": None,
+                        "deepCheckedAt": None,   # 오늘 상세 확인(딥체크)을 했다면 오늘 날짜
                     }
                 )
 
@@ -647,6 +648,67 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
           f"{max(1, (len(ongoing)-covered)//max(ROUND_ROBIN_DAILY_QUOTA,1))}일 더 소요 예상)")
 
 
+# ── 공지 재확인: "공지 확인" 알림이 뜬 작품은 매일 다시 상세 확인 ─────────────
+# 상세 확인(딥체크)은 작품당 며칠에 한 번만 돌기 때문에, 그 사이에 작가가 공지를 지우거나
+# 새 화를 올려도 사이트의 최신 회차 정보는 옛 상태로 남아 있었음("공지 확인"이 떴는데
+# 가 보니 공지가 없는" 사례). 알림 대상은 몇 건 안 되므로 매일 다시 확인해서 알림이 현재 상태를 반영하게 함.
+# ⚠ 아래 두 값은 사이트(scouting_desk_mockup.html)의 NOTICE_KEYWORDS / RECENT_NOTICE_DAYS와 같아야 함.
+NOTICE_KEYWORDS = ["공지", "오픈", "감사", "근황", "챌린저스", "확정", "휴재", "완결", "후기", "수상", "정식", "독자픽", "리메이크", "중단"]
+RECENT_NOTICE_DAYS = 30
+DEEP_COPY_KEYS = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
+                  "firstEpisodeDate", "posterThumbnailUrl")
+
+
+def is_recent_notice(entry: dict) -> bool:
+    subtitle = (entry.get("latestSubtitle") or "").replace(" ", "")
+    if not any(k in subtitle for k in NOTICE_KEYWORDS):
+        return False
+    d = parse_service_date(entry.get("latestDate"))
+    return d is not None and (date.today() - d).days <= RECENT_NOTICE_DAYS
+
+
+def check_notice_recheck(today_snapshot: list[dict], cache: DeepInfoCache, history: dict[str, dict]) -> None:
+    """기록상 '최근 공지'가 최신 회차인 작품을 오늘 다시 상세 확인합니다.
+
+    오늘 목록(최근 업데이트순 상위 150개)에서 밀려난 작품도 포함합니다 — 그런 작품은 다른 트랙이
+    다시 보지 않아서, 공지가 지워져도 옛 정보가 그대로 굳어 있었습니다("공지 확인"이 떴는데 가 보니
+    공지가 없는" 사례). 알림 대상은 몇 건 안 되므로 제목 id로 직접 다시 조회해도 부담이 거의 없습니다.
+    """
+    today_map = {it["titleId"]: it for it in today_snapshot}
+    target_ids = [int(tid) for tid, entry in history.items() if is_recent_notice(entry)]
+    in_list = [t for t in target_ids if t in today_map]
+    out_of_list = [t for t in target_ids if t not in today_map]
+    print(f"[공지재확인] 최근 {RECENT_NOTICE_DAYS}일 이내 공지가 최신 회차인 작품 {len(target_ids)}개 "
+          f"(오늘 목록 안 {len(in_list)}개, 목록 밖 {len(out_of_list)}개)를 다시 확인합니다.")
+
+    for tid in in_list:
+        item = today_map[tid]
+        info = cache.get(tid)
+        if not item["signals"]:
+            for key in DEEP_COPY_KEYS:
+                if info.get(key) is not None:
+                    item[key] = info[key]
+        maybe_flag_hiatus(item)
+
+    # 오늘 목록에 없는 작품은 snapshot에 항목이 없으므로 history 항목을 직접 갱신
+    today_str = date.today().isoformat()
+    for tid in out_of_list:
+        info = cache.get(tid)
+        if info.get("episodeCount") is None:     # 조회 실패 → 기존 값 유지
+            continue
+        entry = history[str(tid)]
+        for key in DEEP_COPY_KEYS:
+            value = info.get(key)
+            if value is None and key in KEEP_IF_NONE:
+                continue
+            entry[key] = value
+        entry["deepCheckedAt"] = today_str
+        signals = [sig for sig in (entry.get("signals") or []) if sig != "hiatus_suspect"]
+        if is_hiatus(entry):
+            signals.append("hiatus_suspect")
+        entry["signals"] = signals
+
+
 # ── 8) 트랙 C: 업데이트순 기반 최근 활동 감지 (1차 무료 + 2차 소수 검증) ──
 def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> None:
     """장르 내 업데이트순 상위 5개를 1차로 무료로 뽑고, 그 소수만 실제
@@ -684,14 +746,29 @@ def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> Non
 HISTORY_PATH = Path("data") / "history.json"
 MAX_HISTORY_DAYS = 120  # 파일이 무한정 커지지 않도록 최근 120일치만 보관
 
-HISTORY_FIELDS = [
+# 목록 API에서 매일 새로 받는 값 → 매일 최신 값으로 덮어씀
+DAILY_FIELDS = [
     "titleName", "author", "genre", "webtoonLevelCode", "finish",
-    "thumbnailUrl", "titleUrl", "signals", "episodeCount", "cadenceDays",
-    "latestSubtitle", "latestDate", "keywords", "updateRank",
-    "starScore", "up", "bestChallengeLevelUp",  # 처음 만들 때 빠뜨렸던 필드들
-    "firstEpisodeDate",  # 1화 날짜 — 딥체크된 작품만 채워짐 (추가 호출 없음)
-    "posterThumbnailUrl",  # 세로형 포스터 이미지 — 딥체크된 작품만, 호출 1회 추가됨
+    "thumbnailUrl", "titleUrl", "updateRank", "starScore", "up", "bestChallengeLevelUp", "signals",
 ]
+# 상세 확인(딥체크)을 한 날에만 새로 채워지는 값 → 오늘 확인을 안 한 작품은 이전 값을 그대로 보존함.
+# (이전 버전은 이 값들도 매일 덮어써서, 오늘 확인 안 한 작품의 상세 정보가 빈 값으로 지워지고 있었음)
+DEEP_FIELDS = [
+    "episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
+    "firstEpisodeDate",     # 현존하는 첫 화 날짜
+    "posterThumbnailUrl",   # 세로형 포스터 (오래된 작품은 원래 없음)
+    "deepCheckedAt",        # 이 상세 값을 확인한 날짜 — 정보가 얼마나 오래됐는지 알 수 있게
+]
+KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl"}   # 조회 실패/없음일 때는 기존 값 유지
+HISTORY_FIELDS = DAILY_FIELDS + DEEP_FIELDS
+
+
+def is_hiatus(entry: dict) -> bool:
+    """장기휴재 의심 판정 (maybe_flag_hiatus와 같은 기준을 history 항목에 적용)."""
+    if "확정" in (entry.get("latestSubtitle") or ""):
+        return False
+    cadence = entry.get("cadenceDays")
+    return cadence is not None and cadence >= HIATUS_CADENCE_DAYS
 
 
 def load_history() -> dict[str, dict]:
@@ -732,10 +809,25 @@ def update_history(history: dict[str, dict], snapshot: list[dict]) -> None:
             entry["viewHistory"] = entry["viewHistory"][-MAX_HISTORY_DAYS:]
             entry["viewDates"] = entry["viewDates"][-MAX_HISTORY_DAYS:]
 
-        for field in HISTORY_FIELDS:
+        for field in DAILY_FIELDS:
             entry[field] = item.get(field)
 
-    print(f"[누적이력] history.json 갱신 완료 — 누적 작품 수 {len(history)}개")
+        # 오늘 상세 확인에 성공한 작품(화수가 채워짐)만 상세 값을 갱신하고, 나머지는 이전 값을 보존함
+        if item.get("deepCheckedAt") == today_str and item.get("episodeCount") is not None:
+            for field in DEEP_FIELDS:
+                value = item.get(field)
+                if value is None and field in KEEP_IF_NONE:
+                    continue
+                entry[field] = value
+
+        # 장기휴재 의심은 상세 값(연재주기)에서 나오므로, 보존된 값 기준으로 매일 다시 계산함
+        signals = [sig for sig in (entry.get("signals") or []) if sig != "hiatus_suspect"]
+        if is_hiatus(entry):
+            signals.append("hiatus_suspect")
+        entry["signals"] = signals
+
+    print(f"[누적이력] history.json 갱신 완료 — 누적 작품 수 {len(history)}개, "
+          f"상세 정보 보유 {sum(1 for e in history.values() if e.get('episodeCount') is not None)}개")
 
 
 def main() -> None:
@@ -746,7 +838,9 @@ def main() -> None:
 
     check_promotions(prev_map, prev_date, today_map)
 
+    history = load_history()
     cache = DeepInfoCache()  # 같은 작품이 여러 트랙에 겹쳐도 딥체크는 한 번만
+    check_notice_recheck(snapshot, cache, history)
     check_fresh_updates(snapshot, cache)
     check_rising_signal(snapshot, prev_map, cache)
     check_immediate_candidates(snapshot, cache)
@@ -756,12 +850,16 @@ def main() -> None:
     check_round_robin(snapshot, cache, state)
     save_check_state(state)
 
+    # 오늘 상세 확인한 작품에 확인 날짜를 표시 (history에서 이 값을 보고 상세 정보를 갱신함)
+    for title_id in cache.checked_ids():
+        if title_id in today_map:
+            today_map[title_id]["deepCheckedAt"] = date.today().isoformat()
+
     # 딥체크로 보강된 뒤에 최종 저장 — 사이트에서 signals/키워드를 바로 쓸 수 있음
     out_path = save_snapshot(snapshot)
     flagged = sum(1 for item in snapshot if item["signals"])
     print(f"완료: 총 {len(snapshot)}개 작품 (신호 부착 {flagged}개) → {out_path}")
 
-    history = load_history()
     update_history(history, snapshot)
     save_history(history)
 
