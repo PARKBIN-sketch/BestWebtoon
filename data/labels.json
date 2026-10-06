@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "exportedAt": "2026-10-06T05:31:23.100Z",
+  "count": 12,
+  "labels": {
+    "650919": {
+      "status": "none",
+      "note": "",
+      "titleName": "웰시네 부부에세이",
+      "subtitle": "#52. 유난히 뜨거웠던 계절에 (+근황,소식)",
+      "noticeDate": "26.09.17",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 3659183,
+        "starScore": 9.58,
+        "episodeCount": 176,
+        "cadenceDays": 7,
+        "growthPct": 0.2,
+        "trackedDays": 27
+      }
+    },
+    "757097": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "새벽인력",
+      "subtitle": "연재공지",
+      "noticeDate": "26.09.29",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 184077,
+        "starScore": 9.74,
+        "episodeCount": 2,
+        "cadenceDays": 102,
+        "growthPct": 1.3,
+        "trackedDays": 27
+      }
+    },
+    "776362": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "카오스이론",
+      "subtitle": "카오스이론 연재 일정 공지",
+      "noticeDate": "26.10.01",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 11358899,
+        "starScore": 9.92,
+        "episodeCount": 3,
+        "cadenceDays": 70.5,
+        "growthPct": 0.2,
+        "trackedDays": 27
+      }
+    },
+    "802026": {
+      "status": "none",
+      "note": "",
+      "titleName": "연애사색",
+      "subtitle": "근황 소식",
+      "noticeDate": "26.09.16",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 128459,
+        "starScore": 8.75,
+        "episodeCount": 16,
+        "cadenceDays": 14,
+        "growthPct": 1.2,
+        "trackedDays": 20
+      }
+    },
+    "831293": {
+      "status": "none",
+      "note": "",
+      "titleName": "영웅의 장의사",
+      "subtitle": "늦은 베도 감사인사!",
+      "noticeDate": "26.09.07",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 1824,
+        "starScore": 9.13,
+        "episodeCount": 4,
+        "cadenceDays": 34,
+        "growthPct": 31.2,
+        "trackedDays": 28
+      }
+    },
+    "833152": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "회색 숨",
+      "subtitle": "공지",
+      "noticeDate": "26.09.10",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 12515,
+        "starScore": 8.58,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 18.7,
+        "trackedDays": 28
+      }
+    },
+    "838173": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "판타지 바베큐",
+      "subtitle": "연재공지입니다.",
+      "noticeDate": "26.09.09",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 30708,
+        "starScore": 8.64,
+        "episodeCount": 12,
+        "cadenceDays": 8,
+        "growthPct": 9.1,
+        "trackedDays": 28
+      }
+    },
+    "841061": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "태은민호만화",
+      "subtitle": "오픈 공지",
+      "noticeDate": "26.09.18",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 334727,
+        "starScore": 9.76,
+        "episodeCount": 25,
+        "cadenceDays": 7,
+        "growthPct": 29.3,
+        "trackedDays": 28
+      }
+    },
+    "849345": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "행복부동산에 어서오세요!",
+      "subtitle": "[공지]",
+      "noticeDate": "26.09.28",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 25448,
+        "starScore": 8.93,
+        "episodeCount": 2,
+        "cadenceDays": 185,
+        "growthPct": 8.1,
+        "trackedDays": 27
+      }
+    },
+    "851850": {
+      "status": "confirmed",
+      "note": "챌린저스",
+      "titleName": "당신의 가격",
+      "subtitle": "챌린저스 공지",
+      "noticeDate": "26.09.10",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 24482,
+        "starScore": 9.68,
+        "episodeCount": 7,
+        "cadenceDays": 7,
+        "growthPct": 25,
+        "trackedDays": 27
+      }
+    },
+    "853811": {
+      "status": "none",
+      "note": "",
+      "titleName": "남의 연애 사업에 참견하면 안 되는 이유",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 71873,
+        "starScore": 9.15,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 143.7,
+        "trackedDays": 27
+      }
+    },
+    "853851": {
+      "status": "none",
+      "note": "",
+      "titleName": "첫사랑과의 거리는, 세 걸음",
+      "subtitle": "공지",
+      "noticeDate": "26.09.23",
+      "checkedAt": "2026-10-06",
+      "snapshot": {
+        "viewCount": 4584,
+        "starScore": 8.56,
+        "episodeCount": 5,
+        "cadenceDays": 7.5,
+        "growthPct": 907.5,
+        "trackedDays": 16
+      }
+    }
+  }
+}

@@ -86,6 +86,18 @@ def load_labels() -> dict:
     return labels if isinstance(labels, dict) else {}
 
 
+def load_reviews() -> dict:
+    """사이트에서 기록한 작품 검토(data/labels.json 안의 reviews). 없거나 깨졌으면 빈 값."""
+    if not LABELS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {}
+    reviews = payload.get("reviews", {}) if isinstance(payload, dict) else {}
+    return reviews if isinstance(reviews, dict) else {}
+
+
 def to_js_literal(obj) -> str:
     """JSON을 <script> 안에 안전하게 넣을 문자열로 만듭니다 (</script> 방지)."""
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
@@ -122,8 +134,18 @@ def main() -> None:
     else:
         print("[build_site] SAVED_LABELS 선언부를 못 찾아 분류 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    # 작품 검토 기록(data/labels.json의 reviews)도 같은 방식으로 사이트 기본값(SAVED_REVIEWS)에 포함
+    reviews = load_reviews()
+    reviews_match = re.compile(r"  const SAVED_REVIEWS = \{.*?\};\n", re.DOTALL).search(new_html)
+    if reviews_match:
+        new_html = (new_html[:reviews_match.start()]
+                    + f"  const SAVED_REVIEWS = {to_js_literal(reviews)};\n"
+                    + new_html[reviews_match.end():])
+    else:
+        print("[build_site] SAVED_REVIEWS 선언부를 못 찾아 검토 기록 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
