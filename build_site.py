@@ -22,6 +22,8 @@ from pathlib import Path
 HISTORY_PATH = Path("data") / "history.json"
 # 사이트의 [분류 내보내기]로 받은 파일을 이 경로에 올리면, 다음 빌드부터 사이트에 기본값으로 포함됨
 LABELS_PATH = Path("data") / "labels.json"
+# 크롤러가 쌓는 정식 연재 추적 기록(data/official_tracking.json)
+OFFICIAL_PATH = Path("data") / "official_tracking.json"
 SITE_PATH = Path("scouting_desk_mockup.html")
 
 
@@ -64,6 +66,9 @@ def build_real_data(history: dict) -> list[dict]:
             "posterThumbnailUrl": entry.get("posterThumbnailUrl"),
             "deepCheckedAt": entry.get("deepCheckedAt"),
             "episodeDates": entry.get("episodeDates"),
+            "favoriteCount": entry.get("favoriteCount"),
+            "favoriteDates": entry.get("favoriteDates") or [],
+            "favoriteValues": entry.get("favoriteValues") or [],
             "keywords": entry.get("keywords", []),
             "updateRank": entry.get("updateRank"),
             "viewHistory": view_history,
@@ -96,6 +101,17 @@ def load_reviews() -> dict:
         return {}
     reviews = payload.get("reviews", {}) if isinstance(payload, dict) else {}
     return reviews if isinstance(reviews, dict) else {}
+
+
+def load_official_tracking() -> dict:
+    """정식 연재 추적 기록. 없거나 깨졌으면 빈 값."""
+    if not OFFICIAL_PATH.exists():
+        return {}
+    try:
+        data = json.loads(OFFICIAL_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {}
+    return data if isinstance(data, dict) else {}
 
 
 def to_js_literal(obj) -> str:
@@ -144,8 +160,17 @@ def main() -> None:
     else:
         print("[build_site] SAVED_REVIEWS 선언부를 못 찾아 검토 기록 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    official = load_official_tracking()
+    official_match = re.compile(r"  const OFFICIAL_TRACKING = \{.*?\};\n", re.DOTALL).search(new_html)
+    if official_match:
+        new_html = (new_html[:official_match.start()]
+                    + f"  const OFFICIAL_TRACKING = {to_js_literal(official)};\n"
+                    + new_html[official_match.end():])
+    else:
+        print("[build_site] OFFICIAL_TRACKING 선언부를 못 찾아 정식 추적 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 정식 추적 {len(official)}건 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":

@@ -250,6 +250,7 @@ def collect_snapshot() -> list[dict]:
                         "firstEpisodeDate": None,
                         "posterThumbnailUrl": None,
                         "episodeDates": None,
+                        "favoriteCount": None,
                         "deepCheckedAt": None,   # 오늘 상세 확인(딥체크)을 했다면 오늘 날짜
                     }
                 )
@@ -406,6 +407,7 @@ class DeepInfoCache:
             time.sleep(REQUEST_DELAY_SEC)
             if title_info.get("status") == "ok":
                 info["posterThumbnailUrl"] = title_info.get("posterThumbnailUrl")
+                info["favoriteCount"] = title_info.get("favoriteCount")
 
             self._cache[title_id] = info
         return self._cache[title_id]
@@ -420,7 +422,7 @@ def attach_signal(item: dict, signal: str, extra: dict) -> None:
     if signal not in item["signals"]:
         item["signals"].append(signal)
 
-    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates")
+    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount")
     for key in common_fields:
         if extra.get(key) is not None:
             item[key] = extra[key]
@@ -475,6 +477,8 @@ def fetch_title_info(title_id: int) -> dict:
         "webtoonLevelCode": data.get("webtoonLevelCode"),
         "finished": data.get("finished"),
         "posterThumbnailUrl": data.get("posterThumbnailUrl"),
+        "favoriteCount": data.get("favoriteCount"),   # 관심 등록 수 (누적값)
+        "titleName": data.get("titleName"),
     }
 
 
@@ -663,7 +667,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
         info = cache.get(item["titleId"])
         if not item["signals"]:
             # 다른 트랙이 이미 신호를 붙인 작품이면 값을 덮어쓰지 않음
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -689,7 +693,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
 NOTICE_KEYWORDS = ["공지", "오픈", "감사", "근황", "챌린저스", "확정", "휴재", "완결", "후기", "수상", "정식", "독자픽", "리메이크", "중단"]
 RECENT_NOTICE_DAYS = 30
 DEEP_COPY_KEYS = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
-                  "firstEpisodeDate", "posterThumbnailUrl", "episodeDates")
+                  "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount")
 
 
 def is_recent_notice(entry: dict) -> bool:
@@ -700,7 +704,8 @@ def is_recent_notice(entry: dict) -> bool:
     return d is not None and (date.today() - d).days <= RECENT_NOTICE_DAYS
 
 
-def check_notice_recheck(today_snapshot: list[dict], cache: DeepInfoCache, history: dict[str, dict]) -> None:
+def check_notice_recheck(today_snapshot: list[dict], cache: DeepInfoCache, history: dict[str, dict],
+                         always_ids: set[int] | None = None) -> None:
     """기록상 '최근 공지'가 최신 회차인 작품을 오늘 다시 상세 확인합니다.
 
     오늘 목록(최근 업데이트순 상위 150개)에서 밀려난 작품도 포함합니다 — 그런 작품은 다른 트랙이
@@ -708,10 +713,12 @@ def check_notice_recheck(today_snapshot: list[dict], cache: DeepInfoCache, histo
     공지가 없는" 사례). 알림 대상은 몇 건 안 되므로 제목 id로 직접 다시 조회해도 부담이 거의 없습니다.
     """
     today_map = {it["titleId"]: it for it in today_snapshot}
-    target_ids = [int(tid) for tid, entry in history.items() if is_recent_notice(entry)]
+    # 최근 공지가 최신 회차인 작품 + (분류해 둔 연재 확정·수상 작품: 오픈 전 관심 수 흐름을 매일 남기려고)
+    always_ids = always_ids or set()
+    target_ids = [int(tid) for tid, entry in history.items() if is_recent_notice(entry) or int(tid) in always_ids]
     in_list = [t for t in target_ids if t in today_map]
     out_of_list = [t for t in target_ids if t not in today_map]
-    print(f"[공지재확인] 최근 {RECENT_NOTICE_DAYS}일 이내 공지가 최신 회차인 작품 {len(target_ids)}개 "
+    print(f"[공지재확인] 최근 {RECENT_NOTICE_DAYS}일 이내 공지가 최신 회차이거나 분류된 연재 확정·수상 작품 {len(target_ids)}개 "
           f"(오늘 목록 안 {len(in_list)}개, 목록 밖 {len(out_of_list)}개)를 다시 확인합니다.")
 
     for tid in in_list:
@@ -736,6 +743,7 @@ def check_notice_recheck(today_snapshot: list[dict], cache: DeepInfoCache, histo
                 continue
             entry[key] = value
         entry["deepCheckedAt"] = today_str
+        record_favorite(entry, info.get("favoriteCount"), today_str)
         signals = [sig for sig in (entry.get("signals") or []) if sig != "hiatus_suspect"]
         if is_hiatus(entry):
             signals.append("hiatus_suspect")
@@ -763,7 +771,7 @@ def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> Non
     for item in candidates:
         info = cache.get(item["titleId"])
         if not item["signals"]:
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -791,10 +799,30 @@ DEEP_FIELDS = [
     "firstEpisodeDate",     # 현존하는 첫 화 날짜
     "posterThumbnailUrl",   # 세로형 포스터 (오래된 작품은 원래 없음)
     "episodeDates",         # 최근 회차 업로드 날짜 목록(ISO) — 조회수 추이 그래프에서 업로드일 표시
+    "favoriteCount",        # 관심 수 (누적값) — 날짜별 이력은 favoriteDates/favoriteValues에 따로 쌓임
     "deepCheckedAt",        # 이 상세 값을 확인한 날짜 — 정보가 얼마나 오래됐는지 알 수 있게
 ]
-KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl"}   # 조회 실패/없음일 때는 기존 값 유지
+KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl", "favoriteCount"}   # 조회 실패/없음일 때는 기존 값 유지
 HISTORY_FIELDS = DAILY_FIELDS + DEEP_FIELDS
+
+
+def record_favorite(entry: dict, value, today_str: str) -> None:
+    """관심 수는 누적값이라 시간에 따른 변화가 중요함 → 확인한 날마다 값을 쌓아서 변화량을 볼 수 있게 함.
+
+    상세 확인(딥체크)을 한 날에만 기록됩니다. 같은 날 다시 확인하면 값만 갱신하고 새 지점은 만들지 않습니다.
+    """
+    if value is None:
+        return
+    dates = entry.setdefault("favoriteDates", [])
+    values = entry.setdefault("favoriteValues", [])
+    if dates and dates[-1] == today_str:
+        values[-1] = value
+    else:
+        dates.append(today_str)
+        values.append(value)
+    if len(dates) > MAX_HISTORY_DAYS:
+        entry["favoriteDates"] = dates[-MAX_HISTORY_DAYS:]
+        entry["favoriteValues"] = values[-MAX_HISTORY_DAYS:]
 
 
 def is_hiatus(entry: dict) -> bool:
@@ -853,6 +881,7 @@ def update_history(history: dict[str, dict], snapshot: list[dict]) -> None:
                 if value is None and field in KEEP_IF_NONE:
                     continue
                 entry[field] = value
+            record_favorite(entry, item.get("favoriteCount"), today_str)
 
         # 장기휴재 의심은 상세 값(연재주기)에서 나오므로, 보존된 값 기준으로 매일 다시 계산함
         signals = [sig for sig in (entry.get("signals") or []) if sig != "hiatus_suspect"]
@@ -864,6 +893,101 @@ def update_history(history: dict[str, dict], snapshot: list[dict]) -> None:
           f"상세 정보 보유 {sum(1 for e in history.values() if e.get('episodeCount') is not None)}개")
 
 
+# ── 정식 연재 추적: 사이트에서 입력한 정식 작품 번호를 매일 조회해 날짜별로 쌓음 ─────────
+# 정식 연재로 넘어가면 베스트도전과 다른 작품 번호가 붙고, 베스트도전 쪽은 지워지기도 해서
+# 사용자가 사이트의 분류 패널에 정식 작품 주소를 입력합니다(data/labels.json에 저장됨).
+# 정식 웹툰은 조회수가 공개되지 않는 것으로 알려져 있어(미확인), 관심 수와 연재 진행(화수)을 기록합니다.
+LABELS_PATH = Path("data") / "labels.json"
+OFFICIAL_TRACKING_PATH = Path("data") / "official_tracking.json"
+OFFICIAL_MAX_POINTS = 400
+PROMOTED_LABEL_STATUSES = ("confirmed", "award")
+
+
+def load_label_records() -> dict:
+    """사이트에서 내보낸 분류 기록(data/labels.json의 labels). 없거나 깨졌으면 빈 값."""
+    if not LABELS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        print("[정식추적] labels.json을 읽지 못했습니다 — 건너뜁니다.")
+        return {}
+    labels = payload.get("labels", payload) if isinstance(payload, dict) else {}
+    return labels if isinstance(labels, dict) else {}
+
+
+def promoted_bench_ids(labels: dict) -> set[int]:
+    """분류가 연재 확정·수상인 베스트도전 작품 번호."""
+    return {int(k) for k, rec in labels.items()
+            if str(k).isdigit() and isinstance(rec, dict) and rec.get("status") in PROMOTED_LABEL_STATUSES}
+
+
+def load_official_targets(labels: dict) -> dict[int, dict]:
+    """분류 기록에서 정식 작품 번호가 입력된 항목을 {정식 번호: 메타}로 뽑습니다."""
+    targets: dict[int, dict] = {}
+    for bench_id, rec in labels.items():
+        if not isinstance(rec, dict):
+            continue
+        official_id = rec.get("officialTitleId")
+        if not isinstance(official_id, int) or official_id <= 0:
+            continue
+        targets[official_id] = {
+            "benchTitleId": int(bench_id) if str(bench_id).isdigit() else None,
+            "openDate": rec.get("officialOpenDate"),
+            "titleName": rec.get("titleName"),
+        }
+    return targets
+
+
+def track_official_titles(targets: dict[int, dict]) -> None:
+    """정식 작품 번호별로 오늘의 관심 수·연재 진행을 조회해 data/official_tracking.json에 쌓습니다."""
+    store: dict[str, dict] = {}
+    if OFFICIAL_TRACKING_PATH.exists():
+        try:
+            store = json.loads(OFFICIAL_TRACKING_PATH.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            store = {}
+    today_str = date.today().isoformat()
+    print(f"[정식추적] 정식 작품 {len(targets)}개를 조회합니다.")
+
+    for official_id, meta in targets.items():
+        entry = store.setdefault(str(official_id), {"dates": [], "favorite": [], "episodes": []})
+        entry["benchTitleId"] = meta.get("benchTitleId")
+        entry["openDate"] = meta.get("openDate")
+        entry["titleName"] = meta.get("titleName")
+
+        info = fetch_title_info(official_id)
+        time.sleep(REQUEST_DELAY_SEC)
+        if info.get("status") != "ok":
+            entry["status"] = "error"              # 조회 실패 — 이전 기록은 그대로 둠
+            entry["lastError"] = str(info.get("error") or info.get("http_status") or "알 수 없음")
+            continue
+        level = info.get("webtoonLevelCode")
+        entry["webtoonLevelCode"] = level
+        # 베스트도전/도전만화 번호를 잘못 넣은 경우 표시 (기록은 계속 쌓되 사이트에서 경고)
+        entry["status"] = "invalid" if level in ("BEST_CHALLENGE", "CHALLENGE") else "ok"
+        entry.pop("lastError", None)
+        if info.get("titleName"):
+            entry["officialTitleName"] = info["titleName"]
+
+        deep = fetch_deep_info(official_id)
+        time.sleep(REQUEST_DELAY_SEC)
+        entry["latestSubtitle"] = deep.get("latestSubtitle")
+        entry["latestDate"] = deep.get("latestDate")
+
+        point = (today_str, info.get("favoriteCount"), deep.get("episodeCount"))
+        if entry["dates"] and entry["dates"][-1] == today_str:       # 같은 날 다시 돌면 값만 갱신
+            entry["favorite"][-1], entry["episodes"][-1] = point[1], point[2]
+        else:
+            entry["dates"].append(point[0]); entry["favorite"].append(point[1]); entry["episodes"].append(point[2])
+        for key in ("dates", "favorite", "episodes"):
+            entry[key] = entry[key][-OFFICIAL_MAX_POINTS:]
+
+    OFFICIAL_TRACKING_PATH.parent.mkdir(parents=True, exist_ok=True)
+    OFFICIAL_TRACKING_PATH.write_text(json.dumps(store, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print(f"[정식추적] 저장 완료 — 누적 추적 작품 {len(store)}개 → {OFFICIAL_TRACKING_PATH}")
+
+
 def main() -> None:
     print(f"=== {date.today().isoformat()} 스냅샷 수집 시작 ===")
     snapshot = collect_snapshot()
@@ -873,8 +997,9 @@ def main() -> None:
     check_promotions(prev_map, prev_date, today_map)
 
     history = load_history()
+    labels = load_label_records()
     cache = DeepInfoCache()  # 같은 작품이 여러 트랙에 겹쳐도 딥체크는 한 번만
-    check_notice_recheck(snapshot, cache, history)
+    check_notice_recheck(snapshot, cache, history, always_ids=promoted_bench_ids(labels))
     check_fresh_updates(snapshot, cache)
     check_rising_signal(snapshot, prev_map, cache)
     check_immediate_candidates(snapshot, cache)
@@ -896,6 +1021,14 @@ def main() -> None:
 
     update_history(history, snapshot)
     save_history(history)
+
+    # 정식 연재 추적은 부가 기능이라, 여기서 실패해도 위의 수집 결과(스냅샷·이력)는 이미 저장된 뒤임
+    try:
+        targets = load_official_targets(labels)
+        if targets:
+            track_official_titles(targets)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[정식추적] 오류로 건너뜁니다: {exc}")
 
 
 if __name__ == "__main__":
