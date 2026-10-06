@@ -1,7 +1,8 @@
 {
-  "version": 1,
-  "exportedAt": "2026-10-06T05:31:23.100Z",
-  "count": 12,
+  "version": 2,
+  "exportedAt": "2026-10-06T07:37:37.163Z",
+  "count": 14,
+  "reviewCount": 0,
   "labels": {
     "650919": {
       "status": "none",
@@ -67,6 +68,25 @@
         "trackedDays": 20
       }
     },
+    "830478": {
+      "status": "confirmed",
+      "note": "830478 -> 네이버 정식 연재 848576",
+      "titleName": "가장 위대한 마술사",
+      "subtitle": "연재공지",
+      "noticeDate": "26.03.19",
+      "checkedAt": "2026-10-06",
+      "updatedAt": "2026-10-06T07:36:32.340Z",
+      "snapshot": {
+        "viewCount": 101163,
+        "starScore": 9.86,
+        "episodeCount": 5,
+        "cadenceDays": 37,
+        "growthPct": 2.6,
+        "trackedDays": 28
+      },
+      "officialTitleId": 848576,
+      "officialOpenDate": "2026-03-26"
+    },
     "831293": {
       "status": "none",
       "note": "",
@@ -114,6 +134,25 @@
         "growthPct": 9.1,
         "trackedDays": 28
       }
+    },
+    "839387": {
+      "status": "confirmed",
+      "note": "베스트도전 839387 → 정식 847812",
+      "titleName": "용사 출연, 마왕 연출",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-06",
+      "updatedAt": "2026-10-06T07:35:11.217Z",
+      "snapshot": {
+        "viewCount": 40765,
+        "starScore": 9.6,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 1.6,
+        "trackedDays": 28
+      },
+      "officialTitleId": 847812,
+      "officialOpenDate": "2026-02-06"
     },
     "841061": {
       "status": "confirmed",
@@ -195,5 +234,6 @@
         "trackedDays": 16
       }
     }
-  }
+  },
+  "reviews": {}
 }
