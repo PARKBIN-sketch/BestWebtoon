@@ -75,7 +75,7 @@ from __future__ import annotations
 
 import json
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import requests
@@ -175,6 +175,22 @@ def fetch_genre_page(genre: str | None, page: int) -> list[dict]:
     return response.json().get("list", [])
 
 
+def extract_author_names(item: dict) -> list[str]:
+    """목록 API의 writers/painters에서 작가 이름(필명)을 뽑습니다.
+
+    목록 API의 author는 마스킹된 로그인 아이디(예: wkdr****)지만, writers/painters에는
+    네이버에 표시되는 이름(예: 막대기)이 들어 있습니다. 매일 받는 목록 응답에 이미 있어서
+    추가 호출 없이 전체 작품에 쓸 수 있습니다.
+    """
+    names: list[str] = []
+    for key in ("writers", "painters"):
+        for person in item.get(key) or []:
+            name = (person.get("name") or "").strip()
+            if name and name not in names:
+                names.append(name)
+    return names
+
+
 def collect_snapshot() -> list[dict]:
     """모든 장르(+전체 탭)를 순회하며 오늘 자 스냅샷을 수집합니다.
 
@@ -213,6 +229,7 @@ def collect_snapshot() -> list[dict]:
                         "titleId": title_id,
                         "titleName": item.get("titleName"),
                         "author": item.get("author"),
+                        "authorNames": extract_author_names(item),   # 필명(마스킹 아이디와 별개)
                         "genre": genre_label,
                         "viewCount": item.get("viewCount"),
                         "starScore": item.get("starScore"),
@@ -232,6 +249,7 @@ def collect_snapshot() -> list[dict]:
                         "keywords": [],
                         "firstEpisodeDate": None,
                         "posterThumbnailUrl": None,
+                        "episodeDates": None,
                         "deepCheckedAt": None,   # 오늘 상세 확인(딥체크)을 했다면 오늘 날짜
                     }
                 )
@@ -267,6 +285,20 @@ def load_previous_snapshot() -> tuple[str | None, dict[int, dict] | None]:
 
 
 # ── 2) 개별 작품 딥체크 (화수/부제/키워드/연재주기 통합 조회) ────────
+EPISODE_DATES_KEEP_DAYS = 120   # 조회수 추이 그래프(history 보관 기간)와 맞춤
+
+
+def extract_episode_dates(episodes: list[dict]) -> list[str]:
+    """회차 목록에서 업로드 날짜(ISO, 오름차순, 중복 제거)만 뽑습니다.
+
+    조회수 추이 그래프에서 '새 화가 올라온 날'을 색으로 표시하는 데 씁니다. 딥체크 때 이미
+    받아오는 최근 회차 목록(최대 20개)에서 뽑으므로 추가 호출이 없습니다.
+    """
+    cutoff = date.today() - timedelta(days=EPISODE_DATES_KEEP_DAYS)
+    days = {d for d in (parse_service_date(e.get("serviceDateDescription")) for e in episodes) if d and d >= cutoff}
+    return sorted(d.isoformat() for d in days)
+
+
 def fetch_deep_info(title_id: int) -> dict:
     """작품 하나에 대해 화수·최신 회차 부제·연재 주기·특이 키워드를 한 번에 확인합니다.
 
@@ -277,7 +309,7 @@ def fetch_deep_info(title_id: int) -> dict:
     empty = {
         "episodeCount": None, "cadenceDays": None,
         "latestSubtitle": None, "latestDate": None, "keywords": [],
-        "firstEpisodeDate": None, "posterThumbnailUrl": None,
+        "firstEpisodeDate": None, "posterThumbnailUrl": None, "episodeDates": None,
     }
 
     first_url = EPISODE_LIST_URL_TEMPLATE.format(title_id=title_id, page=1)
@@ -317,6 +349,7 @@ def fetch_deep_info(title_id: int) -> dict:
         "latestDate": latest.get("serviceDateDescription"),
         "keywords": detect_keywords(latest.get("subtitle")),
         "firstEpisodeDate": first_episode_date,
+        "episodeDates": extract_episode_dates(episodes),
     }
 
 
@@ -387,7 +420,7 @@ def attach_signal(item: dict, signal: str, extra: dict) -> None:
     if signal not in item["signals"]:
         item["signals"].append(signal)
 
-    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl")
+    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates")
     for key in common_fields:
         if extra.get(key) is not None:
             item[key] = extra[key]
@@ -630,7 +663,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
         info = cache.get(item["titleId"])
         if not item["signals"]:
             # 다른 트랙이 이미 신호를 붙인 작품이면 값을 덮어쓰지 않음
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -656,7 +689,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
 NOTICE_KEYWORDS = ["공지", "오픈", "감사", "근황", "챌린저스", "확정", "휴재", "완결", "후기", "수상", "정식", "독자픽", "리메이크", "중단"]
 RECENT_NOTICE_DAYS = 30
 DEEP_COPY_KEYS = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
-                  "firstEpisodeDate", "posterThumbnailUrl")
+                  "firstEpisodeDate", "posterThumbnailUrl", "episodeDates")
 
 
 def is_recent_notice(entry: dict) -> bool:
@@ -730,7 +763,7 @@ def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> Non
     for item in candidates:
         info = cache.get(item["titleId"])
         if not item["signals"]:
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl"):
+            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates"):
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -748,7 +781,7 @@ MAX_HISTORY_DAYS = 120  # 파일이 무한정 커지지 않도록 최근 120일�
 
 # 목록 API에서 매일 새로 받는 값 → 매일 최신 값으로 덮어씀
 DAILY_FIELDS = [
-    "titleName", "author", "genre", "webtoonLevelCode", "finish",
+    "titleName", "author", "authorNames", "genre", "webtoonLevelCode", "finish",
     "thumbnailUrl", "titleUrl", "updateRank", "starScore", "up", "bestChallengeLevelUp", "signals",
 ]
 # 상세 확인(딥체크)을 한 날에만 새로 채워지는 값 → 오늘 확인을 안 한 작품은 이전 값을 그대로 보존함.
@@ -757,6 +790,7 @@ DEEP_FIELDS = [
     "episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
     "firstEpisodeDate",     # 현존하는 첫 화 날짜
     "posterThumbnailUrl",   # 세로형 포스터 (오래된 작품은 원래 없음)
+    "episodeDates",         # 최근 회차 업로드 날짜 목록(ISO) — 조회수 추이 그래프에서 업로드일 표시
     "deepCheckedAt",        # 이 상세 값을 확인한 날짜 — 정보가 얼마나 오래됐는지 알 수 있게
 ]
 KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl"}   # 조회 실패/없음일 때는 기존 값 유지
