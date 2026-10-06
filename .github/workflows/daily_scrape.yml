@@ -15,13 +15,16 @@ permissions:
 
 jobs:
   scrape:
-    runs-on: ubuntu-latest
+    # ubuntu-latest는 2026-10-19~11-19 사이에 Ubuntu 26.04로 단계적으로 바뀜(GitHub 공지).
+    # 새벽에 사람 없이 도는 작업이라, 도구 버전이 바뀌어 깨지는 일이 없도록 24.04로 고정해 둠.
+    # 나중에 runs-on을 ubuntu-26.04로 바꿔 Run workflow로 한 번 시험해 보고 옮기면 됨.
+    runs-on: ubuntu-24.04
     steps:
       - name: 저장소 체크아웃
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6   # v4는 Node 20 기반이라 경고가 뜸 (v5부터 Node 24)
 
       - name: Python 설치
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6   # v5는 Node 20 기반이라 경고가 뜸
         with:
           python-version: "3.13"
 
