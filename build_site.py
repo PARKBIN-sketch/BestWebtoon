@@ -103,6 +103,18 @@ def load_reviews() -> dict:
     return reviews if isinstance(reviews, dict) else {}
 
 
+def load_personal() -> dict:
+    """사이트에서 기록한 ★ 찜·✕ 관심없음·워치리스트 상태/메모(data/labels.json의 personal). 없거나 깨졌으면 빈 값."""
+    if not LABELS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {}
+    personal = payload.get("personal", {}) if isinstance(payload, dict) else {}
+    return personal if isinstance(personal, dict) else {}
+
+
 def load_official_tracking() -> dict:
     """정식 연재 추적 기록. 없거나 깨졌으면 빈 값."""
     if not OFFICIAL_PATH.exists():
@@ -160,6 +172,16 @@ def main() -> None:
     else:
         print("[build_site] SAVED_REVIEWS 선언부를 못 찾아 검토 기록 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    # ★ 찜·✕ 관심없음·워치리스트 메모(data/labels.json의 personal)도 같은 방식으로 사이트 기본값(SAVED_PERSONAL)에 포함
+    personal = load_personal()
+    personal_match = re.compile(r"  const SAVED_PERSONAL = \{.*?\};\n", re.DOTALL).search(new_html)
+    if personal_match:
+        new_html = (new_html[:personal_match.start()]
+                    + f"  const SAVED_PERSONAL = {to_js_literal(personal)};\n"
+                    + new_html[personal_match.end():])
+    else:
+        print("[build_site] SAVED_PERSONAL 선언부를 못 찾아 찜·관심없음 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     official = load_official_tracking()
     official_match = re.compile(r"  const OFFICIAL_TRACKING = \{.*?\};\n", re.DOTALL).search(new_html)
     if official_match:
@@ -170,7 +192,7 @@ def main() -> None:
         print("[build_site] OFFICIAL_TRACKING 선언부를 못 찾아 정식 추적 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 정식 추적 {len(official)}건 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
