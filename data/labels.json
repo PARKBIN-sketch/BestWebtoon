@@ -1,9 +1,28 @@
 {
   "version": 2,
-  "exportedAt": "2026-10-06T07:37:37.163Z",
-  "count": 14,
+  "exportedAt": "2026-10-07T04:25:51.782Z",
+  "count": 17,
   "reviewCount": 0,
   "labels": {
+    "86400": {
+      "status": "confirmed",
+      "note": "타플랫폼에서 네이버로 이적 현재 휴재",
+      "titleName": "은하!",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:23:59.950Z",
+      "snapshot": {
+        "viewCount": 10927847,
+        "starScore": 9.89,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0.1,
+        "trackedDays": 28
+      },
+      "officialTitleId": 800104,
+      "officialOpenDate": "2022-09-09"
+    },
     "650919": {
       "status": "none",
       "note": "",
@@ -38,7 +57,7 @@
     },
     "776362": {
       "status": "confirmed",
-      "note": "",
+      "note": "네이버 10월 17일 오픈",
       "titleName": "카오스이론",
       "subtitle": "카오스이론 연재 일정 공지",
       "noticeDate": "26.10.01",
@@ -50,7 +69,9 @@
         "cadenceDays": 70.5,
         "growthPct": 0.2,
         "trackedDays": 27
-      }
+      },
+      "updatedAt": "2026-10-07T04:22:41.199Z",
+      "officialOpenDate": "2026-10-17"
     },
     "802026": {
       "status": "none",
@@ -66,6 +87,23 @@
         "cadenceDays": 14,
         "growthPct": 1.2,
         "trackedDays": 20
+      }
+    },
+    "810080": {
+      "status": "ended",
+      "note": "",
+      "titleName": "정색이를 웃겨라!",
+      "subtitle": "후기",
+      "noticeDate": "26.09.14",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:25:30.046Z",
+      "snapshot": {
+        "viewCount": 15371,
+        "starScore": 9.01,
+        "episodeCount": 4,
+        "cadenceDays": 259,
+        "growthPct": 16.8,
+        "trackedDays": 28
       }
     },
     "830478": {
@@ -153,6 +191,23 @@
       },
       "officialTitleId": 847812,
       "officialOpenDate": "2026-02-06"
+    },
+    "839665": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "우리 언니가 무당이 되었다",
+      "subtitle": "휴재합니다 사유 : 삼산 밟기",
+      "noticeDate": "26.10.07",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:20:29.910Z",
+      "snapshot": {
+        "viewCount": 1166581,
+        "starScore": 9.52,
+        "episodeCount": 103,
+        "cadenceDays": 3.5,
+        "growthPct": 21.7,
+        "trackedDays": 28
+      }
     },
     "841061": {
       "status": "confirmed",
