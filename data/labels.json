@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "exportedAt": "2026-10-07T04:25:51.782Z",
-  "count": 17,
+  "exportedAt": "2026-10-07T04:46:57.248Z",
+  "count": 27,
   "reviewCount": 0,
   "labels": {
     "86400": {
@@ -39,6 +39,23 @@
         "trackedDays": 27
       }
     },
+    "710956": {
+      "status": "none",
+      "note": "",
+      "titleName": "카나와 초나",
+      "subtitle": "효녀의 근황",
+      "noticeDate": "26.09.22",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:41:48.531Z",
+      "snapshot": {
+        "viewCount": 7416105,
+        "starScore": 9.84,
+        "episodeCount": 305,
+        "cadenceDays": 42,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
     "757097": {
       "status": "confirmed",
       "note": "",
@@ -73,6 +90,23 @@
       "updatedAt": "2026-10-07T04:22:41.199Z",
       "officialOpenDate": "2026-10-17"
     },
+    "794927": {
+      "status": "confirmed",
+      "note": "연재확정 26년 하반",
+      "titleName": "외고생은 왜 고생?",
+      "subtitle": "연재 공지",
+      "noticeDate": "26.09.20",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:37:55.243Z",
+      "snapshot": {
+        "viewCount": 331519,
+        "starScore": 9.1,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.5,
+        "trackedDays": 17
+      }
+    },
     "802026": {
       "status": "none",
       "note": "",
@@ -105,6 +139,42 @@
         "growthPct": 16.8,
         "trackedDays": 28
       }
+    },
+    "810649": {
+      "status": "moved",
+      "note": "일본사이트 런칭",
+      "titleName": "나백수",
+      "subtitle": "신작웹툰공지",
+      "noticeDate": "26.09.14",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:44:37.339Z",
+      "snapshot": {
+        "viewCount": 435619,
+        "starScore": 9.2,
+        "episodeCount": 2,
+        "cadenceDays": 55,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
+    "825641": {
+      "status": "confirmed",
+      "note": "260907 네이버 정식 연재",
+      "titleName": "딜리버리 임파서블",
+      "subtitle": "연재 공지",
+      "noticeDate": "26.09.07",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:35:32.073Z",
+      "snapshot": {
+        "viewCount": 40275,
+        "starScore": 9.75,
+        "episodeCount": 2,
+        "cadenceDays": 771,
+        "growthPct": 3.7,
+        "trackedDays": 28
+      },
+      "officialTitleId": 854757,
+      "officialOpenDate": "2026-09-07"
     },
     "830478": {
       "status": "confirmed",
@@ -141,6 +211,23 @@
         "trackedDays": 28
       }
     },
+    "831470": {
+      "status": "ended",
+      "note": "보나베띠 지최대 수상으로 인한 휴재",
+      "titleName": "비공개 계정",
+      "subtitle": "<공지>",
+      "noticeDate": "26.09.12",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:29:39.198Z",
+      "snapshot": {
+        "viewCount": 88240,
+        "starScore": 9.06,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 3.8,
+        "trackedDays": 25
+      }
+    },
     "833152": {
       "status": "confirmed",
       "note": "",
@@ -170,6 +257,23 @@
         "episodeCount": 12,
         "cadenceDays": 8,
         "growthPct": 9.1,
+        "trackedDays": 28
+      }
+    },
+    "838602": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "쓰리포",
+      "subtitle": "시즌2 종료 및 휴재공지",
+      "noticeDate": "26.09.07",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:35:52.132Z",
+      "snapshot": {
+        "viewCount": 247673,
+        "starScore": 9.68,
+        "episodeCount": 64,
+        "cadenceDays": 7,
+        "growthPct": 3.4,
         "trackedDays": 28
       }
     },
@@ -209,6 +313,41 @@
         "trackedDays": 28
       }
     },
+    "840661": {
+      "status": "none",
+      "note": "공모전 홍보",
+      "titleName": "로판이지만 스케일은 큽니다만..",
+      "subtitle": "편집된 이야기들+근황",
+      "noticeDate": "26.10.03",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:29:09.238Z",
+      "snapshot": {
+        "viewCount": 44028,
+        "starScore": 8.85,
+        "episodeCount": 2,
+        "cadenceDays": 17,
+        "growthPct": 5.5,
+        "trackedDays": 22
+      }
+    },
+    "841033": {
+      "status": "confirmed",
+      "note": "261010정식연재",
+      "titleName": "N년째 외사랑",
+      "subtitle": "연재 공지",
+      "noticeDate": "26.10.03",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:36:20.660Z",
+      "snapshot": {
+        "viewCount": 754196,
+        "starScore": 9.42,
+        "episodeCount": 2,
+        "cadenceDays": 157,
+        "growthPct": 1,
+        "trackedDays": 28
+      },
+      "officialOpenDate": "2026-10-10"
+    },
     "841061": {
       "status": "confirmed",
       "note": "",
@@ -222,6 +361,23 @@
         "episodeCount": 25,
         "cadenceDays": 7,
         "growthPct": 29.3,
+        "trackedDays": 28
+      }
+    },
+    "849040": {
+      "status": "none",
+      "note": "연재 주기 조정",
+      "titleName": "로맨스헬퍼",
+      "subtitle": "공지",
+      "noticeDate": "26.09.16",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:27:27.533Z",
+      "snapshot": {
+        "viewCount": 34974,
+        "starScore": 9.01,
+        "episodeCount": 27,
+        "cadenceDays": 7,
+        "growthPct": 8.9,
         "trackedDays": 28
       }
     },
@@ -239,6 +395,23 @@
         "cadenceDays": 185,
         "growthPct": 8.1,
         "trackedDays": 27
+      }
+    },
+    "850942": {
+      "status": "confirmed",
+      "note": "7월 챌린저스 선정",
+      "titleName": "잘 자면 금메달",
+      "subtitle": "챌린저스 공지",
+      "noticeDate": "26.09.13",
+      "checkedAt": "2026-10-07",
+      "updatedAt": "2026-10-07T04:28:02.468Z",
+      "snapshot": {
+        "viewCount": 22914,
+        "starScore": 9.03,
+        "episodeCount": 9,
+        "cadenceDays": 10,
+        "growthPct": 8.5,
+        "trackedDays": 28
       }
     },
     "851850": {
