@@ -2198,34 +2198,83 @@
       document.querySelectorAll('.genre-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       currentGenre = btn.dataset.genre;
+      saveView();
       render();
     });
   });
 
   document.getElementById('search-input').addEventListener('input', (e)=>{
     currentSearch = e.target.value;
+    saveView();
     render();
   });
 
   document.getElementById('sort-select').addEventListener('change', (e)=>{
     currentSort = e.target.value;
+    saveView();
     render();
   });
 
   document.getElementById('hide-dismissed-toggle').addEventListener('change', (e)=>{
     hideDismissed = e.target.checked;
+    saveView();
     render();
   });
 
   document.getElementById('label-filter').addEventListener('change', (e)=>{
     currentLabelFilter = e.target.value;
+    saveView();
     render();
   });
 
   document.getElementById('wl-sort-select').addEventListener('change', (e)=>{
     currentWlSort = e.target.value;
+    saveView();
     renderWatchlistPage();
   });
+
+  // ── 보기 상태 기억: 새로고침해도 장르·정렬·검색·분류 보기 필터가 유지됨 (이 브라우저에만 저장되는 편의 기능) ──
+  const VIEW_STORAGE_KEY = 'scoutingDesk.view.v1';
+  function saveView(){
+    try {
+      localStorage.setItem(VIEW_STORAGE_KEY, JSON.stringify({
+        genre: currentGenre, sort: currentSort, search: currentSearch,
+        hideDismissed, labelFilter: currentLabelFilter, wlSort: currentWlSort,
+      }));
+    } catch(e){}
+  }
+  function restoreView(){
+    let v = null;
+    try { v = JSON.parse(localStorage.getItem(VIEW_STORAGE_KEY) || 'null'); } catch(e){ v = null; }
+    if(!v || typeof v !== 'object') return;
+    const optionValues = id => [...document.querySelectorAll(`#${id} option`)].map(o => o.value);
+    if(typeof v.genre === 'string' && document.querySelector(`.genre-btn[data-genre="${v.genre}"]`)){
+      currentGenre = v.genre;
+      document.querySelectorAll('.genre-btn').forEach(b => b.classList.toggle('active', b.dataset.genre === currentGenre));
+    }
+    if(typeof v.sort === 'string' && optionValues('sort-select').includes(v.sort)){
+      currentSort = v.sort;
+      document.getElementById('sort-select').value = currentSort;
+    }
+    if(typeof v.search === 'string'){
+      currentSearch = v.search;
+      document.getElementById('search-input').value = currentSearch;
+    }
+    if(typeof v.hideDismissed === 'boolean'){
+      hideDismissed = v.hideDismissed;
+      document.getElementById('hide-dismissed-toggle').checked = hideDismissed;
+    }
+    if(typeof v.wlSort === 'string' && optionValues('wl-sort-select').includes(v.wlSort)){
+      currentWlSort = v.wlSort;
+      document.getElementById('wl-sort-select').value = currentWlSort;
+    }
+    // 분류 보기 필터: 지금 있는 항목일 때만 복원 (없는 값이면 전체로)
+    if(typeof v.labelFilter === 'string' && (v.labelFilter === 'all' || v.labelFilter === 'pending' || v.labelFilter === 'backlog'
+        || v.labelFilter === 'reviewed' || Object.prototype.hasOwnProperty.call(LABEL_STATUS, v.labelFilter))){
+      currentLabelFilter = v.labelFilter;
+    }
+  }
+  restoreView();
 
   renderLabelFilterOptions();
   renderDataSummaries();
