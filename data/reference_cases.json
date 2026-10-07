@@ -1,0 +1,1083 @@
+{
+ "source": "조사 목록(9월 챌린저스 선정작 등)",
+ "cases": [
+  {
+   "titleId": 806846,
+   "titleName": "곱은 궤",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 541
+  },
+  {
+   "titleId": 851861,
+   "titleName": "결속",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 742
+  },
+  {
+   "titleId": 851893,
+   "titleName": "남자. 주인공",
+   "badge": "",
+   "group": "blank",
+   "favorite": 432
+  },
+  {
+   "titleId": 853478,
+   "titleName": "너에게 잠긴 여름",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 186
+  },
+  {
+   "titleId": 810741,
+   "titleName": "사기꾼 한도령",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 202
+  },
+  {
+   "titleId": 852267,
+   "titleName": "작은 우연이 필요해!",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2122
+  },
+  {
+   "titleId": 852410,
+   "titleName": "지하도시 춘천",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 428
+  },
+  {
+   "titleId": 839213,
+   "titleName": "반쪽이",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 564
+  },
+  {
+   "titleId": 811426,
+   "titleName": "여우별잡이",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 196
+  },
+  {
+   "titleId": 791587,
+   "titleName": "도개걸윷모",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": 1646
+  },
+  {
+   "titleId": 759503,
+   "titleName": "바리의 영혼",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 722
+  },
+  {
+   "titleId": 825178,
+   "titleName": "바리, 별을 깨운 천둥 (바리의 영혼 리메이크)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 656
+  },
+  {
+   "titleId": 815092,
+   "titleName": "흑사",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 1229
+  },
+  {
+   "titleId": 776362,
+   "titleName": "카오스이론",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 16336
+  },
+  {
+   "titleId": 791830,
+   "titleName": "나비의 세계",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 812
+  },
+  {
+   "titleId": 852573,
+   "titleName": "은막꽃",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 206
+  },
+  {
+   "titleId": 772801,
+   "titleName": "그날 민우는 죽었다",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 6495
+  },
+  {
+   "titleId": 851646,
+   "titleName": "우주인의 집",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 81
+  },
+  {
+   "titleId": 839662,
+   "titleName": "개같이 사랑해라",
+   "badge": "없음",
+   "group": "none",
+   "favorite": null
+  },
+  {
+   "titleId": 839279,
+   "titleName": "써니서프",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 247
+  },
+  {
+   "titleId": 825056,
+   "titleName": "한판의 미학",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 280
+  },
+  {
+   "titleId": 810226,
+   "titleName": "서른 방학",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2789
+  },
+  {
+   "titleId": 831267,
+   "titleName": "어리바리 치에센세",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1782
+  },
+  {
+   "titleId": 811155,
+   "titleName": "육식주의자선언",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 489
+  },
+  {
+   "titleId": 825112,
+   "titleName": "어쩌면 우리도",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1116
+  },
+  {
+   "titleId": 805183,
+   "titleName": "타임머신 만들기",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 4446
+  },
+  {
+   "titleId": 830822,
+   "titleName": "미련의 망상",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": 1806
+  },
+  {
+   "titleId": 708065,
+   "titleName": "새는 시간을 난다",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 3654
+  },
+  {
+   "titleId": 821733,
+   "titleName": "빌런 치유사 은조이",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 449
+  },
+  {
+   "titleId": 741146,
+   "titleName": "학교다녀오겠습니다",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2868
+  },
+  {
+   "titleId": 825743,
+   "titleName": "천만배우의 딸이 되었다",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 1215
+  },
+  {
+   "titleId": 813569,
+   "titleName": "홀리스틱",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 675
+  },
+  {
+   "titleId": 825176,
+   "titleName": "옥탑방 로미오",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 381
+  },
+  {
+   "titleId": 841382,
+   "titleName": "몽중언",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 94
+  },
+  {
+   "titleId": 825359,
+   "titleName": "해달달해",
+   "badge": "공모전 참가 공지 (연재 임시 중단)",
+   "group": "other",
+   "favorite": 1282
+  },
+  {
+   "titleId": 835893,
+   "titleName": "콩에서 새싹이!",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 529
+  },
+  {
+   "titleId": 830682,
+   "titleName": "오리짱!",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 1862
+  },
+  {
+   "titleId": 704010,
+   "titleName": "",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 4223
+  },
+  {
+   "titleId": 839441,
+   "titleName": "더킹",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 202
+  },
+  {
+   "titleId": 830696,
+   "titleName": "댄서",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 556
+  },
+  {
+   "titleId": 811032,
+   "titleName": "비기닝즈",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 319
+  },
+  {
+   "titleId": 758123,
+   "titleName": "",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 5368
+  },
+  {
+   "titleId": 831029,
+   "titleName": "",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 264
+  },
+  {
+   "titleId": 830358,
+   "titleName": "소녀바둑",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 1293
+  },
+  {
+   "titleId": 809968,
+   "titleName": "공도의 리드레이서",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": 372
+  },
+  {
+   "titleId": 810260,
+   "titleName": "한판",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 1125
+  },
+  {
+   "titleId": 614651,
+   "titleName": "킥오프",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 28549
+  },
+  {
+   "titleId": 792424,
+   "titleName": "",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1152
+  },
+  {
+   "titleId": 815082,
+   "titleName": "헌트레드",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 402
+  },
+  {
+   "titleId": 831681,
+   "titleName": "우리 아이는 외계인에게 납치됐어요",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 212
+  },
+  {
+   "titleId": 810292,
+   "titleName": "두 예술가들",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2723
+  },
+  {
+   "titleId": 718960,
+   "titleName": "그날, 우리",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 3809
+  },
+  {
+   "titleId": 828713,
+   "titleName": "자각몽",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1086
+  },
+  {
+   "titleId": 825493,
+   "titleName": "추추",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 916
+  },
+  {
+   "titleId": 840330,
+   "titleName": "탐: 공포 단편",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1059
+  },
+  {
+   "titleId": 825475,
+   "titleName": "N회차",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 418
+  },
+  {
+   "titleId": 830384,
+   "titleName": "동생 죽이기",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1329
+  },
+  {
+   "titleId": 816302,
+   "titleName": "홀아비",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 320
+  },
+  {
+   "titleId": 840292,
+   "titleName": "르르르",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 441
+  },
+  {
+   "titleId": 810154,
+   "titleName": "프로젝트 마지막 좀비",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 105
+  },
+  {
+   "titleId": 810060,
+   "titleName": "사이코 프레너미",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 629
+  },
+  {
+   "titleId": 818054,
+   "titleName": "장편단편선",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 1907
+  },
+  {
+   "titleId": 825312,
+   "titleName": "독방의 글쓴이",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 805
+  },
+  {
+   "titleId": 825942,
+   "titleName": "당신의 가격을 알려드립니다",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 3925
+  },
+  {
+   "titleId": 830334,
+   "titleName": "딸들",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 441
+  },
+  {
+   "titleId": 830559,
+   "titleName": "겨울잠",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 504
+  },
+  {
+   "titleId": 825108,
+   "titleName": "당골",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 459
+  },
+  {
+   "titleId": 825597,
+   "titleName": "껍데기",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 321
+  },
+  {
+   "titleId": 825318,
+   "titleName": "통제구역관리부",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 9942
+  },
+  {
+   "titleId": 810553,
+   "titleName": "",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 1668
+  },
+  {
+   "titleId": 830513,
+   "titleName": "미생물",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 201
+  },
+  {
+   "titleId": 791459,
+   "titleName": "괴담없는 주식회사",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 209
+  },
+  {
+   "titleId": 852404,
+   "titleName": "힘 센 아기 햄머니",
+   "badge": "없음",
+   "group": "none",
+   "favorite": null
+  },
+  {
+   "titleId": 837359,
+   "titleName": "그녀도 외계인?",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 471
+  },
+  {
+   "titleId": 810077,
+   "titleName": "방송주인",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1110
+  },
+  {
+   "titleId": 810052,
+   "titleName": "",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2068
+  },
+  {
+   "titleId": 816290,
+   "titleName": "남자일짱 김지안",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 719
+  },
+  {
+   "titleId": 825061,
+   "titleName": "클리셰 클럽",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 4783
+  },
+  {
+   "titleId": 825202,
+   "titleName": "너의 완두콩을 먹고 싶어!",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 1002
+  },
+  {
+   "titleId": 809953,
+   "titleName": "세이브 디 어스!",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1464
+  },
+  {
+   "titleId": 818158,
+   "titleName": "경경수의 개발만화",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 7670
+  },
+  {
+   "titleId": 851850,
+   "titleName": "당신의 가격",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 220
+  },
+  {
+   "titleId": 833152,
+   "titleName": "회색 숨",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 121
+  },
+  {
+   "titleId": 841061,
+   "titleName": "태은민호만화",
+   "badge": "공지/ 연재 일정 공지",
+   "group": "other",
+   "favorite": 2727
+  },
+  {
+   "titleId": 805490,
+   "titleName": "머맨백(Merman Bag)",
+   "badge": "없음 공지/ 공지/ 정식연재공지/ 이벤트 당첨자 선정 공지",
+   "group": "other",
+   "favorite": 1692
+  },
+  {
+   "titleId": 742462,
+   "titleName": "[BL] 너와 가까워지는 거리",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": 13874
+  },
+  {
+   "titleId": 421356,
+   "titleName": "blooming(블루밍)",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": 7403
+  },
+  {
+   "titleId": 825111,
+   "titleName": "동경과 윤경",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 4292
+  },
+  {
+   "titleId": 718033,
+   "titleName": "맛있는 남자",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 15109
+  },
+  {
+   "titleId": 841110,
+   "titleName": "결혼파행",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 244
+  },
+  {
+   "titleId": 835503,
+   "titleName": "야간편의점의 그녀",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 5133
+  },
+  {
+   "titleId": 837974,
+   "titleName": "헉(hug)하는 사이",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 502
+  },
+  {
+   "titleId": 841033,
+   "titleName": "N년째 외사랑",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 6457
+  },
+  {
+   "titleId": 831690,
+   "titleName": "전래 맛있어",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": null
+  },
+  {
+   "titleId": 831558,
+   "titleName": "결혼사수스캔들",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1243
+  },
+  {
+   "titleId": 838030,
+   "titleName": "죽여주는 옆집 남자",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1162
+  },
+  {
+   "titleId": 825921,
+   "titleName": "죽여주는 육아일기(지최대 출품작)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1663
+  },
+  {
+   "titleId": 840127,
+   "titleName": "킬링달링 베이비-잉♡ (죽여주는 육아일기 디벨롭 버전)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 570
+  },
+  {
+   "titleId": 831554,
+   "titleName": "벙커의 낮",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2937
+  },
+  {
+   "titleId": 791479,
+   "titleName": "옥탑방 고양이",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1461
+  },
+  {
+   "titleId": 826167,
+   "titleName": "당신의 완벽한 엔딩을 위하여",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 4141
+  },
+  {
+   "titleId": 838173,
+   "titleName": "판타지 바베큐",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 659
+  },
+  {
+   "titleId": 825641,
+   "titleName": "딜리버리 임파서블",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 1684
+  },
+  {
+   "titleId": 689090,
+   "titleName": "PI(파이)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2424
+  },
+  {
+   "titleId": 851049,
+   "titleName": "영영세계",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 52
+  },
+  {
+   "titleId": 842357,
+   "titleName": "현상금 영웅전",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 108
+  },
+  {
+   "titleId": 815053,
+   "titleName": "우리집에 사는 신비한 이웃",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 358
+  },
+  {
+   "titleId": 831333,
+   "titleName": "리히트 (공모전)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 659
+  },
+  {
+   "titleId": 830478,
+   "titleName": "가장 위대한 마술사",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2522
+  },
+  {
+   "titleId": 696233,
+   "titleName": "시간이 머문 집",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  },
+  {
+   "titleId": 810649,
+   "titleName": "나백수",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1774
+  },
+  {
+   "titleId": 849274,
+   "titleName": "우주택배기사 마 또띠아",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 145
+  },
+  {
+   "titleId": 848293,
+   "titleName": "DOLL",
+   "badge": "휴재 공지/ 연재 공지",
+   "group": "other",
+   "favorite": 1238
+  },
+  {
+   "titleId": 766081,
+   "titleName": "기억지도",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 865
+  },
+  {
+   "titleId": 824699,
+   "titleName": "소환진이 좀 이상해 보이는 건 기분 탓이겠지2",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 8956
+  },
+  {
+   "titleId": 815377,
+   "titleName": "꿈바꼭질",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 2198
+  },
+  {
+   "titleId": 831925,
+   "titleName": "마녀의 배를 갈라라",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1448
+  },
+  {
+   "titleId": 834235,
+   "titleName": "이기적 동맹",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1468
+  },
+  {
+   "titleId": 830353,
+   "titleName": "비인간서사",
+   "badge": "수상작",
+   "group": "award",
+   "favorite": 215
+  },
+  {
+   "titleId": 746900,
+   "titleName": "슈체나리움 (Szenarium)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 794
+  },
+  {
+   "titleId": 731350,
+   "titleName": "시나브로 너에게",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 358
+  },
+  {
+   "titleId": 792389,
+   "titleName": "나태한 마왕은 신과 싸우기로 결심한다.",
+   "badge": "정식 연재",
+   "group": "official",
+   "favorite": 13582
+  },
+  {
+   "titleId": 810931,
+   "titleName": "십이제이(1기)",
+   "badge": "없음",
+   "group": "none",
+   "favorite": null
+  },
+  {
+   "titleId": 819600,
+   "titleName": "이모셔널",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 589
+  },
+  {
+   "titleId": 613627,
+   "titleName": "검은 늑대",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 7420
+  },
+  {
+   "titleId": 849096,
+   "titleName": "60프레임 : 나만의 시간",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 147
+  },
+  {
+   "titleId": 641757,
+   "titleName": "정귀괴담록",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 4121
+  },
+  {
+   "titleId": 810773,
+   "titleName": "화스트페이스",
+   "badge": "완결",
+   "group": "ended",
+   "favorite": null
+  },
+  {
+   "titleId": 86400,
+   "titleName": "은하!",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": null
+  },
+  {
+   "titleId": 839899,
+   "titleName": "기와벽귀",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 547
+  },
+  {
+   "titleId": 826161,
+   "titleName": "대마법사 커리큘럼",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 2845
+  },
+  {
+   "titleId": 830366,
+   "titleName": "홍사",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 353
+  },
+  {
+   "titleId": 831856,
+   "titleName": "실라",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 425
+  },
+  {
+   "titleId": 825946,
+   "titleName": "용사 카리엘",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 2342
+  },
+  {
+   "titleId": 831472,
+   "titleName": "좀비떼로",
+   "badge": "정식연재",
+   "group": "official",
+   "favorite": 430
+  },
+  {
+   "titleId": 811089,
+   "titleName": "악마의 천사",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 870
+  },
+  {
+   "titleId": 838923,
+   "titleName": "방문을 열면 그곳엔 괴물",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 96
+  },
+  {
+   "titleId": 825472,
+   "titleName": "프로젝트 마르스",
+   "badge": "수상",
+   "group": "award",
+   "favorite": 1534
+  },
+  {
+   "titleId": 775770,
+   "titleName": "미가식당",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 274
+  },
+  {
+   "titleId": 815856,
+   "titleName": "미가식당-낭만무용담",
+   "badge": "없음",
+   "group": "none",
+   "favorite": null
+  },
+  {
+   "titleId": 686955,
+   "titleName": "후크",
+   "badge": "없음",
+   "group": "none",
+   "favorite": null
+  },
+  {
+   "titleId": 838602,
+   "titleName": "(공지 확인 용)쓰리포",
+   "badge": "시즌2 종료 및 휴재공지",
+   "group": "other",
+   "favorite": null
+  },
+  {
+   "titleId": 845976,
+   "titleName": "",
+   "badge": "휴재공지 /!!긴급휴재 공지!!",
+   "group": "other",
+   "favorite": null
+  },
+  {
+   "titleId": 801713,
+   "titleName": "(공지 확인 용) 집에서 뽀짝뽀짝",
+   "badge": "그..근..황 공지../ !!!긴급 공지!!!",
+   "group": "other",
+   "favorite": null
+  },
+  {
+   "titleId": 811005,
+   "titleName": "(공지 확인 용) 탈개의 그림일기",
+   "badge": "저 출소했습니다. (탈옥일수도..)",
+   "group": "other",
+   "favorite": null
+  },
+  {
+   "titleId": 838840,
+   "titleName": "(공지 확인 용) 과학고 휴학편지",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  },
+  {
+   "titleId": 803659,
+   "titleName": "(공지 확인 용) 여기는 미드스트로크!",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  },
+  {
+   "titleId": 692525,
+   "titleName": "고양이와 집사",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1897
+  },
+  {
+   "titleId": 806433,
+   "titleName": "우당탕탕 서윗멀즈",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 1816
+  },
+  {
+   "titleId": 831600,
+   "titleName": "모여라! 90년대생!",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 761
+  },
+  {
+   "titleId": 33420,
+   "titleName": "(공지 확인 용) 가족입니다.",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  },
+  {
+   "titleId": 740571,
+   "titleName": "(공지 확인 용) 나의 카이생활",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  },
+  {
+   "titleId": 712853,
+   "titleName": "나눠먹는 로맨스",
+   "badge": "없음",
+   "group": "none",
+   "favorite": 3704
+  },
+  {
+   "titleId": 617644,
+   "titleName": "(공지 확인 용) 부부사기단늬우스",
+   "badge": "",
+   "group": "blank",
+   "favorite": null
+  }
+ ]
+}

@@ -1,0 +1,140 @@
+{
+ "computedAt": "2026-10-07",
+ "historyLastDate": "2026-10-06",
+ "referenceSource": "조사 목록(9월 챌린저스 선정작 등)",
+ "alpha": 0.05,
+ "groups": {
+  "none": 102,
+  "blank": 7,
+  "official": 18,
+  "ended": 7,
+  "award": 12,
+  "other": 8
+ },
+ "compared": 120,
+ "comparedOfficial": 18,
+ "indicators": [
+  {
+   "key": "star",
+   "label": "별점",
+   "medianOfficial": 9.62,
+   "medianNone": 9.53,
+   "ratio": 1.01,
+   "rho": 0.19,
+   "p": 0.036,
+   "n": 120,
+   "significant": true,
+   "verdict": "유의",
+   "note": "정식연재 쪽이 높음 · 기준(p<0.05)은 통과, 보정 전 결과",
+   "significantCorrected": false
+  },
+  {
+   "key": "viewsPerEp",
+   "label": "화당 조회수",
+   "medianOfficial": 15166.5,
+   "medianNone": 8270.0,
+   "ratio": 1.83,
+   "rho": 0.17,
+   "p": 0.072,
+   "n": 118,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "정식연재 쪽이 높음 · 경계선 수준 (확정 못 함)",
+   "significantCorrected": false
+  },
+  {
+   "key": "views",
+   "label": "누적 조회수",
+   "medianOfficial": 69956.0,
+   "medianNone": 55938.0,
+   "ratio": 1.25,
+   "rho": 0.09,
+   "p": 0.349,
+   "n": 120,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "거의 차이 없음",
+   "significantCorrected": false
+  },
+  {
+   "key": "favorite",
+   "label": "관심 수",
+   "medianOfficial": 1125.0,
+   "medianNone": 742.0,
+   "ratio": 1.52,
+   "rho": 0.07,
+   "p": 0.464,
+   "n": 114,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "거의 차이 없음",
+   "significantCorrected": false
+  },
+  {
+   "key": "conversion",
+   "label": "관심 전환율 (관심÷조회수 ×1000)",
+   "medianOfficial": 12.24,
+   "medianNone": 13.11,
+   "ratio": 0.93,
+   "rho": -0.06,
+   "p": 0.55,
+   "n": 114,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "거의 차이 없음",
+   "significantCorrected": false
+  },
+  {
+   "key": "episodes",
+   "label": "화수",
+   "medianOfficial": 5.0,
+   "medianNone": 6.0,
+   "ratio": 0.83,
+   "rho": -0.13,
+   "p": 0.17,
+   "n": 118,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "정식연재 쪽이 낮음으로 보이나 우연일 수 있음",
+   "significantCorrected": false
+  }
+ ],
+ "logistic": {
+  "n": 114,
+  "events": 17,
+  "variables": 3,
+  "epv": 5.67,
+  "epvMin": 10,
+  "sampleOk": false,
+  "rows": [
+   {
+    "label": "별점",
+    "or": 2.12,
+    "lo": 0.78,
+    "hi": 5.71,
+    "p": 0.138,
+    "verdict": "구간이 1을 포함 → 방향 확정 불가"
+   },
+   {
+    "label": "로그 조회수",
+    "or": 0.92,
+    "lo": 0.46,
+    "hi": 1.84,
+    "p": 0.82,
+    "verdict": "구간이 1을 포함 → 방향 확정 불가"
+   },
+   {
+    "label": "관심 전환율 (관심÷조회수 ×1000)",
+    "or": 1.52,
+    "lo": 0.67,
+    "hi": 3.47,
+    "p": 0.316,
+    "verdict": "구간이 1을 포함 → 방향 확정 불가"
+   }
+  ]
+ },
+ "significantCount": 1,
+ "indicatorCount": 6,
+ "alphaCorrected": 0.0083,
+ "significantCorrectedCount": 0
+}

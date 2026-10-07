@@ -138,7 +138,57 @@
     margin-top:12px;
   }
 
+  /* ── 정식연재 분석 페이지 ── */
+  .an-page{max-width:920px;margin:0 auto;padding:0 40px 40px;}
+  .an-head{padding:24px 0 6px;}
+  .an-head h2{font-size:20px;margin:0 0 4px;font-weight:600;}
+  .an-head .hint{font-size:12px;color:var(--muted);}
+  .an-summary{margin:14px 0 6px;padding:16px 18px;background:var(--surface);border:1px solid var(--hairline);border-left:3px solid var(--rise);border-radius:2px;font-size:14px;line-height:1.7;}
+  .an-summary b{color:var(--rise);font-weight:600;}
+  .an-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);margin:14px 0 4px;}
+  .an-tile{background:var(--ink);padding:12px 14px;}
+  .an-tile .k{font-size:11px;color:var(--muted);}
+  .an-tile .v{font-size:22px;margin-top:4px;font-family:'Noto Serif KR',serif;}
+  .an-tile .v.dim{color:var(--muted);}
+  .an-sec{margin-top:30px;}
+  .an-sec h3{font-size:15px;font-weight:600;margin:0 0 4px;}
+  .an-sec .sub{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+  .an-tablewrap{overflow-x:auto;border:1px solid var(--hairline);}
+  table.an-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:620px;}
+  .an-table th{font-weight:500;color:var(--muted);text-align:right;padding:8px 10px;border-bottom:1px solid var(--hairline);background:var(--surface);font-size:11.5px;white-space:nowrap;}
+  .an-table th:first-child,.an-table td:first-child{text-align:left;}
+  .an-table td{padding:9px 10px;border-bottom:1px solid var(--hairline);text-align:right;vertical-align:middle;}
+  .an-table tr:last-child td{border-bottom:none;}
+  .an-table .nm{font-size:13px;}
+  .an-table .nt{display:block;font-size:11px;color:var(--muted);margin-top:2px;}
+  .an-table .sig{color:var(--rise);}
+  .an-table .verdict{font-size:11.5px;color:var(--muted);text-align:left;white-space:nowrap;}
+  .an-table .verdict.sig{color:var(--rise);}
+  .an-rho{position:relative;width:130px;height:14px;display:inline-block;vertical-align:middle;}
+  .an-rho::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--hairline);}
+  .an-rho i{position:absolute;top:3px;height:8px;background:var(--stable);}
+  .an-rho i.pos{background:var(--rise);}
+  .an-rho i.hollow{background:transparent;border:1px solid var(--stable);}
+  .an-rho i.pos.hollow{border-color:var(--rise);}
+  .an-box{margin-top:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--hairline);font-size:12.5px;line-height:1.7;}
+  .an-box.warn{border-left:3px solid var(--rise);}
+  .an-box b{font-weight:600;}
+  .an-status{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);}
+  .an-status div{background:var(--ink);padding:9px 12px;font-size:12.5px;display:flex;justify-content:space-between;gap:10px;}
+  .an-status div span:last-child{color:var(--paper);font-weight:600;}
+  .an-limits{margin:0;padding:0;list-style:none;border:1px solid var(--hairline);}
+  .an-limits li{padding:11px 14px;border-bottom:1px solid var(--hairline);font-size:12.5px;line-height:1.65;}
+  .an-limits li:last-child{border-bottom:none;}
+  .an-limits li b{display:block;font-size:12.5px;margin-bottom:2px;}
+  .an-limits li span{color:var(--muted);}
+  .an-read{margin-top:8px;font-size:12px;color:var(--muted);}
+  .an-read summary{cursor:pointer;color:var(--paper);}
+  .an-read p{margin:6px 0 0;line-height:1.7;}
+  .an-empty{padding:40px 0;color:var(--muted);font-size:13px;text-align:center;}
+
   @media (max-width:640px){
+    .an-page{padding:0 20px 30px;}
+    .an-tiles{grid-template-columns:repeat(2,1fr);}
     .pagenav{padding:0 20px;}
     .wl-page{padding:0 20px;}
     .wl-card-stats{gap:12px;}
@@ -754,6 +804,7 @@
 <nav class="pagenav">
   <a href="#/scout" class="pagenav-link" data-route="scout">스카우팅 데스크</a>
   <a href="#/watchlist" class="pagenav-link" data-route="watchlist">워치리스트 <span class="pagenav-badge" id="nav-wl-count">0</span></a>
+  <a href="#/analysis" class="pagenav-link" data-route="analysis">정식연재 분석</a>
 </nav>
 
 <section id="view-scout">
@@ -856,6 +907,10 @@
   </div>
 </section>
 
+<section id="view-analysis" style="display:none;">
+  <div class="an-page" id="analysis-body"></div>
+</section>
+
 <footer>
   <b>데이터</b> — GitHub Actions가 매일 새벽 수집한 <code>REAL_DATA</code>(<span id="footer-data-summary"></span>)를 그대로 사용하며,
   사이트 데이터는 매일 자동으로 갱신됩니다.
@@ -895,6 +950,7 @@
   const SAVED_LABELS = {"86400":{"status":"confirmed","note":"타플랫폼에서 네이버로 이적 현재 휴재","titleName":"은하!","subtitle":null,"noticeDate":null,"checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:23:59.950Z","snapshot":{"viewCount":10927847,"starScore":9.89,"episodeCount":null,"cadenceDays":null,"growthPct":0.1,"trackedDays":28},"officialTitleId":800104,"officialOpenDate":"2022-09-09"},"650919":{"status":"none","note":"","titleName":"웰시네 부부에세이","subtitle":"#52. 유난히 뜨거웠던 계절에 (+근황,소식)","noticeDate":"26.09.17","checkedAt":"2026-10-06","snapshot":{"viewCount":3659183,"starScore":9.58,"episodeCount":176,"cadenceDays":7,"growthPct":0.2,"trackedDays":27}},"710956":{"status":"none","note":"","titleName":"카나와 초나","subtitle":"효녀의 근황","noticeDate":"26.09.22","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:41:48.531Z","snapshot":{"viewCount":7416105,"starScore":9.84,"episodeCount":305,"cadenceDays":42,"growthPct":0.5,"trackedDays":28}},"757097":{"status":"confirmed","note":"","titleName":"새벽인력","subtitle":"연재공지","noticeDate":"26.09.29","checkedAt":"2026-10-06","snapshot":{"viewCount":184077,"starScore":9.74,"episodeCount":2,"cadenceDays":102,"growthPct":1.3,"trackedDays":27}},"776362":{"status":"confirmed","note":"네이버 10월 17일 오픈","titleName":"카오스이론","subtitle":"카오스이론 연재 일정 공지","noticeDate":"26.10.01","checkedAt":"2026-10-06","snapshot":{"viewCount":11358899,"starScore":9.92,"episodeCount":3,"cadenceDays":70.5,"growthPct":0.2,"trackedDays":27},"updatedAt":"2026-10-07T04:22:41.199Z","officialOpenDate":"2026-10-17"},"794927":{"status":"confirmed","note":"연재확정 26년 하반","titleName":"외고생은 왜 고생?","subtitle":"연재 공지","noticeDate":"26.09.20","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:37:55.243Z","snapshot":{"viewCount":331519,"starScore":9.1,"episodeCount":1,"cadenceDays":null,"growthPct":0.5,"trackedDays":17}},"802026":{"status":"none","note":"","titleName":"연애사색","subtitle":"근황 소식","noticeDate":"26.09.16","checkedAt":"2026-10-06","snapshot":{"viewCount":128459,"starScore":8.75,"episodeCount":16,"cadenceDays":14,"growthPct":1.2,"trackedDays":20}},"810080":{"status":"ended","note":"","titleName":"정색이를 웃겨라!","subtitle":"후기","noticeDate":"26.09.14","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:25:30.046Z","snapshot":{"viewCount":15371,"starScore":9.01,"episodeCount":4,"cadenceDays":259,"growthPct":16.8,"trackedDays":28}},"810649":{"status":"moved","note":"일본사이트 런칭","titleName":"나백수","subtitle":"신작웹툰공지","noticeDate":"26.09.14","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:44:37.339Z","snapshot":{"viewCount":435619,"starScore":9.2,"episodeCount":2,"cadenceDays":55,"growthPct":0.2,"trackedDays":28}},"825641":{"status":"confirmed","note":"260907 네이버 정식 연재","titleName":"딜리버리 임파서블","subtitle":"연재 공지","noticeDate":"26.09.07","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:35:32.073Z","snapshot":{"viewCount":40275,"starScore":9.75,"episodeCount":2,"cadenceDays":771,"growthPct":3.7,"trackedDays":28},"officialTitleId":854757,"officialOpenDate":"2026-09-07"},"830478":{"status":"confirmed","note":"830478 -> 네이버 정식 연재 848576","titleName":"가장 위대한 마술사","subtitle":"연재공지","noticeDate":"26.03.19","checkedAt":"2026-10-06","updatedAt":"2026-10-06T07:36:32.340Z","snapshot":{"viewCount":101163,"starScore":9.86,"episodeCount":5,"cadenceDays":37,"growthPct":2.6,"trackedDays":28},"officialTitleId":848576,"officialOpenDate":"2026-03-26"},"831293":{"status":"none","note":"","titleName":"영웅의 장의사","subtitle":"늦은 베도 감사인사!","noticeDate":"26.09.07","checkedAt":"2026-10-06","snapshot":{"viewCount":1824,"starScore":9.13,"episodeCount":4,"cadenceDays":34,"growthPct":31.2,"trackedDays":28}},"831470":{"status":"ended","note":"보나베띠 지최대 수상으로 인한 휴재","titleName":"비공개 계정","subtitle":"<공지>","noticeDate":"26.09.12","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:29:39.198Z","snapshot":{"viewCount":88240,"starScore":9.06,"episodeCount":1,"cadenceDays":null,"growthPct":3.8,"trackedDays":25}},"833152":{"status":"confirmed","note":"","titleName":"회색 숨","subtitle":"공지","noticeDate":"26.09.10","checkedAt":"2026-10-06","snapshot":{"viewCount":12515,"starScore":8.58,"episodeCount":1,"cadenceDays":null,"growthPct":18.7,"trackedDays":28}},"838173":{"status":"confirmed","note":"","titleName":"판타지 바베큐","subtitle":"연재공지입니다.","noticeDate":"26.09.09","checkedAt":"2026-10-06","snapshot":{"viewCount":30708,"starScore":8.64,"episodeCount":12,"cadenceDays":8,"growthPct":9.1,"trackedDays":28}},"838602":{"status":"none","note":"휴재","titleName":"쓰리포","subtitle":"시즌2 종료 및 휴재공지","noticeDate":"26.09.07","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:35:52.132Z","snapshot":{"viewCount":247673,"starScore":9.68,"episodeCount":64,"cadenceDays":7,"growthPct":3.4,"trackedDays":28}},"839387":{"status":"confirmed","note":"베스트도전 839387 → 정식 847812","titleName":"용사 출연, 마왕 연출","subtitle":null,"noticeDate":null,"checkedAt":"2026-10-06","updatedAt":"2026-10-06T07:35:11.217Z","snapshot":{"viewCount":40765,"starScore":9.6,"episodeCount":null,"cadenceDays":null,"growthPct":1.6,"trackedDays":28},"officialTitleId":847812,"officialOpenDate":"2026-02-06"},"839665":{"status":"none","note":"휴재","titleName":"우리 언니가 무당이 되었다","subtitle":"휴재합니다 사유 : 삼산 밟기","noticeDate":"26.10.07","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:20:29.910Z","snapshot":{"viewCount":1166581,"starScore":9.52,"episodeCount":103,"cadenceDays":3.5,"growthPct":21.7,"trackedDays":28}},"840661":{"status":"none","note":"공모전 홍보","titleName":"로판이지만 스케일은 큽니다만..","subtitle":"편집된 이야기들+근황","noticeDate":"26.10.03","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:29:09.238Z","snapshot":{"viewCount":44028,"starScore":8.85,"episodeCount":2,"cadenceDays":17,"growthPct":5.5,"trackedDays":22}},"841033":{"status":"confirmed","note":"261010정식연재","titleName":"N년째 외사랑","subtitle":"연재 공지","noticeDate":"26.10.03","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:36:20.660Z","snapshot":{"viewCount":754196,"starScore":9.42,"episodeCount":2,"cadenceDays":157,"growthPct":1,"trackedDays":28},"officialOpenDate":"2026-10-10"},"841061":{"status":"confirmed","note":"","titleName":"태은민호만화","subtitle":"오픈 공지","noticeDate":"26.09.18","checkedAt":"2026-10-06","snapshot":{"viewCount":334727,"starScore":9.76,"episodeCount":25,"cadenceDays":7,"growthPct":29.3,"trackedDays":28}},"849040":{"status":"none","note":"연재 주기 조정","titleName":"로맨스헬퍼","subtitle":"공지","noticeDate":"26.09.16","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:27:27.533Z","snapshot":{"viewCount":34974,"starScore":9.01,"episodeCount":27,"cadenceDays":7,"growthPct":8.9,"trackedDays":28}},"849345":{"status":"confirmed","note":"","titleName":"행복부동산에 어서오세요!","subtitle":"[공지]","noticeDate":"26.09.28","checkedAt":"2026-10-06","snapshot":{"viewCount":25448,"starScore":8.93,"episodeCount":2,"cadenceDays":185,"growthPct":8.1,"trackedDays":27}},"850942":{"status":"confirmed","note":"7월 챌린저스 선정","titleName":"잘 자면 금메달","subtitle":"챌린저스 공지","noticeDate":"26.09.13","checkedAt":"2026-10-07","updatedAt":"2026-10-07T04:28:02.468Z","snapshot":{"viewCount":22914,"starScore":9.03,"episodeCount":9,"cadenceDays":10,"growthPct":8.5,"trackedDays":28}},"851850":{"status":"confirmed","note":"챌린저스","titleName":"당신의 가격","subtitle":"챌린저스 공지","noticeDate":"26.09.10","checkedAt":"2026-10-06","snapshot":{"viewCount":24482,"starScore":9.68,"episodeCount":7,"cadenceDays":7,"growthPct":25,"trackedDays":27}},"853811":{"status":"none","note":"","titleName":"남의 연애 사업에 참견하면 안 되는 이유","subtitle":null,"noticeDate":null,"checkedAt":"2026-10-06","snapshot":{"viewCount":71873,"starScore":9.15,"episodeCount":null,"cadenceDays":null,"growthPct":143.7,"trackedDays":27}},"853851":{"status":"none","note":"","titleName":"첫사랑과의 거리는, 세 걸음","subtitle":"공지","noticeDate":"26.09.23","checkedAt":"2026-10-06","snapshot":{"viewCount":4584,"starScore":8.56,"episodeCount":5,"cadenceDays":7.5,"growthPct":907.5,"trackedDays":16}}};
   const SAVED_REVIEWS = {};
   const OFFICIAL_TRACKING = {"848576":{"dates":["2026-10-06"],"favorite":[43401],"episodes":[33],"benchTitleId":830478,"openDate":"2026-03-26","titleName":"가장 위대한 마술사","webtoonLevelCode":"WEBTOON","status":"ok","officialTitleName":"가장 위대한 마술사","latestSubtitle":"[033화] 배천회: 양(3)","latestDate":"29일 후 무료"},"847812":{"dates":["2026-10-06"],"favorite":[26230],"episodes":[39],"benchTitleId":839387,"openDate":"2026-02-06","titleName":"용사 출연, 마왕 연출","webtoonLevelCode":"WEBTOON","status":"ok","officialTitleName":"용사 출연 마왕 연출","latestSubtitle":"38화","latestDate":"23일 후 무료"}};
+  const ANALYSIS = {"computedAt":"2026-10-07","historyLastDate":"2026-10-06","referenceSource":"조사 목록(9월 챌린저스 선정작 등)","alpha":0.05,"groups":{"none":102,"blank":7,"official":18,"ended":7,"award":12,"other":8},"compared":120,"comparedOfficial":18,"indicators":[{"key":"star","label":"별점","medianOfficial":9.62,"medianNone":9.53,"ratio":1.01,"rho":0.19,"p":0.036,"n":120,"significant":true,"verdict":"유의","note":"정식연재 쪽이 높음 · 기준(p<0.05)은 통과, 보정 전 결과","significantCorrected":false},{"key":"viewsPerEp","label":"화당 조회수","medianOfficial":15166.5,"medianNone":8270.0,"ratio":1.83,"rho":0.17,"p":0.072,"n":118,"significant":false,"verdict":"확정 못 함 (우연일 수 있음)","note":"정식연재 쪽이 높음 · 경계선 수준 (확정 못 함)","significantCorrected":false},{"key":"views","label":"누적 조회수","medianOfficial":69956.0,"medianNone":55938.0,"ratio":1.25,"rho":0.09,"p":0.349,"n":120,"significant":false,"verdict":"확정 못 함 (우연일 수 있음)","note":"거의 차이 없음","significantCorrected":false},{"key":"favorite","label":"관심 수","medianOfficial":1125.0,"medianNone":742.0,"ratio":1.52,"rho":0.07,"p":0.464,"n":114,"significant":false,"verdict":"확정 못 함 (우연일 수 있음)","note":"거의 차이 없음","significantCorrected":false},{"key":"conversion","label":"관심 전환율 (관심÷조회수 ×1000)","medianOfficial":12.24,"medianNone":13.11,"ratio":0.93,"rho":-0.06,"p":0.55,"n":114,"significant":false,"verdict":"확정 못 함 (우연일 수 있음)","note":"거의 차이 없음","significantCorrected":false},{"key":"episodes","label":"화수","medianOfficial":5.0,"medianNone":6.0,"ratio":0.83,"rho":-0.13,"p":0.17,"n":118,"significant":false,"verdict":"확정 못 함 (우연일 수 있음)","note":"정식연재 쪽이 낮음으로 보이나 우연일 수 있음","significantCorrected":false}],"logistic":{"n":114,"events":17,"variables":3,"epv":5.67,"epvMin":10,"sampleOk":false,"rows":[{"label":"별점","or":2.12,"lo":0.78,"hi":5.71,"p":0.138,"verdict":"구간이 1을 포함 → 방향 확정 불가"},{"label":"로그 조회수","or":0.92,"lo":0.46,"hi":1.84,"p":0.82,"verdict":"구간이 1을 포함 → 방향 확정 불가"},{"label":"관심 전환율 (관심÷조회수 ×1000)","or":1.52,"lo":0.67,"hi":3.47,"p":0.316,"verdict":"구간이 1을 포함 → 방향 확정 불가"}]},"significantCount":1,"indicatorCount":6,"alphaCorrected":0.0083,"significantCorrectedCount":0};   // data/analysis.json (정식연재 지표 분석 결과 — build_analysis.py가 계산, build_site.py가 넣음)
 
   const GROWTH_THRESHOLD = 10; // 4일 관측 기준 상위 약 0.9%에 해당하는 임계값
   const MIN_BASE_VIEW = 5000; // 이 값 미만이면 %증가율이 튀어도 표본이 작아 신뢰 안 함
@@ -1777,14 +1833,154 @@
     const hash = location.hash || '#/scout';
     const route = hash.replace('#/', '') || 'scout';
 
-    document.getElementById('view-scout').style.display = route === 'watchlist' ? 'none' : '';
+    document.getElementById('view-scout').style.display = (route === 'watchlist' || route === 'analysis') ? 'none' : '';
     document.getElementById('view-watchlist').style.display = route === 'watchlist' ? '' : 'none';
+    document.getElementById('view-analysis').style.display = route === 'analysis' ? '' : 'none';
 
     document.querySelectorAll('.pagenav-link').forEach(link => {
       link.classList.toggle('active', link.dataset.route === route);
     });
 
     if(route === 'watchlist') renderWatchlistPage();
+    if(route === 'analysis') renderAnalysisPage();
+  }
+
+
+  // ── 정식연재 분석 페이지 (#/analysis) ──
+  // 계산은 빌드할 때 파이썬(build_analysis.py)이 하고, 여기서는 결과(ANALYSIS)를 그대로 보여주기만 함.
+  const AN_GROUP_LABELS = { official: '정식연재', none: '정식연재 없음', award: '수상작', ended: '완결', blank: '뱃지 칸 비어 있음', other: '분류 불가' };
+
+  function anNum(v){
+    if(v === null || v === undefined || Number.isNaN(v)) return '–';
+    return Math.abs(v) >= 1000 ? Math.round(v).toLocaleString() : String(v);
+  }
+
+  function anRhoBar(rho, filled, maxAbs){
+    const w = Math.min(Math.abs(rho) / maxAbs, 1) * 50;
+    const side = rho >= 0 ? `left:50%;width:${w}%;` : `left:${50 - w}%;width:${w}%;`;
+    return `<span class="an-rho" title="ρ ${rho}"><i class="${rho >= 0 ? 'pos' : ''} ${filled ? '' : 'hollow'}" style="${side}"></i></span>`;
+  }
+
+  function anCiBar(row, lim){
+    const W = 200, H = 16, x = v => W / 2 + (Math.log(v) / lim) * (W / 2 - 4);
+    const lo = Math.max(0, Math.min(W, x(Math.max(row.lo, 0.0001)))), hi = Math.max(0, Math.min(W, x(row.hi))), c = Math.max(0, Math.min(W, x(row.or)));
+    return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="오즈비 ${row.or}, 95% 신뢰구간 ${row.lo}~${row.hi}">
+      <line x1="${W/2}" y1="0" x2="${W/2}" y2="${H}" stroke="#33353F"/>
+      <line x1="${lo}" y1="${H/2}" x2="${hi}" y2="${H/2}" stroke="#8B8D98" stroke-width="2"/>
+      <circle cx="${c}" cy="${H/2}" r="3.5" fill="${row.lo < 1 && row.hi > 1 ? '#8B8D98' : '#E8A33D'}"/></svg>`;
+  }
+
+  function renderAnalysisPage(){
+    const body = document.getElementById('analysis-body');
+    if(!body) return;
+    const A = ANALYSIS || {};
+    const head = `<div class="an-head"><h2 class="serif">정식연재 지표 분석</h2>
+      <span class="hint">정식연재로 이어진 작품과 그렇지 않은 작품의 지표를 비교해요. 결론이 아니라, 데이터가 어디까지 말해 주는지를 보여주는 페이지예요.</span></div>`;
+    if(!A.computedAt || !(A.indicators || []).length){
+      body.innerHTML = head + `<div class="an-empty">${escapeHtml(A.error || '아직 계산된 분석 결과가 없어요. 저장소에 data/reference_cases.json을 올리고 build_site.py를 실행하면 채워져요.')}</div>`;
+      return;
+    }
+    const m = A.indicatorCount, sig = A.significantCount, corr = A.significantCorrectedCount || 0;
+    const nOff = A.comparedOfficial, nNone = A.compared - A.comparedOfficial;
+    const sigNames = A.indicators.filter(i => i.significant).map(i => i.label.replace(/ \(.*\)$/, ''));
+    let verdict;
+    if(corr > 0){
+      verdict = `지표 ${m}개 중 <b>${corr}개</b>는 여러 지표를 함께 검정하는 보정(p &lt; ${A.alphaCorrected})을 거치고도 유의했어요. 다만 정식연재 사례가 ${nOff}개뿐이라 해석에 주의가 필요해요.`;
+    } else if(sig > 0){
+      verdict = `지표 ${m}개 중 <b>${sig}개</b>(${sigNames.map(escapeHtml).join(', ')})가 기준(p &lt; ${A.alpha})을 통과했어요. 하지만 지표 ${m}개를 한꺼번에 검정하면 우연히 하나쯤 나올 수 있어서, 보정 기준(p &lt; ${A.alphaCorrected})으로 다시 보면 <b>유의한 지표는 없어요</b>.`;
+    } else {
+      verdict = `지표 ${m}개 <b>모두</b> 우연과 구분되지 않았어요.`;
+    }
+    const conclusion = corr > 0
+      ? ''
+      : ' 지금 데이터로는 “이 지표가 높으면 정식연재 가능성이 높다”고 말할 수 없어요.';
+    const summary = `<div class="an-summary">정식연재 작품 <b>${nOff}개</b>와 정식연재 없음 <b>${nNone}개</b>를 비교했어요. ${verdict}${conclusion}</div>
+      <div class="an-tiles">
+        <div class="an-tile"><div class="k">비교한 작품</div><div class="v">${A.compared}</div></div>
+        <div class="an-tile"><div class="k">그중 정식연재</div><div class="v">${nOff}</div></div>
+        <div class="an-tile"><div class="k">유의한 지표 (p &lt; ${A.alpha})</div><div class="v ${sig ? '' : 'dim'}">${sig} / ${m}</div></div>
+        <div class="an-tile"><div class="k">보정 후 (p &lt; ${A.alphaCorrected})</div><div class="v ${corr ? '' : 'dim'}">${corr} / ${m}</div></div>
+      </div>`;
+
+    // ① 지표 비교
+    const maxAbs = Math.max(0.4, ...A.indicators.map(i => Math.abs(i.rho))) * 1.15;
+    const indRows = A.indicators.map(i => {
+      const status = i.significantCorrected ? ['보정 후에도 유의', true] : i.significant ? [`p<${A.alpha} · 보정 후 확정 못 함`, true] : ['확정 못 함', false];
+      return `<tr>
+        <td class="nm">${escapeHtml(i.label)}<span class="nt">${escapeHtml(i.note)}</span></td>
+        <td>${anNum(i.medianOfficial)}</td><td>${anNum(i.medianNone)}</td>
+        <td>${i.ratio == null ? '–' : '×' + i.ratio}</td>
+        <td style="white-space:nowrap">${anRhoBar(i.rho, i.significant, maxAbs)} <span class="${i.significant ? 'sig' : ''}">${i.rho > 0 ? '+' : ''}${i.rho}</span></td>
+        <td class="${i.significant ? 'sig' : ''}">${i.p}</td><td>${i.n}</td>
+        <td class="verdict ${status[1] ? 'sig' : ''}">${status[0]}</td></tr>`;
+    }).join('');
+    const sec1 = `<div class="an-sec"><h3>① 지표별 비교 (스피어만 상관)</h3>
+      <div class="sub">정식연재 ${nOff}개 vs 정식연재 없음 ${nNone}개. 막대가 오른쪽이면 정식연재 쪽이 그 지표가 높은 경향, 속이 빈 막대는 우연과 구분되지 않는다는 뜻이에요.</div>
+      <div class="an-tablewrap"><table class="an-table"><thead><tr>
+        <th>지표</th><th>정식연재<br>중앙값</th><th>없음<br>중앙값</th><th>배율</th><th>스피어만 ρ</th><th>p값</th><th>표본</th><th style="text-align:left">판정</th></tr></thead>
+        <tbody>${indRows}</tbody></table></div>
+      <details class="an-read"><summary>읽는 법</summary>
+        <p><b>스피어만 ρ</b>: −1~1. 0이면 관계가 없고, 클수록 그 지표가 높은 작품이 정식연재인 경향이 있어요. 조회수처럼 편차가 큰 값은 순위로 비교해요.</p>
+        <p><b>p값</b>: 이 정도 차이가 우연히 나올 확률이에요. ${A.alpha}보다 작으면 우연이 아니라고 볼 근거가 생겨요. 다만 지표를 ${m}개 동시에 보면 우연히 하나쯤 작게 나올 수 있어서, 기준을 ${m}로 나눈 ${A.alphaCorrected}로도 함께 판정해요(본페로니 보정).</p>
+      </details></div>`;
+
+    // ② 로지스틱 회귀
+    let sec2 = '';
+    const L = A.logistic;
+    if(L){
+      let inner;
+      if(L.rows && L.rows.length){
+        const lim = Math.max(Math.log(2), ...L.rows.flatMap(r => [Math.abs(Math.log(Math.max(r.lo, 0.0001))), Math.abs(Math.log(r.hi))])) * 1.05;
+        inner = `<div class="an-tablewrap"><table class="an-table"><thead><tr>
+          <th>지표 (1 표준편차 증가당)</th><th>오즈비</th><th>95% 신뢰구간</th><th style="text-align:center">1(영향 없음) 기준 위치</th><th>p값</th><th style="text-align:left">판정</th></tr></thead><tbody>
+          ${L.rows.map(r => `<tr><td class="nm">${escapeHtml(r.label)}</td><td>${r.or}</td><td>${r.lo} ~ ${r.hi}</td><td style="text-align:center">${anCiBar(r, lim)}</td><td>${r.p}</td><td class="verdict">${escapeHtml(r.verdict)}</td></tr>`).join('')}
+          </tbody></table></div>`;
+      } else {
+        inner = `<div class="an-box">${escapeHtml(L.error || '회귀를 계산하지 못했어요.')}</div>`;
+      }
+      sec2 = `<div class="an-sec"><h3>② 로지스틱 회귀 (정식연재 여부 ~ 지표들)</h3>
+        <div class="sub">여러 지표를 한꺼번에 넣고, 다른 지표가 같을 때 그 지표 하나가 정식연재 가능성에 주는 영향을 봐요. 지표는 평균 0·표준편차 1로 맞춰서 넣었어요. 오즈비 1이면 영향 없음, 2면 정식연재일 승산이 2배예요. 신뢰구간이 1을 포함하면 늘어나는지 줄어드는지조차 확정하지 못해요.</div>
+        ${inner}
+        <div class="an-box ${L.sampleOk ? '' : 'warn'}"><b>표본이 충분한가?</b> 분석 표본 ${L.n}개 중 정식연재 ${L.events}개, 독립변수 ${L.variables}개 → 변수당 사건 수(EPV) <b>${L.epv}</b> (경험칙 ${L.epvMin} 이상).
+          ${L.sampleOk ? '기준을 충족해요.' : '<b>표본 부족</b> — 추정이 불안정할 수 있어서 오즈비는 방향을 가늠하는 참고용이에요.'}
+          <span style="color:var(--muted)">(기준 출처: Peduzzi 외, 1996, J Clin Epidemiol)</span></div></div>`;
+    }
+
+    // ③ 분류 현황 (이 브라우저에서 보이는 분류를 그대로 셈)
+    const labels = mergedLabels();
+    const byStatus = {};
+    Object.values(labels).forEach(l => { byStatus[l.status] = (byStatus[l.status] || 0) + 1; });
+    const officialLinked = Object.values(labels).filter(l => l.officialTitleId).length;
+    const pendingCount = REAL_DATA.filter(d => noticePending(d)).length;
+    const backlogCount = REAL_DATA.filter(d => noticeBacklog(d)).length;
+    const groupText = Object.entries(A.groups || {}).map(([k, v]) => `${AN_GROUP_LABELS[k] || k} ${v}`).join(' · ');
+    const sec3 = `<div class="an-sec"><h3>③ 분류 현황</h3>
+      <div class="sub">공지를 직접 확인해 분류한 사례예요. 이 숫자는 지금 이 브라우저에서 보이는 분류를 그대로 센 값이에요.</div>
+      <div class="an-status">
+        ${Object.entries(LABEL_STATUS).map(([k, v]) => `<div><span>${v}</span><span>${byStatus[k] || 0}</span></div>`).join('')}
+        <div><span>정식 작품 번호 입력</span><span>${officialLinked}</span></div>
+        <div><span>공지 확인 대기</span><span>${pendingCount}</span></div>
+        <div><span>지난 공지(미분류)</span><span>${backlogCount}</span></div>
+      </div>
+      <div class="an-box"><b>분석에 쓰인 데이터</b>: 조사 목록 기준 데이터 ${Object.values(A.groups || {}).reduce((a, b) => a + b, 0)}개 (${escapeHtml(groupText)}).
+        위 분류 사례는 아직 계산에 <b>합치지 않았어요</b> — 지금 계산은 조사 목록만 써요. 분류 사례가 충분히 쌓이면 같은 방식으로 합쳐 다시 계산할 예정이에요.<br>
+        <span style="color:var(--muted)">마지막 계산 ${escapeHtml(A.computedAt)} · 추적 데이터 기준일 ${escapeHtml(A.historyLastDate || '–')}</span></div></div>`;
+
+    // ④ 한계
+    const excluded = Object.entries(A.groups || {}).filter(([k]) => k !== 'official' && k !== 'none').reduce((a, [, v]) => a + v, 0);
+    const limits = [
+      ['표본 크기', `정식연재 사례가 ${nOff}개뿐이라 신뢰구간이 넓고, 로지스틱 회귀는 변수당 사건 수가 경험칙에 못 미쳐요.`, '경향 비교로만 읽고, 사례가 늘면 같은 방식으로 다시 계산해요.'],
+      ['여러 지표를 함께 검정', `지표 ${m}개를 동시에 보면 아무 관계가 없어도 p < ${A.alpha}가 하나쯤 나올 수 있어요.`, `기준을 ${A.alphaCorrected}로 낮춘 보정 결과를 같이 보여줘요.`],
+      ['선택 편향', '조사 목록은 공지가 있던 작품 위주라 베스트도전 전체를 대표하지 않아요.', '공지 없는 작품을 비교군으로 늘리거나 한계로 명시해요.'],
+      ['측정 시점', '정식연재 작품의 수치는 승격 뒤(마지막 추적값)에 잰 값이라 “예측”이 아니라 “비교”예요.', '앞으로는 일일 추적 데이터에서 공지 이전 시점의 지표를 써요.'],
+      ['누적값의 시대 편향', '누적 조회수·관심 수는 오래된 작품일수록 커서 작품 나이의 영향이 섞여요.', '누적값에 큰 비중을 두지 않고 비율·최근 변화 지표를 함께 봐요.'],
+      ['제외한 작품', `수상작·완결·분류 불가 작품(총 ${excluded}개)은 이번 비교에서 뺐어요.`, '수상작은 별도 분석, 완결은 사유별로 나눈 뒤 다시 검토해요.'],
+      ['수동 입력 값', '뱃지와 관심 수는 사람이 직접 정리한 값이라 입력 오류가 있을 수 있어요.', '크롤러가 조회할 수 있는 값(정식 작품 관심 수)은 자동 기록으로 대체해요.'],
+    ];
+    const sec4 = `<div class="an-sec"><h3>④ 결과를 읽을 때의 한계</h3>
+      <ul class="an-limits">${limits.map(([t, d, r]) => `<li><b>${escapeHtml(t)}</b>${escapeHtml(d)}<br><span>대응: ${escapeHtml(r)}</span></li>`).join('')}</ul></div>`;
+
+    body.innerHTML = head + summary + sec1 + sec2 + sec3 + sec4;
   }
 
   window.addEventListener('hashchange', showRoute);

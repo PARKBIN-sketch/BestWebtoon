@@ -17,6 +17,7 @@ scouting_desk_mockup.html 코드를 직접 고치는 방식으로 진행해야 �
 """
 import json
 import re
+import sys
 from pathlib import Path
 
 HISTORY_PATH = Path("data") / "history.json"
@@ -24,6 +25,8 @@ HISTORY_PATH = Path("data") / "history.json"
 LABELS_PATH = Path("data") / "labels.json"
 # 크롤러가 쌓는 정식 연재 추적 기록(data/official_tracking.json)
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
+# build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
+ANALYSIS_PATH = Path("data") / "analysis.json"
 SITE_PATH = Path("scouting_desk_mockup.html")
 
 
@@ -115,6 +118,17 @@ def load_personal() -> dict:
     return personal if isinstance(personal, dict) else {}
 
 
+def load_analysis() -> dict:
+    """정식연재 지표 분석 결과. 없거나 깨졌으면 빈 값 (페이지에는 '아직 계산 안 됨'이 표시됨)."""
+    if not ANALYSIS_PATH.exists():
+        return {}
+    try:
+        data = json.loads(ANALYSIS_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
 def load_official_tracking() -> dict:
     """정식 연재 추적 기록. 없거나 깨졌으면 빈 값."""
     if not OFFICIAL_PATH.exists():
@@ -138,6 +152,14 @@ def main() -> None:
     if not SITE_PATH.exists():
         print(f"[build_site] {SITE_PATH}가 저장소 루트에 없습니다 — 한 번은 직접 올려둬야 합니다.")
         return
+
+    # 분석 결과를 먼저 새로 계산함 (분석 패키지가 없거나 실패해도 사이트 빌드는 계속 진행)
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))   # 같은 폴더의 build_analysis.py를 찾도록
+        import build_analysis
+        build_analysis.main()
+    except Exception as e:   # noqa: BLE001
+        print(f"[build_site] 분석 계산을 건너뜁니다: {e}")
 
     history = json.loads(HISTORY_PATH.read_text(encoding="utf-8"))
     real_data = build_real_data(history)
@@ -191,8 +213,17 @@ def main() -> None:
     else:
         print("[build_site] OFFICIAL_TRACKING 선언부를 못 찾아 정식 추적 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    analysis = load_analysis()
+    analysis_match = re.compile(r"  const ANALYSIS = \{.*?\};", re.DOTALL).search(new_html)
+    if analysis_match:
+        new_html = (new_html[:analysis_match.start()]
+                    + f"  const ANALYSIS = {to_js_literal(analysis)};"
+                    + new_html[analysis_match.end():])
+    else:
+        print("[build_site] ANALYSIS 선언부를 못 찾아 분석 결과 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
