@@ -922,6 +922,17 @@ def promoted_bench_ids(labels: dict) -> set[int]:
             if str(k).isdigit() and isinstance(rec, dict) and rec.get("status") in PROMOTED_LABEL_STATUSES}
 
 
+def valid_iso_date(value):
+    """YYYY-MM-DD이고 연도가 2000~2100이면 그대로, 아니면 None (0020-03-26 같은 잘못된 입력 방지)."""
+    if not isinstance(value, str) or len(value) != 10 or value[4] != "-" or value[7] != "-":
+        return None
+    try:
+        parsed = datetime.strptime(value, "%Y-%m-%d")
+    except ValueError:
+        return None
+    return value if 2000 <= parsed.year <= 2100 else None
+
+
 def load_official_targets(labels: dict) -> dict[int, dict]:
     """분류 기록에서 정식 작품 번호가 입력된 항목을 {정식 번호: 메타}로 뽑습니다."""
     targets: dict[int, dict] = {}
@@ -933,7 +944,7 @@ def load_official_targets(labels: dict) -> dict[int, dict]:
             continue
         targets[official_id] = {
             "benchTitleId": int(bench_id) if str(bench_id).isdigit() else None,
-            "openDate": rec.get("officialOpenDate"),
+            "openDate": valid_iso_date(rec.get("officialOpenDate")),
             "titleName": rec.get("titleName"),
         }
     return targets
