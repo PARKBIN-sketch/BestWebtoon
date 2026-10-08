@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "exportedAt": "2026-10-07T07:42:05.617Z",
-  "count": 99,
+  "exportedAt": "2026-10-08T08:03:38.136Z",
+  "count": 186,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -57,6 +57,23 @@
         "trackedDays": 27
       }
     },
+    "710703": {
+      "status": "none",
+      "note": "작가 근황 재연재 사유",
+      "titleName": "그 앨리스에게 판타지란 없다",
+      "subtitle": "<그 앨리스에게 판타지란 없다> 작품 관련 비하인드 + 작가근황",
+      "noticeDate": "26.06.29",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:50:53.181Z",
+      "snapshot": {
+        "viewCount": 1045532,
+        "starScore": 9.88,
+        "episodeCount": 14,
+        "cadenceDays": 0,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
     "710956": {
       "status": "none",
       "note": "",
@@ -71,6 +88,40 @@
         "episodeCount": 305,
         "cadenceDays": 42,
         "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "736000": {
+      "status": "ended",
+      "note": "' 매지컬 급식:암살법사' 연재를 위해 일시 중단",
+      "titleName": "월혼",
+      "subtitle": "1부 북녘골의 여명 후기",
+      "noticeDate": "22.02.23",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:21:25.314Z",
+      "snapshot": {
+        "viewCount": 1815652,
+        "starScore": 9.78,
+        "episodeCount": 34,
+        "cadenceDays": 5,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
+    },
+    "747155": {
+      "status": "remake",
+      "note": "",
+      "titleName": "미친 공작을 길들여버렸다",
+      "subtitle": "1화[리메이크]",
+      "noticeDate": "26.01.16",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:52:49.747Z",
+      "snapshot": {
+        "viewCount": 114200,
+        "starScore": 8.64,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.2,
         "trackedDays": 28
       }
     },
@@ -108,6 +159,23 @@
         "trackedDays": 28
       }
     },
+    "755644": {
+      "status": "ended",
+      "note": "괴담 칵테일과 분리(괴담 칵테일이 챌린저스 선정 됨으로 사실상 중단)",
+      "titleName": "모호담",
+      "subtitle": "괴담 칵테일 분리 공지",
+      "noticeDate": "26.05.26",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:16:25.508Z",
+      "snapshot": {
+        "viewCount": 1622513,
+        "starScore": 9.74,
+        "episodeCount": 70,
+        "cadenceDays": 8,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      }
+    },
     "757097": {
       "status": "confirmed",
       "note": "",
@@ -127,6 +195,57 @@
       "officialOpenDate": "2026-09-30",
       "officialTitleId": 853096
     },
+    "758264": {
+      "status": "ended",
+      "note": "'운명해주세요' 연재 중",
+      "titleName": "라떼는 말이야",
+      "subtitle": "정식연재공지!!!",
+      "noticeDate": "24.12.18",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:20:36.461Z",
+      "snapshot": {
+        "viewCount": 291685,
+        "starScore": 9.71,
+        "episodeCount": 18,
+        "cadenceDays": 7,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      }
+    },
+    "759503": {
+      "status": "remake",
+      "note": "바리 별을 깨운 천둥으로 리메이크 ",
+      "titleName": "바리의 영혼",
+      "subtitle": "공지",
+      "noticeDate": "24.05.30",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:19:14.451Z",
+      "snapshot": {
+        "viewCount": 55075,
+        "starScore": 9.1,
+        "episodeCount": 12,
+        "cadenceDays": 7,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
+    },
+    "766081": {
+      "status": "moved",
+      "note": "조아라 웹소설화",
+      "titleName": "기억지도",
+      "subtitle": "기억지도 웹소설화 공지",
+      "noticeDate": "26.06.24",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:51:14.788Z",
+      "snapshot": {
+        "viewCount": 92845,
+        "starScore": 9.57,
+        "episodeCount": 19,
+        "cadenceDays": 7,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
     "767645": {
       "status": "moved",
       "note": "아마존 재팬 플립툰",
@@ -141,6 +260,40 @@
         "episodeCount": 13,
         "cadenceDays": 45.5,
         "growthPct": 0.7,
+        "trackedDays": 28
+      }
+    },
+    "770506": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "마피아게임에 어서오세요",
+      "subtitle": "Chapter3 - 대 보물찾기 시대 23 + 휴재공지",
+      "noticeDate": "25.01.30",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:51:50.649Z",
+      "snapshot": {
+        "viewCount": 1039099,
+        "starScore": 9.49,
+        "episodeCount": 81,
+        "cadenceDays": null,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
+    },
+    "775770": {
+      "status": "ended",
+      "note": "'축구천재로 오해받는 중입니다' 연재로 임시 중단",
+      "titleName": "미가식당",
+      "subtitle": "공지",
+      "noticeDate": "24.12.23",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:10:56.725Z",
+      "snapshot": {
+        "viewCount": 33901,
+        "starScore": 9.2,
+        "episodeCount": 6,
+        "cadenceDays": 7,
+        "growthPct": 0.3,
         "trackedDays": 28
       }
     },
@@ -232,6 +385,23 @@
         "trackedDays": 17
       }
     },
+    "798684": {
+      "status": "ended",
+      "note": "한국영상대학교에서 제작한 영화 <오! 마이 고스트>의 프리퀄 스토리를 같은 대학교 웹툰 창작 동아리 학생들이 모여 제작한 작품",
+      "titleName": "만신비망록",
+      "subtitle": "만신비망록 후기",
+      "noticeDate": "22.09.19",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:37:28.478Z",
+      "snapshot": {
+        "viewCount": 155565,
+        "starScore": 9.9,
+        "episodeCount": 10,
+        "cadenceDays": 6,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "802026": {
       "status": "none",
       "note": "",
@@ -248,6 +418,95 @@
         "trackedDays": 20
       }
     },
+    "802451": {
+      "status": "confirmed",
+      "note": "만화경 연재, 플랫폼 삭제 후 네이버에서 정식 연재",
+      "titleName": "K학원 생존기",
+      "subtitle": "연재공지",
+      "noticeDate": "24.03.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:55:41.345Z",
+      "snapshot": {
+        "viewCount": 275542,
+        "starScore": 9.64,
+        "episodeCount": 13,
+        "cadenceDays": 7,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 823190,
+      "officialOpenDate": "2024-03-29"
+    },
+    "802837": {
+      "status": "none",
+      "note": "감사 인사",
+      "titleName": "언터쳐블",
+      "subtitle": "감사인사와 이야기.",
+      "noticeDate": "23.01.18",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:43:44.436Z",
+      "snapshot": {
+        "viewCount": 31871,
+        "starScore": 9.53,
+        "episodeCount": 9,
+        "cadenceDays": 7,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "805490": {
+      "status": "moved",
+      "note": "투비 연재",
+      "titleName": "머맨백(Merman Bag)",
+      "subtitle": "이벤트 당첨자 선정 공지",
+      "noticeDate": "26.08.08",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:45:18.382Z",
+      "snapshot": {
+        "viewCount": 150408,
+        "starScore": 9.61,
+        "episodeCount": 10,
+        "cadenceDays": 11,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
+    "806054": {
+      "status": "ended",
+      "note": "완결 후기",
+      "titleName": "옆동네 집사",
+      "subtitle": "78. 후기",
+      "noticeDate": "26.02.06",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:26:54.371Z",
+      "snapshot": {
+        "viewCount": 163787,
+        "starScore": 9.67,
+        "episodeCount": 80,
+        "cadenceDays": 14,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "806699": {
+      "status": "confirmed",
+      "note": "리메이크작으로 정식연재",
+      "titleName": "호붕빵 아저씨 (4컷만화)",
+      "subtitle": "오픈 공지",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:41:33.294Z",
+      "snapshot": {
+        "viewCount": 426884,
+        "starScore": 9.86,
+        "episodeCount": 16,
+        "cadenceDays": 6,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialTitleId": 833361,
+      "officialOpenDate": "2024-11-22"
+    },
     "807374": {
       "status": "none",
       "note": "휴재",
@@ -262,6 +521,95 @@
         "episodeCount": 30,
         "cadenceDays": 11,
         "growthPct": 1.1,
+        "trackedDays": 28
+      }
+    },
+    "809094": {
+      "status": "moved",
+      "note": "노벨피아 연재",
+      "titleName": "기사수업 리벤지",
+      "subtitle": "연재공지",
+      "noticeDate": "23.12.30",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:21:34.948Z",
+      "snapshot": {
+        "viewCount": 26543,
+        "starScore": 9.71,
+        "episodeCount": 8,
+        "cadenceDays": 7,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "810029": {
+      "status": "confirmed",
+      "note": "지최대 입상 실패 후 컨택",
+      "titleName": "그냥 고양이",
+      "subtitle": "정식연재 공지",
+      "noticeDate": "24.11.04",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:56:24.769Z",
+      "snapshot": {
+        "viewCount": 72956,
+        "starScore": 9.85,
+        "episodeCount": 5,
+        "cadenceDays": 25,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      },
+      "officialTitleId": 833622,
+      "officialOpenDate": "2024-11-08"
+    },
+    "810030": {
+      "status": "ended",
+      "note": "공모전 투고작 투고 실패 후 현재 연재 계획 없음",
+      "titleName": "복수마검",
+      "subtitle": "간단한 공지",
+      "noticeDate": "26.03.26",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:33:57.191Z",
+      "snapshot": {
+        "viewCount": 46663,
+        "starScore": 8.58,
+        "episodeCount": 4,
+        "cadenceDays": 0,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "810033": {
+      "status": "award",
+      "note": "우수상",
+      "titleName": "본즈",
+      "subtitle": "연재 공지",
+      "noticeDate": "24.10.10",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T08:01:40.420Z",
+      "snapshot": {
+        "viewCount": 1811548,
+        "starScore": 9.73,
+        "episodeCount": 6,
+        "cadenceDays": 15,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      },
+      "officialOpenDate": "2024-10-12",
+      "officialTitleId": 833182
+    },
+    "810048": {
+      "status": "remake",
+      "note": "",
+      "titleName": "밀어내려고 키스!",
+      "subtitle": "-공지-",
+      "noticeDate": "24.12.05",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:30:25.887Z",
+      "snapshot": {
+        "viewCount": 54056,
+        "starScore": 9.41,
+        "episodeCount": 4,
+        "cadenceDays": 19,
+        "growthPct": 0.5,
         "trackedDays": 28
       }
     },
@@ -282,6 +630,23 @@
         "trackedDays": 28
       }
     },
+    "810077": {
+      "status": "ended",
+      "note": "",
+      "titleName": "방송주인",
+      "subtitle": "후기",
+      "noticeDate": "26.02.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:45:36.309Z",
+      "snapshot": {
+        "viewCount": 147719,
+        "starScore": 9,
+        "episodeCount": 30,
+        "cadenceDays": 26,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
     "810080": {
       "status": "ended",
       "note": "",
@@ -296,6 +661,23 @@
         "episodeCount": 4,
         "cadenceDays": 259,
         "growthPct": 16.8,
+        "trackedDays": 28
+      }
+    },
+    "810154": {
+      "status": "ended",
+      "note": "공모전 작품 다른 도전 만화를 위해 일시 중단",
+      "titleName": "프로젝트 마지막 좀비",
+      "subtitle": "후기",
+      "noticeDate": "25.10.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:48:09.212Z",
+      "snapshot": {
+        "viewCount": 7074,
+        "starScore": 9.3,
+        "episodeCount": 4,
+        "cadenceDays": 13,
+        "growthPct": 0.4,
         "trackedDays": 28
       }
     },
@@ -316,6 +698,23 @@
         "trackedDays": 28
       }
     },
+    "810269": {
+      "status": "ended",
+      "note": "<마멸의 셰도로프> 공모전 최우수상 수상 연재 중지",
+      "titleName": "큐리오스",
+      "subtitle": "<공지>2",
+      "noticeDate": "24.10.05",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T08:03:24.632Z",
+      "snapshot": {
+        "viewCount": 49312,
+        "starScore": 9.71,
+        "episodeCount": 8,
+        "cadenceDays": 25,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
     "810292": {
       "status": "confirmed",
       "note": "챌린저스 선정 2606",
@@ -330,6 +729,40 @@
         "episodeCount": 9,
         "cadenceDays": 7,
         "growthPct": 0.7,
+        "trackedDays": 28
+      }
+    },
+    "810328": {
+      "status": "moved",
+      "note": "네이버 시리즈 연재 ",
+      "titleName": "5와 6층 폐쇄공간",
+      "subtitle": "공지",
+      "noticeDate": "24.08.13",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:53:56.657Z",
+      "snapshot": {
+        "viewCount": 21593,
+        "starScore": 8.57,
+        "episodeCount": 6,
+        "cadenceDays": 8,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
+    },
+    "810370": {
+      "status": "moved",
+      "note": "탑툰 연재",
+      "titleName": "밤이 되었습니다. 안드로이드는 고개를 들어주세요.",
+      "subtitle": "<오픈>",
+      "noticeDate": "23.11.20",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:17:19.849Z",
+      "snapshot": {
+        "viewCount": 55657,
+        "starScore": 9.08,
+        "episodeCount": 10,
+        "cadenceDays": 0,
+        "growthPct": 0.6,
         "trackedDays": 28
       }
     },
@@ -351,6 +784,23 @@
       },
       "officialOpenDate": "2026-01-11",
       "officialTitleId": 846079
+    },
+    "810456": {
+      "status": "ended",
+      "note": "공모전 수상 실패 후 도전만화 '이웃전쟁' 연재 중 ",
+      "titleName": "도망좀비",
+      "subtitle": "도전만화 '이웃전쟁' 홍보 공지",
+      "noticeDate": "24.09.02",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:15:28.199Z",
+      "snapshot": {
+        "viewCount": 9925,
+        "starScore": 9.27,
+        "episodeCount": 4,
+        "cadenceDays": 16,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
     },
     "810553": {
       "status": "confirmed",
@@ -405,6 +855,112 @@
         "trackedDays": 28
       }
     },
+    "810735": {
+      "status": "none",
+      "note": "",
+      "titleName": "엔키의 서",
+      "subtitle": "감사한 독자님들께 작가 이현욱 드림.",
+      "noticeDate": "25.09.01",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:54:45.706Z",
+      "snapshot": {
+        "viewCount": 20251,
+        "starScore": 9.02,
+        "episodeCount": 15,
+        "cadenceDays": 49,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
+    "811010": {
+      "status": "ended",
+      "note": "입상 실패 후 다음 공모전을 위해서 재정비",
+      "titleName": "봄날에",
+      "subtitle": "공지사항.",
+      "noticeDate": "23.09.03",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:43:03.285Z",
+      "snapshot": {
+        "viewCount": 7051,
+        "starScore": 8.63,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "811032": {
+      "status": "confirmed",
+      "note": "네이버 정식 연재",
+      "titleName": "비기닝즈",
+      "subtitle": "정식 연재 공지",
+      "noticeDate": "25.07.28",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:41:22.938Z",
+      "snapshot": {
+        "viewCount": 20522,
+        "starScore": 9.67,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      },
+      "officialTitleId": 840344,
+      "officialOpenDate": "2025-07-28"
+    },
+    "811034": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "랭커랑 연애가능",
+      "subtitle": "연재공지",
+      "noticeDate": "24.11.26",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:48:16.286Z",
+      "snapshot": {
+        "viewCount": 32226,
+        "starScore": 9.35,
+        "episodeCount": 4,
+        "cadenceDays": 13,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      },
+      "officialTitleId": 834555,
+      "officialOpenDate": "2024-12-04"
+    },
+    "811155": {
+      "status": "none",
+      "note": "연재 공지",
+      "titleName": "육식주의자 선언",
+      "subtitle": "연재 공지",
+      "noticeDate": "26.05.05",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:51:59.626Z",
+      "snapshot": {
+        "viewCount": 36508,
+        "starScore": 9.16,
+        "episodeCount": 10,
+        "cadenceDays": 0,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
+    "811210": {
+      "status": "none",
+      "note": "",
+      "titleName": "달을 따라",
+      "subtitle": "13화 (리메이크)",
+      "noticeDate": "25.06.12",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:40:26.702Z",
+      "snapshot": {
+        "viewCount": 24465,
+        "starScore": 9.08,
+        "episodeCount": 13,
+        "cadenceDays": 14,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "811426": {
       "status": "confirmed",
       "note": "컨택 후 연",
@@ -424,6 +980,59 @@
       "officialTitleId": 834733,
       "officialOpenDate": "2024-12-15"
     },
+    "814941": {
+      "status": "confirmed",
+      "note": "지최대 작품 컨택 후 연재로 추정",
+      "titleName": "호붕빵 아저씨",
+      "subtitle": "오픈 공지",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:26:58.178Z",
+      "snapshot": {
+        "viewCount": 80486,
+        "starScore": 9.87,
+        "episodeCount": 5,
+        "cadenceDays": 21,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      },
+      "officialTitleId": 833361,
+      "officialOpenDate": "2024-11-22"
+    },
+    "814979": {
+      "status": "award",
+      "note": "최우수상",
+      "titleName": "킬로드",
+      "subtitle": "후기",
+      "noticeDate": "23.11.10",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:23:08.006Z",
+      "snapshot": {
+        "viewCount": 36400,
+        "starScore": 9.56,
+        "episodeCount": 4,
+        "cadenceDays": 26,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "814995": {
+      "status": "ended",
+      "note": "공모전 입상 실패 후기 ",
+      "titleName": "사신 포인트",
+      "subtitle": "짧은 공지",
+      "noticeDate": "24.03.12",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:16:42.244Z",
+      "snapshot": {
+        "viewCount": 21783,
+        "starScore": 9.29,
+        "episodeCount": 4,
+        "cadenceDays": 26,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "815053": {
       "status": "none",
       "note": "자유 연재",
@@ -438,6 +1047,59 @@
         "episodeCount": 15,
         "cadenceDays": 14,
         "growthPct": 0.8,
+        "trackedDays": 28
+      }
+    },
+    "815060": {
+      "status": "none",
+      "note": "베도 후기",
+      "titleName": "예린이는,",
+      "subtitle": "공지) 예린이는, '베.도'에 올라왔다!",
+      "noticeDate": "24.06.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:34:19.008Z",
+      "snapshot": {
+        "viewCount": 9251,
+        "starScore": 8.64,
+        "episodeCount": 4,
+        "cadenceDays": 0,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "815062": {
+      "status": "confirmed",
+      "note": "컨택 후 연재",
+      "titleName": "어쩌다 보니 제물이 되었습니다!",
+      "subtitle": "연재 공지",
+      "noticeDate": "24.08.13",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:33:54.407Z",
+      "snapshot": {
+        "viewCount": 33733,
+        "starScore": 9.48,
+        "episodeCount": 4,
+        "cadenceDays": 26,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialTitleId": 829196,
+      "officialOpenDate": "2024-08-13"
+    },
+    "815082": {
+      "status": "none",
+      "note": "공모전 후기",
+      "titleName": "헌트레드",
+      "subtitle": "후기",
+      "noticeDate": "26.05.09",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:38:15.607Z",
+      "snapshot": {
+        "viewCount": 16690,
+        "starScore": 9.53,
+        "episodeCount": 4,
+        "cadenceDays": 0,
+        "growthPct": 0.5,
         "trackedDays": 28
       }
     },
@@ -460,6 +1122,23 @@
       "officialTitleId": 828170,
       "officialOpenDate": "2024-07-16"
     },
+    "815165": {
+      "status": "ended",
+      "note": "레진에서 '청성' 작품 연재",
+      "titleName": "그녀를 위한 변태",
+      "subtitle": "연재공지",
+      "noticeDate": "24.11.24",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:33:15.791Z",
+      "snapshot": {
+        "viewCount": 75141,
+        "starScore": 8.99,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.5,
+        "trackedDays": 13
+      }
+    },
     "815512": {
       "status": "none",
       "note": "베스도 도전 입성 후기 ",
@@ -474,6 +1153,23 @@
         "episodeCount": 6,
         "cadenceDays": 1,
         "growthPct": 0.7,
+        "trackedDays": 28
+      }
+    },
+    "815988": {
+      "status": "none",
+      "note": "",
+      "titleName": "[베스트도전] NPC씨 아님",
+      "subtitle": "근황 일상툰 - 디맥 미라클 보고 온 만화",
+      "noticeDate": "25.08.17",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:28:50.505Z",
+      "snapshot": {
+        "viewCount": 1330637,
+        "starScore": 9.9,
+        "episodeCount": 30,
+        "cadenceDays": 12,
+        "growthPct": 0.3,
         "trackedDays": 28
       }
     },
@@ -496,6 +1192,25 @@
       "officialTitleId": 843919,
       "officialOpenDate": "2025-10-25"
     },
+    "816302": {
+      "status": "award",
+      "note": "우수상",
+      "titleName": "홀아비",
+      "subtitle": "연재공지",
+      "noticeDate": "25.11.25",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:48:46.693Z",
+      "snapshot": {
+        "viewCount": 28024,
+        "starScore": 9.51,
+        "episodeCount": 5,
+        "cadenceDays": 30.5,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 845154,
+      "officialOpenDate": "2025-11-25"
+    },
     "816403": {
       "status": "confirmed",
       "note": "수상 실패 후 컨텍",
@@ -514,6 +1229,23 @@
       },
       "officialTitleId": 835557,
       "officialOpenDate": "2025-01-10"
+    },
+    "817892": {
+      "status": "ended",
+      "note": "무기한 휴재",
+      "titleName": "인호",
+      "subtitle": "공지",
+      "noticeDate": "26.03.16",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:48:54.526Z",
+      "snapshot": {
+        "viewCount": 67752,
+        "starScore": 9.69,
+        "episodeCount": 11,
+        "cadenceDays": 14,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
     },
     "818158": {
       "status": "confirmed",
@@ -587,6 +1319,42 @@
       "officialTitleId": 848874,
       "officialOpenDate": "2026-03-19"
     },
+    "825108": {
+      "status": "confirmed",
+      "note": "컨택 후 연",
+      "titleName": "당골",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.04.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:51:32.883Z",
+      "snapshot": {
+        "viewCount": 57059,
+        "starScore": 9.78,
+        "episodeCount": 4,
+        "cadenceDays": 27,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 838215,
+      "officialOpenDate": "2025-04-15"
+    },
+    "825111": {
+      "status": "confirmed",
+      "note": "챌린저스 선정",
+      "titleName": "동경과 윤경",
+      "subtitle": "공지",
+      "noticeDate": "26.06.06",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:27:23.873Z",
+      "snapshot": {
+        "viewCount": 253133,
+        "starScore": 8,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
     "825151": {
       "status": "ended",
       "note": "공모전 후기",
@@ -623,6 +1391,25 @@
       "officialTitleId": 842321,
       "officialOpenDate": "2025-08-28"
     },
+    "825178": {
+      "status": "confirmed",
+      "note": "공모전 수상 실패 컨택 후 연재 추 ",
+      "titleName": "바리, 별을 깨운 천둥",
+      "subtitle": "후기",
+      "noticeDate": "24.07.27",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:22:23.364Z",
+      "snapshot": {
+        "viewCount": 23036,
+        "starScore": 9.62,
+        "episodeCount": 4,
+        "cadenceDays": 27,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      },
+      "officialTitleId": 843430,
+      "officialOpenDate": "2025-10-09"
+    },
     "825202": {
       "status": "award",
       "note": "우수상 2407",
@@ -642,6 +1429,42 @@
       "officialTitleId": 839082,
       "officialOpenDate": "2025-05-18"
     },
+    "825288": {
+      "status": "none",
+      "note": "공모전 입상 실패 후기",
+      "titleName": "사탄의 킬러",
+      "subtitle": "후기",
+      "noticeDate": "24.08.06",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:32:52.738Z",
+      "snapshot": {
+        "viewCount": 27404,
+        "starScore": 9.55,
+        "episodeCount": 4,
+        "cadenceDays": 26,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "825312": {
+      "status": "award",
+      "note": "우수상 ",
+      "titleName": "독방의 글쓴이",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.09.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:40:09.870Z",
+      "snapshot": {
+        "viewCount": 36688,
+        "starScore": 9.78,
+        "episodeCount": 5,
+        "cadenceDays": 31,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      },
+      "officialTitleId": 842213,
+      "officialOpenDate": "2025-09-17"
+    },
     "825318": {
       "status": "award",
       "note": "독자 인기상 240726",
@@ -660,6 +1483,42 @@
       },
       "officialTitleId": 836833,
       "officialOpenDate": "2025-03-02"
+    },
+    "825359": {
+      "status": "ended",
+      "note": "<그날 민우는 죽었다> 챌린저스 선정작이 되어 잠시 연재가 중단",
+      "titleName": "해달달해",
+      "subtitle": "공모전 참가 공지 (연재 임시 중단)",
+      "noticeDate": "25.08.02",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:40:13.600Z",
+      "snapshot": {
+        "viewCount": 118766,
+        "starScore": 9.81,
+        "episodeCount": 17,
+        "cadenceDays": 14,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "825403": {
+      "status": "award",
+      "note": "",
+      "titleName": "퇴출행성 세레나데",
+      "subtitle": "오픈 일정 공지!!",
+      "noticeDate": "25.02.26",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:24:34.226Z",
+      "snapshot": {
+        "viewCount": 11420,
+        "starScore": 9.73,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      },
+      "officialOpenDate": "2025-02-27",
+      "officialTitleId": 836352
     },
     "825472": {
       "status": "award",
@@ -733,6 +1592,44 @@
       "officialTitleId": 854757,
       "officialOpenDate": "2026-09-07"
     },
+    "825658": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "숨쉬지마",
+      "subtitle": "연재공지",
+      "noticeDate": "25.08.23",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:49:11.401Z",
+      "snapshot": {
+        "viewCount": 29021,
+        "starScore": 9.63,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 841941,
+      "officialOpenDate": "2025-08-23"
+    },
+    "825704": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "유사품에 주의하세요",
+      "subtitle": "<오픈 공지>",
+      "noticeDate": "25.05.13",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:46:18.989Z",
+      "snapshot": {
+        "viewCount": 26401,
+        "starScore": 9.62,
+        "episodeCount": 4,
+        "cadenceDays": 28,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      },
+      "officialTitleId": 838943,
+      "officialOpenDate": "2025-05-13"
+    },
     "825743": {
       "status": "confirmed",
       "note": "컨택 후 연재 ",
@@ -752,6 +1649,42 @@
       "officialTitleId": 844390,
       "officialOpenDate": "2025-11-05"
     },
+    "825842": {
+      "status": "award",
+      "note": "최우수상 ",
+      "titleName": "부두슬램(공모전)",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.09.12",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:53:35.764Z",
+      "snapshot": {
+        "viewCount": 63547,
+        "starScore": 9.8,
+        "episodeCount": 5,
+        "cadenceDays": 30,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      },
+      "officialTitleId": 842462,
+      "officialOpenDate": "2025-09-14"
+    },
+    "825877": {
+      "status": "ended",
+      "note": "공모전 입상 실패 후기 ",
+      "titleName": "마법소녀 황석철",
+      "subtitle": "공모전 참가 후기",
+      "noticeDate": "24.07.26",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:16:36.982Z",
+      "snapshot": {
+        "viewCount": 22564,
+        "starScore": 9.88,
+        "episodeCount": 4,
+        "cadenceDays": 25,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "825921": {
       "status": "ended",
       "note": "공모전 후기  리메이크 작품 '킬링 달링 베이비-잉♡'으로 연재 중",
@@ -766,6 +1699,80 @@
         "episodeCount": 6,
         "cadenceDays": 36,
         "growthPct": 1,
+        "trackedDays": 28
+      }
+    },
+    "825930": {
+      "status": "confirmed",
+      "note": "공모전 작품. 컨택 후 연재",
+      "titleName": "나니와 : 오사카 환상선",
+      "subtitle": "오픈 안내",
+      "noticeDate": "25.05.30",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:42:39.781Z",
+      "snapshot": {
+        "viewCount": 186074,
+        "starScore": 9.88,
+        "episodeCount": 5,
+        "cadenceDays": 41.5,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      },
+      "officialTitleId": 838885,
+      "officialOpenDate": "2025-05-30"
+    },
+    "825996": {
+      "status": "award",
+      "note": "우수상",
+      "titleName": "지옥도시",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.08.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:32:09.266Z",
+      "snapshot": {
+        "viewCount": 126215,
+        "starScore": 9.83,
+        "episodeCount": 5,
+        "cadenceDays": 33,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialTitleId": 842093,
+      "officialOpenDate": "2025-08-22"
+    },
+    "826001": {
+      "status": "confirmed",
+      "note": "7월 독자픽",
+      "titleName": "컬러리스트",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.11.05",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:08:03.838Z",
+      "snapshot": {
+        "viewCount": 269368,
+        "starScore": 9.85,
+        "episodeCount": 14,
+        "cadenceDays": 20,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialTitleId": 844352,
+      "officialOpenDate": "2025-11-12"
+    },
+    "826010": {
+      "status": "ended",
+      "note": "입상 실패 후 다음 공모전을 위해서 재정비",
+      "titleName": "저승기사",
+      "subtitle": "모두 감사합니다 재정비 후 돌아오겠습니다 :)",
+      "noticeDate": "24.09.06",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:43:07.798Z",
+      "snapshot": {
+        "viewCount": 8826,
+        "starScore": 9.7,
+        "episodeCount": 4,
+        "cadenceDays": 27,
+        "growthPct": 0.3,
         "trackedDays": 28
       }
     },
@@ -786,6 +1793,59 @@
         "trackedDays": 28
       }
     },
+    "828330": {
+      "status": "confirmed",
+      "note": "컨택 후 연재",
+      "titleName": "썰",
+      "subtitle": "11/20 런칭 공지",
+      "noticeDate": "24.11.19",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:33:58.287Z",
+      "snapshot": {
+        "viewCount": 69041,
+        "starScore": 9.03,
+        "episodeCount": 8,
+        "cadenceDays": 7,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 834033,
+      "officialOpenDate": "2024-11-29"
+    },
+    "828713": {
+      "status": "ended",
+      "note": "네이버에서 '써니 써프' 연재로 일시 중단",
+      "titleName": "자각몽",
+      "subtitle": "<써니서프> 정식연재 공지",
+      "noticeDate": "26.03.17",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:38:44.245Z",
+      "snapshot": {
+        "viewCount": 165794,
+        "starScore": 9.52,
+        "episodeCount": 32,
+        "cadenceDays": 14,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "830318": {
+      "status": "confirmed",
+      "note": "네이버 정식 연재",
+      "titleName": "파리 여왕",
+      "subtitle": "정식 연재 공지",
+      "noticeDate": "25.06.02",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:27:49.914Z",
+      "snapshot": {
+        "viewCount": 59159,
+        "starScore": 9.42,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
     "830341": {
       "status": "remake",
       "note": "리메이크",
@@ -801,6 +1861,76 @@
         "cadenceDays": 37,
         "growthPct": 2.4,
         "trackedDays": 28
+      }
+    },
+    "830358": {
+      "status": "award",
+      "note": "우수상 ",
+      "titleName": "소녀바둑",
+      "subtitle": "수상 감사합니다.",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:44:02.813Z",
+      "snapshot": {
+        "viewCount": 69844,
+        "starScore": 9.42,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      },
+      "officialTitleId": 842839,
+      "officialOpenDate": "2025-09-20"
+    },
+    "830384": {
+      "status": "ended",
+      "note": "연재 중단",
+      "titleName": "동생 죽이기",
+      "subtitle": "공지",
+      "noticeDate": "25.12.19",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:16:54.444Z",
+      "snapshot": {
+        "viewCount": 169846,
+        "starScore": 9.21,
+        "episodeCount": 15,
+        "cadenceDays": 8.5,
+        "growthPct": 0.6,
+        "trackedDays": 28
+      }
+    },
+    "830416": {
+      "status": "none",
+      "note": "입상 실패 후 후기",
+      "titleName": "불꽃처럼 빛나는 [글 뭉티기 / 그림 전갱이]",
+      "subtitle": "후기",
+      "noticeDate": "24.11.24",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:49:07.013Z",
+      "snapshot": {
+        "viewCount": 8141,
+        "starScore": 9.5,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.2,
+        "trackedDays": 16
+      }
+    },
+    "830475": {
+      "status": "ended",
+      "note": "입상 실패 후 후기",
+      "titleName": "너의 홍조가 유죄!",
+      "subtitle": "공모전 후기",
+      "noticeDate": "24.11.25",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:48:40.084Z",
+      "snapshot": {
+        "viewCount": 13730,
+        "starScore": 9.62,
+        "episodeCount": 4,
+        "cadenceDays": 26,
+        "growthPct": 0.2,
+        "trackedDays": 20
       }
     },
     "830478": {
@@ -821,6 +1951,23 @@
       },
       "officialTitleId": 848576,
       "officialOpenDate": "2026-03-26"
+    },
+    "830490": {
+      "status": "ended",
+      "note": "지최대 입상 실패 후기",
+      "titleName": "싸이코 B팀",
+      "subtitle": "후기",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:55:21.485Z",
+      "snapshot": {
+        "viewCount": 6929,
+        "starScore": 8.68,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
     },
     "830504": {
       "status": "none",
@@ -858,6 +2005,40 @@
       "officialOpenDate": "2025-05-20",
       "officialTitleId": 838948
     },
+    "830577": {
+      "status": "none",
+      "note": "'남의 남자' 카카오 페이지 연재",
+      "titleName": "내 마눌님은 아이돌",
+      "subtitle": "공지",
+      "noticeDate": "25.03.31",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:30:07.961Z",
+      "snapshot": {
+        "viewCount": 26211,
+        "starScore": 9.52,
+        "episodeCount": 5,
+        "cadenceDays": 37.5,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "830626": {
+      "status": "ended",
+      "note": "",
+      "titleName": "삼촌이 애야?!",
+      "subtitle": "공지사항",
+      "noticeDate": "26.06.16",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:44:30.428Z",
+      "snapshot": {
+        "viewCount": 92000,
+        "starScore": 8.94,
+        "episodeCount": 9,
+        "cadenceDays": 39.5,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
+    },
     "830682": {
       "status": "award",
       "note": "24 우수상",
@@ -877,6 +2058,25 @@
       "officialTitleId": 842892,
       "officialOpenDate": "2025-09-27"
     },
+    "830709": {
+      "status": "confirmed",
+      "note": "독자픽 선정 ",
+      "titleName": "킬러와 여고생 그리고 개",
+      "subtitle": "정식연재 공지",
+      "noticeDate": "25.01.07",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:23:09.249Z",
+      "snapshot": {
+        "viewCount": 13882,
+        "starScore": 8.88,
+        "episodeCount": 5,
+        "cadenceDays": 33.5,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 839282,
+      "officialOpenDate": "2025-05-30"
+    },
     "830720": {
       "status": "none",
       "note": "공모전 도전 후기",
@@ -892,6 +2092,93 @@
         "cadenceDays": 24,
         "growthPct": 12.2,
         "trackedDays": 22
+      }
+    },
+    "830743": {
+      "status": "award",
+      "note": "우수상 ",
+      "titleName": "좀비 대 조폭",
+      "subtitle": "수상 후기",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:34:26.046Z",
+      "snapshot": {
+        "viewCount": 26340,
+        "starScore": 9.43,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "830954": {
+      "status": "remake",
+      "note": "",
+      "titleName": "망한 아이돌도 A/S가 될까요?",
+      "subtitle": "<리메이크 공지>",
+      "noticeDate": "25.12.04",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:40:40.676Z",
+      "snapshot": {
+        "viewCount": 24302,
+        "starScore": 9.64,
+        "episodeCount": 4,
+        "cadenceDays": 25,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "831029": {
+      "status": "none",
+      "note": "지최대 수상 실패 후기",
+      "titleName": "엑스트라 이닝",
+      "subtitle": "지최대 후기",
+      "noticeDate": "24.11.23",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:43:20.524Z",
+      "snapshot": {
+        "viewCount": 15220,
+        "starScore": 9.56,
+        "episodeCount": 4,
+        "cadenceDays": 23,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
+    "831130": {
+      "status": "award",
+      "note": "우수상",
+      "titleName": "별 거 아니겠지",
+      "subtitle": "오픈 공지",
+      "noticeDate": "25.06.11",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:31:08.895Z",
+      "snapshot": {
+        "viewCount": 158045,
+        "starScore": 9.88,
+        "episodeCount": 5,
+        "cadenceDays": 0,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialOpenDate": "2025-06-11",
+      "officialTitleId": 839544
+    },
+    "831250": {
+      "status": "none",
+      "note": "공모전 도전 후기",
+      "titleName": "평범한 나라의 앨리스",
+      "subtitle": "+후기&감사인사",
+      "noticeDate": "24.11.27",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:48:31.498Z",
+      "snapshot": {
+        "viewCount": 13373,
+        "starScore": 9.62,
+        "episodeCount": 4,
+        "cadenceDays": 25,
+        "growthPct": 0.3,
+        "trackedDays": 28
       }
     },
     "831252": {
@@ -980,6 +2267,25 @@
         "trackedDays": 25
       }
     },
+    "831472": {
+      "status": "confirmed",
+      "note": "공모전 수상 실패 후 컨텍",
+      "titleName": "좀비떼로",
+      "subtitle": "오픈 공지",
+      "noticeDate": "25.07.13",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:10:21.833Z",
+      "snapshot": {
+        "viewCount": 23570,
+        "starScore": 9.5,
+        "episodeCount": 5,
+        "cadenceDays": 58.5,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      },
+      "officialTitleId": 840597,
+      "officialOpenDate": "2025-07-14"
+    },
     "831554": {
       "status": "confirmed",
       "note": "미분류",
@@ -1017,6 +2323,23 @@
       },
       "officialTitleId": 849079,
       "officialOpenDate": "2026-03-27"
+    },
+    "831677": {
+      "status": "none",
+      "note": "지최대 후기",
+      "titleName": "어깨걸이 극락타임!",
+      "subtitle": "지최대 후기",
+      "noticeDate": "24.11.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:54:20.667Z",
+      "snapshot": {
+        "viewCount": 7815,
+        "starScore": 9.35,
+        "episodeCount": 4,
+        "cadenceDays": 24,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      }
     },
     "831923": {
       "status": "ended",
@@ -1071,6 +2394,23 @@
       "officialTitleId": 844981,
       "officialOpenDate": "2025-11-19"
     },
+    "831948": {
+      "status": "confirmed",
+      "note": "공모전 작품 수상 실패 컨택 후 연재 추정",
+      "titleName": "미로에 빠진 사랑",
+      "subtitle": "연재 공지",
+      "noticeDate": "25.04.30",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T01:48:16.294Z",
+      "snapshot": {
+        "viewCount": 120544,
+        "starScore": 9.88,
+        "episodeCount": 4,
+        "cadenceDays": 23,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "833152": {
       "status": "confirmed",
       "note": "8월 챌린저스 선정",
@@ -1087,6 +2427,42 @@
         "trackedDays": 28
       },
       "updatedAt": "2026-10-07T04:52:37.096Z"
+    },
+    "833625": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "딜레마 존",
+      "subtitle": "한 손으로 쓰는 휴재공지",
+      "noticeDate": "25.01.13",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:47:00.062Z",
+      "snapshot": {
+        "viewCount": 71664,
+        "starScore": 9.62,
+        "episodeCount": 9,
+        "cadenceDays": 9.5,
+        "growthPct": 0.2,
+        "trackedDays": 28
+      }
+    },
+    "833852": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "수사중 연애금지!",
+      "subtitle": "정식 연재 공지",
+      "noticeDate": "26.01.07",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:45:33.064Z",
+      "snapshot": {
+        "viewCount": 66929,
+        "starScore": 8.95,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 0.4,
+        "trackedDays": 28
+      },
+      "officialTitleId": 846335,
+      "officialOpenDate": "2026-01-14"
     },
     "834235": {
       "status": "confirmed",
@@ -1124,6 +2500,23 @@
         "trackedDays": 28
       }
     },
+    "835719": {
+      "status": "none",
+      "note": "",
+      "titleName": "부달조 일상툰",
+      "subtitle": "54화. 공지사항",
+      "noticeDate": "26.04.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:37:30.741Z",
+      "snapshot": {
+        "viewCount": 193425,
+        "starScore": 9.5,
+        "episodeCount": 56,
+        "cadenceDays": 7,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      }
+    },
     "836666": {
       "status": "ended",
       "note": "셍활고로 중단",
@@ -1138,6 +2531,23 @@
         "episodeCount": 61,
         "cadenceDays": null,
         "growthPct": 1.6,
+        "trackedDays": 28
+      }
+    },
+    "837359": {
+      "status": "none",
+      "note": "",
+      "titleName": "그녀도 외계인?",
+      "subtitle": "사죄문 공지",
+      "noticeDate": "26.04.21",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:17:53.954Z",
+      "snapshot": {
+        "viewCount": 35374,
+        "starScore": 9.52,
+        "episodeCount": 10,
+        "cadenceDays": 13,
+        "growthPct": 0.6,
         "trackedDays": 28
       }
     },
@@ -1176,6 +2586,25 @@
         "growthPct": 0.7,
         "trackedDays": 28
       }
+    },
+    "838007": {
+      "status": "confirmed",
+      "note": "독자픽 선정 ",
+      "titleName": "불순물 연애",
+      "subtitle": "연재공지",
+      "noticeDate": "25.04.23",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:29:33.825Z",
+      "snapshot": {
+        "viewCount": 31242,
+        "starScore": 8.09,
+        "episodeCount": 4,
+        "cadenceDays": 8,
+        "growthPct": 0.5,
+        "trackedDays": 28
+      },
+      "officialTitleId": 842335,
+      "officialOpenDate": "2025-09-01"
     },
     "838173": {
       "status": "confirmed",
@@ -1302,6 +2731,40 @@
       "officialOpenDate": "2026-05-26",
       "officialTitleId": 851029
     },
+    "839451": {
+      "status": "none",
+      "note": "감사 인사",
+      "titleName": "박멸맨",
+      "subtitle": "공지",
+      "noticeDate": "25.09.01",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:38:34.931Z",
+      "snapshot": {
+        "viewCount": 5866,
+        "starScore": 8.68,
+        "episodeCount": 6,
+        "cadenceDays": 17,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
+    "839662": {
+      "status": "remake",
+      "note": "2026 하반기",
+      "titleName": "개같이 사랑해라",
+      "subtitle": "공지",
+      "noticeDate": "25.11.14",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:37:49.082Z",
+      "snapshot": {
+        "viewCount": 27237,
+        "starScore": 8.12,
+        "episodeCount": 12,
+        "cadenceDays": 13,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
+    },
     "839665": {
       "status": "none",
       "note": "휴재",
@@ -1316,6 +2779,23 @@
         "episodeCount": 103,
         "cadenceDays": 3.5,
         "growthPct": 21.7,
+        "trackedDays": 28
+      }
+    },
+    "839876": {
+      "status": "remake",
+      "note": "",
+      "titleName": "서리태",
+      "subtitle": "리메이크 공지",
+      "noticeDate": "25.09.01",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:54:59.298Z",
+      "snapshot": {
+        "viewCount": 32033,
+        "starScore": 9.35,
+        "episodeCount": 13,
+        "cadenceDays": 7,
+        "growthPct": 0.2,
         "trackedDays": 28
       }
     },
@@ -1427,6 +2907,23 @@
       "updatedAt": "2026-10-07T04:53:25.806Z",
       "officialTitleId": 854519,
       "officialOpenDate": "2026-09-18"
+    },
+    "841382": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "몽중언",
+      "subtitle": "베스트도전 & 휴재공지",
+      "noticeDate": "25.08.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T07:39:11.037Z",
+      "snapshot": {
+        "viewCount": 6801,
+        "starScore": 8.02,
+        "episodeCount": 5,
+        "cadenceDays": 7,
+        "growthPct": 0.3,
+        "trackedDays": 28
+      }
     },
     "842010": {
       "status": "none",
@@ -1600,6 +3097,23 @@
       "officialOpenDate": "2026-10-06",
       "officialTitleId": 855591
     },
+    "849417": {
+      "status": "none",
+      "note": "시즌 1 후기",
+      "titleName": "블랙벨트",
+      "subtitle": "블랙밸트 시즌1 후기",
+      "noticeDate": "26.06.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:15:20.434Z",
+      "snapshot": {
+        "viewCount": 16691,
+        "starScore": 8.61,
+        "episodeCount": 14,
+        "cadenceDays": 7,
+        "growthPct": 0.7,
+        "trackedDays": 28
+      }
+    },
     "850234": {
       "status": "none",
       "note": "키워드 '오픈'이 걸림",
@@ -1665,6 +3179,23 @@
         "episodeCount": 6,
         "cadenceDays": 10,
         "growthPct": 13,
+        "trackedDays": 28
+      }
+    },
+    "851646": {
+      "status": "ended",
+      "note": "지원 사업 당첨돼서 일시 중단",
+      "titleName": "우주인의 집",
+      "subtitle": "휴재공지",
+      "noticeDate": "26.07.22",
+      "checkedAt": "2026-10-08",
+      "updatedAt": "2026-10-08T00:23:27.624Z",
+      "snapshot": {
+        "viewCount": 6742,
+        "starScore": 8.18,
+        "episodeCount": 4,
+        "cadenceDays": 16,
+        "growthPct": 0.6,
         "trackedDays": 28
       }
     },
