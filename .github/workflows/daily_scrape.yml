@@ -13,6 +13,11 @@ on:
 permissions:
   contents: write  # 자동 커밋/푸시를 위해 쓰기 권한 명시
 
+# 지난 회차 훑기 작업(scan_past_notices.yml)과 동시에 돌면 같은 파일을 덮어쓸 수 있어서, 한 번에 하나만 돌도록 묶음
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
 jobs:
   scrape:
     # ubuntu-latest는 2026-10-19~11-19 사이에 Ubuntu 26.04로 단계적으로 바뀜(GitHub 공지).

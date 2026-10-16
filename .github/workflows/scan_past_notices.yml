@@ -1,0 +1,57 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/scan_past_notices.yml
+# 지난 회차 제목 전체를 훑어 공지 후보를 찾는 작업입니다. 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다.
+# (처음 한 번은 40분 안팎 걸립니다. 중간에 끊겨도 다시 실행하면 이어서 합니다.)
+
+name: Scan Past Notices
+
+on:
+  workflow_dispatch:
+    inputs:
+      rescan:
+        description: "이미 훑은 작품도 다시 훑기 (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+# 매일 도는 수집 작업과 동시에 돌면 같은 파일을 서로 덮어쓸 수 있어서, 한 번에 하나만 돌도록 묶음
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v6
+
+      - name: Python 설치
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: 의존성 설치
+        run: pip install requests numpy scipy
+
+      - name: 지난 회차 훑기
+        run: |
+          if [ "${{ github.event.inputs.rescan }}" = "true" ]; then
+            python scan_past_notices.py --rescan
+          else
+            python scan_past_notices.py
+          fi
+
+      - name: 사이트 빌드 (공지 후보 반영)
+        run: python build_site.py
+
+      - name: 결과 커밋 및 푸시
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ scouting_desk_mockup.html
+          git diff --quiet --cached || git commit -m "chore: 지난 회차 공지 후보 훑기 $(date +'%Y-%m-%d')"
+          git pull --rebase
+          git push

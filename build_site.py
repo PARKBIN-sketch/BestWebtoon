@@ -27,6 +27,7 @@ LABELS_PATH = Path("data") / "labels.json"
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
+PAST_NOTICES_PATH = Path("data") / "past_notices.json"     # scan_past_notices.py가 만드는 "지난 회차 공지 후보" 기록
 SITE_PATH = Path("scouting_desk_mockup.html")
 
 
@@ -143,6 +144,18 @@ def load_official_tracking() -> dict:
     return data if isinstance(data, dict) else {}
 
 
+def load_past_notices() -> dict:
+    """지난 회차 제목 훑기 결과. 없거나 깨졌으면 빈 값."""
+    if not PAST_NOTICES_PATH.exists():
+        return {"scanned": {}}
+    try:
+        data = json.loads(PAST_NOTICES_PATH.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {"scanned": {}}
+    scanned = data.get("scanned") if isinstance(data, dict) else None
+    return {"scanned": scanned if isinstance(scanned, dict) else {}}
+
+
 def to_js_literal(obj) -> str:
     """JSON을 <script> 안에 안전하게 넣을 문자열로 만듭니다 (</script> 방지)."""
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
@@ -225,8 +238,17 @@ def main() -> None:
     else:
         print("[build_site] ANALYSIS 선언부를 못 찾아 분석 결과 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    past = load_past_notices()
+    past_match = re.compile(r"  const PAST_NOTICES = \{.*?\};\n", re.DOTALL).search(new_html)
+    if past_match:
+        new_html = (new_html[:past_match.start()]
+                    + f"  const PAST_NOTICES = {to_js_literal(past)};\n"
+                    + new_html[past_match.end():])
+    else:
+        print("[build_site] PAST_NOTICES 선언부를 못 찾아 지난 회차 공지 후보 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 지난 회차 훑은 작품 {len(past["scanned"])}개, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
