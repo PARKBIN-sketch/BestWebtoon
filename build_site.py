@@ -53,7 +53,7 @@ def build_real_data(history: dict) -> list[dict]:
             "authorNames": entry.get("authorNames") or [],
             "genre": entry.get("genre"),
             "viewCount": view_history[-1] if view_history else 0,
-            "starScore": round(entry.get("starScore") or 0, 2),
+            "starScore": round(entry.get("starScore") or 0, 5),   # 분석이 파이썬 계산과 같은 값을 쓰도록 소수점 5자리까지 보존 (화면에는 toFixed로 표시)
             "up": entry.get("up", False),
             "bestChallengeLevelUp": entry.get("bestChallengeLevelUp", False),
             "finish": entry.get("finish"),
@@ -74,6 +74,7 @@ def build_real_data(history: dict) -> list[dict]:
             "favoriteValues": entry.get("favoriteValues") or [],
             "keywords": entry.get("keywords", []),
             "updateRank": entry.get("updateRank"),
+            "allUpdateRank": entry.get("allUpdateRank"),
             "viewHistory": view_history,
             "viewDates": view_dates,
             "growthPct": growth_pct,

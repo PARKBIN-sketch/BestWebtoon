@@ -125,6 +125,8 @@ def compute(history: dict, reference: dict) -> dict:
         "referenceSource": (reference or {}).get("source"),
         "alpha": ALPHA,
         "groups": group_counts,
+        # 사이트가 브라우저에서 다시 계산할 때 쓰는 기준 사례 [작품 번호, 그룹, 관심 수]
+        "cases": [[c["titleId"], c["group"], c.get("favorite")] for c in cases],
         "compared": len(rows),
         "comparedOfficial": sum(y for y, _ in rows),
         "indicators": [],

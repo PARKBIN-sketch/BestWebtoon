@@ -206,17 +206,43 @@ def collect_snapshot() -> list[dict]:
     if INCLUDE_ALL_TAB:
         genres_to_crawl.append(None)
 
+    # '전체' 탭을 먼저 읽어서 전체 최근 업데이트순 순위(allUpdateRank)를 기록함.
+    # updateRank는 "그 장르 안에서의" 순위라서, 장르가 섞인 전체 화면을 정렬하는 데는 쓸 수 없음
+    # (각 장르 1위끼리 먼저 나열되는 문제). 읽은 페이지는 아래 '전체' 탭 순회에서 그대로 재사용함.
+    all_rank: dict[int, int] = {}
+    all_pages: dict[int, list[dict]] = {}
+    if INCLUDE_ALL_TAB:
+        position = 0
+        for page in range(1, MAX_PAGES_PER_GENRE + 1):
+            try:
+                items = fetch_genre_page(None, page)
+            except requests.RequestException as exc:
+                print(f"[경고] ALL(순위용) page={page} 요청 실패: {exc}")
+                break
+            if not items:
+                break
+            all_pages[page] = items
+            for item in items:
+                position += 1
+                all_rank.setdefault(item.get("titleId"), position)
+            time.sleep(REQUEST_DELAY_SEC)
+
     for genre in genres_to_crawl:
         genre_label = genre or "ALL"
         for page in range(1, MAX_PAGES_PER_GENRE + 1):
-            try:
-                items = fetch_genre_page(genre, page)
-            except requests.RequestException as exc:
-                print(f"[경고] {genre_label} page={page} 요청 실패: {exc}")
-                break
+            if genre is None:
+                items = all_pages.get(page)      # 미리 읽어 둔 '전체' 탭 페이지 (없으면 거기서 끝)
+                if not items:
+                    break
+            else:
+                try:
+                    items = fetch_genre_page(genre, page)
+                except requests.RequestException as exc:
+                    print(f"[경고] {genre_label} page={page} 요청 실패: {exc}")
+                    break
 
-            if not items:
-                break
+                if not items:
+                    break
 
             for item in items:
                 title_id = item.get("titleId")
@@ -238,6 +264,7 @@ def collect_snapshot() -> list[dict]:
                         "webtoonLevelCode": item.get("webtoonLevelCode"),
                         "finish": item.get("finish"),
                         "updateRank": rank_counters[genre_label],  # 이 장르 안에서 최근 업데이트순 몇 위인지
+                        "allUpdateRank": all_rank.get(title_id),    # '전체' 탭 기준 최근 업데이트순 몇 위인지 (상위 150위 밖이면 None)
                         "thumbnailUrl": item.get("thumbnailUrl"),  # 목록 API에 이미 포함된 썸네일 (API 호출 추가 없음)
                         "titleUrl": TITLE_URL_TEMPLATE.format(title_id=title_id),  # 클릭 시 이동할 상세페이지
                         # 아래 필드들은 딥체크 대상이 됐을 때만 채워짐 (기본은 비어있음)
@@ -790,7 +817,7 @@ MAX_HISTORY_DAYS = 120  # 파일이 무한정 커지지 않도록 최근 120일�
 # 목록 API에서 매일 새로 받는 값 → 매일 최신 값으로 덮어씀
 DAILY_FIELDS = [
     "titleName", "author", "authorNames", "genre", "webtoonLevelCode", "finish",
-    "thumbnailUrl", "titleUrl", "updateRank", "starScore", "up", "bestChallengeLevelUp", "signals",
+    "thumbnailUrl", "titleUrl", "updateRank", "allUpdateRank", "starScore", "up", "bestChallengeLevelUp", "signals",
 ]
 # 상세 확인(딥체크)을 한 날에만 새로 채워지는 값 → 오늘 확인을 안 한 작품은 이전 값을 그대로 보존함.
 # (이전 버전은 이 값들도 매일 덮어써서, 오늘 확인 안 한 작품의 상세 정보가 빈 값으로 지워지고 있었음)
@@ -888,6 +915,12 @@ def update_history(history: dict[str, dict], snapshot: list[dict]) -> None:
         if is_hiatus(entry):
             signals.append("hiatus_suspect")
         entry["signals"] = signals
+
+    # 오늘 '전체' 탭 목록에 없는 작품은 예전 순위가 남아 있으면 안 됨 (순서가 틀어짐)
+    in_today = {str(item["titleId"]) for item in snapshot}
+    for key, entry in history.items():
+        if key not in in_today:
+            entry["allUpdateRank"] = None
 
     print(f"[누적이력] history.json 갱신 완료 — 누적 작품 수 {len(history)}개, "
           f"상세 정보 보유 {sum(1 for e in history.values() if e.get('episodeCount') is not None)}개")
