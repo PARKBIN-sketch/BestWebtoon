@@ -803,8 +803,8 @@
   {
    "key": "viewsPerEp",
    "label": "화당 조회수",
-   "medianOfficial": 15786.88,
-   "medianNone": 8566.2,
+   "medianOfficial": 15792.5,
+   "medianNone": 8585.6,
    "ratio": 1.84,
    "rho": 0.17,
    "p": 0.057,
@@ -817,8 +817,8 @@
   {
    "key": "views",
    "label": "누적 조회수",
-   "medianOfficial": 70537.5,
-   "medianNone": 56433.5,
+   "medianOfficial": 70582.0,
+   "medianNone": 56476.0,
    "ratio": 1.25,
    "rho": 0.09,
    "p": 0.353,
@@ -863,7 +863,7 @@
    "medianNone": 6.0,
    "ratio": 0.83,
    "rho": -0.09,
-   "p": 0.341,
+   "p": 0.339,
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -874,11 +874,11 @@
    "key": "lastNo",
    "label": "마지막 회차 번호 (삭제 영향 적음)",
    "medianOfficial": 6.0,
-   "medianNone": 9.0,
-   "ratio": 0.67,
+   "medianNone": 10.5,
+   "ratio": 0.57,
    "rho": -0.08,
-   "p": 0.536,
-   "n": 69,
+   "p": 0.471,
+   "n": 82,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
    "note": "거의 차이 없음",
@@ -895,10 +895,10 @@
   "rows": [
    {
     "label": "별점",
-    "or": 2.1,
+    "or": 2.09,
     "lo": 0.78,
-    "hi": 5.61,
-    "p": 0.14,
+    "hi": 5.6,
+    "p": 0.141,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
@@ -906,7 +906,7 @@
     "or": 0.92,
     "lo": 0.46,
     "hi": 1.84,
-    "p": 0.821,
+    "p": 0.822,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
