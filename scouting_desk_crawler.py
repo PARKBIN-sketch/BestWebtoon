@@ -700,7 +700,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
         info = cache.get(item["titleId"])
         if not item["signals"]:
             # 다른 트랙이 이미 신호를 붙인 작품이면 값을 덮어쓰지 않음
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount"):
+            for key in DEEP_COPY_KEYS:
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
@@ -804,7 +804,7 @@ def check_fresh_updates(today_snapshot: list[dict], cache: DeepInfoCache) -> Non
     for item in candidates:
         info = cache.get(item["titleId"])
         if not item["signals"]:
-            for key in ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount"):
+            for key in DEEP_COPY_KEYS:
                 if info.get(key) is not None:
                     item[key] = info[key]
         maybe_flag_hiatus(item)
