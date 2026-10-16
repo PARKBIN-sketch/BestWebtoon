@@ -338,6 +338,7 @@ def fetch_deep_info(title_id: int) -> dict:
         "episodeCount": None, "cadenceDays": None,
         "latestSubtitle": None, "latestDate": None, "keywords": [],
         "firstEpisodeDate": None, "posterThumbnailUrl": None, "episodeDates": None,
+        "latestNo": None, "firstNo": None,
     }
 
     first_url = EPISODE_LIST_URL_TEMPLATE.format(title_id=title_id, page=1)
@@ -355,6 +356,9 @@ def fetch_deep_info(title_id: int) -> dict:
 
     # 1페이지(sort=ASC)의 첫 항목이 곧 1화라서, 추가 호출 없이 연재 시작일을 얻을 수 있음
     first_episode_date = episodes[0].get("serviceDateDescription") if episodes else None
+    # 회차 번호(no): 작가가 글을 지워도 번호는 건너뛰기만 할 뿐 되돌아가지 않으므로,
+    # 마지막 회차 번호는 "남아 있는 회차 수"(episodeCount)보다 삭제에 덜 흔들리는 분량 지표임.
+    first_no = episodes[0].get("no") if episodes else None
 
     if total_pages and total_pages > 1:
         time.sleep(0.5)
@@ -367,7 +371,7 @@ def fetch_deep_info(title_id: int) -> dict:
             pass  # 마지막 페이지 조회 실패 시 1페이지 것으로라도 대체
 
     if not episodes:
-        return {**empty, "episodeCount": episode_count, "firstEpisodeDate": first_episode_date}
+        return {**empty, "episodeCount": episode_count, "firstEpisodeDate": first_episode_date, "firstNo": first_no}
 
     latest = episodes[-1]
     return {
@@ -378,6 +382,8 @@ def fetch_deep_info(title_id: int) -> dict:
         "keywords": detect_keywords(latest.get("subtitle")),
         "firstEpisodeDate": first_episode_date,
         "episodeDates": extract_episode_dates(episodes),
+        "latestNo": latest.get("no"),     # 마지막 회차 번호 — 공지 알림에서 해당 회차로 바로 이동할 때도 씀
+        "firstNo": first_no,              # 현존하는 첫 회차 번호
     }
 
 
@@ -449,7 +455,7 @@ def attach_signal(item: dict, signal: str, extra: dict) -> None:
     if signal not in item["signals"]:
         item["signals"].append(signal)
 
-    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount")
+    common_fields = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords", "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount", "latestNo", "firstNo")
     for key in common_fields:
         if extra.get(key) is not None:
             item[key] = extra[key]
@@ -720,7 +726,7 @@ def check_round_robin(today_snapshot: list[dict], cache: DeepInfoCache, state: d
 NOTICE_KEYWORDS = ["공지", "오픈", "감사", "근황", "챌린저스", "확정", "휴재", "완결", "후기", "수상", "정식", "독자픽", "리메이크", "중단"]
 RECENT_NOTICE_DAYS = 30
 DEEP_COPY_KEYS = ("episodeCount", "cadenceDays", "latestSubtitle", "latestDate", "keywords",
-                  "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount")
+                  "firstEpisodeDate", "posterThumbnailUrl", "episodeDates", "favoriteCount", "latestNo", "firstNo")
 
 
 def is_recent_notice(entry: dict) -> bool:
@@ -826,10 +832,12 @@ DEEP_FIELDS = [
     "firstEpisodeDate",     # 현존하는 첫 화 날짜
     "posterThumbnailUrl",   # 세로형 포스터 (오래된 작품은 원래 없음)
     "episodeDates",         # 최근 회차 업로드 날짜 목록(ISO) — 조회수 추이 그래프에서 업로드일 표시
+    "latestNo",             # 마지막 회차 번호 (삭제에 덜 흔들리는 분량 지표 + 공지 확인 링크용)
+    "firstNo",              # 현존하는 첫 회차 번호
     "favoriteCount",        # 관심 수 (누적값) — 날짜별 이력은 favoriteDates/favoriteValues에 따로 쌓임
     "deepCheckedAt",        # 이 상세 값을 확인한 날짜 — 정보가 얼마나 오래됐는지 알 수 있게
 ]
-KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl", "favoriteCount"}   # 조회 실패/없음일 때는 기존 값 유지
+KEEP_IF_NONE = {"firstEpisodeDate", "posterThumbnailUrl", "favoriteCount", "latestNo", "firstNo"}   # 조회 실패/없음일 때는 기존 값 유지
 HISTORY_FIELDS = DAILY_FIELDS + DEEP_FIELDS
 
 

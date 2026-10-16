@@ -69,6 +69,8 @@ def build_real_data(history: dict) -> list[dict]:
             "posterThumbnailUrl": entry.get("posterThumbnailUrl"),
             "deepCheckedAt": entry.get("deepCheckedAt"),
             "episodeDates": entry.get("episodeDates"),
+            "latestNo": entry.get("latestNo"),
+            "firstNo": entry.get("firstNo"),
             "favoriteCount": entry.get("favoriteCount"),
             "favoriteDates": entry.get("favoriteDates") or [],
             "favoriteValues": entry.get("favoriteValues") or [],

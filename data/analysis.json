@@ -858,7 +858,7 @@
   },
   {
    "key": "episodes",
-   "label": "화수",
+   "label": "화수 (남아 있는 회차)",
    "medianOfficial": 5.0,
    "medianNone": 6.0,
    "ratio": 0.83,

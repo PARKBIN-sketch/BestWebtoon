@@ -36,7 +36,8 @@ INDICATORS = [
     ("views", "누적 조회수"),
     ("favorite", "관심 수"),
     ("conversion", "관심 전환율 (관심÷조회수 ×1000)"),
-    ("episodes", "화수"),
+    ("episodes", "화수 (남아 있는 회차)"),
+    ("lastNo", "마지막 회차 번호 (삭제 영향 적음)"),
 ]
 
 
@@ -57,6 +58,7 @@ def metrics_for(entry: dict, favorite):
         "star": star if star else None,
         "views": views if views else None,
         "episodes": eps if eps else None,
+        "lastNo": entry.get("latestNo") or None,
         "viewsPerEp": (views / eps) if views and eps else None,
         "favorite": favorite if favorite else None,
         "conversion": (favorite / views * 1000) if favorite and views else None,
