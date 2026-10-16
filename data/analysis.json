@@ -804,7 +804,7 @@
    "key": "viewsPerEp",
    "label": "화당 조회수",
    "medianOfficial": 15786.88,
-   "medianNone": 8564.4,
+   "medianNone": 8564.8,
    "ratio": 1.84,
    "rho": 0.17,
    "p": 0.057,
@@ -817,8 +817,8 @@
   {
    "key": "views",
    "label": "누적 조회수",
-   "medianOfficial": 70532.0,
-   "medianNone": 56428.5,
+   "medianOfficial": 70535.5,
+   "medianNone": 56431.5,
    "ratio": 1.25,
    "rho": 0.09,
    "p": 0.353,
@@ -869,6 +869,20 @@
    "verdict": "확정 못 함 (우연일 수 있음)",
    "note": "거의 차이 없음",
    "significantCorrected": false
+  },
+  {
+   "key": "lastNo",
+   "label": "마지막 회차 번호 (삭제 영향 적음)",
+   "medianOfficial": 6.0,
+   "medianNone": 8.0,
+   "ratio": 0.75,
+   "rho": -0.06,
+   "p": 0.671,
+   "n": 54,
+   "significant": false,
+   "verdict": "확정 못 함 (우연일 수 있음)",
+   "note": "거의 차이 없음",
+   "significantCorrected": false
   }
  ],
  "logistic": {
@@ -899,14 +913,14 @@
     "label": "관심 전환율 (관심÷조회수 ×1000)",
     "or": 1.53,
     "lo": 0.67,
-    "hi": 3.51,
+    "hi": 3.52,
     "p": 0.317,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    }
   ]
  },
  "significantCount": 1,
- "indicatorCount": 6,
- "alphaCorrected": 0.0083,
+ "indicatorCount": 7,
+ "alphaCorrected": 0.0071,
  "significantCorrectedCount": 0
 }
