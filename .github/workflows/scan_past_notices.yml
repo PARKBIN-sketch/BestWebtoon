@@ -63,3 +63,4 @@ jobs:
             sleep 10
           done
           exit 1
+   # 저장소 이전 (2026-10-21)
