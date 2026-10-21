@@ -53,3 +53,5 @@ jobs:
           git add data/ scouting_desk_mockup.html
           git diff --quiet --cached || git commit -m "chore: 자동 수집 및 사이트 반영 $(date +'%Y-%m-%d')"
           git push
+
+# 저장소 이전 (2026-10-21)
