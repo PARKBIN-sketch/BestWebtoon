@@ -44,14 +44,22 @@ jobs:
             python scan_past_notices.py
           fi
 
-      - name: 사이트 빌드 (공지 후보 반영)
-        run: python build_site.py
-
       - name: 결과 커밋 및 푸시
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ scouting_desk_mockup.html
-          git diff --quiet --cached || git commit -m "chore: 지난 회차 공지 후보 훑기 $(date +'%Y-%m-%d')"
-          git pull --rebase
-          git push
+          # 훑기 결과 파일만 올립니다. 사이트(HTML)는 다음 매일 수집 때 이 파일을 읽어 자동으로 다시 만들어집니다.
+          # (HTML까지 같이 올리면, 훑는 동안 내가 올린 변경과 부딪혀 푸시가 실패할 수 있어서 뺐습니다.)
+          git add data/past_notices.json
+          if git diff --quiet --cached; then
+            echo "올릴 변경이 없습니다."
+            exit 0
+          fi
+          git commit -m "chore: 지난 회차 공지 후보 훑기 $(date +'%Y-%m-%d')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            echo "푸시 실패, 다시 시도 ($i/5)"
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          exit 1
