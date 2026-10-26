@@ -1,10 +1,27 @@
 {
   "version": 3,
-  "exportedAt": "2026-10-26T02:08:37.862Z",
-  "count": 443,
+  "exportedAt": "2026-10-26T06:16:51.065Z",
+  "count": 468,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
+    "15067": {
+      "status": "moved",
+      "note": "이만배",
+      "titleName": "어쩌다 주짓수",
+      "subtitle": "낮부터 열어주세요",
+      "noticeDate": "25.08.04",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:05:02.933Z",
+      "snapshot": {
+        "viewCount": 1282201,
+        "starScore": 9.61222,
+        "episodeCount": 96,
+        "cadenceDays": 21,
+        "growthPct": 0.3,
+        "trackedDays": 47
+      }
+    },
     "33420": {
       "status": "none",
       "note": "웹소설 도전 ",
@@ -92,6 +109,25 @@
         "trackedDays": 35
       }
     },
+    "280629": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "문아(問我)",
+      "subtitle": "웹툰 문아 예고편 - 여행의 시작",
+      "noticeDate": "11.09.06",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:38:08.829Z",
+      "snapshot": {
+        "viewCount": 102603,
+        "starScore": 9.76379,
+        "episodeCount": 10,
+        "cadenceDays": 11,
+        "growthPct": 0.1,
+        "trackedDays": 47
+      },
+      "officialTitleId": 374973,
+      "officialOpenDate": "2011-09-07"
+    },
     "383577": {
       "status": "none",
       "note": "",
@@ -124,6 +160,23 @@
         "cadenceDays": 14,
         "growthPct": 0.1,
         "trackedDays": 35
+      }
+    },
+    "399322": {
+      "status": "award",
+      "note": "2014 슈퍼루키전 드라마부분 수상후 정식 연재, 건강상 문제로 연재 중단 및 배스트도전 자유연재 중",
+      "titleName": "날로 먹는 연애",
+      "subtitle": "7. 열(熱)(1)",
+      "noticeDate": "26.09.22",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:37:21.434Z",
+      "snapshot": {
+        "viewCount": 111530,
+        "starScore": 9.70446,
+        "episodeCount": 9,
+        "cadenceDays": 13.5,
+        "growthPct": 8.7,
+        "trackedDays": 47
       }
     },
     "445450": {
@@ -213,6 +266,23 @@
         "trackedDays": 36
       }
     },
+    "492499": {
+      "status": "none",
+      "note": "곰툰  정식 연재 > 연재 중단 > 출판 펀딩",
+      "titleName": "숨비야울어 & 소여소설",
+      "subtitle": "안녕하세요, 오랜만입니다. (完)",
+      "noticeDate": "23.02.10",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:01:30.738Z",
+      "snapshot": {
+        "viewCount": 1655995,
+        "starScore": 9.79606,
+        "episodeCount": 83,
+        "cadenceDays": 10.5,
+        "growthPct": 0,
+        "trackedDays": 47
+      }
+    },
     "521219": {
       "status": "remake",
       "note": "",
@@ -263,6 +333,25 @@
         "growthPct": 0,
         "trackedDays": 36
       }
+    },
+    "541668": {
+      "status": "award",
+      "note": "'2015 개그 올림피아드' 공모전 당선작(우승작)",
+      "titleName": "203호 저승사자",
+      "subtitle": "ㅁ메리 크리스마스",
+      "noticeDate": "24.12.25",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:03:52.217Z",
+      "snapshot": {
+        "viewCount": 1446923,
+        "starScore": 9.73792,
+        "episodeCount": 58,
+        "cadenceDays": 7,
+        "growthPct": 0,
+        "trackedDays": 47
+      },
+      "officialTitleId": 670140,
+      "officialOpenDate": "2016-01-03"
     },
     "551162": {
       "status": "moved",
@@ -398,6 +487,23 @@
         "cadenceDays": 7,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "619959": {
+      "status": "moved",
+      "note": "탑툰",
+      "titleName": "전염소녀",
+      "subtitle": ":RE-002",
+      "noticeDate": "26.03.27",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T04:58:40.890Z",
+      "snapshot": {
+        "viewCount": 1823436,
+        "starScore": 9.8416,
+        "episodeCount": 23,
+        "cadenceDays": 14,
+        "growthPct": 0,
+        "trackedDays": 47
       }
     },
     "620219": {
@@ -640,6 +746,23 @@
         "cadenceDays": 11,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "648310": {
+      "status": "moved",
+      "note": "투믹스/ 카카오페이지",
+      "titleName": "안즈",
+      "subtitle": "안녕하세요",
+      "noticeDate": "25.08.08",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:54:09.494Z",
+      "snapshot": {
+        "viewCount": 124340,
+        "starScore": 9.72238,
+        "episodeCount": 4,
+        "cadenceDays": 78,
+        "growthPct": 0.5,
+        "trackedDays": 47
       }
     },
     "650919": {
@@ -949,6 +1072,23 @@
         "trackedDays": 35
       }
     },
+    "699830": {
+      "status": "none",
+      "note": "<이 무슨 대자연인가> 정신 연재로 휴재",
+      "titleName": "졸렬☆다이나믹",
+      "subtitle": "좀 진짜 너무 옛날에~",
+      "noticeDate": "25.08.31",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:40:50.449Z",
+      "snapshot": {
+        "viewCount": 4568071,
+        "starScore": 9.90412,
+        "episodeCount": 66,
+        "cadenceDays": 62,
+        "growthPct": 0.8,
+        "trackedDays": 47
+      }
+    },
     "701214": {
       "status": "confirmed",
       "note": "",
@@ -1019,6 +1159,23 @@
         "trackedDays": 36
       }
     },
+    "704098": {
+      "status": "moved",
+      "note": "버프툰",
+      "titleName": "할짝 심리학",
+      "subtitle": "이벤트 당첨자 발표!",
+      "noticeDate": "20.12.26",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:05:55.960Z",
+      "snapshot": {
+        "viewCount": 1145430,
+        "starScore": 9.87747,
+        "episodeCount": 38,
+        "cadenceDays": 7,
+        "growthPct": 0,
+        "trackedDays": 47
+      }
+    },
     "706120": {
       "status": "ended",
       "note": "완결",
@@ -1085,6 +1242,23 @@
         "cadenceDays": 191,
         "growthPct": 0.6,
         "trackedDays": 36
+      }
+    },
+    "708497": {
+      "status": "moved",
+      "note": "리디 북스",
+      "titleName": "쉼터에 살았다",
+      "subtitle": "차기작 예고",
+      "noticeDate": "24.04.03",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T04:59:05.309Z",
+      "snapshot": {
+        "viewCount": 1820742,
+        "starScore": 9.88929,
+        "episodeCount": 40,
+        "cadenceDays": 9,
+        "growthPct": 0,
+        "trackedDays": 47
       }
     },
     "709438": {
@@ -1384,6 +1558,25 @@
         "trackedDays": 35
       }
     },
+    "720220": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "수영만화일기",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T04:58:02.835Z",
+      "snapshot": {
+        "viewCount": 1924073,
+        "starScore": 9.83582,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0,
+        "trackedDays": 47
+      },
+      "officialTitleId": 768534,
+      "officialOpenDate": "2021-03-21"
+    },
     "723990": {
       "status": "ended",
       "note": "",
@@ -1416,6 +1609,23 @@
         "cadenceDays": 7,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "725931": {
+      "status": "moved",
+      "note": "만화경 ",
+      "titleName": "마롱의 마카롱",
+      "subtitle": "연재시작!",
+      "noticeDate": "22.01.06",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:56:39.653Z",
+      "snapshot": {
+        "viewCount": 1124306,
+        "starScore": 9.85745,
+        "episodeCount": 25,
+        "cadenceDays": 47.5,
+        "growthPct": 0,
+        "trackedDays": 47
       }
     },
     "726223": {
@@ -1539,6 +1749,23 @@
         "trackedDays": 36
       }
     },
+    "732504": {
+      "status": "moved",
+      "note": "만화경",
+      "titleName": "바다의 끝에는 언제나 그 아이들이 있었다.",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:53:47.016Z",
+      "snapshot": {
+        "viewCount": 155640,
+        "starScore": 9.87831,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0.7,
+        "trackedDays": 47
+      }
+    },
     "733303": {
       "status": "confirmed",
       "note": "컨택 후 연재  ",
@@ -1643,6 +1870,23 @@
         "trackedDays": 28
       }
     },
+    "736368": {
+      "status": "moved",
+      "note": "만화경 ",
+      "titleName": "별이 내린 여름날",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:54:34.238Z",
+      "snapshot": {
+        "viewCount": 81126,
+        "starScore": 9.755,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0.3,
+        "trackedDays": 47
+      }
+    },
     "737419": {
       "status": "ended",
       "note": "",
@@ -1709,6 +1953,23 @@
         "cadenceDays": 7,
         "growthPct": 0.1,
         "trackedDays": 35
+      }
+    },
+    "740498": {
+      "status": "moved",
+      "note": "리디, 원스토어 (매니지먼트사의 폐업으로 연재 중단)",
+      "titleName": "깜빡깜빡",
+      "subtitle": "!![깜빡깜빡] 반짝이 단행본 수요조사!!",
+      "noticeDate": "25.12.04",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:49:56.871Z",
+      "snapshot": {
+        "viewCount": 2289834,
+        "starScore": 9.89601,
+        "episodeCount": 70,
+        "cadenceDays": 122,
+        "growthPct": 0.1,
+        "trackedDays": 47
       }
     },
     "740571": {
@@ -2020,6 +2281,23 @@
       },
       "officialOpenDate": "2021-09-18"
     },
+    "757738": {
+      "status": "ended",
+      "note": "",
+      "titleName": "사장님은 떡뽀끼!",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:51:49.511Z",
+      "snapshot": {
+        "viewCount": 623926,
+        "starScore": 9.65872,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0,
+        "trackedDays": 3
+      }
+    },
     "758264": {
       "status": "ended",
       "note": "'운명해주세요' 연재 중",
@@ -2290,6 +2568,23 @@
         "cadenceDays": 7,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "773477": {
+      "status": "moved",
+      "note": "만화경 ",
+      "titleName": "매일의 선물",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:54:21.742Z",
+      "snapshot": {
+        "viewCount": 88856,
+        "starScore": 9.86264,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0,
+        "trackedDays": 47
       }
     },
     "773929": {
@@ -2619,6 +2914,23 @@
         "trackedDays": 28
       }
     },
+    "791587": {
+      "status": "moved",
+      "note": "올툰",
+      "titleName": "도개걸윷모",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:53:31.741Z",
+      "snapshot": {
+        "viewCount": 161781,
+        "starScore": 9.61175,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0.1,
+        "trackedDays": 47
+      }
+    },
     "791830": {
       "status": "ended",
       "note": "포텐업 작품, 아주 사적인 영역 연재 중",
@@ -2706,6 +3018,23 @@
       "officialTitleId": 807314,
       "officialOpenDate": "2023-03-13"
     },
+    "793248": {
+      "status": "moved",
+      "note": "이만배",
+      "titleName": "매우의 방콕 생활일기",
+      "subtitle": "[특별편 1] 아무도 모른다",
+      "noticeDate": "26.10.04",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:52:00.855Z",
+      "snapshot": {
+        "viewCount": 367843,
+        "starScore": 9.80329,
+        "episodeCount": 29,
+        "cadenceDays": 67,
+        "growthPct": 0.9,
+        "trackedDays": 22
+      }
+    },
     "793451": {
       "status": "ended",
       "note": "<구제불능 천사> 포스타입 연재로 중단 ",
@@ -2789,6 +3118,23 @@
         "cadenceDays": null,
         "growthPct": 0.5,
         "trackedDays": 17
+      }
+    },
+    "796167": {
+      "status": "moved",
+      "note": "이만배",
+      "titleName": "아빠를 위하여",
+      "subtitle": "<아빠를 위하여>-텃밭이야기 연재합니다^^",
+      "noticeDate": "23.04.05",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:41:05.204Z",
+      "snapshot": {
+        "viewCount": 2802324,
+        "starScore": 9.89468,
+        "episodeCount": 82,
+        "cadenceDays": 178,
+        "growthPct": 0,
+        "trackedDays": 47
       }
     },
     "797703": {
@@ -4175,6 +4521,23 @@
       "officialTitleId": 834733,
       "officialOpenDate": "2024-12-15"
     },
+    "811444": {
+      "status": "moved",
+      "note": "알라딘(투 비 컨티뉴드 )",
+      "titleName": "살인결재",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:56:16.404Z",
+      "snapshot": {
+        "viewCount": 10641,
+        "starScore": 8.47881,
+        "episodeCount": null,
+        "cadenceDays": null,
+        "growthPct": 0.3,
+        "trackedDays": 47
+      }
+    },
     "813112": {
       "status": "moved",
       "note": "올툰 ",
@@ -4949,6 +5312,25 @@
       },
       "officialTitleId": 848874,
       "officialOpenDate": "2026-03-19"
+    },
+    "825061": {
+      "status": "award",
+      "note": "2024 지상최대공모전 웹툰 부문 1기 우수상",
+      "titleName": "클리셰 클럽",
+      "subtitle": "연재안내",
+      "noticeDate": "25.05.13",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:53:11.928Z",
+      "snapshot": {
+        "viewCount": 171791,
+        "starScore": 9.81779,
+        "episodeCount": 2,
+        "cadenceDays": 290,
+        "growthPct": 0.1,
+        "trackedDays": 47
+      },
+      "officialTitleId": 838958,
+      "officialOpenDate": "2025-05-16"
     },
     "825108": {
       "status": "confirmed",
@@ -5801,6 +6183,25 @@
         "trackedDays": 28
       }
     },
+    "830307": {
+      "status": "award",
+      "note": " 2024 지상최대공모전 2기 최우수상",
+      "titleName": "괴이현상 하나",
+      "subtitle": "-",
+      "noticeDate": "26.09.01",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:33:05.309Z",
+      "snapshot": {
+        "viewCount": 304630,
+        "starScore": 9.79545,
+        "episodeCount": 6,
+        "cadenceDays": 52,
+        "growthPct": 6.8,
+        "trackedDays": 47
+      },
+      "officialTitleId": 848549,
+      "officialOpenDate": "2026-03-09"
+    },
     "830318": {
       "status": "confirmed",
       "note": "네이버 정식 연재",
@@ -6425,6 +6826,26 @@
       "officialTitleId": 846643,
       "officialOpenDate": "2026-01-12"
     },
+    "831558": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "결혼사수스캔들",
+      "subtitle": "런칭했습니다!",
+      "noticeDate": "26.04.07",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:39:57.017Z",
+      "snapshot": {
+        "viewCount": 102518,
+        "starScore": 9.65211,
+        "episodeCount": 5,
+        "cadenceDays": 0,
+        "growthPct": 7.1,
+        "trackedDays": 47
+      },
+      "officialTitleId": 849563,
+      "officialOpenDate": "2026-04-06",
+      "path": "reader"
+    },
     "831587": {
       "status": "ended",
       "note": "공모전 입상 실패, 후기",
@@ -6513,6 +6934,25 @@
         "growthPct": 0.2,
         "trackedDays": 34
       }
+    },
+    "831842": {
+      "status": "award",
+      "note": " 2024 지상최대공모전 2기 독자인기상",
+      "titleName": "과학고 사건부: 음풍농월",
+      "subtitle": null,
+      "noticeDate": null,
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T05:08:38.460Z",
+      "snapshot": {
+        "viewCount": 312636,
+        "starScore": 9.72536,
+        "episodeCount": 15,
+        "cadenceDays": 0,
+        "growthPct": 9.2,
+        "trackedDays": 47
+      },
+      "officialTitleId": 849907,
+      "officialOpenDate": "2026-04-18"
     },
     "831923": {
       "status": "ended",
