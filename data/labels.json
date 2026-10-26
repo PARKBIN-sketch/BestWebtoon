@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "exportedAt": "2026-10-15T07:52:07.562Z",
-  "count": 438,
+  "exportedAt": "2026-10-26T02:08:37.862Z",
+  "count": 443,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -2107,12 +2107,12 @@
     },
     "762676": {
       "status": "none",
-      "note": "휴재",
+      "note": "휴재 연장",
       "titleName": "하루땃따",
       "subtitle": "-휴재공지-",
       "noticeDate": "26.10.09",
       "checkedAt": "2026-10-13",
-      "updatedAt": "2026-10-13T00:33:51.008Z",
+      "updatedAt": "2026-10-16T00:19:59.588Z",
       "snapshot": {
         "viewCount": 10935893,
         "starScore": 9.89,
@@ -2362,21 +2362,20 @@
     },
     "776362": {
       "status": "confirmed",
-      "note": "네이버 10월 17일 오픈",
+      "note": "",
       "titleName": "카오스이론",
-      "subtitle": "카오스이론 연재 일정 공지",
-      "noticeDate": "26.10.01",
-      "checkedAt": "2026-10-06",
+      "subtitle": "카오스이론 오픈 공지",
+      "noticeDate": "26.10.17",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:48:47.599Z",
       "snapshot": {
-        "viewCount": 11358899,
-        "starScore": 9.92,
-        "episodeCount": 3,
-        "cadenceDays": 70.5,
-        "growthPct": 0.2,
-        "trackedDays": 27
-      },
-      "updatedAt": "2026-10-07T04:22:41.199Z",
-      "officialOpenDate": "2026-10-17"
+        "viewCount": 11395023,
+        "starScore": 9.92385,
+        "episodeCount": 4,
+        "cadenceDays": 25,
+        "growthPct": 0.5,
+        "trackedDays": 47
+      }
     },
     "777086": {
       "status": "moved",
@@ -5912,6 +5911,23 @@
       "officialTitleId": 842839,
       "officialOpenDate": "2025-09-20"
     },
+    "830365": {
+      "status": "none",
+      "note": "",
+      "titleName": "애플데이",
+      "subtitle": "공지",
+      "noticeDate": "26.10.18",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:47:07.079Z",
+      "snapshot": {
+        "viewCount": 3906,
+        "starScore": 9.15556,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 20.7,
+        "trackedDays": 8
+      }
+    },
     "830384": {
       "status": "ended",
       "note": "연재 중단",
@@ -7124,20 +7140,37 @@
       "officialOpenDate": "2026-01-13"
     },
     "840661": {
-      "status": "none",
-      "note": "공모전 홍보",
+      "status": "remake",
+      "note": "리메이크 ",
       "titleName": "로판이지만 스케일은 큽니다만..",
-      "subtitle": "편집된 이야기들+근황",
-      "noticeDate": "26.10.03",
-      "checkedAt": "2026-10-07",
-      "updatedAt": "2026-10-07T04:29:09.238Z",
+      "subtitle": "근황알림",
+      "noticeDate": "26.10.18",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:32:56.026Z",
       "snapshot": {
-        "viewCount": 44028,
-        "starScore": 8.85,
-        "episodeCount": 2,
-        "cadenceDays": 17,
-        "growthPct": 5.5,
-        "trackedDays": 22
+        "viewCount": 45992,
+        "starScore": 8.86717,
+        "episodeCount": 6,
+        "cadenceDays": 0,
+        "growthPct": 10.2,
+        "trackedDays": 36
+      }
+    },
+    "840974": {
+      "status": "remake",
+      "note": "",
+      "titleName": "스팟업",
+      "subtitle": "공지사항..",
+      "noticeDate": "26.10.22",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:43:28.688Z",
+      "snapshot": {
+        "viewCount": 22648,
+        "starScore": 9.45747,
+        "episodeCount": 11,
+        "cadenceDays": 7,
+        "growthPct": 4.4,
+        "trackedDays": 47
       }
     },
     "841033": {
@@ -7572,6 +7605,24 @@
       },
       "updatedAt": "2026-10-07T04:52:49.343Z"
     },
+    "851861": {
+      "status": "confirmed",
+      "note": "챌린저스 선정",
+      "titleName": "결속",
+      "subtitle": "공지",
+      "noticeDate": "26.10.22",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:33:16.009Z",
+      "snapshot": {
+        "viewCount": 45161,
+        "starScore": 7.42366,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 36.4,
+        "trackedDays": 47
+      },
+      "path": "challengers"
+    },
     "852404": {
       "status": "confirmed",
       "note": "챌린저스 선정",
@@ -7588,6 +7639,24 @@
         "growthPct": 4.8,
         "trackedDays": 28
       }
+    },
+    "852410": {
+      "status": "confirmed",
+      "note": "챌린저스 선정 및 휴재",
+      "titleName": "지하도시 춘천",
+      "subtitle": "휴재 공지 및 감사 인사",
+      "noticeDate": "26.10.16",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:42:10.079Z",
+      "snapshot": {
+        "viewCount": 33590,
+        "starScore": 8.82295,
+        "episodeCount": 16,
+        "cadenceDays": 7,
+        "growthPct": 46.7,
+        "trackedDays": 47
+      },
+      "path": "challengers"
     },
     "852573": {
       "status": "none",
@@ -7670,6 +7739,23 @@
         "cadenceDays": 7.5,
         "growthPct": 907.5,
         "trackedDays": 16
+      }
+    },
+    "854960": {
+      "status": "none",
+      "note": "1부 완결",
+      "titleName": "착호:범그늘",
+      "subtitle": "-범그늘- 08화 [1부 완결]",
+      "noticeDate": "26.10.21",
+      "checkedAt": "2026-10-26",
+      "updatedAt": "2026-10-26T01:47:52.875Z",
+      "snapshot": {
+        "viewCount": 3212,
+        "starScore": 8.5,
+        "episodeCount": 8,
+        "cadenceDays": 6,
+        "growthPct": 106.4,
+        "trackedDays": 5
       }
     }
   },
