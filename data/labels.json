@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "exportedAt": "2026-10-26T06:20:11.633Z",
-  "count": 468,
+  "exportedAt": "2026-10-30T07:22:06.625Z",
+  "count": 470,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -6363,6 +6363,24 @@
         "trackedDays": 16
       }
     },
+    "830453": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "락앤롤 베이비",
+      "subtitle": "정식연재공지",
+      "noticeDate": "26.10.26",
+      "checkedAt": "2026-10-29",
+      "updatedAt": "2026-10-29T01:08:54.046Z",
+      "snapshot": {
+        "viewCount": 12045,
+        "starScore": 9.5558,
+        "episodeCount": 4,
+        "cadenceDays": 25,
+        "growthPct": 4.5,
+        "trackedDays": 3
+      },
+      "officialOpenDate": "2026-11-02"
+    },
     "830475": {
       "status": "ended",
       "note": "입상 실패 후 후기",
@@ -7473,19 +7491,19 @@
     },
     "839665": {
       "status": "none",
-      "note": "휴재",
+      "note": "시즌 1후기 휴재",
       "titleName": "우리 언니가 무당이 되었다",
-      "subtitle": "휴재합니다 사유 : 삼산 밟기",
-      "noticeDate": "26.10.07",
-      "checkedAt": "2026-10-07",
-      "updatedAt": "2026-10-07T04:20:29.910Z",
+      "subtitle": "시즌 1 후기",
+      "noticeDate": "26.10.28",
+      "checkedAt": "2026-10-29",
+      "updatedAt": "2026-10-29T01:06:12.606Z",
       "snapshot": {
-        "viewCount": 1166581,
-        "starScore": 9.52,
-        "episodeCount": 103,
-        "cadenceDays": 3.5,
-        "growthPct": 21.7,
-        "trackedDays": 28
+        "viewCount": 1323790,
+        "starScore": 9.55909,
+        "episodeCount": 108,
+        "cadenceDays": 4,
+        "growthPct": 38.1,
+        "trackedDays": 50
       }
     },
     "839876": {
@@ -7943,6 +7961,23 @@
         "trackedDays": 28
       }
     },
+    "849645": {
+      "status": "none",
+      "note": "컷 수정 공지",
+      "titleName": "세번째 사랑이거나? 마지막 사랑이거나!",
+      "subtitle": "[공지] 16화~20화 컷 수정+추가 안내",
+      "noticeDate": "26.10.27",
+      "checkedAt": "2026-10-29",
+      "updatedAt": "2026-10-29T01:08:37.782Z",
+      "snapshot": {
+        "viewCount": 18900,
+        "starScore": 7.80028,
+        "episodeCount": 24,
+        "cadenceDays": 14,
+        "growthPct": 16.2,
+        "trackedDays": 50
+      }
+    },
     "850234": {
       "status": "none",
       "note": "키워드 '오픈'이 걸림",
@@ -8185,17 +8220,17 @@
       "status": "none",
       "note": "1부 완결",
       "titleName": "착호:범그늘",
-      "subtitle": "-범그늘- 08화 [1부 완결]",
-      "noticeDate": "26.10.21",
-      "checkedAt": "2026-10-26",
-      "updatedAt": "2026-10-26T01:47:52.875Z",
+      "subtitle": "중간 후기.",
+      "noticeDate": "26.10.27",
+      "checkedAt": "2026-10-29",
+      "updatedAt": "2026-10-29T01:09:10.180Z",
       "snapshot": {
-        "viewCount": 3212,
-        "starScore": 8.5,
-        "episodeCount": 8,
+        "viewCount": 4375,
+        "starScore": 8.54167,
+        "episodeCount": 9,
         "cadenceDays": 6,
-        "growthPct": 106.4,
-        "trackedDays": 5
+        "growthPct": 181.2,
+        "trackedDays": 8
       }
     }
   },
