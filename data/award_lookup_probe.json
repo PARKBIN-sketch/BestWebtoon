@@ -1,0 +1,17 @@
+{
+ "searchList": [],
+ "pageInfo": {
+  "totalRows": 0,
+  "pageSize": 10,
+  "indexSize": 10,
+  "page": 1,
+  "totalPages": 1,
+  "startRowNum": 1,
+  "lastPage": 1,
+  "firstPage": 1,
+  "endRowNum": 0,
+  "rawPage": 1,
+  "prevPage": 0,
+  "nextPage": 0
+ }
+}
