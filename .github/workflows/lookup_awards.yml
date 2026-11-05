@@ -1,0 +1,70 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/lookup_awards.yml
+# 선정작·수상작 제목을 네이버 웹툰에서 검색해 data/award_lookup.json에 모읍니다.
+# 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다. 중간에 끊겨도 다시 실행하면 이어서 합니다.
+
+name: Lookup Awards
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "시험용: 이 개수만 조회 (비우면 전부)"
+        required: false
+        default: ""
+      redo:
+        description: "이미 조회한 항목도 다시 (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+# 매일 도는 수집 작업과 같은 파일을 덮어쓰지 않도록 한 번에 하나만 돕니다.
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
+jobs:
+  lookup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v6
+
+      - name: Python 설치
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: 의존성 설치
+        run: pip install requests numpy scipy
+
+      - name: 검색 주소 확인
+        run: python lookup_awards.py --probe "보이드맨"
+
+      - name: 제목 조회
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ github.event.inputs.limit }}"; fi
+          if [ "${{ github.event.inputs.redo }}" = "true" ]; then ARGS="$ARGS --redo"; fi
+          python lookup_awards.py $ARGS
+
+      - name: 결과 커밋 및 푸시
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/award_lookup.json data/award_lookup_probe.json
+          if git diff --quiet --cached; then
+            echo "올릴 변경이 없습니다."
+            exit 0
+          fi
+          git commit -m "chore: 선정작·수상작 제목 조회 $(date +'%Y-%m-%d')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            echo "푸시 실패, 다시 시도 ($i/5)"
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          exit 1
