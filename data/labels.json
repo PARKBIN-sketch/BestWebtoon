@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "exportedAt": "2026-10-30T07:22:06.625Z",
-  "count": 470,
+  "exportedAt": "2026-11-05T07:20:02.893Z",
+  "count": 474,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -2895,6 +2895,23 @@
         "cadenceDays": 15,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "791249": {
+      "status": "none",
+      "note": "근황보고",
+      "titleName": "겨울살이",
+      "subtitle": "근황만화",
+      "noticeDate": "26.11.01",
+      "checkedAt": "2026-11-03",
+      "updatedAt": "2026-11-03T00:46:04.906Z",
+      "snapshot": {
+        "viewCount": 676658,
+        "starScore": 9.69863,
+        "episodeCount": 66,
+        "cadenceDays": 175,
+        "growthPct": 0.8,
+        "trackedDays": 55
       }
     },
     "791459": {
@@ -7704,6 +7721,23 @@
         "trackedDays": 28
       }
     },
+    "841645": {
+      "status": "none",
+      "note": "베도 승격 감사인사",
+      "titleName": "그날 이후엔",
+      "subtitle": "베도 승격 감사 인사",
+      "noticeDate": "26.10.14",
+      "checkedAt": "2026-11-05",
+      "updatedAt": "2026-11-05T06:47:29.685Z",
+      "snapshot": {
+        "viewCount": 27278,
+        "starScore": 9,
+        "episodeCount": 5,
+        "cadenceDays": 0,
+        "growthPct": 6.1,
+        "trackedDays": 57
+      }
+    },
     "841764": {
       "status": "confirmed",
       "note": "독자픽 선정 ",
@@ -8047,20 +8081,20 @@
       }
     },
     "851646": {
-      "status": "ended",
-      "note": "지원 사업 당첨돼서 일시 중단",
+      "status": "none",
+      "note": "지원 사업 연재 제안 중 휴재",
       "titleName": "우주인의 집",
-      "subtitle": "휴재공지",
-      "noticeDate": "26.07.22",
-      "checkedAt": "2026-10-08",
-      "updatedAt": "2026-10-08T00:23:27.624Z",
+      "subtitle": "근황공지",
+      "noticeDate": "26.11.02",
+      "checkedAt": "2026-11-03",
+      "updatedAt": "2026-11-03T00:47:33.420Z",
       "snapshot": {
-        "viewCount": 6742,
-        "starScore": 8.18,
-        "episodeCount": 4,
-        "cadenceDays": 16,
-        "growthPct": 0.6,
-        "trackedDays": 28
+        "viewCount": 6967,
+        "starScore": 8.2437,
+        "episodeCount": 5,
+        "cadenceDays": 16.5,
+        "growthPct": 4,
+        "trackedDays": 55
       }
     },
     "851850": {
@@ -8095,6 +8129,24 @@
         "cadenceDays": null,
         "growthPct": 36.4,
         "trackedDays": 47
+      },
+      "path": "challengers"
+    },
+    "851893": {
+      "status": "confirmed",
+      "note": "챌린저스 선정",
+      "titleName": "남자. 주인공",
+      "subtitle": "공지",
+      "noticeDate": "26.10.31",
+      "checkedAt": "2026-11-03",
+      "updatedAt": "2026-11-03T00:46:36.331Z",
+      "snapshot": {
+        "viewCount": 45469,
+        "starScore": 9.53127,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 51.7,
+        "trackedDays": 55
       },
       "path": "challengers"
     },
@@ -8214,6 +8266,23 @@
         "cadenceDays": 7.5,
         "growthPct": 907.5,
         "trackedDays": 16
+      }
+    },
+    "854144": {
+      "status": "none",
+      "note": "베스트 도전 승격 감사 인사",
+      "titleName": "나비효과",
+      "subtitle": "6화 및 베스트 도전 승격 감사 인사",
+      "noticeDate": "26.11.02",
+      "checkedAt": "2026-11-03",
+      "updatedAt": "2026-11-03T00:47:59.201Z",
+      "snapshot": {
+        "viewCount": 2516,
+        "starScore": 7.66216,
+        "episodeCount": 6,
+        "cadenceDays": 14,
+        "growthPct": 160.5,
+        "trackedDays": 13
       }
     },
     "854960": {

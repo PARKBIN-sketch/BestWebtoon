@@ -27,6 +27,8 @@ LABELS_PATH = Path("data") / "labels.json"
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
+PATH_TAGS_PATH = Path("data") / "path_tags.json"           # 공식 명단·라벨 메모로 확인된 선정 경로 (titleId별 목록)
+AWARD_LOOKUP_PATH = Path("data") / "award_lookup.json"     # lookup_awards.py가 제목으로 찾은 결과 (추정으로만 표시)
 PAST_NOTICES_PATH = Path("data") / "past_notices.json"     # scan_past_notices.py가 만드는 "지난 회차 공지 후보" 기록
 SITE_PATH = Path("scouting_desk_mockup.html")
 
@@ -156,6 +158,40 @@ def load_past_notices() -> dict:
     return {"scanned": scanned if isinstance(scanned, dict) else {}}
 
 
+def load_path_tags(history: dict) -> dict:
+    """선정 경로 배지용 데이터. {titleId: [[경로, 시기, 기수/부문, 등급, 근거, 확정/추정], ...]}.
+
+    - data/path_tags.json: 공식 명단과 제목이 일치했거나 내 라벨 메모가 경로를 적은 작품 → '확정'
+    - data/award_lookup.json: 제목 조회에서 decision이 auto인 작품 → '추정' (같은 이름의 다른 작품일 수 있음)
+      사이트에 카드가 있는 작품(history에 있는 작품)만 담고, 이미 같은 경로가 확정으로 있으면 건너뜀.
+    """
+    out: dict[str, list] = {}
+    try:
+        confirmed = json.loads(PATH_TAGS_PATH.read_text(encoding="utf-8")) if PATH_TAGS_PATH.exists() else {}
+    except (ValueError, OSError):
+        confirmed = {}
+    for tid, tags in confirmed.items():
+        if tid not in history or not isinstance(tags, list):
+            continue
+        out[tid] = [[t.get("path"), t.get("when") or "", t.get("sub") or "", t.get("grade") or "", t.get("conf") or "", "확정"]
+                    for t in tags if isinstance(t, dict) and t.get("path")]
+    try:
+        lookup = json.loads(AWARD_LOOKUP_PATH.read_text(encoding="utf-8")).get("results", {}) if AWARD_LOOKUP_PATH.exists() else {}
+    except (ValueError, OSError):
+        lookup = {}
+    for rec in lookup.values():
+        if rec.get("decision") != "auto" or not rec.get("candidates"):
+            continue
+        tid = str(rec["candidates"][0].get("titleId"))
+        if tid not in history:
+            continue
+        if any(t[0] == rec.get("path") for t in out.get(tid, [])):
+            continue
+        out.setdefault(tid, []).append([rec.get("path"), rec.get("when") or "", rec.get("sub") or "", rec.get("grade") or "",
+                                        rec.get("conf") or "", "추정"])
+    return out
+
+
 def to_js_literal(obj) -> str:
     """JSON을 <script> 안에 안전하게 넣을 문자열로 만듭니다 (</script> 방지)."""
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
@@ -229,6 +265,15 @@ def main() -> None:
     else:
         print("[build_site] OFFICIAL_TRACKING 선언부를 못 찾아 정식 추적 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    path_tags = load_path_tags(history)
+    path_match = re.compile(r"  const PATH_TAGS = \{.*?\};\n", re.DOTALL).search(new_html)
+    if path_match:
+        new_html = (new_html[:path_match.start()]
+                    + f"  const PATH_TAGS = {to_js_literal(path_tags)};\n"
+                    + new_html[path_match.end():])
+    else:
+        print("[build_site] PATH_TAGS 선언부를 못 찾아 선정 경로 배지 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     analysis = load_analysis()
     analysis_match = re.compile(r"  const ANALYSIS = \{.*?\};", re.DOTALL).search(new_html)
     if analysis_match:
@@ -248,7 +293,7 @@ def main() -> None:
         print("[build_site] PAST_NOTICES 선언부를 못 찾아 지난 회차 공지 후보 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 지난 회차 훑은 작품 {len(past["scanned"])}개, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 지난 회차 훑은 작품 {len(past["scanned"])}개, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, 선정 경로 배지 {len(path_tags)}작품, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
