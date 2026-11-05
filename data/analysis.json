@@ -1,6 +1,6 @@
 {
  "computedAt": "2026-11-05",
- "historyLastDate": "2026-11-04",
+ "historyLastDate": "2026-11-05",
  "referenceSource": "조사 목록(9월 챌린저스 선정작 등)",
  "alpha": 0.05,
  "groups": {
@@ -793,7 +793,7 @@
    "medianNone": 9.53,
    "ratio": 1.01,
    "rho": 0.19,
-   "p": 0.036,
+   "p": 0.034,
    "n": 120,
    "significant": true,
    "verdict": "유의",
@@ -803,11 +803,11 @@
   {
    "key": "viewsPerEp",
    "label": "화당 조회수",
-   "medianOfficial": 15915.0,
-   "medianNone": 8995.79,
+   "medianOfficial": 15925.62,
+   "medianNone": 8995.92,
    "ratio": 1.77,
    "rho": 0.17,
-   "p": 0.069,
+   "p": 0.07,
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -817,11 +817,11 @@
   {
    "key": "views",
    "label": "누적 조회수",
-   "medianOfficial": 71722.5,
-   "medianNone": 56906.0,
+   "medianOfficial": 71751.0,
+   "medianNone": 56916.5,
    "ratio": 1.26,
    "rho": 0.08,
-   "p": 0.357,
+   "p": 0.364,
    "n": 120,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -845,11 +845,11 @@
   {
    "key": "conversion",
    "label": "관심 전환율 (관심÷조회수 ×1000)",
-   "medianOfficial": 12.21,
-   "medianNone": 12.79,
-   "ratio": 0.95,
+   "medianOfficial": 12.2,
+   "medianNone": 12.77,
+   "ratio": 0.96,
    "rho": -0.05,
-   "p": 0.572,
+   "p": 0.577,
    "n": 114,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -863,7 +863,7 @@
    "medianNone": 6.0,
    "ratio": 0.83,
    "rho": -0.08,
-   "p": 0.4,
+   "p": 0.396,
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -895,26 +895,26 @@
   "rows": [
    {
     "label": "별점",
-    "or": 2.23,
+    "or": 2.24,
     "lo": 0.83,
-    "hi": 6.01,
-    "p": 0.113,
+    "hi": 6.06,
+    "p": 0.111,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
     "label": "로그 조회수",
     "or": 0.91,
     "lo": 0.46,
-    "hi": 1.81,
-    "p": 0.794,
+    "hi": 1.8,
+    "p": 0.786,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
     "label": "관심 전환율 (관심÷조회수 ×1000)",
     "or": 1.37,
     "lo": 0.8,
-    "hi": 2.33,
-    "p": 0.247,
+    "hi": 2.34,
+    "p": 0.249,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    }
   ]
