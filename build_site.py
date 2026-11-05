@@ -161,7 +161,7 @@ def load_past_notices() -> dict:
 def load_path_tags(history: dict) -> dict:
     """선정 경로 배지용 데이터. {titleId: [[경로, 시기, 기수/부문, 등급, 근거, 확정/추정], ...]}.
 
-    - data/path_tags.json: 공식 명단과 제목이 일치했거나 내 라벨 메모가 경로를 적은 작품 → '확정'
+    - data/path_tags.json: 공식 명단과 제목이 일치했거나 내 라벨 메모가 경로를 적은 작품 → '확정' (근거가 AI 요약본(C)이면 '추정')
     - data/award_lookup.json: 제목 조회에서 decision이 auto인 작품 → '추정' (같은 이름의 다른 작품일 수 있음)
       사이트에 카드가 있는 작품(history에 있는 작품)만 담고, 이미 같은 경로가 확정으로 있으면 건너뜀.
     """
@@ -173,7 +173,7 @@ def load_path_tags(history: dict) -> dict:
     for tid, tags in confirmed.items():
         if tid not in history or not isinstance(tags, list):
             continue
-        out[tid] = [[t.get("path"), t.get("when") or "", t.get("sub") or "", t.get("grade") or "", t.get("conf") or "", "확정"]
+        out[tid] = [[t.get("path"), t.get("when") or "", t.get("sub") or "", t.get("grade") or "", t.get("conf") or "", "확정" if t.get("conf") != "C" else "추정"]
                     for t in tags if isinstance(t, dict) and t.get("path")]
     try:
         lookup = json.loads(AWARD_LOOKUP_PATH.read_text(encoding="utf-8")).get("results", {}) if AWARD_LOOKUP_PATH.exists() else {}
