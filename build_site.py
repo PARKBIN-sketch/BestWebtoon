@@ -27,6 +27,7 @@ LABELS_PATH = Path("data") / "labels.json"
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
+BADGE_NAMES_PATH = Path("data") / "badge_names.json"       # 선정 배지 "당시 명칭" 추천 목록 (경로별 이름)
 PATH_TAGS_PATH = Path("data") / "path_tags.json"           # 공식 명단·라벨 메모로 확인된 선정 경로 (titleId별 목록)
 AWARD_LOOKUP_PATH = Path("data") / "award_lookup.json"     # lookup_awards.py가 제목으로 찾은 결과 (추정으로만 표시)
 PAST_NOTICES_PATH = Path("data") / "past_notices.json"     # scan_past_notices.py가 만드는 "지난 회차 공지 후보" 기록
@@ -273,6 +274,13 @@ def main() -> None:
                     + new_html[path_match.end():])
     else:
         print("[build_site] PATH_TAGS 선언부를 못 찾아 선정 경로 배지 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
+    badge_names = json.loads(BADGE_NAMES_PATH.read_text(encoding="utf-8")) if BADGE_NAMES_PATH.exists() else None
+    names_match = re.compile(r"  const BADGE_NAMES = \{.*?\};\n", re.DOTALL).search(new_html)
+    if badge_names is not None and names_match:
+        new_html = (new_html[:names_match.start()]
+                    + f"  const BADGE_NAMES = {to_js_literal(badge_names)};\n"
+                    + new_html[names_match.end():])
 
     analysis = load_analysis()
     analysis_match = re.compile(r"  const ANALYSIS = \{.*?\};", re.DOTALL).search(new_html)
