@@ -1,0 +1,449 @@
+{
+ "lists": [
+  {
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday",
+   "http_status": 200,
+   "shape": {
+    "titleListMap": {
+     "THURSDAY": [
+      "list(117)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "TUESDAY": [
+      "list(122)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "MONDAY": [
+      "list(123)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "FRIDAY": [
+      "list(116)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "WEDNESDAY": [
+      "list(116)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "SATURDAY": [
+      "list(133)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "SUNDAY": [
+      "list(114)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ]
+    },
+    "dayOfWeek": "str"
+   },
+   "item_count": 841,
+   "item_keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first_item": {
+    "titleId": 853278,
+    "titleName": "나의 경험",
+    "author": "윤박",
+    "thumbnailUrl": "https://image-comic.pstatic.net/webtoon/853278/thumbnail/thumbnail_IMAG21_cf968ba7-05ce-4849-8f9f-ea2ca7b45d9c.jpg",
+    "up": false,
+    "rest": false,
+    "bm": false,
+    "adult": true,
+    "starScore": 9.87096,
+    "viewCount": 0,
+    "openToday": false,
+    "potenUp": false,
+    "bestChallengeLevelUp": false,
+    "finish": false,
+    "new": false
+   }
+  },
+  {
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=user",
+   "http_status": 200,
+   "shape": {
+    "titleListMap": {
+     "MONDAY": [
+      "list(123)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "FRIDAY": [
+      "list(116)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "TUESDAY": [
+      "list(122)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "THURSDAY": [
+      "list(117)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "SATURDAY": [
+      "list(133)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "WEDNESDAY": [
+      "list(116)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ],
+     "SUNDAY": [
+      "list(114)",
+      {
+       "titleId": "…",
+       "titleName": "…",
+       "author": "…",
+       "thumbnailUrl": "…",
+       "up": "…",
+       "rest": "…",
+       "bm": "…",
+       "adult": "…",
+       "starScore": "…",
+       "viewCount": "…",
+       "openToday": "…",
+       "potenUp": "…",
+       "bestChallengeLevelUp": "…",
+       "finish": "…",
+       "new": "…"
+      }
+     ]
+    },
+    "dayOfWeek": "str"
+   },
+   "item_count": 841,
+   "item_keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first_item": {
+    "titleId": 844058,
+    "titleName": "신체",
+    "author": "엄세윤 / 정썸머",
+    "thumbnailUrl": "https://image-comic.pstatic.net/webtoon/844058/thumbnail/thumbnail_IMAG21_18e663e7-b2bc-4c26-8163-ea7fb31b64a9.jpg",
+    "up": false,
+    "rest": false,
+    "bm": false,
+    "adult": true,
+    "starScore": 9.80915,
+    "viewCount": 0,
+    "openToday": false,
+    "potenUp": false,
+    "bestChallengeLevelUp": false,
+    "finish": false,
+    "new": false
+   }
+  }
+ ],
+ "samples": [
+  {
+   "titleId": 853278,
+   "titleName": "나의 경험",
+   "info": {
+    "status": "ok",
+    "favoriteCount": 103145,
+    "webtoonLevelCode": "WEBTOON"
+   },
+   "deep": {
+    "episodeCount": null,
+    "firstEpisodeDate": null,
+    "latestDate": null,
+    "cadenceDays": null
+   }
+  },
+  {
+   "titleId": 818969,
+   "titleName": "약 파는 황태자",
+   "info": {
+    "status": "ok",
+    "favoriteCount": 143944,
+    "webtoonLevelCode": "WEBTOON"
+   },
+   "deep": {
+    "episodeCount": 131,
+    "firstEpisodeDate": "23.12.04",
+    "latestDate": "26.10.12",
+    "cadenceDays": 7.0
+   }
+  },
+  {
+   "titleId": 837999,
+   "titleName": "프로젝트 마르스",
+   "info": {
+    "status": "ok",
+    "favoriteCount": 55292,
+    "webtoonLevelCode": "WEBTOON"
+   },
+   "deep": {
+    "episodeCount": 82,
+    "firstEpisodeDate": "25.04.13",
+    "latestDate": "23일 후 무료",
+    "cadenceDays": null
+   }
+  },
+  {
+   "titleId": 836382,
+   "titleName": "첩자의 마교생활",
+   "info": {
+    "status": "ok",
+    "favoriteCount": 68010,
+    "webtoonLevelCode": "WEBTOON"
+   },
+   "deep": {
+    "episodeCount": 100,
+    "firstEpisodeDate": "25.02.04",
+    "latestDate": "46일 후 무료",
+    "cadenceDays": 7.0
+   }
+  },
+  {
+   "titleId": 850885,
+   "titleName": "예쁜 개차반",
+   "info": {
+    "status": "ok",
+    "favoriteCount": 85805,
+    "webtoonLevelCode": "WEBTOON"
+   },
+   "deep": {
+    "episodeCount": 30,
+    "firstEpisodeDate": "26.05.22",
+    "latestDate": "35일 후 무료",
+    "cadenceDays": 7
+   }
+  }
+ ]
+}
