@@ -1,0 +1,54 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/collect_current.yml
+# 현재 연재 중인 작품의 관심 수·연재 시작일을 data/current_webtoons.json에 모읍니다. 끊겨도 다시 실행하면 이어서 합니다.
+# 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다.
+
+name: Collect Current
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "시험용: 이 개수만 조회 (비우면 전부)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install requests numpy scipy
+      - name: 수집
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="--limit ${{ github.event.inputs.limit }}"; fi
+          python collect_current.py $ARGS
+      - name: 결과 커밋 및 푸시
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/current_webtoons.json
+          if git diff --quiet --cached; then
+            echo "올릴 변경이 없습니다."
+            exit 0
+          fi
+          git commit -m "chore: 현재 연재작 관심 수 수집 $(date +'%Y-%m-%d')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            echo "푸시 실패, 다시 시도 ($i/5)"
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          exit 1
