@@ -1,0 +1,51 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/probe_current.yml
+# 현재 연재 중인 작품 목록·관심 수를 가져올 수 있는지 시험만 합니다 (data/current_probe.json 저장).
+# 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다.
+
+name: Probe Current
+
+on:
+  workflow_dispatch:
+    inputs:
+      sample:
+        description: "시험할 작품 수 (기본 5)"
+        required: false
+        default: "5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install requests numpy scipy
+      - name: 시험 실행
+        run: python probe_current.py --sample "${{ github.event.inputs.sample }}"
+      - name: 결과 커밋 및 푸시
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/current_probe.json
+          if git diff --quiet --cached; then
+            echo "올릴 변경이 없습니다."
+            exit 0
+          fi
+          git commit -m "chore: 현재 연재작 목록 시험 $(date +'%Y-%m-%d')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            echo "푸시 실패, 다시 시도 ($i/5)"
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          exit 1
