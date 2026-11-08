@@ -1,6 +1,6 @@
 {
- "computedAt": "2026-11-07",
- "historyLastDate": "2026-11-07",
+ "computedAt": "2026-11-08",
+ "historyLastDate": "2026-11-08",
  "referenceSource": "조사 목록(9월 챌린저스 선정작 등)",
  "alpha": 0.05,
  "groups": {
@@ -803,11 +803,11 @@
   {
    "key": "viewsPerEp",
    "label": "화당 조회수",
-   "medianOfficial": 15939.88,
-   "medianNone": 8995.96,
-   "ratio": 1.77,
-   "rho": 0.17,
-   "p": 0.069,
+   "medianOfficial": 15948.5,
+   "medianNone": 9875.22,
+   "ratio": 1.62,
+   "rho": 0.16,
+   "p": 0.076,
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -817,11 +817,11 @@
   {
    "key": "views",
    "label": "누적 조회수",
-   "medianOfficial": 71898.5,
-   "medianNone": 56977.0,
+   "medianOfficial": 71960.0,
+   "medianNone": 56997.0,
    "ratio": 1.26,
    "rho": 0.08,
-   "p": 0.364,
+   "p": 0.368,
    "n": 120,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -846,7 +846,7 @@
    "key": "conversion",
    "label": "관심 전환율 (관심÷조회수 ×1000)",
    "medianOfficial": 12.2,
-   "medianNone": 12.72,
+   "medianNone": 12.67,
    "ratio": 0.96,
    "rho": -0.05,
    "p": 0.577,
@@ -862,8 +862,8 @@
    "medianOfficial": 5.0,
    "medianNone": 6.0,
    "ratio": 0.83,
-   "rho": -0.08,
-   "p": 0.396,
+   "rho": -0.07,
+   "p": 0.454,
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
@@ -895,10 +895,10 @@
   "rows": [
    {
     "label": "별점",
-    "or": 2.24,
+    "or": 2.23,
     "lo": 0.83,
-    "hi": 6.04,
-    "p": 0.112,
+    "hi": 6.02,
+    "p": 0.113,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
@@ -906,14 +906,14 @@
     "or": 0.91,
     "lo": 0.46,
     "hi": 1.81,
-    "p": 0.788,
+    "p": 0.79,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    },
    {
     "label": "관심 전환율 (관심÷조회수 ×1000)",
-    "or": 1.37,
+    "or": 1.38,
     "lo": 0.8,
-    "hi": 2.36,
+    "hi": 2.38,
     "p": 0.25,
     "verdict": "구간이 1을 포함 → 방향 확정 불가"
    }
