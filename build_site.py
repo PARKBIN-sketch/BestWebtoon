@@ -27,6 +27,7 @@ LABELS_PATH = Path("data") / "labels.json"
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
+CURRENT_PATH = Path("data") / "current_webtoons.json"       # 현재 연재작 관심 수·연재 시작일 (collect_current.py가 모음)
 BADGE_NAMES_PATH = Path("data") / "badge_names.json"       # 선정 배지 "당시 명칭" 추천 목록 (경로별 이름)
 PATH_TAGS_PATH = Path("data") / "path_tags.json"           # 공식 명단·라벨 메모로 확인된 선정 경로 (titleId별 목록)
 AWARD_LOOKUP_PATH = Path("data") / "award_lookup.json"     # lookup_awards.py가 제목으로 찾은 결과 (추정으로만 표시)
@@ -111,6 +112,33 @@ def load_reviews() -> dict:
         return {}
     reviews = payload.get("reviews", {}) if isinstance(payload, dict) else {}
     return reviews if isinstance(reviews, dict) else {}
+
+
+def load_starts() -> dict:
+    """사이트에서 직접 입력한 연재 시작일(data/labels.json의 starts). 없거나 깨졌으면 빈 값."""
+    if not LABELS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    starts = payload.get("starts", {}) if isinstance(payload, dict) else {}
+    return starts if isinstance(starts, dict) else {}
+
+
+def load_current() -> dict:
+    """현재 연재작 데이터에서 분포도 페이지가 쓰는 값만 줄여서 가져옵니다. 없으면 빈 값."""
+    if not CURRENT_PATH.exists():
+        return {}
+    try:
+        raw = json.loads(CURRENT_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    works = {}
+    for tid, w in (raw.get("works") or {}).items():
+        works[tid] = {k: w.get(k) for k in ("title", "author", "days", "rest", "adult", "active", "firstEpisodeDate", "episodeCount") if w.get(k) is not None}
+        works[tid]["favorite"] = (w.get("favorite") or [])[-1:]        # 분포도는 가장 최근 값만 씀
+    return {"updated": raw.get("updated"), "works": works}
 
 
 def load_personal() -> dict:
@@ -281,6 +309,13 @@ def main() -> None:
         new_html = (new_html[:names_match.start()]
                     + f"  const BADGE_NAMES = {to_js_literal(badge_names)};\n"
                     + new_html[names_match.end():])
+
+    for const_name, value in (("CURRENT_WEBTOONS", load_current()), ("SAVED_STARTS", load_starts())):
+        m = re.compile(rf"  const {const_name} = \{{.*?\}};\n", re.DOTALL).search(new_html)
+        if m:
+            new_html = new_html[:m.start()] + f"  const {const_name} = {to_js_literal(value)};\n" + new_html[m.end():]
+        else:
+            print(f"[build_site] {const_name} 선언부를 못 찾아 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
     analysis = load_analysis()
     analysis_match = re.compile(r"  const ANALYSIS = \{.*?\};", re.DOTALL).search(new_html)
