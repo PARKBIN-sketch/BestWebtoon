@@ -2081,8 +2081,10 @@
     const item = REAL_DATA.find(d => d.titleId === titleId);
     const label = getLabel(titleId);
     if(!item || !label) return;                // 분류를 먼저 골라야 메모가 저장됨
-    localLabels[String(titleId)] = { ...label, note, updatedAt: new Date().toISOString() };
+    // 저장 = 지금 보이는 회차를 확인했다는 뜻 → 확인한 회차·날짜를 갱신해 '공지 확인 대기'에서 빠짐
+    localLabels[String(titleId)] = { ...label, note, subtitle: item.latestSubtitle || label.subtitle || null, noticeDate: item.latestDate || label.noticeDate || null, checkedAt: todayStr(), updatedAt: new Date().toISOString() };
     afterLabelChange(item);
+    if(typeof renderLabelFilterOptions === 'function') renderLabelFilterOptions();
   }
 
   function afterLabelChange(item){
