@@ -2414,7 +2414,7 @@
       </div>
       <div class="ds-chart" id="ds-chart"><div id="ds-svg">${svg}</div>
         <div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
-      <div class="ds-note" style="margin-top:6px">확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 점에 마우스를 올리면 하얀 테두리가 생겨요.</div>${legend}
+      <div class="ds-note" style="margin-top:6px">확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨져요. 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
       <div class="ds-sec"><h3>요일별 관심 수</h3>${dayTable}</div>
       <div class="ds-sec"><h3>내가 추적 중인 작품은 어디쯤일까</h3>${pathTable}
         <div class="ds-note">“전체 중 위치”는 그 경로 작품들의 중앙값이 지금 보이는 작품 전체에서 상위 몇 %인지예요.</div></div>
@@ -2433,13 +2433,15 @@
   function dsChartSvg(rows){
     const favs = rows.map(r => r.fav).sort((a, b) => a - b);
     const q50 = dsQuantile(favs, 0.5), q75 = dsQuantile(favs, 0.75), q90 = dsQuantile(favs, 0.9);
-    const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 70, GAP = 26;
-    const px0 = L + STRIP + GAP, px1 = W - R, py0 = T, py1 = H - B, v = dsView;
+    const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;
+    const v = dsView, zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
+    const showStrip = !zoomed;                         // 확대하면 '연재일수 없음' 칸은 숨기고 그 자리까지 그림을 넓게 씀
+    const px0 = L + (showStrip ? STRIP + GAP : 0), px1 = W - R, py0 = T, py1 = H - B;
     const withSpan = rows.filter(r => r.span != null);
     const maxSpan = Math.max(60, ...withSpan.map(r => r.span)) * 1.05;
     const maxFav = Math.max(1000, ...favs), minFav = Math.max(100, Math.min(...favs, 1e9));
     const lg = Math.log10;
-    const xMin = dsState.logX ? lg(10) : 0, xMax = dsState.logX ? lg(maxSpan) : maxSpan;
+    const xMin = dsState.logX ? lg(6) : -maxSpan * 0.01, xMax = dsState.logX ? lg(maxSpan) : maxSpan;
     const yMin = dsState.logY ? lg(Math.max(100, minFav / 1.5)) : 0, yMax = dsState.logY ? lg(maxFav * 1.15) : maxFav * 1.1;
     const tx = d => dsState.logX ? lg(Math.max(1, d)) : d, ty = f => dsState.logY ? lg(Math.max(1, f)) : f;
     const X = d => px0 + (((tx(d) - xMin) / (xMax - xMin)) - v.x0) / (v.x1 - v.x0) * (px1 - px0);
@@ -2459,10 +2461,10 @@
     let xC = xDefs.filter(([d]) => d >= dVis0 && d <= dVis1);
     if(!dsState.logX) xC = xC.filter(([d]) => d % 365 === 0 || (dVis1 - dVis0) < 700);
     const xTicks = thin(xC, c => X(c[0]), 44);
-    let g = `<defs><clipPath id="ds-clip-plot"><rect x="${px0}" y="${py0}" width="${px1 - px0}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-strip"><rect x="${L}" y="${py0}" width="${STRIP}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-all"><rect x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}"/></clipPath></defs>`;
+    let g = `<defs><clipPath id="ds-clip-plot"><rect x="${px0 - (showStrip ? 10 : 0)}" y="${py0}" width="${px1 - px0 + (showStrip ? 10 : 0)}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-strip"><rect x="${L}" y="${py0}" width="${STRIP}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-all"><rect x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}"/></clipPath></defs>`;
     yTicks.forEach(f => { g += `<line class="gl" x1="${L}" x2="${px1}" y1="${Y(f)}" y2="${Y(f)}"/><text x="${L - 8}" y="${Y(f) + 4}" text-anchor="end">${dsFmt(Math.round(f))}</text>`; });
     xTicks.forEach(([d, t]) => { g += `<line class="gl" x1="${X(d)}" x2="${X(d)}" y1="${py0}" y2="${py1}" stroke-opacity=".5"/><text x="${X(d)}" y="${py1 + 18}" text-anchor="middle">${t}</text>`; });
-    g += `<line class="gl" x1="${L + STRIP + GAP / 2}" x2="${L + STRIP + GAP / 2}" y1="${py0}" y2="${py1}" stroke-dasharray="2 4"/><text x="${L + STRIP / 2}" y="${py1 + 18}" text-anchor="middle">연재일수 없음</text>`;
+    if(showStrip) g += `<line class="gl" x1="${L + STRIP + GAP / 2}" x2="${L + STRIP + GAP / 2}" y1="${py0}" y2="${py1}" stroke-dasharray="2 4"/><text x="${L + STRIP / 2}" y="${py1 + 16}" text-anchor="middle">연재일수</text><text x="${L + STRIP / 2}" y="${py1 + 29}" text-anchor="middle">없음</text>`;
     g += `<text x="${(px0 + px1) / 2}" y="${H - 6}" text-anchor="middle">연재일수 (${dsState.logX ? '로그 눈금' : '일반 눈금'})</text><text transform="translate(14 ${(py0 + py1) / 2}) rotate(-90)" text-anchor="middle">관심 수 (${dsState.logY ? '로그 눈금' : '일반 눈금'})</text>`;
     let refs = '';
     [[q50, '중앙값'], [q75, '상위 25%'], [q90, '상위 10%']].forEach(([val, t]) => { if(val != null){ const y = Y(val); if(y > py0 && y < py1) refs += `<line class="ref" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${px1 + 4}" y="${y - 2}">${t}</text><text x="${px1 + 4}" y="${y + 10}">${dsFmt(Math.round(val))}</text>`; } });
@@ -2473,14 +2475,14 @@
     rows.forEach((r, i) => (r.path ? tracked : plain).push(i));
     const mk = (i, clip) => {
       const r = rows[i], st = r.path ? DS_PATH_STYLE[r.path] || DS_PATH_STYLE.unknown : null;
-      const x = r.span == null ? L + 8 + (hash(r.id) % (STRIP - 16)) : X(r.span), y = Y(r.fav);
+      if(r.span == null && !showStrip) return '';
+      const x = r.span == null ? L + 9 + (hash(r.id) % (STRIP - 18)) : X(r.span), y = Y(r.fav);
       if(x < L - 12 || x > px1 + 12 || y < py0 - 12 || y > py1 + 12) return '';
       return `<g class="pt" data-i="${i}" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}" data-r="${st ? 9 : 6}">${st ? dsMarker(st.shape, x, y, 6, st.color, 0.95) : dsMarker('circle', x, y, 3.4, 'var(--muted)', 0.5)}<circle cx="${x}" cy="${y}" r="${st ? 10 : 7}" fill="transparent"/></g>`;
     };
     const order = plain.concat(tracked);
     const stripPts = order.filter(i => rows[i].span == null).map(i => mk(i)).join('');
     const plotPts = order.filter(i => rows[i].span != null).map(i => mk(i)).join('');
-    const zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
     return `<svg viewBox="0 0 ${W} ${H}" id="ds-svgel" class="${dsBox ? 'boxmode' : (zoomed ? 'zoomed' : '')}" role="img" aria-label="연재일수와 관심 수 분포도. 작품 ${rows.length}개">${g}<g clip-path="url(#ds-clip-all)">${refs}</g><g clip-path="url(#ds-clip-strip)">${stripPts}</g><g clip-path="url(#ds-clip-plot)">${plotPts}</g></svg>`;
   }
   function dsRefreshChart(){ const el = document.getElementById('ds-svg'); if(el){ dsHideTip(); el.innerHTML = dsChartSvg(dsShown); } const bb = document.getElementById('ds-boxbtn'); if(bb) bb.classList.toggle('on', dsBox); }
@@ -2561,14 +2563,17 @@
     tip.style.left = Math.min(cx + 14, window.innerWidth - w - 8) + 'px';
     tip.style.top = (cy + 14 + h > window.innerHeight ? cy - h - 10 : cy + 14) + 'px';
   }
-  function dsRing(pt){                              // 지금 정보가 뜬 점에 하얀 테두리를 둘러 어느 점인지 보이게 함
+  function dsRing(pt){                              // 정보가 뜬 점의 모양을 그대로 본뜬 하얀 테두리 (도형 바로 뒤에 깔려 가장자리만 보임)
     const old = document.getElementById('ds-ring'); if(old) old.remove();
     if(!pt) return;
-    const svg = pt.ownerSVGElement; if(!svg) return;
-    const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    ring.setAttribute('id', 'ds-ring'); ring.setAttribute('cx', pt.dataset.x); ring.setAttribute('cy', pt.dataset.y); ring.setAttribute('r', +pt.dataset.r + 3);
-    ring.setAttribute('fill', 'none'); ring.setAttribute('stroke', 'var(--text, #fff)'); ring.setAttribute('stroke-width', '2.5'); ring.setAttribute('pointer-events', 'none');
-    svg.appendChild(ring);
+    const shape = pt.firstElementChild; if(!shape) return;
+    const ring = shape.cloneNode(true);
+    ring.setAttribute('id', 'ds-ring'); ring.setAttribute('pointer-events', 'none');
+    const w = parseFloat(shape.getAttribute('stroke-width') || '0');
+    ring.setAttribute('stroke', 'var(--text, #fff)'); ring.setAttribute('stroke-opacity', '1');
+    ring.setAttribute('stroke-width', String(w + 4.5)); ring.setAttribute('stroke-linejoin', 'round');
+    if(shape.getAttribute('fill') && shape.getAttribute('fill') !== 'none'){ ring.setAttribute('fill', 'var(--text, #fff)'); ring.setAttribute('fill-opacity', '1'); }
+    pt.insertBefore(ring, shape);
   }
   function dsHideTip(){ const tip = document.getElementById('ds-tip'); if(tip) tip.style.display = 'none'; const ring = document.getElementById('ds-ring'); if(ring) ring.remove(); }
   function onDistOpt(key, value){ dsState[key] = value; if(key !== 'mine') dsView = { x0: 0, x1: 1, y0: 0, y1: 1 }; renderDistPage(); }
