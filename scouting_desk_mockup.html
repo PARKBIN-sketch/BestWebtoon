@@ -599,6 +599,7 @@
   .ds-table th:first-child, .ds-table td:first-child{text-align:left;}
   .ds-table th{color:var(--muted); font-weight:500;}
   .ds-exportbar{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; margin:8px 0 10px;}
+  .ds-links{display:inline-flex;gap:10px;flex-wrap:wrap}
   .ds-missing{display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; padding:6px 0; border-bottom:1px solid var(--hairline); font-size:12.5px;}
   .ds-missing .t{min-width:180px; flex:1;}
   .ds-missing input[type=date]{background:transparent; color:inherit; border:1px solid var(--hairline); border-radius:3px; padding:3px 6px; font-size:12px;}
@@ -2453,7 +2454,7 @@
     const candHtml = (autoN || links.cands.length) ? `<div class="ds-sec"><h3>정식 번호 자동 연결</h3>
       <div class="ds-note">정식 번호를 안 적은 확정·수상 작품을 현재 연재 목록과 <b>제목이 같고(공백·기호 무시, 겹치는 제목 없음) 날짜가 맞을 때</b> 자동으로 이어요. 날짜는 입력한 오픈일(±3일), 없으면 분류 시점(±14일)이 첫 화와 맞는지 봐요. 계산만 하고 저장하지 않으며, 직접 입력한 번호가 항상 우선이에요. 동명이작일 수 있으니 점에 올려 “자동 연결” 표시를 확인해 주세요. 자동 연결 ${autoN}개: ${Object.values(links.auto).map(a => escapeHtml(a.title)).join(', ') || '없음'}</div>
       ${links.cands.length ? `<div class="ds-note" style="margin-top:6px"><b>연결 후보 ${links.cands.length}개</b> — 자동으로 잇지 않았어요. 맞으면 작품 카드에 정식 번호를 직접 입력해 주세요.</div>
-      ${links.cands.map(c => `<div class="ds-missing"><span class="t">${escapeHtml(c.title)}</span><span class="ds-note">정식 번호 ${c.ids.map(escapeHtml).join(' / ')} · ${escapeHtml(c.why)}</span></div>`).join('')}` : ''}</div>` : '';
+      ${links.cands.map(c => `<div class="ds-missing"><span class="t">${escapeHtml(c.title)}</span><span class="ds-note">${escapeHtml(c.why)}</span><span class="ds-links"><a class="label-link" href="https://comic.naver.com/bestChallenge/list?titleId=${encodeURIComponent(c.benchId)}" target="_blank" rel="noopener">베스트도전 ↗</a>${c.ids.map(id => `<a class="label-link" href="https://comic.naver.com/webtoon/list?titleId=${encodeURIComponent(id)}" target="_blank" rel="noopener">정식연재 ${escapeHtml(id)} ↗</a>`).join('')}</span></div>`).join('')}` : ''}</div>` : '';
 
     body.innerHTML = `<div class="ds-wrap">
       <div class="an-head"><h2 class="serif">관심도 분포</h2>
