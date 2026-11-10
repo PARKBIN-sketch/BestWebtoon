@@ -2452,11 +2452,11 @@
     const showStrip = !zoomed;                         // 확대하면 '연재일수 없음' 칸은 숨기고 그 자리까지 그림을 넓게 씀
     const px0 = L + (showStrip ? STRIP + GAP : 0), px1 = W - R, py0 = T, py1 = H - B;
     const withSpan = rows.filter(r => r.span != null);
-    const maxSpan = Math.max(60, ...withSpan.map(r => r.span)) * 1.05;
+    const maxSpan = Math.max(60, ...withSpan.map(r => r.span)) * 1.22;      // 오른쪽·위·아래에 여백을 둠 (가장 오래된·가장 높은 점이 테두리에 붙지 않게)
     const maxFav = Math.max(1000, ...favs), minFav = Math.max(100, Math.min(...favs, 1e9));
     const lg = Math.log10;
     const xMin = dsState.logX ? lg(6) : -maxSpan * 0.01, xMax = dsState.logX ? lg(maxSpan) : maxSpan;
-    const yMin = dsState.logY ? lg(Math.max(100, minFav / 1.5)) : 0, yMax = dsState.logY ? lg(maxFav * 1.15) : maxFav * 1.1;
+    const yMin = dsState.logY ? lg(Math.max(100, minFav / 2.2)) : 0, yMax = dsState.logY ? lg(maxFav * 1.9) : maxFav * 1.2;
     const tx = d => dsState.logX ? lg(Math.max(1, d)) : d, ty = f => dsState.logY ? lg(Math.max(1, f)) : f;
     const X = d => px0 + (((tx(d) - xMin) / (xMax - xMin)) - v.x0) / (v.x1 - v.x0) * (px1 - px0);
     const Y = f => py1 - (((ty(f) - yMin) / (yMax - yMin)) - v.y0) / (v.y1 - v.y0) * (py1 - py0);
