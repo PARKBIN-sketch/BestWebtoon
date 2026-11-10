@@ -2347,7 +2347,7 @@
       const start = dsParseDate(w.firstEpisodeDate), open = dsParseDate(l.officialOpenDate), notice = dsParseDate(l.noticeDate);
       let ok = false, why = '';
       if(open && start){ ok = Math.abs(open - start) <= 3 * 86400000; why = ok ? '' : `입력한 오픈일(${l.officialOpenDate})과 현재 첫 화(${w.firstEpisodeDate})가 달라요`; }
-      else if(notice && start){ ok = Math.abs(notice - start) <= 14 * 86400000; why = ok ? '' : `분류 시점(${l.noticeDate})과 현재 첫 화(${w.firstEpisodeDate})가 14일 넘게 떨어져요`; }
+      else if(notice && start){ const diff = (start - notice) / 86400000; ok = diff >= -14 && diff <= 730; why = ok ? '' : (diff > 730 ? `분류 시점(${l.noticeDate})이 현재 첫 화(${w.firstEpisodeDate})보다 2년 넘게 앞서요` : `분류 시점(${l.noticeDate})이 현재 첫 화(${w.firstEpisodeDate})보다 14일 넘게 뒤예요`); }
       else why = start ? '비교할 분류 날짜가 없어요' : '현재 첫 화 날짜를 몰라요 (성인 작품 등)';
       if(ok) auto[id] = { ...entry, id }; else cands.push({ ...entry, ids: [id], why });
     });
@@ -2452,7 +2452,7 @@
     const manualN = all.filter(r => r.manual).length;
     const links = dsAutoLinks(), autoN = Object.keys(links.auto).length;
     const candHtml = (autoN || links.cands.length) ? `<div class="ds-sec"><h3>정식 번호 자동 연결</h3>
-      <div class="ds-note">정식 번호를 안 적은 확정·수상 작품을 현재 연재 목록과 <b>제목이 같고(공백·기호 무시, 겹치는 제목 없음) 날짜가 맞을 때</b> 자동으로 이어요. 날짜는 입력한 오픈일(±3일), 없으면 분류 시점(±14일)이 첫 화와 맞는지 봐요. 계산만 하고 저장하지 않으며, 직접 입력한 번호가 항상 우선이에요. 동명이작일 수 있으니 점에 올려 “자동 연결” 표시를 확인해 주세요. 자동 연결 ${autoN}개: ${Object.values(links.auto).map(a => escapeHtml(a.title)).join(', ') || '없음'}</div>
+      <div class="ds-note">정식 번호를 안 적은 확정·수상 작품을 현재 연재 목록과 <b>제목이 같고(공백·기호 무시, 겹치는 제목 없음) 날짜가 맞을 때</b> 자동으로 이어요. 날짜는 입력한 오픈일(±3일), 없으면 분류 시점이 첫 화보다 최대 2년 앞서거나 14일 뒤까지 인정해요. 계산만 하고 저장하지 않으며, 직접 입력한 번호가 항상 우선이에요. 동명이작일 수 있으니 점에 올려 “자동 연결” 표시를 확인해 주세요. 자동 연결 ${autoN}개: ${Object.values(links.auto).map(a => escapeHtml(a.title)).join(', ') || '없음'}</div>
       ${links.cands.length ? `<div class="ds-note" style="margin-top:6px"><b>연결 후보 ${links.cands.length}개</b> — 자동으로 잇지 않았어요. 맞으면 작품 카드에 정식 번호를 직접 입력해 주세요.</div>
       ${links.cands.map(c => `<div class="ds-missing"><span class="t">${escapeHtml(c.title)}</span><span class="ds-note">${escapeHtml(c.why)}</span><span class="ds-links"><a class="label-link" href="https://comic.naver.com/bestChallenge/list?titleId=${encodeURIComponent(c.benchId)}" target="_blank" rel="noopener">베스트도전 ↗</a>${c.ids.map(id => `<a class="label-link" href="https://comic.naver.com/webtoon/list?titleId=${encodeURIComponent(id)}" target="_blank" rel="noopener">정식연재 ${escapeHtml(id)} ↗</a>`).join('')}</span></div>`).join('')}` : ''}</div>` : '';
 
