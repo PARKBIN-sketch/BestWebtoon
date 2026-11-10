@@ -214,8 +214,8 @@
       "updatedAt": "2026-11-10T05:49:20.722Z"
     }
   },
-  "exportedAt": "2026-11-10T05:50:58.627Z",
-  "count": 474,
+  "exportedAt": "2026-11-10T06:55:52.454Z",
+  "count": 476,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -274,12 +274,12 @@
     },
     "94950": {
       "status": "none",
-      "note": "",
+      "note": "막노동 후기(그냥 평범한 화)",
       "titleName": "채똘일기",
-      "subtitle": "옆집에 이레즈미남 이사온후기",
-      "noticeDate": "26.08.21",
-      "checkedAt": "2026-10-07",
-      "updatedAt": "2026-10-07T06:56:38.645Z",
+      "subtitle": "막노동 후기",
+      "noticeDate": "26.11.08",
+      "checkedAt": "2026-11-10",
+      "updatedAt": "2026-11-10T06:55:35.317Z",
       "snapshot": {
         "viewCount": 95075,
         "starScore": 8.82,
@@ -2876,7 +2876,7 @@
       "subtitle": "카오스이론 오픈 공지",
       "noticeDate": "26.10.17",
       "checkedAt": "2026-10-26",
-      "updatedAt": "2026-11-06T07:16:52.339Z",
+      "updatedAt": "2026-11-10T06:43:58.538Z",
       "snapshot": {
         "viewCount": 11395023,
         "starScore": 9.92385,
@@ -2885,7 +2885,9 @@
         "growthPct": 0.5,
         "trackedDays": 47
       },
-      "path": "challengers"
+      "path": "challengers",
+      "officialTitleId": 855666,
+      "officialOpenDate": "2026-10-17"
     },
     "777086": {
       "status": "moved",
@@ -4401,6 +4403,24 @@
         "trackedDays": 28
       }
     },
+    "810741": {
+      "status": "confirmed",
+      "note": "",
+      "titleName": "사기꾼 한도령",
+      "subtitle": "공지",
+      "noticeDate": "26.11.09",
+      "checkedAt": "2026-11-10",
+      "updatedAt": "2026-11-10T06:55:49.357Z",
+      "snapshot": {
+        "viewCount": 11721,
+        "starScore": 9.1276,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 30.7,
+        "trackedDays": 62
+      },
+      "path": "challengers"
+    },
     "810758": {
       "status": "ended",
       "note": "콘티 작가 생활 중 ",
@@ -5471,6 +5491,23 @@
         "cadenceDays": 10,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "823891": {
+      "status": "none",
+      "note": "근황 공지",
+      "titleName": "10대백작",
+      "subtitle": "근황",
+      "noticeDate": "26.11.07",
+      "checkedAt": "2026-11-10",
+      "updatedAt": "2026-11-10T06:10:46.191Z",
+      "snapshot": {
+        "viewCount": 495968,
+        "starScore": 8.87308,
+        "episodeCount": 111,
+        "cadenceDays": 7,
+        "growthPct": 2.2,
+        "trackedDays": 62
       }
     },
     "824699": {
