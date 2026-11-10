@@ -1,10 +1,13 @@
 # 저장 위치: 프로젝트 루트의 .github/workflows/collect_current.yml
 # 현재 연재 중인 작품의 관심 수·연재 시작일을 data/current_webtoons.json에 모읍니다. 끊겨도 다시 실행하면 이어서 합니다.
-# 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다.
+# 매주 일요일 19:00 UTC(= 월요일 새벽 4시 KST)에 자동으로 한 번 돌고, Actions 화면의 "Run workflow" 버튼으로도 실행할 수 있습니다.
+# (매일 도는 daily_scrape가 02:00 KST에 끝난 뒤라 겹치지 않고, 같은 concurrency 그룹이라 겹쳐도 순서대로 돕니다.)
 
 name: Collect Current
 
 on:
+  schedule:
+    - cron: "0 19 * * 0"
   workflow_dispatch:
     inputs:
       limit:
