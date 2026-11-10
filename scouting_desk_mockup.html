@@ -577,6 +577,10 @@
   .ds-zoom button{width:30px; height:30px; border:1px solid var(--hairline); border-radius:4px; background:var(--surface-2); color:inherit; font-size:16px; line-height:1; cursor:pointer;}
   .ds-zoom button:hover{border-color:var(--new); color:var(--new);}
   .ds-zoom button.on{background:var(--new); color:#fff; border-color:var(--new);}
+  .ds-mini{position:absolute; right:14px; bottom:196px; width:132px; height:92px; z-index:5; border:1px solid var(--hairline); border-radius:4px; background:var(--surface-2); padding:3px; cursor:pointer; touch-action:none; box-shadow:0 4px 14px rgba(0,0,0,.3);}
+  .ds-mini svg{display:block; width:100%; height:100%;}
+  .ds-mini .vp{fill:rgba(95,168,211,.22); stroke:var(--new); stroke-width:1.5;}
+  .ds-mini-cap{position:absolute; right:14px; bottom:290px; font-size:10.5px; color:var(--muted); z-index:5; pointer-events:none;}
   .ds-chart svg.boxmode{cursor:crosshair;} .ds-chart svg.zoomed{cursor:grab;}
   .ds-sel{position:absolute; border:1.5px dashed var(--new); background:rgba(95,168,211,.15); pointer-events:none; z-index:4;}
   .ds-tip{position:fixed; z-index:80; pointer-events:none; background:var(--surface-2); border:1px solid var(--hairline); border-radius:4px; padding:8px 10px; font-size:12px; line-height:1.55; max-width:280px; box-shadow:0 6px 18px rgba(0,0,0,.35);}
@@ -2413,8 +2417,8 @@
         <label>내 기준 관심 수 <input type="number" min="0" step="1000" value="${escapeHtml(dsState.mine)}" placeholder="예: 50000" onchange="onDistOpt('mine', this.value)"></label>${mineText}
       </div>
       <div class="ds-chart" id="ds-chart"><div id="ds-svg">${svg}</div>
-        <div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
-      <div class="ds-note" style="margin-top:6px">확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨져요. 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
+        <div class="ds-mini" id="ds-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div><div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
+      <div class="ds-note" style="margin-top:6px">확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
       <div class="ds-sec"><h3>요일별 관심 수</h3>${dayTable}</div>
       <div class="ds-sec"><h3>내가 추적 중인 작품은 어디쯤일까</h3>${pathTable}
         <div class="ds-note">“전체 중 위치”는 그 경로 작품들의 중앙값이 지금 보이는 작품 전체에서 상위 몇 %인지예요.</div></div>
@@ -2426,7 +2430,7 @@
         · 같은 작품이 여러 요일에 나와도 한 점으로 세요(작품 번호 기준). 요일별 표에서는 연재하는 요일마다 들어가요.<br>
         · 점 모양은 정식 연재 추적 링크를 넣어 둔 작품만 분류별로 달라요. 나머지는 회색 점이에요.${manualN ? `<br>· 직접 입력한 연재 시작일이 ${manualN}개 포함돼 있어요.` : ''}</div></div>
     </div>`;
-    dsBindChart();
+    dsBindChart(); dsBindMini(); dsFillMini();
   }
   // 확대 상태: 전체 범위를 0~1로 봤을 때 지금 보이는 구간 (x0~x1: 가로, y0~y1: 세로 / 0이 아래·왼쪽)
   let dsView = { x0: 0, x1: 1, y0: 0, y1: 1 }, dsBox = false, dsGeom = null;
@@ -2449,6 +2453,15 @@
     const dAt = fr => { const t = xMin + fr * (xMax - xMin); return dsState.logX ? Math.pow(10, t) : t; };       // 가로 비율 → 연재일수
     const fAt = fr => { const t = yMin + fr * (yMax - yMin); return dsState.logY ? Math.pow(10, t) : t; };       // 세로 비율 → 관심 수
     dsGeom = { W, H, px0, px1, py0, py1, STRIP, L };
+    // 미니맵: 전체 범위를 작게 그리고 지금 보는 구간을 네모로 표시
+    {
+      const MW = 124, MH = 84;
+      const fx = d => (tx(d) - xMin) / (xMax - xMin), fy = f => (ty(f) - yMin) / (yMax - yMin);
+      let dots = '';
+      rows.forEach(r => { if(r.span == null) return; const st = r.path ? (DS_PATH_STYLE[r.path] || DS_PATH_STYLE.unknown) : null; dots += `<circle cx="${(fx(r.span) * MW).toFixed(1)}" cy="${((1 - fy(r.fav)) * MH).toFixed(1)}" r="${st ? 1.8 : 1}" fill="${st ? st.color : 'var(--muted)'}" fill-opacity="${st ? 1 : 0.55}"/>`; });
+      dsGeom.miniSvg = `<svg viewBox="0 0 ${MW} ${MH}" preserveAspectRatio="none" aria-label="전체 중 지금 보는 위치">${dots}<rect class="vp" x="${(v.x0 * MW).toFixed(1)}" y="${((1 - v.y1) * MH).toFixed(1)}" width="${((v.x1 - v.x0) * MW).toFixed(1)}" height="${((v.y1 - v.y0) * MH).toFixed(1)}"/></svg>`;
+      dsGeom.zoomed = zoomed;
+    }
     const dVis0 = dAt(v.x0), dVis1 = dAt(v.x1), fVis0 = fAt(v.y0), fVis1 = fAt(v.y1);
     // 눈금: 후보를 만든 뒤 화면에서 너무 붙은 것은 솎아 냄
     const thin = (cands, pos, gap) => { const out = []; let last = -1e9; cands.forEach(c => { const p = pos(c); if(p > last + gap){ out.push(c); last = p; } }); return out; };
@@ -2485,7 +2498,28 @@
     const plotPts = order.filter(i => rows[i].span != null).map(i => mk(i)).join('');
     return `<svg viewBox="0 0 ${W} ${H}" id="ds-svgel" class="${dsBox ? 'boxmode' : (zoomed ? 'zoomed' : '')}" role="img" aria-label="연재일수와 관심 수 분포도. 작품 ${rows.length}개">${g}<g clip-path="url(#ds-clip-all)">${refs}</g><g clip-path="url(#ds-clip-strip)">${stripPts}</g><g clip-path="url(#ds-clip-plot)">${plotPts}</g></svg>`;
   }
-  function dsRefreshChart(){ const el = document.getElementById('ds-svg'); if(el){ dsHideTip(); el.innerHTML = dsChartSvg(dsShown); } const bb = document.getElementById('ds-boxbtn'); if(bb) bb.classList.toggle('on', dsBox); }
+  function dsRefreshChart(){ const el = document.getElementById('ds-svg'); if(el){ dsHideTip(); el.innerHTML = dsChartSvg(dsShown); } dsFillMini(); const bb = document.getElementById('ds-boxbtn'); if(bb) bb.classList.toggle('on', dsBox); }
+  function dsFillMini(){
+    const mi = document.getElementById('ds-mini'); if(!mi || !dsGeom) return;
+    mi.style.display = dsGeom.zoomed ? '' : 'none';
+    if(dsGeom.zoomed) mi.innerHTML = dsGeom.miniSvg;
+  }
+  function dsMiniMove(ev){                          // 미니맵의 눌린 위치가 화면 중앙이 되도록 이동 (크기는 그대로)
+    const mi = document.getElementById('ds-mini'); if(!mi) return;
+    const r = mi.getBoundingClientRect(), pad = 3;
+    const cx = (ev.clientX - r.left - pad) / (r.width - 2 * pad), cy = 1 - (ev.clientY - r.top - pad) / (r.height - 2 * pad);
+    const wx = dsView.x1 - dsView.x0, wy = dsView.y1 - dsView.y0;
+    const x0 = Math.min(Math.max(0, cx - wx / 2), 1 - wx), y0 = Math.min(Math.max(0, cy - wy / 2), 1 - wy);
+    dsView = { x0, x1: x0 + wx, y0, y1: y0 + wy };
+    dsRefreshChart();
+  }
+  function dsBindMini(){
+    const mi = document.getElementById('ds-mini'); if(!mi) return;
+    let on = false;
+    mi.onpointerdown = ev => { on = true; try { mi.setPointerCapture(ev.pointerId); } catch(e){} dsMiniMove(ev); ev.preventDefault(); ev.stopPropagation(); };
+    mi.onpointermove = ev => { if(on) dsMiniMove(ev); };
+    mi.onpointerup = mi.onpointercancel = () => { on = false; };
+  }
   function dsZoom(f){                              // 보이는 영역의 중앙을 기준으로 확대/축소
     const v = dsView, fit = (lo, hi) => { let w = Math.min(1, Math.max(0.01, (hi - lo))); let a = Math.min(Math.max(0, lo), 1 - w); return [a, a + w]; };
     const nx = fit((v.x0 + v.x1) / 2 - (v.x1 - v.x0) / f / 2, (v.x0 + v.x1) / 2 + (v.x1 - v.x0) / f / 2);
@@ -2527,7 +2561,7 @@
       if(pt) dsShowTip(+pt.dataset.i, ev.clientX, ev.clientY, pt); else dsHideTip();
     };
     chart.onmousedown = ev => {
-      if(ev.button !== 0 || !ev.target.closest || ev.target.closest('.ds-zoom')) return;
+      if(ev.button !== 0 || !ev.target.closest || ev.target.closest('.ds-zoom, .ds-mini')) return;
       const p = dsSvgPoint(ev), g = dsGeom;
       if(p.x < g.L || p.x > g.px1 || p.y < g.py0 || p.y > g.py1) return;
       if(!dsBox && !(dsView.x0 > 0 || dsView.x1 < 1 || dsView.y0 > 0 || dsView.y1 < 1)) return;      // 확대 전에는 드래그 이동 없음
