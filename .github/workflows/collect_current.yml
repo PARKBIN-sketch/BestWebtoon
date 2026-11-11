@@ -15,7 +15,7 @@ on:
         required: false
         default: ""
       finished_only:
-        description: "완결 목록 번호만 새로 받기 (true면 1~2분, 관심 수 수집은 안 함)"
+        description: "완결 목록 번호와 목록 순위만 새로 받기 (true면 2~3분, 관심 수 수집은 안 함)"
         required: false
         default: "false"
 
@@ -48,6 +48,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/current_webtoons.json
+          if [ -f data/rank_history.json ]; then git add data/rank_history.json; fi
           if git diff --quiet --cached; then
             echo "올릴 변경이 없습니다."
             exit 0
