@@ -12,6 +12,7 @@ collect_current.py — 현재 연재 중인 정식연재(요일웹툰) 작품의
   성인 작품은 회차 목록을 못 읽는 경우가 있어 연재 시작일이 비어 있을 수 있음(2번 시도 후 포기)
 
   매일+ 목록(요일과 겹치지 않는 별도 목록) → 요일 항목에 'DAILYPLUS'로 함께 모음
+  요일·매일+ 목록의 인기순·조회순·별점순 순서 → data/rank_history.json에 날짜별로 쌓음 (목록 안 순위용)
   완결 목록(finished, 여러 쪽) → 작품 번호만 store["finished"]["ids"]에 저장 (분포도에서 '네이버 완결 탭에 있음' 표시에 씀)
 
 출력  data/current_webtoons.json
@@ -19,7 +20,7 @@ collect_current.py — 현재 연재 중인 정식연재(요일웹툰) 작품의
      firstEpisodeDate,episodeCount,dates:[...],favorite:[...],active,lastSeen}}, "dupNames":[...]}
 
 사용
-  python collect_current.py --finished-only   # 완결 목록 번호만 새로 받음 (1~2분)
+  python collect_current.py --finished-only   # 완결 목록 번호와 목록 순위만 새로 받음 (2~3분)
   python collect_current.py --limit 10     # 10작품만 시험
   python collect_current.py                # 전부 (하루 안에 끊기면 다시 실행해도 이어서 함)
 
@@ -40,6 +41,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import scouting_desk_crawler as crawler
 
 OUT_PATH = Path("data") / "current_webtoons.json"
+RANK_PATH = Path("data") / "rank_history.json"
+RANK_WEEKS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", "dailyPlus"]
+RANK_ORDERS = ["user", "view", "star"]          # 인기순·조회순·별점순 (화면이 쓰는 소문자 값)
+MAX_RANK_SNAPSHOTS = 60
 LIST_URL = "https://comic.naver.com/api/webtoon/titlelist/weekday"
 FINISHED_URL = "https://comic.naver.com/api/webtoon/titlelist/finished"
 MIN_FINISHED = 1000         # 이보다 적게 받으면 오류로 보고 기존 값을 지우지 않음
@@ -82,6 +87,44 @@ def fetch_list():
         if "DAILYPLUS" not in w["days"]:
             w["days"].append("DAILYPLUS")
     return works
+
+
+def fetch_ranks(today):
+    """목록(요일 7개 + 매일+)마다 인기순·조회순·별점순 작품 번호 순서를 받음. 하나라도 이상하면 None."""
+    lists = {}
+    for wk in RANK_WEEKS:
+        entry = {}
+        for order in RANK_ORDERS:
+            try:
+                res = requests.get(LIST_URL, params={"week": wk, "order": order}, headers=crawler.HEADERS, timeout=20)
+                res.raise_for_status()
+                lst = res.json().get("titleList")
+            except (requests.RequestException, ValueError):
+                return None
+            if not isinstance(lst, list) or not lst:
+                return None
+            entry[order] = [str(it.get("titleId")) for it in lst]
+            time.sleep(0.5)
+        sizes = {len(v) for v in entry.values()}
+        if len(sizes) != 1 or len({frozenset(v) for v in entry.values()}) != 1:     # 정렬만 다르고 작품 구성은 같아야 함
+            return None
+        entry["n"] = sizes.pop()
+        lists[wk] = entry
+    return {"date": today, "lists": lists}
+
+
+def save_ranks(snap):
+    store = {"version": 1, "snapshots": []}
+    if RANK_PATH.exists():
+        try:
+            store = json.loads(RANK_PATH.read_text(encoding="utf-8"))
+        except ValueError:
+            pass
+    snaps = [x for x in store.get("snapshots", []) if x.get("date") != snap["date"]]
+    snaps.append(snap)
+    store["snapshots"] = snaps[-MAX_RANK_SNAPSHOTS:]
+    RANK_PATH.parent.mkdir(exist_ok=True)
+    RANK_PATH.write_text(json.dumps(store, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
 def fetch_finished():
@@ -136,10 +179,16 @@ def main():
         print(f"[collect] 완결 목록: {len(fin)}개")
     else:
         print("[collect] 완결 목록을 끝까지 읽지 못해 기존 값을 그대로 둡니다")
+    snap = fetch_ranks(today)
+    if snap:
+        save_ranks(snap)
+        print(f"[collect] 목록 순위 저장: {sum(v['n'] for v in snap['lists'].values())}개 항목 ({today})")
+    else:
+        print("[collect] 목록 순위를 받지 못해 이번엔 저장하지 않습니다")
     if args.finished_only:
         OUT_PATH.parent.mkdir(exist_ok=True)
         OUT_PATH.write_text(json.dumps(store, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-        print(f"[collect] 완결 목록만 갱신 → {OUT_PATH}")
+        print(f"[collect] 완결 목록·순위만 갱신 → {OUT_PATH}")
         return
 
     current = fetch_list()

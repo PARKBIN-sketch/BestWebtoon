@@ -126,6 +126,33 @@ def load_starts() -> dict:
     return starts if isinstance(starts, dict) else {}
 
 
+RANK_PATH = Path("data") / "rank_history.json"
+RANK_DAY_KEYS = {"mon": "MONDAY", "tue": "TUESDAY", "wed": "WEDNESDAY", "thu": "THURSDAY", "fri": "FRIDAY",
+                 "sat": "SATURDAY", "sun": "SUNDAY", "dailyPlus": "DAILYPLUS"}
+
+
+def load_latest_ranks():
+    """가장 최근 목록 순위 기록 → (날짜, {작품번호: {요일키: [인기순, 조회순, 별점순, 목록 작품 수]}}). 없으면 (None, {})."""
+    if not RANK_PATH.exists():
+        return None, {}
+    try:
+        snaps = json.loads(RANK_PATH.read_text(encoding="utf-8")).get("snapshots") or []
+    except (OSError, ValueError):
+        return None, {}
+    if not snaps:
+        return None, {}
+    snap = snaps[-1]
+    out = {}
+    for wk, entry in (snap.get("lists") or {}).items():
+        key = RANK_DAY_KEYS.get(wk)
+        if not key:
+            continue
+        pos = {o: {tid: i + 1 for i, tid in enumerate(entry.get(o) or [])} for o in ("user", "view", "star")}
+        for tid in pos["user"]:
+            out.setdefault(tid, {})[key] = [pos["user"].get(tid), pos["view"].get(tid), pos["star"].get(tid), entry.get("n")]
+    return snap.get("date"), out
+
+
 def load_current() -> dict:
     """현재 연재작 데이터에서 분포도 페이지가 쓰는 값만 줄여서 가져옵니다. 없으면 빈 값."""
     if not CURRENT_PATH.exists():
@@ -138,7 +165,13 @@ def load_current() -> dict:
     for tid, w in (raw.get("works") or {}).items():
         works[tid] = {k: w.get(k) for k in ("title", "author", "days", "rest", "adult", "active", "firstEpisodeDate", "episodeCount") if w.get(k) is not None}
         works[tid]["favorite"] = (w.get("favorite") or [])[-1:]        # 분포도는 가장 최근 값만 씀
+    rank_date, ranks = load_latest_ranks()
+    for tid, rk in ranks.items():
+        if tid in works:
+            works[tid]["rk"] = rk
     out = {"updated": raw.get("updated"), "works": works}
+    if rank_date:
+        out["rankDate"] = rank_date
     fin = (raw.get("finished") or {}).get("ids")
     if isinstance(fin, list) and fin:
         out["finishedIds"] = [str(x) for x in fin]          # 네이버 완결 탭에 있는 작품 번호 (분포도의 '완결 탭 작품' 표시용)
