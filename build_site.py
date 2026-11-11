@@ -138,7 +138,11 @@ def load_current() -> dict:
     for tid, w in (raw.get("works") or {}).items():
         works[tid] = {k: w.get(k) for k in ("title", "author", "days", "rest", "adult", "active", "firstEpisodeDate", "episodeCount") if w.get(k) is not None}
         works[tid]["favorite"] = (w.get("favorite") or [])[-1:]        # 분포도는 가장 최근 값만 씀
-    return {"updated": raw.get("updated"), "works": works}
+    out = {"updated": raw.get("updated"), "works": works}
+    fin = (raw.get("finished") or {}).get("ids")
+    if isinstance(fin, list) and fin:
+        out["finishedIds"] = [str(x) for x in fin]          # 네이버 완결 탭에 있는 작품 번호 (분포도의 '완결 탭 작품' 표시용)
+    return out
 
 
 def load_personal() -> dict:

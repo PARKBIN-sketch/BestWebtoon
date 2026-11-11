@@ -14,6 +14,10 @@ on:
         description: "시험용: 이 개수만 조회 (비우면 전부)"
         required: false
         default: ""
+      finished_only:
+        description: "완결 목록 번호만 새로 받기 (true면 1~2분, 관심 수 수집은 안 함)"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -25,7 +29,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -36,6 +40,7 @@ jobs:
         run: |
           ARGS=""
           if [ -n "${{ github.event.inputs.limit }}" ]; then ARGS="--limit ${{ github.event.inputs.limit }}"; fi
+          if [ "${{ github.event.inputs.finished_only }}" = "true" ]; then ARGS="$ARGS --finished-only"; fi
           python collect_current.py $ARGS
       - name: 결과 커밋 및 푸시
         if: always()
