@@ -1,0 +1,46 @@
+# 저장 위치: 프로젝트 루트의 .github/workflows/probe_sort3.yml
+# 요일웹툰 목록의 정렬(인기·업데이트·조회·별점)과 조회수를 읽을 수 있는지 시험만 합니다 (data/sort_probe3.json 저장).
+# 자동으로 돌지 않고, Actions 화면의 "Run workflow" 버튼으로만 실행합니다.
+
+name: Probe Sort 3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scouting-data
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install requests numpy scipy
+      - name: 시험 실행
+        run: python probe_sort3.py
+      - name: 결과 커밋 및 푸시
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/sort_probe3.json
+          if git diff --quiet --cached; then
+            echo "올릴 변경이 없습니다."
+            exit 0
+          fi
+          git commit -m "chore: 정렬·조회수 시험 $(date +'%Y-%m-%d')"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash && git push && exit 0
+            echo "푸시 실패, 다시 시도 ($i/5)"
+            git rebase --abort 2>/dev/null || true
+            sleep 10
+          done
+          exit 1
