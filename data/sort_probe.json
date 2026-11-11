@@ -1,0 +1,5501 @@
+{
+ "results": [
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=user",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=update",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     853326,
+     "그랬더니 남친임니다",
+     0,
+     9.71908
+    ],
+    [
+     841810,
+     "브레이커즈",
+     0,
+     9.7808
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     849676,
+     "생활의 참견 2 : 지금은 가족시절",
+     0,
+     9.94499
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     850026,
+     "커플이상 부부미만",
+     0,
+     9.93087
+    ],
+    [
+     828167,
+     "구야는 신입",
+     0,
+     9.92806
+    ],
+    [
+     856744,
+     "그 여자, 그 남자, 또 다른 진심",
+     0,
+     9.84994
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=view",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     779632,
+     "일타강사 백사부",
+     0,
+     9.90169
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=star",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     846301,
+     "이름 사이 공백",
+     0,
+     9.97836
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ],
+    [
+     761496,
+     "도무지 그애는",
+     0,
+     9.97118
+    ],
+    [
+     780063,
+     "달이 없는 나라",
+     0,
+     9.96997
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     823737,
+     "사자의 서",
+     0,
+     9.96601
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ],
+    [
+     848576,
+     "가장 위대한 마술사",
+     0,
+     9.96433
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=USER",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=UPDATE",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     857023,
+     "인외 콤플렉스",
+     0,
+     9.85182
+    ],
+    [
+     849113,
+     "Mickey x F1 정상을 향한 질주",
+     0,
+     9.32345
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     840163,
+     "구운몽 제로",
+     0,
+     9.87587
+    ],
+    [
+     850928,
+     "같이 장볼래?",
+     0,
+     9.95071
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     850503,
+     "몰락 끝에 네가 있다",
+     0,
+     9.92599
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     841129,
+     "뒷골목 마법사의 회귀생활",
+     0,
+     9.86416
+    ],
+    [
+     839959,
+     "빌런의 프로파일러",
+     0,
+     9.93239
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=VIEW",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     644112,
+     "몽홀",
+     17565586,
+     9.8932
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=STAR",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     846301,
+     "이름 사이 공백",
+     0,
+     9.97836
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ],
+    [
+     761496,
+     "도무지 그애는",
+     0,
+     9.97118
+    ],
+    [
+     780063,
+     "달이 없는 나라",
+     0,
+     9.96997
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     823737,
+     "사자의 서",
+     0,
+     9.96601
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ],
+    [
+     848576,
+     "가장 위대한 마술사",
+     0,
+     9.96433
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=popularity",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=viewCount",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?order=starScore",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=user",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=update",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     857023,
+     "인외 콤플렉스",
+     0,
+     9.85182
+    ],
+    [
+     849113,
+     "Mickey x F1 정상을 향한 질주",
+     0,
+     9.32345
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     840163,
+     "구운몽 제로",
+     0,
+     9.87587
+    ],
+    [
+     850928,
+     "같이 장볼래?",
+     0,
+     9.95071
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     850503,
+     "몰락 끝에 네가 있다",
+     0,
+     9.92599
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     841129,
+     "뒷골목 마법사의 회귀생활",
+     0,
+     9.86416
+    ],
+    [
+     839959,
+     "빌런의 프로파일러",
+     0,
+     9.93239
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=view",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     64997,
+     "나이트런",
+     225292680,
+     9.91361
+    ],
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     793275,
+     "작전명 순정",
+     0,
+     9.76112
+    ],
+    [
+     792651,
+     "99강화나무몽둥이",
+     0,
+     9.68889
+    ],
+    [
+     721948,
+     "스터디그룹",
+     294030,
+     9.95624
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=star",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     846301,
+     "이름 사이 공백",
+     0,
+     9.97836
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ],
+    [
+     761496,
+     "도무지 그애는",
+     0,
+     9.97118
+    ],
+    [
+     780063,
+     "달이 없는 나라",
+     0,
+     9.96997
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     823737,
+     "사자의 서",
+     0,
+     9.96601
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ],
+    [
+     848576,
+     "가장 위대한 마술사",
+     0,
+     9.96433
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=USER",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=UPDATE",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     841639,
+     "중대장은 실망했다",
+     0,
+     9.94502
+    ],
+    [
+     856109,
+     "주식토피아",
+     0,
+     9.73804
+    ],
+    [
+     851503,
+     "동생 왔다",
+     0,
+     9.94339
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     823190,
+     "K학원 생존기",
+     0,
+     9.93792
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     850237,
+     "사회초년캣",
+     0,
+     9.81758
+    ],
+    [
+     840092,
+     "세이브 디 어스!",
+     0,
+     9.90263
+    ],
+    [
+     837336,
+     "비밀복식클럽",
+     0,
+     9.95757
+    ],
+    [
+     827423,
+     "나만 최강 초월자",
+     0,
+     9.65451
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=VIEW",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     779632,
+     "일타강사 백사부",
+     0,
+     9.90169
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=STAR",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     838705,
+     "모럴리스 스캔들",
+     0,
+     9.97398
+    ],
+    [
+     852333,
+     "남들 로판 여주 할 때 나는 장롱 괴물 됨",
+     0,
+     9.97386
+    ],
+    [
+     838945,
+     "고백대리",
+     0,
+     9.9717
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     849736,
+     "아리도록",
+     0,
+     9.9686
+    ],
+    [
+     835910,
+     "고대동물기",
+     0,
+     9.96733
+    ],
+    [
+     840332,
+     "용사생활기록부",
+     0,
+     9.96677
+    ],
+    [
+     842892,
+     "오리짱!",
+     0,
+     9.96383
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     844812,
+     "양아치의 첫사랑",
+     0,
+     9.95916
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=popularity",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=viewCount",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "weekday_mon",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=MONDAY&order=starScore",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=user",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=update",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     857023,
+     "인외 콤플렉스",
+     0,
+     9.85182
+    ],
+    [
+     849113,
+     "Mickey x F1 정상을 향한 질주",
+     0,
+     9.32345
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     840163,
+     "구운몽 제로",
+     0,
+     9.87587
+    ],
+    [
+     850928,
+     "같이 장볼래?",
+     0,
+     9.95072
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     850503,
+     "몰락 끝에 네가 있다",
+     0,
+     9.92599
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     841129,
+     "뒷골목 마법사의 회귀생활",
+     0,
+     9.86416
+    ],
+    [
+     839959,
+     "빌런의 프로파일러",
+     0,
+     9.93239
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=view",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     644112,
+     "몽홀",
+     17565586,
+     9.8932
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=star",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     838705,
+     "모럴리스 스캔들",
+     0,
+     9.97398
+    ],
+    [
+     852333,
+     "남들 로판 여주 할 때 나는 장롱 괴물 됨",
+     0,
+     9.97386
+    ],
+    [
+     838945,
+     "고백대리",
+     0,
+     9.9717
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     849736,
+     "아리도록",
+     0,
+     9.9686
+    ],
+    [
+     835910,
+     "고대동물기",
+     0,
+     9.96733
+    ],
+    [
+     840332,
+     "용사생활기록부",
+     0,
+     9.96677
+    ],
+    [
+     842892,
+     "오리짱!",
+     0,
+     9.96383
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     844812,
+     "양아치의 첫사랑",
+     0,
+     9.95916
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=USER",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=UPDATE",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     853326,
+     "그랬더니 남친임니다",
+     0,
+     9.71908
+    ],
+    [
+     841810,
+     "브레이커즈",
+     0,
+     9.7808
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     849676,
+     "생활의 참견 2 : 지금은 가족시절",
+     0,
+     9.94499
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     850026,
+     "커플이상 부부미만",
+     0,
+     9.93087
+    ],
+    [
+     828167,
+     "구야는 신입",
+     0,
+     9.92806
+    ],
+    [
+     856744,
+     "그 여자, 그 남자, 또 다른 진심",
+     0,
+     9.84994
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=VIEW",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     64997,
+     "나이트런",
+     225292680,
+     9.91361
+    ],
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     793275,
+     "작전명 순정",
+     0,
+     9.76112
+    ],
+    [
+     792651,
+     "99강화나무몽둥이",
+     0,
+     9.68889
+    ],
+    [
+     721948,
+     "스터디그룹",
+     294030,
+     9.95624
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=STAR",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     838705,
+     "모럴리스 스캔들",
+     0,
+     9.97398
+    ],
+    [
+     852333,
+     "남들 로판 여주 할 때 나는 장롱 괴물 됨",
+     0,
+     9.97386
+    ],
+    [
+     838945,
+     "고백대리",
+     0,
+     9.9717
+    ],
+    [
+     850546,
+     "맹종",
+     0,
+     9.96936
+    ],
+    [
+     849736,
+     "아리도록",
+     0,
+     9.9686
+    ],
+    [
+     835910,
+     "고대동물기",
+     0,
+     9.96733
+    ],
+    [
+     840332,
+     "용사생활기록부",
+     0,
+     9.96677
+    ],
+    [
+     842892,
+     "오리짱!",
+     0,
+     9.96383
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     844812,
+     "양아치의 첫사랑",
+     0,
+     9.95916
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=popularity",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=viewCount",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILY&order=starScore",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=user",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=update",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     841639,
+     "중대장은 실망했다",
+     0,
+     9.94502
+    ],
+    [
+     856109,
+     "주식토피아",
+     0,
+     9.73804
+    ],
+    [
+     851503,
+     "동생 왔다",
+     0,
+     9.94339
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     823190,
+     "K학원 생존기",
+     0,
+     9.93793
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     850237,
+     "사회초년캣",
+     0,
+     9.81758
+    ],
+    [
+     840092,
+     "세이브 디 어스!",
+     0,
+     9.90263
+    ],
+    [
+     837336,
+     "비밀복식클럽",
+     0,
+     9.95757
+    ],
+    [
+     827423,
+     "나만 최강 초월자",
+     0,
+     9.65451
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=view",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     64997,
+     "나이트런",
+     225292680,
+     9.91361
+    ],
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     793275,
+     "작전명 순정",
+     0,
+     9.76112
+    ],
+    [
+     792651,
+     "99강화나무몽둥이",
+     0,
+     9.68889
+    ],
+    [
+     721948,
+     "스터디그룹",
+     294030,
+     9.95624
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=star",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     846301,
+     "이름 사이 공백",
+     0,
+     9.97836
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ],
+    [
+     761496,
+     "도무지 그애는",
+     0,
+     9.97118
+    ],
+    [
+     780063,
+     "달이 없는 나라",
+     0,
+     9.96997
+    ],
+    [
+     828292,
+     "개집사",
+     0,
+     9.96947
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     823737,
+     "사자의 서",
+     0,
+     9.96601
+    ],
+    [
+     848496,
+     "죽음은 잠 못 이루고",
+     0,
+     9.9655
+    ],
+    [
+     848576,
+     "가장 위대한 마술사",
+     0,
+     9.96433
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=USER",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=UPDATE",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     841639,
+     "중대장은 실망했다",
+     0,
+     9.94502
+    ],
+    [
+     856109,
+     "주식토피아",
+     0,
+     9.73804
+    ],
+    [
+     851503,
+     "동생 왔다",
+     0,
+     9.94339
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     823190,
+     "K학원 생존기",
+     0,
+     9.93793
+    ],
+    [
+     842647,
+     "용사파티만화",
+     0,
+     9.95798
+    ],
+    [
+     850237,
+     "사회초년캣",
+     0,
+     9.81758
+    ],
+    [
+     840092,
+     "세이브 디 어스!",
+     0,
+     9.90263
+    ],
+    [
+     837336,
+     "비밀복식클럽",
+     0,
+     9.95757
+    ],
+    [
+     827423,
+     "나만 최강 초월자",
+     0,
+     9.65451
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=VIEW",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     64997,
+     "나이트런",
+     225292680,
+     9.91361
+    ],
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     616239,
+     "윌유메리미",
+     103340238,
+     9.91453
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     793275,
+     "작전명 순정",
+     0,
+     9.76112
+    ],
+    [
+     792651,
+     "99강화나무몽둥이",
+     0,
+     9.68889
+    ],
+    [
+     721948,
+     "스터디그룹",
+     294030,
+     9.95624
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=STAR",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     835526,
+     "미스 펜들턴",
+     0,
+     9.98255
+    ],
+    [
+     819748,
+     "탑아이돌의 막내 멤버가 되었다",
+     0,
+     9.97773
+    ],
+    [
+     832575,
+     "살아생전",
+     0,
+     9.97566
+    ],
+    [
+     822642,
+     "스쿨 오브 스트릿",
+     0,
+     9.9751
+    ],
+    [
+     833361,
+     "호붕빵 아저씨",
+     0,
+     9.97343
+    ],
+    [
+     703630,
+     "어글리후드",
+     9610578,
+     9.97339
+    ],
+    [
+     774832,
+     "같은 학교 친구",
+     0,
+     9.97162
+    ],
+    [
+     823239,
+     "유령의 노래",
+     0,
+     9.96976
+    ],
+    [
+     834391,
+     "내 호수에 가둔 인어",
+     0,
+     9.96866
+    ],
+    [
+     838885,
+     "오사카 환상선",
+     0,
+     9.96843
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=popularity",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     832677,
+     "절대군림",
+     0,
+     9.95207
+    ],
+    [
+     650305,
+     "호랑이형님",
+     112350625,
+     9.85419
+    ],
+    [
+     807777,
+     "마도전생기",
+     0,
+     9.92705
+    ],
+    [
+     846883,
+     "만취남녀",
+     0,
+     9.83258
+    ],
+    [
+     827190,
+     "시든 꽃에 눈물을",
+     0,
+     9.65461
+    ],
+    [
+     816798,
+     "킬러 배드로",
+     0,
+     9.93922
+    ],
+    [
+     730694,
+     "초인의 시대",
+     0,
+     9.68852
+    ],
+    [
+     845711,
+     "둘째에게",
+     0,
+     9.96662
+    ],
+    [
+     855719,
+     "대기업 탈출일지",
+     0,
+     9.92627
+    ],
+    [
+     772853,
+     "나태 공자, 노력 천재 되다",
+     0,
+     9.93563
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=viewCount",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     776601,
+     "광마회귀",
+     0,
+     9.96111
+    ],
+    [
+     841624,
+     "오! 나의 교주님",
+     0,
+     9.5264
+    ],
+    [
+     641253,
+     "외모지상주의",
+     354266224,
+     9.43923
+    ],
+    [
+     773797,
+     "나 혼자 만렙 뉴비",
+     0,
+     9.93052
+    ],
+    [
+     751168,
+     "상남자",
+     0,
+     9.96815
+    ],
+    [
+     820097,
+     "아카데미에서 살아남기",
+     0,
+     9.94841
+    ],
+    [
+     808389,
+     "나 혼자 탑에서 농사",
+     0,
+     9.96678
+    ],
+    [
+     842465,
+     "네가 사는 그 집",
+     0,
+     9.70127
+    ],
+    [
+     844063,
+     "악당들의 후원자가 되었다",
+     0,
+     9.96005
+    ],
+    [
+     765804,
+     "A.I. 닥터",
+     0,
+     9.97387
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "dailyPlus2",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/weekday?week=DAILYPLUS&order=starScore",
+   "status": 200,
+   "err": "",
+   "count": 842,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "openToday",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount"
+   ],
+   "first10": [
+    [
+     737628,
+     "별이삼샵",
+     0,
+     9.94808
+    ],
+    [
+     812354,
+     "육아일기",
+     0,
+     9.96355
+    ],
+    [
+     848000,
+     "범죄도시0",
+     0,
+     9.85237
+    ],
+    [
+     852498,
+     "럭키비치",
+     0,
+     9.31078
+    ],
+    [
+     839568,
+     "권왕환생",
+     0,
+     9.9545
+    ],
+    [
+     840687,
+     "태존비록",
+     0,
+     9.69874
+    ],
+    [
+     805193,
+     "천화서고 대공자",
+     0,
+     9.94643
+    ],
+    [
+     849611,
+     "모든걸 기억하는 천재무사",
+     0,
+     9.70347
+    ],
+    [
+     832566,
+     "2회차 환관이 남성을 되찾음",
+     0,
+     9.88099
+    ],
+    [
+     845508,
+     "하남자의 탑 공략법",
+     0,
+     9.93838
+    ]
+   ],
+   "viewCount_nonzero": 16,
+   "viewCount_max": 354266224,
+   "starScore_nonnull": 842,
+   "same_order_as_default": false,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=user",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=update",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     857367,
+     "업데이터",
+     0,
+     9.90909
+    ],
+    [
+     856135,
+     "여의도",
+     0,
+     9.75
+    ],
+    [
+     823779,
+     "누가 어른 되면 다 된댔어?",
+     0,
+     9.87192
+    ],
+    [
+     842116,
+     "오늘은 뭐하고 놀까?",
+     0,
+     9.86649
+    ],
+    [
+     835753,
+     "결혼은 당신 형과",
+     0,
+     9.70457
+    ],
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     857056,
+     "후서유기",
+     0,
+     8.88662
+    ],
+    [
+     846650,
+     "연애지옥",
+     0,
+     7.49294
+    ],
+    [
+     842321,
+     "우리집 로미오",
+     0,
+     9.56267
+    ]
+   ],
+   "viewCount_nonzero": 1,
+   "viewCount_max": 53585375,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=view",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     350217,
+     "2011 미스테리 단편",
+     168602621,
+     8.45263
+    ],
+    [
+     325629,
+     "패션왕",
+     366878225,
+     8.33555
+    ],
+    [
+     150388,
+     "폭풍의 전학생",
+     328074883,
+     9.55818
+    ],
+    [
+     23182,
+     "싸우자귀신아",
+     424556025,
+     9.90272
+    ],
+    [
+     15640,
+     "입시명문사립 정글고등학교",
+     1502086840,
+     9.91396
+    ],
+    [
+     22896,
+     "핑크레이디",
+     235667132,
+     9.92448
+    ],
+    [
+     179704,
+     "안나라수마나라",
+     66462622,
+     9.95116
+    ],
+    [
+     55150,
+     "남기한엘리트만들기",
+     556593912,
+     9.94249
+    ],
+    [
+     67235,
+     "지금 우리 학교는",
+     267388987,
+     9.56011
+    ],
+    [
+     26310,
+     "3단합체김창남",
+     54536788,
+     9.94393
+    ]
+   ],
+   "viewCount_nonzero": 45,
+   "viewCount_max": 1502086840,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=star",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     720121,
+     "치즈인더트랩",
+     1814746,
+     9.98471
+    ],
+    [
+     834369,
+     "엄마를 만나러 가는 길",
+     0,
+     9.9847
+    ],
+    [
+     738145,
+     "숲속의 담",
+     0,
+     9.98465
+    ],
+    [
+     729767,
+     "고래별",
+     0,
+     9.98445
+    ],
+    [
+     718020,
+     "귀곡의 문",
+     2394530,
+     9.98443
+    ],
+    [
+     647946,
+     "여중생A",
+     39069108,
+     9.98426
+    ],
+    [
+     796152,
+     "마루는 강쥐",
+     0,
+     9.98425
+    ],
+    [
+     716857,
+     "오늘의 순정망화",
+     5535527,
+     9.98363
+    ],
+    [
+     713872,
+     "연의 편지",
+     1879884,
+     9.98356
+    ],
+    [
+     836648,
+     "눈에 밟힌 발걸음",
+     0,
+     9.98309
+    ]
+   ],
+   "viewCount_nonzero": 20,
+   "viewCount_max": 63194577,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=USER",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=UPDATE",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     857367,
+     "업데이터",
+     0,
+     9.90909
+    ],
+    [
+     856135,
+     "여의도",
+     0,
+     9.75
+    ],
+    [
+     823779,
+     "누가 어른 되면 다 된댔어?",
+     0,
+     9.87192
+    ],
+    [
+     842116,
+     "오늘은 뭐하고 놀까?",
+     0,
+     9.86649
+    ],
+    [
+     835753,
+     "결혼은 당신 형과",
+     0,
+     9.70457
+    ],
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     857056,
+     "후서유기",
+     0,
+     8.88662
+    ],
+    [
+     846650,
+     "연애지옥",
+     0,
+     7.49294
+    ],
+    [
+     842321,
+     "우리집 로미오",
+     0,
+     9.56267
+    ]
+   ],
+   "viewCount_nonzero": 1,
+   "viewCount_max": 53585375,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=VIEW",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     350217,
+     "2011 미스테리 단편",
+     168602621,
+     8.45263
+    ],
+    [
+     325629,
+     "패션왕",
+     366878225,
+     8.33555
+    ],
+    [
+     150388,
+     "폭풍의 전학생",
+     328074883,
+     9.55818
+    ],
+    [
+     23182,
+     "싸우자귀신아",
+     424556025,
+     9.90272
+    ],
+    [
+     15640,
+     "입시명문사립 정글고등학교",
+     1502086840,
+     9.91396
+    ],
+    [
+     22896,
+     "핑크레이디",
+     235667132,
+     9.92448
+    ],
+    [
+     179704,
+     "안나라수마나라",
+     66462622,
+     9.95116
+    ],
+    [
+     55150,
+     "남기한엘리트만들기",
+     556593912,
+     9.94249
+    ],
+    [
+     67235,
+     "지금 우리 학교는",
+     267388987,
+     9.56011
+    ],
+    [
+     26310,
+     "3단합체김창남",
+     54536788,
+     9.94393
+    ]
+   ],
+   "viewCount_nonzero": 45,
+   "viewCount_max": 1502086840,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=STAR",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     720121,
+     "치즈인더트랩",
+     1814746,
+     9.98471
+    ],
+    [
+     834369,
+     "엄마를 만나러 가는 길",
+     0,
+     9.9847
+    ],
+    [
+     738145,
+     "숲속의 담",
+     0,
+     9.98465
+    ],
+    [
+     729767,
+     "고래별",
+     0,
+     9.98445
+    ],
+    [
+     718020,
+     "귀곡의 문",
+     2394530,
+     9.98443
+    ],
+    [
+     647946,
+     "여중생A",
+     39069108,
+     9.98426
+    ],
+    [
+     796152,
+     "마루는 강쥐",
+     0,
+     9.98425
+    ],
+    [
+     716857,
+     "오늘의 순정망화",
+     5535527,
+     9.98363
+    ],
+    [
+     713872,
+     "연의 편지",
+     1879884,
+     9.98356
+    ],
+    [
+     836648,
+     "눈에 밟힌 발걸음",
+     0,
+     9.98309
+    ]
+   ],
+   "viewCount_nonzero": 20,
+   "viewCount_max": 63194577,
+   "starScore_nonnull": 45,
+   "same_order_as_default": false,
+   "same_set_as_default": false
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=popularity",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=viewCount",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  },
+  {
+   "name": "finished_p1",
+   "url": "https://comic.naver.com/api/webtoon/titlelist/finished?page=1&order=starScore",
+   "status": 200,
+   "err": "",
+   "count": 45,
+   "keys": [
+    "adult",
+    "author",
+    "bestChallengeLevelUp",
+    "bm",
+    "finish",
+    "new",
+    "novelOriginAuthors",
+    "openToday",
+    "painters",
+    "potenUp",
+    "rest",
+    "starScore",
+    "thumbnailUrl",
+    "titleId",
+    "titleName",
+    "up",
+    "viewCount",
+    "writers"
+   ],
+   "first10": [
+    [
+     818434,
+     "아카데미 플레이어를 죽였다",
+     0,
+     9.88327
+    ],
+    [
+     725586,
+     "1초",
+     0,
+     9.97565
+    ],
+    [
+     808455,
+     "중간에서 만나",
+     0,
+     9.95524
+    ],
+    [
+     798182,
+     "디펜스 게임의 폭군이 되었다",
+     0,
+     9.95995
+    ],
+    [
+     747269,
+     "전지적 독자 시점",
+     0,
+     9.95112
+    ],
+    [
+     802840,
+     "저 그런 인재 아닙니다",
+     0,
+     9.95608
+    ],
+    [
+     842839,
+     "소녀바둑",
+     0,
+     9.88347
+    ],
+    [
+     822640,
+     "소꿉친구 컴플렉스",
+     0,
+     9.78206
+    ],
+    [
+     817366,
+     "내 남편의 정부에게",
+     0,
+     9.92359
+    ],
+    [
+     835082,
+     "연애리뷰",
+     0,
+     9.86401
+    ]
+   ],
+   "viewCount_nonzero": 4,
+   "viewCount_max": 881614870,
+   "starScore_nonnull": 45,
+   "same_order_as_default": true,
+   "same_set_as_default": true
+  }
+ ],
+ "pagination_note": ""
+}
