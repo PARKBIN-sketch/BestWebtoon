@@ -474,8 +474,8 @@
       "updatedAt": "2026-11-11T07:38:10.077Z"
     }
   },
-  "exportedAt": "2026-11-11T07:38:12.213Z",
-  "count": 476,
+  "exportedAt": "2026-11-13T04:35:06.646Z",
+  "count": 477,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -6935,7 +6935,7 @@
       "subtitle": "연재공지",
       "noticeDate": "26.03.19",
       "checkedAt": "2026-10-06",
-      "updatedAt": "2026-10-07T05:33:54.358Z",
+      "updatedAt": "2026-11-11T07:46:34.575Z",
       "snapshot": {
         "viewCount": 101163,
         "starScore": 9.86,
@@ -6945,7 +6945,8 @@
         "trackedDays": 28
       },
       "officialTitleId": 848576,
-      "officialOpenDate": "2026-03-26"
+      "officialOpenDate": "2026-03-26",
+      "path": "contact"
     },
     "830490": {
       "status": "ended",
@@ -8574,6 +8575,23 @@
         "cadenceDays": 10,
         "growthPct": 8.5,
         "trackedDays": 28
+      }
+    },
+    "851016": {
+      "status": "none",
+      "note": "컴퓨터 고장",
+      "titleName": "썸머넘버.88",
+      "subtitle": "휴재 공지",
+      "noticeDate": "26.11.12",
+      "checkedAt": "2026-11-13",
+      "updatedAt": "2026-11-13T04:35:02.261Z",
+      "snapshot": {
+        "viewCount": 9504,
+        "starScore": 8.89535,
+        "episodeCount": 5,
+        "cadenceDays": 31.5,
+        "growthPct": 11.9,
+        "trackedDays": 65
       }
     },
     "851049": {
