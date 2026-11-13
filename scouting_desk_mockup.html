@@ -607,6 +607,7 @@
   .ds-mine-row{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin:4px 0 14px; font-size:12.5px; color:var(--muted);}
   .ds-mine-row label{display:inline-flex; gap:10px; align-items:center;}
   .ds-mine-row input[type=number]{width:96px; background:transparent; color:var(--paper); border:1px solid var(--hairline); border-radius:3px; padding:4px 8px; font-size:13px;}
+  .ds-mine-row input.ds-pct{width:70px;}
   .ds-mine-row .ds-clear{font-size:12px; padding:3px 10px; border:1px solid var(--hairline); border-radius:3px; background:transparent; color:var(--muted); cursor:pointer;}
   .ds-mine-row .ds-clear:hover{color:var(--paper); border-color:var(--muted);}
   input[type=range].ds-range{accent-color:var(--new); width:min(380px, 62vw); height:22px; cursor:pointer;}
@@ -2514,17 +2515,16 @@
         <label><input type="checkbox" ${dsState.rest ? 'checked' : ''} onchange="onDistOpt('rest', this.checked)"> 휴재 중 포함</label>
         <label title="성인 인증이 필요한 작품은 분홍색으로 표시돼요. 끄면 기준선(중앙값 등)과 표에서도 빠져서 성인 작품 유무에 따른 차이를 비교할 수 있어요."><input type="checkbox" ${dsState.adult ? 'checked' : ''} onchange="onDistOpt('adult', this.checked)"> 성인 작품 포함 (${all.filter(r => r.adult).length})</label>
         ${endedAll.length ? `<label title="연재 중 목록에서 빠져 네이버 완결 탭에 있는 추적 작품 ${endedAll.length}개를 속이 빈 모양으로 겹쳐 그려요. 기준선(중앙값 등)에는 넣지 않아요. 요일을 고르면 보이지 않아요."><input type="checkbox" ${dsState.ended ? 'checked' : ''} onchange="onDistOpt('ended', this.checked)"> 완결 탭 작품 겹쳐 보기 (${endedAll.length})</label>` : ''}
-        <label>세로축 <select onchange="onDistOpt('logY', this.value === 'log')"><option value="log" ${dsState.logY ? 'selected' : ''}>로그</option><option value="lin" ${!dsState.logY ? 'selected' : ''}>일반</option></select></label>
-        <label>가로축 <select onchange="onDistOpt('logX', this.value === 'log')"><option value="log" ${dsState.logX ? 'selected' : ''}>로그</option><option value="lin" ${!dsState.logX ? 'selected' : ''}>일반</option></select></label>
       </div>
       <div class="ds-mine-row"><label>내 기준 관심 수
         <input type="range" class="ds-range" min="0" max="1000" step="1" value="${slPos(mineV > 0 ? mineV : (q50 || 10000), DS_SL.min, DS_SL.max)}" oninput="onDistMineSlide(this.value)">
         <input type="number" id="ds-mine-num" min="0" step="1000" value="${escapeHtml(dsState.mine)}" placeholder="예: 50000" onchange="onDistOpt('mine', this.value)"></label>
+        <label>상위 <input type="number" id="ds-mine-pct" class="ds-pct" min="0.1" max="100" step="0.1" value="${dsPctOf(mineV)}" onchange="onDistPct(this.value)"> %</label>
         ${dsState.mine !== '' ? `<button type="button" class="ds-clear" onclick="onDistOpt('mine', '')">지우기</button>` : ''}<span id="ds-mine-text">${mineText}</span></div>
       <div class="ds-chart" id="ds-chart"><div class="ds-stage"><div id="ds-svg">${svg}</div>
         <div class="ds-plotbox"><div class="ds-mini" id="ds-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div></div></div>
         <div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
-      <div class="ds-note" style="margin-top:6px">확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
+      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
       <div class="ds-sec"><h3>요일별 관심 수</h3>${dayTable}</div>
       <div class="ds-sec"><h3>내가 추적 중인 작품은 어디쯤일까</h3>${pathTable}
         <div class="ds-note">“전체 중 위치”는 그 경로 작품들의 중앙값이 지금 보이는 작품 전체에서 상위 몇 %인지예요.</div></div>
@@ -2737,21 +2737,30 @@
     const above = dsFavs.filter(x => x >= v).length;
     return `<span class="ds-note">→ 지금 보이는 ${dsFavs.length}개 작품 중 <b>상위 ${(above / dsFavs.length * 100).toFixed(1)}%</b> (이 값 이상인 작품 ${above}개)</span>`;
   }
+  function dsPctOf(v){ return v > 0 && dsFavs.length ? (dsFavs.filter(x => x >= v).length / dsFavs.length * 100).toFixed(1) : ''; }
+  function onDistPct(p){                             // 상위 N% 칸: 그 비율에 해당하는 관심 수로 맞춤
+    p = +p; if(!(p > 0) || !dsFavs.length) return;
+    const d = [...dsFavs].sort((a, b) => b - a), k = Math.min(d.length, Math.max(1, Math.ceil(Math.min(p, 100) / 100 * d.length)));
+    const v = d[k - 1]; dsState.mine = String(v);
+    const num = document.getElementById('ds-mine-num'); if(num) num.value = v;
+    const rg = document.querySelector('#dist-body input.ds-range'); if(rg) rg.value = slPos(v, DS_SL.min, DS_SL.max);
+    const t = document.getElementById('ds-mine-text'); if(t) t.innerHTML = dsMineInner();
+    const pc = document.getElementById('ds-mine-pct'); if(pc) pc.value = dsPctOf(v);
+    dsRefreshChart();
+  }
   function onDistMineSlide(p){
     const v = slVal(+p, DS_SL.min, DS_SL.max);
     dsState.mine = String(v);
     const num = document.getElementById('ds-mine-num'); if(num) num.value = v;
     const t = document.getElementById('ds-mine-text'); if(t) t.innerHTML = dsMineInner();
+    const pc = document.getElementById('ds-mine-pct'); if(pc) pc.value = dsPctOf(v);
     dsRefreshChart();
   }
 
   // ── 관심도 위치 페이지 (#/pos): 베스트도전 작품의 관심 수가 독자PICK·챌린저스·정식연재작·그 외 중 어디쯤인지 ──
-  const PS_GROUPS = [
-    { n: '그 외 베스트도전', shape: 'circle',   color: 'var(--muted)' },
-    { n: '정식연재작',       shape: 'ring',     color: '#5FA8D3' },
-    { n: '챌린저스',         shape: 'triangle', color: '#d95926' },
-    { n: '독자PICK',         shape: 'diamond',  color: '#3987e5' },
-  ];
+  // 도형·색은 관심도 분포(DS_PATH_STYLE)와 같은 것을 씀: 독자PICK=독자픽 파란 마름모, 챌린저스=주황 삼각형, 정식연재작=경로 미상 회색 육각형, 그 외=회색 점
+  const PS_NAMES = ['그 외 베스트도전', '정식연재작', '챌린저스', '독자PICK'];
+  const PS_STYLE = [{ shape: 'circle', color: 'var(--muted)' }, DS_PATH_STYLE.unknown, DS_PATH_STYLE.challengers, DS_PATH_STYLE.reader];
   const PS_ORDER = [3, 2, 1, 0];
   const PS_AGES = [
     { k: 'all', t: '전체', f: d => true },
@@ -2761,14 +2770,15 @@
   ];
   const PS_SL = { min: 10, max: 100000 };
   const PS_DEL_MIN = 10;                 // 마지막 회차 번호와 남은 회차 수의 차이가 이 값 이상이면 '삭제 많음'
-  const psState = { fav: 500, age: 'all', tol: 0.2, g: -1 };
-  let psPts = [];
+  const psState = { fav: 500, age: 'all', tol: 0.2, g: -1, logX: true, logY: true };
+  let psView = { x0: 0, x1: 1, y0: 0, y1: 1 }, psBox = false, psGeom = null, psShown = [], psBase = [], psDrag = null, psBound = false;
   const psFmt = n => Math.round(n).toLocaleString('ko-KR');
   const psExc = () => (BC_POSITION && BC_POSITION.exc) || {};
-  function psPool(){ const f = PS_AGES.find(a => a.k === psState.age).f; return ((BC_POSITION && BC_POSITION.works) || []).filter(r => f(r[4])); }
+  function psAll(){ return ((BC_POSITION && BC_POSITION.works) || []).map(r => ({ id: r[0], title: r[1], g: r[2], fav: r[3], span: r[4], del: r[5], age: r[6] })); }
+  function psPool(){ const f = PS_AGES.find(a => a.k === psState.age).f; return psAll().filter(r => f(r.span)); }
   function psMed(a){ if(!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
-  function psSwatch(g){ const s = PS_GROUPS[g]; return `<svg class="ps-sw" width="14" height="14" viewBox="-7 -7 14 14">${dsMarker(s.shape, 0, 0, g === 0 ? 3.2 : 4.4, s.color, 0.95)}</svg>`; }
-  function psDelTag(r){ return r[5] != null && r[5] >= PS_DEL_MIN ? `<span class="ps-del" title="마지막 회차 번호와 남은 회차 수의 차이가 ${r[5]}개예요. 작가가 지운 회차가 많다는 뜻이라 연재일수·분량이 실제와 다를 수 있어요.">삭제 많음 ${r[5]}</span>` : ''; }
+  function psSwatch(g){ return dsMarkerSvg(PS_STYLE[g].shape, PS_STYLE[g].color); }
+  function psDelTag(r){ return r.del != null && r.del >= PS_DEL_MIN ? `<span class="ps-del" title="마지막 회차 번호와 남은 회차 수의 차이가 ${r.del}개예요. 작가가 지운 회차가 많다는 뜻이라 연재일수·분량이 실제와 다를 수 있어요.">삭제 많음 ${r.del}</span>` : ''; }
 
   function renderPosPage(){
     const body = document.getElementById('pos-body'); if(!body) return;
@@ -2777,112 +2787,263 @@
       body.innerHTML = `<div class="ds-wrap"><div class="an-head"><h2 class="serif">관심도 위치</h2></div><div class="an-empty">아직 베스트도전 관심 수 데이터가 없어요. <code>python build_site.py</code>를 돌려 주세요.</div></div>`;
       return;
     }
-    const nUnk = bp.works.filter(r => r[4] == null).length;
     body.innerHTML = `<div class="ds-wrap">
       <div class="an-head"><h2 class="serif">관심도 위치</h2>
         <span class="hint">베스트도전 ${bp.works.length}개 작품의 관심 등록 수가 독자PICK·챌린저스·정식연재작·그 외 중 어디쯤인지 보여 줘요. 관심 수는 ${escapeHtml(bp.favFrom || '')} ~ ${escapeHtml(bp.favTo || '')}에 확인한 값이고, 연재일수는 ${escapeHtml(bp.updated || '')} 기준이에요.</span></div>
       <div class="ds-controls">
         <label>연재기간 <select onchange="onPosOpt('age', this.value)">${PS_AGES.map(a => `<option value="${a.k}" ${a.k === psState.age ? 'selected' : ''}>${a.t}</option>`).join('')}</select></label>
         <label>비슷한 수준의 범위 <select onchange="onPosOpt('tol', +this.value)">${[0.1, 0.2, 0.3].map(t => `<option value="${t}" ${t === psState.tol ? 'selected' : ''}>±${Math.round(t * 100)}%</option>`).join('')}</select></label>
-        <label>목록에 보일 집단 <select onchange="onPosOpt('g', +this.value)"><option value="-1">전체</option>${PS_ORDER.map(g => `<option value="${g}" ${psState.g === g ? 'selected' : ''}>${PS_GROUPS[g].n}</option>`).join('')}</select></label>
+        <label>목록에 보일 집단 <select onchange="onPosOpt('g', +this.value)"><option value="-1">전체</option>${PS_ORDER.map(g => `<option value="${g}" ${psState.g === g ? 'selected' : ''}>${PS_NAMES[g]}</option>`).join('')}</select></label>
       </div>
       <div class="ds-mine-row"><label>관심 등록 수
         <input type="range" class="ds-range" id="ps-range" min="0" max="1000" step="1" value="${slPos(psState.fav, PS_SL.min, PS_SL.max)}" oninput="onPosSlide(this.value)">
         <input type="number" id="ps-num" min="10" max="100000" step="10" value="${psState.fav}" onchange="onPosNum(this.value)"></label>
+        <label>상위 <input type="number" id="ps-pct" class="ds-pct" min="0.1" max="100" step="0.1" onchange="onPosPct(this.value)"> %</label>
         <span id="ps-sentence"></span></div>
-      <div class="ds-legend">${PS_ORDER.map(g => `<span>${psSwatch(g)} ${PS_GROUPS[g].n}</span>`).join('')}<span><span class="ps-del">삭제 많음</span> 마지막 회차 번호와 남은 회차 수의 차이가 ${PS_DEL_MIN}개 이상 (표시만 하고 통계에서는 빼지 않아요)</span></div>
+      <div class="ds-chart" id="ps-chart"><div class="ds-stage"><div id="ps-svg"></div>
+        <div class="ds-plotbox"><div class="ds-mini" id="ps-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div></div></div>
+        <div class="ds-zoom"><button type="button" title="확대" onclick="psZoom(1.6)">+</button><button type="button" title="축소" onclick="psZoom(1 / 1.6)">−</button><button type="button" id="ps-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="psToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="psResetView()">⟲</button></div></div>
+      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 확대: 오른쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요. <span id="ps-chartnote"></span></div>
+      <div class="ds-legend">${PS_ORDER.map(g => `<span>${psSwatch(g)} ${PS_NAMES[g]}${g === 1 ? ' (공식 추적·정식 연재 확정)' : ''}</span>`).join('')}<span><span class="ps-del">삭제 많음</span> 마지막 회차 번호와 남은 회차 수의 차이가 ${PS_DEL_MIN}개 이상 (표시만 하고 통계에서는 빼지 않아요)</span></div>
       <div class="ds-sec"><h3>집단별 위치</h3><div id="ps-tbl"></div><div class="ds-note" id="ps-tblnote"></div></div>
-      <div class="ds-sec"><h3>분포도 <span class="ds-note">(연재일수 × 관심 등록 수, 로그 눈금)</span></h3>
-        <div class="ds-chart" style="position:relative"><div id="ps-chart"></div></div><div class="ds-note" id="ps-chartnote"></div></div>
       <div class="ds-sec"><h3>비슷한 수준의 작품</h3><div id="ps-lst"></div><div class="ds-note" id="ps-lstnote"></div></div>
-      <div class="ds-sec"><h3>읽는 법</h3><div class="ds-note" id="ps-notes"></div></div>
-      <div class="ds-tip" id="ps-tip" style="display:none"></div>
+      <div class="ds-sec"><h3>읽을 때 주의할 점</h3><div class="ds-note" id="ps-notes"></div></div>
     </div>`;
+    psBindChart(); psBindMini();
     psUpdate();
   }
-  function onPosOpt(k, v){ psState[k] = v; psUpdate(); }
-  function onPosSlide(p){ psState.fav = Math.min(PS_SL.max, Math.max(PS_SL.min, slVal(+p, PS_SL.min, PS_SL.max))); const n = document.getElementById('ps-num'); if(n) n.value = psState.fav; psUpdate(); }
-  function onPosNum(v){ v = Math.round(+v); if(!(v >= PS_SL.min)) v = PS_SL.min; psState.fav = Math.min(v, PS_SL.max); const n = document.getElementById('ps-num'), r = document.getElementById('ps-range'); if(n) n.value = psState.fav; if(r) r.value = slPos(psState.fav, PS_SL.min, PS_SL.max); psUpdate(); }
+  function onPosOpt(k, v, resetView){ psState[k] = v; if(resetView) psView = { x0: 0, x1: 1, y0: 0, y1: 1 }; psUpdate(); }
+  function psSetFav(v){ psState.fav = Math.min(PS_SL.max, Math.max(PS_SL.min, Math.round(v))); psUpdate(true); }
+  function onPosSlide(p){ psSetFav(slVal(+p, PS_SL.min, PS_SL.max)); }
+  function onPosNum(v){ psSetFav(+v || PS_SL.min); }
+  function onPosPct(p){                              // 상위 N% 칸: 그 비율에 해당하는 관심 수로 맞춤
+    p = +p; if(!(p > 0) || !psBase.length) return;
+    const d = psBase.map(r => r.fav).sort((a, b) => b - a), k = Math.min(d.length, Math.max(1, Math.ceil(Math.min(p, 100) / 100 * d.length)));
+    psSetFav(d[k - 1]);
+  }
 
-  function psUpdate(){
+  function psUpdate(fromInput){
     const P = psPool(), exc = psExc(), v = psState.fav;
     const lo = v * (1 - psState.tol), hi = v * (1 + psState.tol);
-    // 문장: 지금 고른 연재기간의 모든 작품 중 이 값 이상인 비율
-    const base = P.filter(r => !(r[0] in exc)), above = base.filter(r => r[3] >= v).length;
+    psShown = P;
+    psBase = P.filter(r => !(r.id in exc));
+    // 입력칸 맞춤
+    const num = document.getElementById('ps-num'), rng = document.getElementById('ps-range'), pct = document.getElementById('ps-pct');
+    if(num && document.activeElement !== num) num.value = v;
+    if(rng && document.activeElement !== rng) rng.value = slPos(v, PS_SL.min, PS_SL.max);
+    const above = psBase.filter(r => r.fav >= v).length;
+    if(pct && document.activeElement !== pct) pct.value = psBase.length ? (above / psBase.length * 100).toFixed(1) : '';
     const se = document.getElementById('ps-sentence');
-    if(se) se.innerHTML = base.length ? `<span class="ds-note">→ 지금 보이는 ${psFmt(base.length)}개 작품 중 <b>상위 ${(above / base.length * 100).toFixed(1)}%</b> (이 값 이상인 작품 ${psFmt(above)}개)</span>` : '';
+    if(se) se.innerHTML = psBase.length ? `<span class="ds-note">→ 지금 보이는 ${psFmt(psBase.length)}개 작품 중 <b>상위 ${(above / psBase.length * 100).toFixed(1)}%</b> (이 값 이상인 작품 ${psFmt(above)}개)</span>` : '';
     // 집단별 표
     let h = '<table class="ds-table"><thead><tr><th>집단</th><th>작품 수</th><th>관심 중앙값</th><th>입력값 백분위</th><th>비슷한 수준</th><th>삭제 많음</th></tr></thead><tbody>';
     PS_ORDER.forEach(g => {
-      const r = P.filter(x => x[2] === g && !(x[0] in exc)), n = r.length;
-      if(!n){ h += `<tr><td>${psSwatch(g)} ${PS_GROUPS[g].n}</td><td>0</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>`; return; }
-      const pct = Math.round(r.filter(x => x[3] <= v).length / n * 100);
-      h += `<tr><td>${psSwatch(g)} ${PS_GROUPS[g].n}</td><td>${psFmt(n)}</td><td>${psFmt(psMed(r.map(x => x[3])))}</td><td><b>${pct}%</b></td><td>${r.filter(x => x[3] >= lo && x[3] <= hi).length}</td><td>${r.filter(x => x[5] != null && x[5] >= PS_DEL_MIN).length}</td></tr>`;
+      const r = P.filter(x => x.g === g && !(x.id in exc)), n = r.length;
+      if(!n){ h += `<tr><td>${psSwatch(g)} ${PS_NAMES[g]}</td><td>0</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>`; return; }
+      const pc = Math.round(r.filter(x => x.fav <= v).length / n * 100);
+      h += `<tr><td>${psSwatch(g)} ${PS_NAMES[g]}</td><td>${psFmt(n)}</td><td>${psFmt(psMed(r.map(x => x.fav)))}</td><td><b>${pc}%</b></td><td>${r.filter(x => x.fav >= lo && x.fav <= hi).length}</td><td>${r.filter(x => x.del != null && x.del >= PS_DEL_MIN).length}</td></tr>`;
     });
     document.getElementById('ps-tbl').innerHTML = h + '</tbody></table>';
-    document.getElementById('ps-tblnote').textContent = `백분위는 그 집단 작품 중 관심 등록 수가 ${psFmt(v)} 이하인 비율이에요. 비슷한 수준은 ${psFmt(lo)}~${psFmt(hi)} 범위의 작품 수예요. 이력이 특이해 통계에서 뺀 작품이 ${Object.keys(exc).length}개 있어요 (아래 읽는 법).`;
-    psChart(P);
+    document.getElementById('ps-tblnote').textContent = `백분위는 그 집단 작품 중 관심 등록 수가 ${psFmt(v)} 이하인 비율이에요. 비슷한 수준은 ${psFmt(lo)}~${psFmt(hi)} 범위의 작품 수예요. 이력이 특이해 통계에서 뺀 작품이 ${Object.keys(exc).length}개 있어요 (아래 주의할 점).`;
+    psRefreshChart();
     // 목록
-    let rows = P.filter(r => r[3] >= lo && r[3] <= hi && (psState.g < 0 || r[2] === psState.g));
-    rows.sort((a, b) => Math.abs(a[3] - v) - Math.abs(b[3] - v));
+    let rows = P.filter(r => r.fav >= lo && r.fav <= hi && (psState.g < 0 || r.g === psState.g));
+    rows.sort((a, b) => Math.abs(a.fav - v) - Math.abs(b.fav - v));
     const total = rows.length; rows = rows.slice(0, 40);
     document.getElementById('ps-lst').innerHTML = total ? '<table class="ds-table"><thead><tr><th>작품</th><th style="text-align:left">집단</th><th>관심 등록 수</th><th>연재일수 <span style="font-weight:400">(정식연재작은 베스트도전 기간)</span></th><th>입력값과 차이</th></tr></thead><tbody>' +
-      rows.map(r => { const d = (r[3] - v) / v * 100;
-        return `<tr><td style="white-space:normal">${escapeHtml(r[1])}${r[0] in exc ? ` <span class="ds-note">(${escapeHtml(exc[r[0]])}·통계 제외)</span>` : ''}${psDelTag(r)}</td><td style="text-align:left">${psSwatch(r[2])} ${PS_GROUPS[r[2]].n}</td><td>${psFmt(r[3])}${r[6] != null && r[6] > 7 ? `<span class="ds-note" title="이 작품의 관심 수는 확인한 지 ${r[6]}일 지난 값이에요."> †</span>` : ''}</td><td>${r[4] == null ? '–' : psFmt(r[4])}</td><td>${d > 0 ? '+' : ''}${d.toFixed(0)}%</td></tr>`; }).join('') + '</tbody></table>'
+      rows.map(r => { const d = (r.fav - v) / v * 100;
+        return `<tr><td style="white-space:normal">${escapeHtml(r.title)}${r.id in exc ? ` <span class="ds-note">(${escapeHtml(exc[r.id])}·통계 제외)</span>` : ''}${psDelTag(r)}</td><td style="text-align:left">${psSwatch(r.g)} ${PS_NAMES[r.g]}</td><td>${psFmt(r.fav)}${r.age != null && r.age > 7 ? `<span class="ds-note" title="이 작품의 관심 수는 확인한 지 ${r.age}일 지난 값이에요."> †</span>` : ''}</td><td>${r.span == null ? '–' : psFmt(r.span)}</td><td>${d > 0 ? '+' : ''}${d.toFixed(0)}%</td></tr>`; }).join('') + '</tbody></table>'
       : '<div class="an-empty" style="text-align:left;padding:10px 0">이 범위에 해당하는 작품이 없어요. 범위를 넓히거나 연재기간을 바꿔 보세요.</div>';
     document.getElementById('ps-lstnote').textContent = total ? `입력값에 가까운 순으로 ${total > 40 ? `40작품만 보여요 (전체 ${total}작품).` : `${total}작품이에요.`} † 표시는 관심 수를 확인한 지 7일이 넘은 값이에요.` : '';
     psNotes();
   }
   function psNotes(){
-    const bp = BC_POSITION, exc = psExc(), w = bp.works;
-    const g1 = w.filter(r => r[2] === 1 && !(r[0] in exc)), g1unk = g1.filter(r => r[4] == null).length;
-    const old = w.filter(r => r[6] != null && r[6] > 7).length;
-    const delN = w.filter(r => r[5] != null && r[5] >= PS_DEL_MIN).length;
+    const exc = psExc(), w = psAll();
+    const g1 = w.filter(r => r.g === 1 && !(r.id in exc)), g1unk = g1.filter(r => r.span == null).length;
+    const old = w.filter(r => r.age != null && r.age > 7).length;
+    const delN = w.filter(r => r.del != null && r.del >= PS_DEL_MIN).length;
     document.getElementById('ps-notes').innerHTML = [
-      `<b>관심 수는 현재 값이에요.</b> 선정이나 정식 연재 시점의 값이 아니에요. 연재가 길수록 쌓이므로 연재기간을 같이 고르는 편이 공정해요. 이 화면은 작품이 어디쯤인지만 보여 주고, 정식 연재 성공 여부를 예측하지 않아요.`,
-      `<b>집단 기준.</b> 챌린저스·독자PICK은 선정 경로 배지(공식 공지 또는 목록으로 확인한 것)가 있는 작품이에요. 정식연재작은 공식 추적 목록에 있거나 분류가 '정식 연재 확정'인 작품이고, 챌린저스·독자PICK과 겹치면 그쪽으로 분류해요. 수상·포텐업 등은 정식 연재 확인 전이면 '그 외'에 있어요.`,
-      `<b>정식연재작의 연재일수</b>는 베스트도전에서 보낸 기간(첫 회 ~ 분류 시점, 정식 시작일이 더 빠르면 그날까지)이에요. 기간을 알 수 없는 ${g1unk}개는 그림에서 빼고 '전체'에서만 세요. 관심 수는 옮겨 간 뒤 거의 멈춘다고 보지만 확인된 값은 아니에요.`,
-      `<b>통계에서 뺀 작품</b> ${Object.keys(exc).map(k => { const r = w.find(x => String(x[0]) === k); return `${escapeHtml(r ? r[1] : k)}(${escapeHtml(exc[k])})`; }).join(', ') || '없음'}. 이력이 특이해 관심 수가 언제 쌓였는지 알 수 없어서 집단 통계에서만 빼고 목록에는 표시해요. 목록은 <code>data/position_exceptions.json</code>에서 고쳐요.`,
-      `<b>삭제 많음</b>은 마지막 회차 번호와 남은 회차 수의 차이가 ${PS_DEL_MIN}개 이상인 ${delN}개 작품이에요. 작가가 회차를 지웠다는 뜻이라 첫 회 날짜·연재일수가 실제와 다를 수 있어요. 표시만 하고 통계에서는 빼지 않아요.`,
-      `<b>확인한 날이 달라요.</b> 관심 수는 작품마다 확인한 날이 달라 대부분 최근 7일 안이고, 7일이 넘은 값은 ${old}개예요(†). 관심 수를 아직 못 모은 베스트도전 작품은 빠져 있어요.`
-    ].map(t => `<p style="margin:0 0 8px">${t}</p>`).join('');
+      `· <b>관심 수는 현재 값이에요.</b> 선정이나 정식 연재 시점의 값이 아니에요. 연재가 길수록 쌓이므로 연재기간을 같이 고르는 편이 공정해요. 이 화면은 작품이 어디쯤인지만 보여 주고, 정식 연재 성공 여부를 예측하지 않아요.`,
+      `· <b>집단 기준.</b> 챌린저스·독자PICK은 선정 경로 배지(공식 공지 또는 목록으로 확인한 것)가 있는 작품이에요. 정식연재작은 공식 추적 목록에 있거나 분류가 '정식 연재 확정'인 작품이고, 챌린저스·독자PICK과 겹치면 그쪽으로 분류해요. 수상·포텐업 등은 정식 연재 확인 전이면 '그 외'에 있어요.`,
+      `· <b>정식연재작의 연재일수</b>는 베스트도전에서 보낸 기간(첫 회 ~ 분류 시점, 정식 시작일이 더 빠르면 그날까지)이에요. 기간을 알 수 없는 ${g1unk}개는 맨 왼쪽 “연재일수 없음” 칸에 모여 있고, 연재기간 '전체'에서만 세요. 관심 수는 옮겨 간 뒤 거의 멈춘다고 보지만 확인된 값은 아니에요.`,
+      `· <b>통계에서 뺀 작품</b> ${Object.keys(exc).map(k => { const r = w.find(x => String(x.id) === k); return `${escapeHtml(r ? r.title : k)}(${escapeHtml(exc[k])})`; }).join(', ') || '없음'}. 이력이 특이해 관심 수가 언제 쌓였는지 알 수 없어서 집단 통계에서만 빼고 그림·목록에는 표시해요. 목록은 <code>data/position_exceptions.json</code>에서 고쳐요.`,
+      `· <b>삭제 많음</b>은 마지막 회차 번호와 남은 회차 수의 차이가 ${PS_DEL_MIN}개 이상인 ${delN}개 작품이에요. 작가가 회차를 지웠다는 뜻이라 첫 회 날짜·연재일수가 실제와 다를 수 있어요. 표시만 하고 통계에서는 빼지 않아요.`,
+      `· <b>확인한 날이 달라요.</b> 관심 수는 작품마다 확인한 날이 달라 대부분 최근 7일 안이고, 7일이 넘은 값은 ${old}개예요(†). 관심 수를 아직 못 모은 베스트도전 작품은 빠져 있어요.`
+    ].join('<br>');
   }
-  function psChart(P){
-    const W = 1000, Hh = 520, M = { l: 64, r: 16, t: 12, b: 46 }, lg = Math.log10;
-    const X0 = lg(1), X1 = lg(8000), Y0 = lg(10), Y1 = lg(100000);
-    const sx = x => M.l + (lg(Math.max(x, 1)) - X0) / (X1 - X0) * (W - M.l - M.r);
-    const sy = y => Hh - M.b - (lg(Math.min(Math.max(y, 10), 100000)) - Y0) / (Y1 - Y0) * (Hh - M.t - M.b);
-    const v = psState.fav, lo = v * (1 - psState.tol), hi = v * (1 + psState.tol), exc = psExc();
-    let s = `<svg viewBox="0 0 ${W} ${Hh}" onpointermove="psMove(event)" onpointerleave="psHide()" style="display:block;width:100%;height:auto">`;
-    [10, 100, 1000, 10000, 100000].forEach(t => { const y = sy(t); s += `<line class="gl" x1="${M.l}" x2="${W - M.r}" y1="${y}" y2="${y}"/><text x="${M.l - 8}" y="${y + 4}" text-anchor="end">${psFmt(t)}</text>`; });
-    [1, 10, 100, 1000].forEach(t => { const x = sx(t); s += `<line class="gl" x1="${x}" x2="${x}" y1="${M.t}" y2="${Hh - M.b}"/><text x="${x}" y="${Hh - M.b + 16}" text-anchor="middle">${psFmt(t)}</text>`; });
-    s += `<text x="${(M.l + W - M.r) / 2}" y="${Hh - 6}" text-anchor="middle">연재일수 (정식연재작은 베스트도전 기간)</text><text transform="translate(13 ${(M.t + Hh - M.b) / 2}) rotate(-90)" text-anchor="middle">관심 등록 수</text>`;
-    const yl = Math.max(sy(hi), M.t), yh = Math.min(sy(lo), Hh - M.b);
-    s += `<rect x="${M.l}" y="${yl}" width="${W - M.l - M.r}" height="${Math.max(yh - yl, 1.5)}" fill="var(--new)" fill-opacity=".14"/><line class="mine" x1="${M.l}" x2="${W - M.r}" y1="${sy(v)}" y2="${sy(v)}"/><text x="${W - M.r - 4}" y="${Math.max(sy(v) - 6, M.t + 10)}" text-anchor="end" style="fill:var(--new)">입력 ${psFmt(v)}</text>`;
-    const inP = new Set(P.map(r => r[0])); psPts = []; let hid = 0;
-    [0, 1, 2, 3].forEach(g => {
-      const st = PS_GROUPS[g];
-      ((BC_POSITION && BC_POSITION.works) || []).filter(r => r[2] === g).forEach(r => {
-        if(r[4] == null){ hid++; return; }
-        const x = sx(r[4]), y = sy(r[3]), on = inP.has(r[0]);
-        psPts.push({ x, y, r });
-        s += g === 0 ? `<circle cx="${x}" cy="${y}" r="2.4" fill="var(--muted)" fill-opacity="${on ? 0.7 : 0.15}"/>` : `<g opacity="${on ? 1 : 0.25}">${dsMarker(st.shape, x, y, 4.2, st.color, 0.95)}</g>`;
+
+  // ── 그림: 관심도 분포의 그림(dsChartSvg)과 같은 방식·같은 모양 (확대·축소·영역 확대·미니맵) ──
+  function psChartSvg(list){
+    const all = list;
+    const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;
+    const v = psView, zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
+    const showStrip = !zoomed;
+    const px0 = L + (showStrip ? STRIP + GAP : 0), px1 = W - R, py0 = T, py1 = H - B;
+    const full = psAll();                                  // 축 범위는 연재기간 필터와 상관없이 전체 작품 기준(필터를 바꿔도 그림이 흔들리지 않게)
+    const maxSpan = Math.max(60, ...full.filter(r => r.span != null).map(r => r.span)) * 1.22;
+    const maxFav = Math.max(1000, ...full.map(r => r.fav)), minFav = Math.max(10, Math.min(...full.map(r => r.fav)));
+    const lg = Math.log10;
+    const xMin = psState.logX ? lg(2) : -maxSpan * 0.01, xMax = psState.logX ? lg(maxSpan) : maxSpan;
+    const yMin = psState.logY ? lg(Math.max(10, minFav / 1.5)) : 0, yMax = psState.logY ? lg(maxFav * 1.9) : maxFav * 1.2;
+    const tx = d => psState.logX ? lg(Math.max(1, d)) : d, ty = f => psState.logY ? lg(Math.max(1, f)) : f;
+    const X = d => px0 + (((tx(d) - xMin) / (xMax - xMin)) - v.x0) / (v.x1 - v.x0) * (px1 - px0);
+    const Y = f => py1 - (((ty(f) - yMin) / (yMax - yMin)) - v.y0) / (v.y1 - v.y0) * (py1 - py0);
+    const dAt = fr => { const t = xMin + fr * (xMax - xMin); return psState.logX ? Math.pow(10, t) : t; };
+    const fAt = fr => { const t = yMin + fr * (yMax - yMin); return psState.logY ? Math.pow(10, t) : t; };
+    psGeom = { W, H, px0, px1, py0, py1, STRIP, L };
+    {
+      const MW = 124, MH = 84;
+      const fx = d => (tx(d) - xMin) / (xMax - xMin), fy = f => (ty(f) - yMin) / (yMax - yMin);
+      let dots = '';
+      all.forEach(r => { if(r.span == null) return; dots += `<circle cx="${(fx(r.span) * MW).toFixed(1)}" cy="${((1 - fy(r.fav)) * MH).toFixed(1)}" r="${r.g ? 1.8 : 1}" fill="${PS_STYLE[r.g].color}" fill-opacity="${r.g ? 1 : 0.55}"/>`; });
+      psGeom.miniSvg = `<svg viewBox="0 0 ${MW} ${MH}" preserveAspectRatio="none" aria-label="전체 중 지금 보는 위치">${dots}<rect class="vp" x="${(v.x0 * MW).toFixed(1)}" y="${((1 - v.y1) * MH).toFixed(1)}" width="${((v.x1 - v.x0) * MW).toFixed(1)}" height="${((v.y1 - v.y0) * MH).toFixed(1)}"/></svg>`;
+      psGeom.zoomed = zoomed;
+    }
+    const dVis0 = dAt(v.x0), dVis1 = dAt(v.x1), fVis0 = fAt(v.y0), fVis1 = fAt(v.y1);
+    const thin = (cands, pos, gap) => { const out = []; let last = -1e9; cands.forEach(c => { const p = pos(c); if(p > last + gap){ out.push(c); last = p; } }); return out; };
+    let yCands = [];
+    if(psState.logY){ for(let e = Math.floor(lg(fVis0)); e <= Math.ceil(lg(fVis1)); e++) [1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9].forEach(m => yCands.push(m * Math.pow(10, e))); }
+    else { const span = fVis1 - fVis0, stepBase = Math.pow(10, Math.floor(lg(span / 6))); const st = [1, 2, 2.5, 5, 10].map(m => m * stepBase).find(x => span / x <= 7) || stepBase * 10; for(let t = Math.ceil(fVis0 / st) * st; t <= fVis1; t += st) yCands.push(t); }
+    yCands = yCands.filter(c => c >= fVis0 && c <= fVis1).sort((a, b) => b - a);
+    const yTicks = thin(yCands, c => Y(c), 28);
+    const xDefs = [[7, '1주'], [14, '2주'], [30, '1개월'], [60, '2개월'], [90, '3개월'], [120, '4개월'], [180, '6개월'], [270, '9개월'], [365, '1년'], [548, '1.5년'], [730, '2년'], [1095, '3년'], [1460, '4년'], [1825, '5년'], [2555, '7년'], [3650, '10년']];
+    let xC = xDefs.filter(([d]) => d >= dVis0 && d <= dVis1);
+    if(!psState.logX) xC = xC.filter(([d]) => d % 365 === 0 || (dVis1 - dVis0) < 700);
+    const xTicks = thin(xC, c => X(c[0]), 44);
+    let g = `<defs><clipPath id="ps-clip-plot"><rect x="${px0 - (showStrip ? 10 : 0)}" y="${py0}" width="${px1 - px0 + (showStrip ? 10 : 0)}" height="${py1 - py0}"/></clipPath><clipPath id="ps-clip-strip"><rect x="${L}" y="${py0}" width="${STRIP}" height="${py1 - py0}"/></clipPath><clipPath id="ps-clip-all"><rect x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}"/></clipPath></defs>`;
+    g += `<rect class="plotbg" x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}" rx="2"/>`;
+    yTicks.forEach(f => { g += `<line class="gl" x1="${L}" x2="${px1}" y1="${Y(f)}" y2="${Y(f)}"/><text x="${L - 8}" y="${Y(f) + 4}" text-anchor="end">${dsFmt(Math.round(f))}</text>`; });
+    xTicks.forEach(([d, t]) => { g += `<line class="gl" x1="${X(d)}" x2="${X(d)}" y1="${py0}" y2="${py1}" stroke-opacity=".5"/><text x="${X(d)}" y="${py1 + 18}" text-anchor="middle">${t}</text>`; });
+    if(showStrip) g += `<line class="gl" x1="${L + STRIP + GAP / 2}" x2="${L + STRIP + GAP / 2}" y1="${py0}" y2="${py1}" stroke-dasharray="2 4"/><text x="${L + STRIP / 2}" y="${py1 + 16}" text-anchor="middle">연재일수</text><text x="${L + STRIP / 2}" y="${py1 + 29}" text-anchor="middle">없음</text>`;
+    g += `<text x="${(px0 + px1) / 2}" y="${H - 6}" text-anchor="middle">연재일수 (${psState.logX ? '로그 눈금' : '일반 눈금'}) · 정식연재작은 베스트도전 기간</text><text transform="translate(14 ${(py0 + py1) / 2}) rotate(-90)" text-anchor="middle">관심 수 (${psState.logY ? '로그 눈금' : '일반 눈금'})</text>`;
+    // 입력한 관심 수 선과 비슷한 수준의 범위
+    let refs = '';
+    const fv = psState.fav, flo = fv * (1 - psState.tol), fhi = fv * (1 + psState.tol);
+    { const ya = Math.max(py0, Math.min(py1, Y(fhi))), yb = Math.max(py0, Math.min(py1, Y(flo))); if(yb > ya) refs += `<rect x="${L}" y="${ya}" width="${px1 - L}" height="${Math.max(yb - ya, 1.5)}" fill="var(--new)" fill-opacity=".12"/>`; }
+    { const y = Y(fv); if(y > py0 && y < py1) refs += `<line class="mine" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${px1 + 4}" y="${y - 2}" style="fill:var(--new)">입력</text><text x="${px1 + 4}" y="${y + 10}" style="fill:var(--new)">${dsFmt(fv)}</text>`; }
+    const hash = id => { let h = 0; for(const c of String(id)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+    const plain = [], tracked = [];
+    all.forEach((r, i) => (r.g ? tracked : plain).push(i));
+    const zoomK = Math.min(1, Math.max(0.78, 0.78 + 0.22 * Math.log2(1 / Math.sqrt((v.x1 - v.x0) * (v.y1 - v.y0))) / 2));
+    const mk = i => {
+      const r = all[i], st = PS_STYLE[r.g];
+      if(r.span == null && !showStrip) return '';
+      const x = r.span == null ? L + 9 + (hash(r.id) % (STRIP - 18)) : X(r.span), y = Y(r.fav);
+      if(x < L - 12 || x > px1 + 12 || y < py0 - 12 || y > py1 + 12) return '';
+      return `<g class="pt" data-i="${i}" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}" data-r="${((r.g ? 9 : 6) * zoomK).toFixed(1)}">${r.g ? dsMarker(st.shape, x, y, 6 * zoomK, st.color, 0.95) : dsMarker('circle', x, y, 3.4 * zoomK, 'var(--muted)', 0.5)}<circle cx="${x}" cy="${y}" r="${((r.g ? 9 : 6) * zoomK).toFixed(1)}" fill="transparent"/></g>`;
+    };
+    const order = plain.concat(tracked);
+    const stripPts = order.filter(i => all[i].span == null).map(mk).join('');
+    const plotPts = order.filter(i => all[i].span != null).map(mk).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" id="ps-svgel" class="${psBox ? 'boxmode' : (zoomed ? 'zoomed' : '')}" role="img" aria-label="연재일수와 관심 수 분포도. 베스트도전 작품 ${all.length}개">${g}<g clip-path="url(#ps-clip-all)">${refs}</g><g clip-path="url(#ps-clip-strip)">${stripPts}</g><g clip-path="url(#ps-clip-plot)">${plotPts}</g></svg>`;
+  }
+  function psRefreshChart(){
+    const el = document.getElementById('ps-svg'); if(!el) return;
+    dsHideTip(); el.innerHTML = psChartSvg(psShown); psFillMini();
+    const bb = document.getElementById('ps-boxbtn'); if(bb) bb.classList.toggle('on', psBox);
+    const hid = psShown.filter(r => r.span == null).length, nt = document.getElementById('ps-chartnote');
+    if(nt) nt.textContent = hid ? `연재일수를 알 수 없는 작품 ${hid}개는 맨 왼쪽 칸에 모여 있어요.` : '';
+  }
+  function psFillMini(){
+    const mi = document.getElementById('ps-mini'); if(!mi || !psGeom) return;
+    mi.style.display = psGeom.zoomed ? '' : 'none';
+    if(psGeom.zoomed) mi.innerHTML = psGeom.miniSvg;
+  }
+  function psMiniMove(ev){
+    const mi = document.getElementById('ps-mini'); if(!mi) return;
+    const r = mi.getBoundingClientRect(), pad = 3;
+    const cx = (ev.clientX - r.left - pad) / (r.width - 2 * pad), cy = 1 - (ev.clientY - r.top - pad) / (r.height - 2 * pad);
+    const wx = psView.x1 - psView.x0, wy = psView.y1 - psView.y0;
+    const x0 = Math.min(Math.max(0, cx - wx / 2), 1 - wx), y0 = Math.min(Math.max(0, cy - wy / 2), 1 - wy);
+    psView = { x0, x1: x0 + wx, y0, y1: y0 + wy };
+    psRefreshChart();
+  }
+  function psBindMini(){
+    const mi = document.getElementById('ps-mini'); if(!mi) return;
+    let on = false;
+    mi.onpointerdown = ev => { on = true; try { mi.setPointerCapture(ev.pointerId); } catch(e){} psMiniMove(ev); ev.preventDefault(); ev.stopPropagation(); };
+    mi.onpointermove = ev => { if(on) psMiniMove(ev); };
+    mi.onpointerup = mi.onpointercancel = () => { on = false; };
+  }
+  function psZoom(f){
+    const v = psView, fit = (lo, hi) => { let w = Math.min(1, Math.max(0.01, (hi - lo))); let a = Math.min(Math.max(0, lo), 1 - w); return [a, a + w]; };
+    const nx = fit((v.x0 + v.x1) / 2 - (v.x1 - v.x0) / f / 2, (v.x0 + v.x1) / 2 + (v.x1 - v.x0) / f / 2);
+    const ny = fit((v.y0 + v.y1) / 2 - (v.y1 - v.y0) / f / 2, (v.y0 + v.y1) / 2 + (v.y1 - v.y0) / f / 2);
+    psView = { x0: nx[0], x1: nx[1], y0: ny[0], y1: ny[1] };
+    psRefreshChart();
+  }
+  function psResetView(){ psView = { x0: 0, x1: 1, y0: 0, y1: 1 }; psBox = false; psRefreshChart(); }
+  function psToggleBox(){ psBox = !psBox; psRefreshChart(); }
+  function psSvgPoint(ev){ const svg = document.getElementById('ps-svgel'); const r = svg.getBoundingClientRect(); return { x: (ev.clientX - r.left) * psGeom.W / r.width, y: (ev.clientY - r.top) * psGeom.H / r.height }; }
+  function psBindChart(){
+    const chart = document.getElementById('ps-chart'); if(!chart) return;
+    let raf = 0;
+    chart.onmousemove = ev => {
+      if(psDrag){
+        const p = psSvgPoint(ev), moved = Math.hypot(p.x - psDrag.p0.x, p.y - psDrag.p0.y);
+        if(moved > 4) psDrag.moved = true;
+        if(!psDrag.moved) return;
+        if(psBox){
+          let sel = document.getElementById('ps-sel');
+          if(!sel){ sel = document.createElement('div'); sel.id = 'ps-sel'; sel.className = 'ds-sel'; chart.appendChild(sel); }
+          const r = chart.getBoundingClientRect(), svgR = document.getElementById('ps-svgel').getBoundingClientRect();
+          const sx = svgR.width / psGeom.W;
+          sel.style.left = (svgR.left - r.left + Math.min(p.x, psDrag.p0.x) * sx) + 'px'; sel.style.top = (svgR.top - r.top + Math.min(p.y, psDrag.p0.y) * sx) + 'px';
+          sel.style.width = Math.abs(p.x - psDrag.p0.x) * sx + 'px'; sel.style.height = Math.abs(p.y - psDrag.p0.y) * sx + 'px';
+        } else if(!raf){
+          raf = requestAnimationFrame(() => {
+            raf = 0; if(!psDrag) return;
+            const g = psGeom, v = psDrag.v0, dx = (p.x - psDrag.p0.x) / (g.px1 - g.px0) * (v.x1 - v.x0), dy = (p.y - psDrag.p0.y) / (g.py1 - g.py0) * (v.y1 - v.y0);
+            const wx = v.x1 - v.x0, wy = v.y1 - v.y0;
+            const x0 = Math.min(Math.max(0, v.x0 - dx), 1 - wx), y0 = Math.min(Math.max(0, v.y0 + dy), 1 - wy);
+            psView = { x0, x1: x0 + wx, y0, y1: y0 + wy };
+            psRefreshChart();
+          });
+        }
+        return;
+      }
+      const pt = ev.target.closest && ev.target.closest('.pt');
+      if(pt) psShowTip(+pt.dataset.i, ev.clientX, ev.clientY, pt); else dsHideTip();
+    };
+    chart.onmousedown = ev => {
+      if(ev.button !== 0 || !ev.target.closest || ev.target.closest('.ds-zoom, .ds-mini')) return;
+      const p = psSvgPoint(ev), g = psGeom;
+      if(p.x < g.L || p.x > g.px1 || p.y < g.py0 || p.y > g.py1) return;
+      if(!psBox && !(psView.x0 > 0 || psView.x1 < 1 || psView.y0 > 0 || psView.y1 < 1)) return;
+      psDrag = { p0: p, v0: { ...psView }, moved: false }; ev.preventDefault(); dsHideTip();
+    };
+    chart.onmouseleave = () => { if(!psDrag) dsHideTip(); };
+    chart.onclick = ev => { if(chart._dragged) return; const pt = ev.target.closest && ev.target.closest('.pt'); if(pt) psShowTip(+pt.dataset.i, ev.clientX, ev.clientY, pt); else dsHideTip(); };
+    if(!psBound){                                    // 마우스를 놓는 순간은 페이지 전체에서 한 번만 받음
+      psBound = true;
+      document.addEventListener('mouseup', ev => {
+        if(!psDrag) return;
+        const d = psDrag; psDrag = null;
+        const sel = document.getElementById('ps-sel'); if(sel) sel.remove();
+        const ch = document.getElementById('ps-chart'); if(ch){ ch._dragged = d.moved; setTimeout(() => { ch._dragged = false; }, 0); }
+        if(psBox && d.moved && psGeom){
+          const p = psSvgPoint(ev), g = psGeom, v = d.v0;
+          const fx = x => v.x0 + (Math.min(Math.max(x, g.px0), g.px1) - g.px0) / (g.px1 - g.px0) * (v.x1 - v.x0);
+          const fy = y => v.y0 + (g.py1 - Math.min(Math.max(y, g.py0), g.py1)) / (g.py1 - g.py0) * (v.y1 - v.y0);
+          const xa = fx(Math.min(p.x, d.p0.x)), xb = fx(Math.max(p.x, d.p0.x)), ya = fy(Math.max(p.y, d.p0.y)), yb = fy(Math.min(p.y, d.p0.y));
+          if(xb - xa > 0.005 && yb - ya > 0.005){ psView = { x0: xa, x1: xb, y0: ya, y1: yb }; psBox = false; }
+          psRefreshChart();
+        }
       });
-    });
-    document.getElementById('ps-chart').innerHTML = s + '</svg>';
-    document.getElementById('ps-chartnote').textContent = hid ? `연재일수를 알 수 없는 작품 ${hid}개는 그림에서 빼고, 연재기간 "전체"를 고른 표·목록에만 넣었어요.` : '';
+    }
   }
-  function psMove(e){
-    const svg = e.currentTarget, b = svg.getBoundingClientRect(), k = 1000 / b.width, px = (e.clientX - b.left) * k, py = (e.clientY - b.top) * k;
-    let best = null, bd = 14 * 14;
-    psPts.forEach(p => { const d = (p.x - px) ** 2 + (p.y - py) ** 2; if(d < bd){ bd = d; best = p; } });
-    const tip = document.getElementById('ps-tip'); if(!tip) return;
-    if(!best){ tip.style.display = 'none'; return; }
-    const r = best.r, exc = psExc();
-    tip.innerHTML = `<b>${escapeHtml(r[1])}</b><br>${PS_GROUPS[r[2]].n}${r[0] in exc ? ` · ${escapeHtml(exc[r[0]])}(통계 제외)` : ''}<br>관심 ${psFmt(r[3])} · ${r[2] === 1 ? '베스트도전 ' : ''}연재 ${psFmt(r[4])}일${r[5] != null && r[5] >= PS_DEL_MIN ? `<br><span style="color:var(--rise)">삭제 많음 (${r[5]}개 차이)</span>` : ''}`;
-    tip.style.display = 'block'; tip.style.left = Math.min(e.clientX + 14, innerWidth - 300) + 'px'; tip.style.top = (e.clientY + 16) + 'px';
+  function psShowTip(i, cx, cy, ptEl){
+    const r = psShown[i]; if(!r) return;
+    dsRing(ptEl);
+    let tip = document.getElementById('ds-tip');
+    if(!tip){ tip = document.createElement('div'); tip.id = 'ds-tip'; tip.className = 'ds-tip'; document.body.appendChild(tip); }
+    const exc = psExc();
+    tip.innerHTML = `<b>${escapeHtml(r.title)}</b><br><span style="color:var(--muted)">${PS_NAMES[r.g]}${r.id in exc ? ` · ${escapeHtml(exc[r.id])}(통계 제외)` : ''}</span><br>${r.g === 1 ? '베스트도전 연재일수' : '연재일수'} ${dsDur(r.span)}<br>관심 수 ${r.fav.toLocaleString()}${r.age != null && r.age > 7 ? ` <span style="color:var(--muted)">(${r.age}일 전 값)</span>` : ''}${r.del != null && r.del >= PS_DEL_MIN ? `<br><span style="color:var(--rise)">삭제 많음 (마지막 회차 번호와 남은 회차 수 ${r.del}개 차이)</span>` : ''}`;
+    tip.style.display = '';
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    tip.style.left = Math.min(cx + 14, window.innerWidth - w - 8) + 'px';
+    tip.style.top = (cy + 14 + h > window.innerHeight ? cy - h - 10 : cy + 14) + 'px';
   }
-  function psHide(){ const t = document.getElementById('ps-tip'); if(t) t.style.display = 'none'; }
 
   function onDistOpt(key, value){ dsState[key] = value; if(key !== 'mine') dsView = { x0: 0, x1: 1, y0: 0, y1: 1 }; renderDistPage(); }
   function onDistStartSave(id){
