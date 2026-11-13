@@ -27,6 +27,7 @@ LABELS_PATH = Path("data") / "labels.json"
 OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
+POSITION_EXC_PATH = Path("data") / "position_exceptions.json"   # 관심도 위치 탭: 통계에서 뺄 작품 {번호: 사유}
 CURRENT_PATH = Path("data") / "current_webtoons.json"       # 현재 연재작 관심 수·연재 시작일 (collect_current.py가 모음)
 BADGE_NAMES_PATH = Path("data") / "badge_names.json"       # 선정 배지 "당시 명칭" 추천 목록 (경로별 이름)
 PATH_TAGS_PATH = Path("data") / "path_tags.json"           # 공식 명단·라벨 메모로 확인된 선정 경로 (titleId별 목록)
@@ -201,6 +202,95 @@ def load_analysis() -> dict:
     return data if isinstance(data, dict) else {}
 
 
+def _yymmdd(text):
+    """'25.01.06' 같은 날짜 글자를 date로. 못 읽으면 None."""
+    import datetime as _dt
+    try:
+        a, b, c = str(text).split(".")
+        return _dt.date(2000 + int(a), int(b), int(c))
+    except (ValueError, TypeError, AttributeError):
+        return None
+
+
+def load_position(history: dict) -> dict:
+    """'관심도 위치' 탭용: 베스트도전 작품마다 [번호, 제목, 집단, 관심 수, 연재일수, 삭제된 회차 수, 관심 수를 마지막으로 확인한 지 며칠].
+
+    집단 0 그 외 / 1 정식연재작 / 2 챌린저스 / 3 독자PICK.
+      - 선정 경로 태그(data/path_tags.json)가 '챌린저스'면 2, '독자PICK…'이고 근거가 공식 공지(A)나 목록(L)이면 3
+        (메모 근거 C는 제외) — 챌린저스·독자PICK이 정식연재와 겹치면 그쪽으로 분류
+      - 아니면 공식 추적 목록에 있거나 라벨이 '정식 연재 확정'이면 1, 나머지는 0
+    연재일수: 정식연재작은 베스트도전에서 보낸 기간(첫 회 ~ 분류 시점, 정식 시작일이 더 빠르면 그날까지),
+      나머지는 첫 회부터 데이터 기준일까지. 날짜를 모르면 None.
+    삭제된 회차 수 = 마지막 회차 번호 - 남은 회차 수 (둘 다 알 때만). 표시용이며 통계에서 빼지 않음.
+    data/position_exceptions.json에 적은 작품은 정식연재작이되 연재일수 None으로 두고, 화면에서 통계에서 뺌.
+    """
+    import datetime as _dt
+    labels = load_labels()
+    official = load_official_tracking()
+    open_dates = {}
+    for v in official.values():
+        if isinstance(v, dict) and v.get("benchTitleId") and v.get("openDate"):
+            open_dates[str(v["benchTitleId"])] = v["openDate"]
+    try:
+        tags = json.loads(PATH_TAGS_PATH.read_text(encoding="utf-8")) if PATH_TAGS_PATH.exists() else {}
+    except (ValueError, OSError):
+        tags = {}
+    try:
+        exc = json.loads(POSITION_EXC_PATH.read_text(encoding="utf-8")) if POSITION_EXC_PATH.exists() else {}
+    except (ValueError, OSError):
+        exc = {}
+    exc = {str(k): str(v) for k, v in exc.items() if not str(k).startswith("_")}
+
+    last_dates = [(w.get("viewDates") or [""])[-1] for w in history.values()]
+    last_dates = [d for d in last_dates if d]
+    if not last_dates:
+        return {}
+    base = _dt.date.fromisoformat(max(last_dates))
+
+    rows, fav_dates = [], []
+    for tid, w in history.items():
+        fav = w.get("favoriteCount")
+        if not fav:
+            continue
+        tag = (tags.get(tid) or [{}])[0] if isinstance(tags.get(tid), list) and tags.get(tid) else {}
+        path = tag.get("path") or ""
+        lb = labels.get(tid) or {}
+        if path == "챌린저스":
+            group = 2
+        elif path.startswith("독자PICK") and tag.get("conf") in ("A", "L"):
+            group = 3
+        elif tid in open_dates or lb.get("status") == "confirmed" or tid in exc:
+            group = 1
+        else:
+            group = 0
+        first = _yymmdd(w.get("firstEpisodeDate"))
+        if tid in exc:
+            days = None
+        elif group == 1:
+            end = _yymmdd(lb.get("noticeDate"))
+            if end and tid in open_dates:
+                try:
+                    end = min(end, _dt.date.fromisoformat(open_dates[tid]))
+                except ValueError:
+                    pass
+            days = (end - first).days if first and end and end > first else None
+        else:
+            days = (base - first).days if first and base > first else None
+        ln, ec = w.get("latestNo"), w.get("episodeCount")
+        deleted = ln - ec if isinstance(ln, int) and isinstance(ec, int) and ln >= ec else None
+        fd = (w.get("favoriteDates") or [""])[-1]
+        fav_age = None
+        if fd:
+            fav_dates.append(fd)
+            try:
+                fav_age = max((base - _dt.date.fromisoformat(fd)).days, 0)
+            except ValueError:
+                pass
+        rows.append([int(tid), w.get("titleName") or "", group, int(fav), days, deleted, fav_age])
+    return {"updated": base.isoformat(), "favFrom": min(fav_dates) if fav_dates else None, "favTo": max(fav_dates) if fav_dates else None,
+            "exc": exc, "works": rows}
+
+
 def load_official_tracking() -> dict:
     """정식 연재 추적 기록. 없거나 깨졌으면 빈 값."""
     if not OFFICIAL_PATH.exists():
@@ -354,6 +444,14 @@ def main() -> None:
         else:
             print(f"[build_site] {const_name} 선언부를 못 찾아 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
+    # 관심도 위치 탭용 베스트도전 작품 목록(BC_POSITION)
+    pos_match = re.compile(r"  const BC_POSITION = \{.*?\};\n", re.DOTALL).search(new_html)
+    position = load_position(history)
+    if pos_match:
+        new_html = new_html[:pos_match.start()] + f"  const BC_POSITION = {to_js_literal(position)};\n" + new_html[pos_match.end():]
+    else:
+        print("[build_site] BC_POSITION 선언부를 못 찾아 관심도 위치 탭 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
     analysis = load_analysis()
     analysis_match = re.compile(r"  const ANALYSIS = \{.*?\};", re.DOTALL).search(new_html)
     if analysis_match:
@@ -373,7 +471,7 @@ def main() -> None:
         print("[build_site] PAST_NOTICES 선언부를 못 찾아 지난 회차 공지 후보 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
     SITE_PATH.write_text(new_html, encoding="utf-8")
-    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 지난 회차 훑은 작품 {len(past["scanned"])}개, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, 선정 경로 배지 {len(path_tags)}작품, {SITE_PATH} 갱신됨")
+    print(f"[build_site] 완료 — {len(real_data)}개 작품, 분류 {len(labels)}건, 검토 기록 {len(reviews)}건, 찜·관심없음 기록 {len(personal)}건, 정식 추적 {len(official)}건, 지난 회차 훑은 작품 {len(past["scanned"])}개, 분석 결과 {"있음" if analysis.get("computedAt") else "없음"} 반영, 관심도 위치 {len(position.get("works", []))}작품, 선정 경로 배지 {len(path_tags)}작품, {SITE_PATH} 갱신됨")
 
 
 if __name__ == "__main__":
