@@ -608,6 +608,9 @@
   .ds-mine-row label{display:inline-flex; gap:10px; align-items:center;}
   .ds-mine-row input[type=number]{width:96px; background:transparent; color:var(--paper); border:1px solid var(--hairline); border-radius:3px; padding:4px 8px; font-size:13px;}
   .ds-mine-row input.ds-pct{width:70px;}
+  .ds-rankbox{display:inline-flex; gap:10px; align-items:center; font-size:12.5px; color:var(--muted);}
+  .ds-controls input:disabled, .ds-mine-row input:disabled{opacity:.4; cursor:not-allowed;}
+  .ds-controls label:has(input:disabled){opacity:.5;}
   .ds-mine-row .ds-clear{font-size:12px; padding:3px 10px; border:1px solid var(--hairline); border-radius:3px; background:transparent; color:var(--muted); cursor:pointer;}
   .ds-mine-row .ds-clear:hover{color:var(--paper); border-color:var(--muted);}
   input[type=range].ds-range{accent-color:var(--new); width:min(380px, 62vw); height:22px; cursor:pointer;}
@@ -2338,7 +2341,9 @@
   };
   const DS_ADULT_COLOR = '#e0508b';              // 성인 작품(일반 점·경로 모양의 테두리)을 구분하는 색
   const DS_PATH_ORDER = ['award', 'challengers', 'contact', 'reader', 'other', 'unknown'];
-  const dsState = { day: 'all', rest: true, adult: true, ended: false, logY: true, logX: true, mine: '' };
+  const dsState = { day: 'all', rest: true, adult: true, ended: false, logY: true, logX: true, mine: '', rank: '' };
+  const DS_RANKS = [['user', '인기순', 0], ['view', '조회순', 1], ['star', '별점순', 2]];   // 목록 안 순위 (요일·매일+ 하나를 골랐을 때만)
+  const dsRankMode = () => !!dsState.rank && dsState.day !== 'all';
 
   function dsFmt(n){ if(n == null) return '–'; return n >= 10000 ? `${(n / 10000).toFixed(n >= 100000 ? 0 : 1)}만` : Number(n).toLocaleString(); }
   function dsQuantile(sorted, q){
@@ -2459,7 +2464,13 @@
     const rows = all.filter(r => (dsState.day === 'all' || r.days.includes(dsState.day)) && (dsState.rest || !r.rest) && (dsState.adult || !r.adult));
     const endedAll = dsEndedRows();
     const endedRows = dsState.ended && dsState.day === 'all' ? endedAll : [];
-    dsShown = rows.concat(endedRows);
+    const rankMode = dsRankMode();
+    let rankMissing = 0;
+    if(rankMode){                                   // 그 요일 목록 안 순위를 높을수록 위(rv 0~100)로 바꿈. 목록에 순위가 없는 작품은 그림에서 뺌
+      const ri = DS_RANKS.find(x => x[0] === dsState.rank)[2];
+      dsShown = rows.map(r => { const a = r.rk && r.rk[dsState.day], x = a && a[ri], n = a && a[3]; return x && n ? { ...r, rankX: x, rankN: n, rv: 100 * (n - x + 0.5) / n } : null; }).filter(Boolean);
+      rankMissing = rows.length - dsShown.length;
+    } else dsShown = rows.concat(endedRows);
     const favs = rows.map(r => r.fav).sort((a, b) => a - b);
     const q50 = dsQuantile(favs, 0.5), q75 = dsQuantile(favs, 0.75), q90 = dsQuantile(favs, 0.9);
 
@@ -2488,7 +2499,7 @@
 
     // ── 내 기준 입력 ──
     dsFavs = favs;
-    const mineText = dsMineInner();
+    const mineText = rankMode ? '<span class="ds-note">순위 보기에서는 관심 수 기준선을 쓰지 않아요.</span>' : dsMineInner();
 
     // ── 연재일수 없는 작품: 직접 입력 ──
     const missing = all.filter(r => r.span == null).sort((a, b) => b.fav - a.fav);
@@ -2514,13 +2525,15 @@
         <label>요일 <select onchange="onDistOpt('day', this.value)"><option value="all">전체</option>${DS_DAY_ORDER.map(d => `<option value="${d}" ${dsState.day === d ? 'selected' : ''}>${d === 'DAILYPLUS' ? '매일+' : DS_DAY_KO[d] + '요일'}</option>`).join('')}</select></label>
         <label><input type="checkbox" ${dsState.rest ? 'checked' : ''} onchange="onDistOpt('rest', this.checked)"> 휴재 중 포함</label>
         <label title="성인 인증이 필요한 작품은 분홍색으로 표시돼요. 끄면 기준선(중앙값 등)과 표에서도 빠져서 성인 작품 유무에 따른 차이를 비교할 수 있어요."><input type="checkbox" ${dsState.adult ? 'checked' : ''} onchange="onDistOpt('adult', this.checked)"> 성인 작품 포함 (${all.filter(r => r.adult).length})</label>
-        ${endedAll.length ? `<label title="연재 중 목록에서 빠져 네이버 완결 탭에 있는 추적 작품 ${endedAll.length}개를 속이 빈 모양으로 겹쳐 그려요. 기준선(중앙값 등)에는 넣지 않아요. 요일을 고르면 보이지 않아요."><input type="checkbox" ${dsState.ended ? 'checked' : ''} onchange="onDistOpt('ended', this.checked)"> 완결 탭 작품 겹쳐 보기 (${endedAll.length})</label>` : ''}
+        <span class="ds-rankbox" title="요일(또는 매일+) 하나를 골랐을 때만 쓸 수 있어요. 네이버가 그 목록 안에서 매긴 순위를 세로축으로 보여 줘요. 목록마다 작품 수가 달라 전체에서는 쓸 수 없고, 하나만 고를 수 있어요.">세로축 순위 ${DS_RANKS.map(([k, t]) => `<label><input type="checkbox" ${dsState.rank === k ? 'checked' : ''} ${dsState.day === 'all' ? 'disabled' : ''} onchange="onDistRank('${k}', this.checked)"> ${t}</label>`).join('')}</span>
+        ${endedAll.length ? `<label title="연재 중 목록에서 빠져 네이버 완결 탭에 있는 추적 작품 ${endedAll.length}개를 속이 빈 모양으로 겹쳐 그려요. 기준선(중앙값 등)에는 넣지 않아요. 요일을 고르면 보이지 않아요."><input type="checkbox" ${dsState.ended ? 'checked' : ''} ${dsState.rank ? 'disabled' : ''} onchange="onDistOpt('ended', this.checked)"> 완결 탭 작품 겹쳐 보기 (${endedAll.length})</label>` : ''}
       </div>
       <div class="ds-mine-row"><label>내 기준 관심 수
-        <input type="range" class="ds-range" min="0" max="1000" step="1" value="${slPos(mineV > 0 ? mineV : (q50 || 10000), DS_SL.min, DS_SL.max)}" oninput="onDistMineSlide(this.value)">
-        <input type="number" id="ds-mine-num" min="0" step="1000" value="${escapeHtml(dsState.mine)}" placeholder="예: 50000" onchange="onDistOpt('mine', this.value)"></label>
-        <label>상위 <input type="number" id="ds-mine-pct" class="ds-pct" min="0.1" max="100" step="0.1" value="${dsPctOf(mineV)}" onchange="onDistPct(this.value)"> %</label>
+        <input type="range" class="ds-range" min="0" max="1000" step="1" value="${slPos(mineV > 0 ? mineV : (q50 || 10000), DS_SL.min, DS_SL.max)}" oninput="onDistMineSlide(this.value)" ${rankMode ? 'disabled' : ''}>
+        <input type="number" id="ds-mine-num" min="0" step="1000" value="${escapeHtml(dsState.mine)}" placeholder="예: 50000" ${rankMode ? 'disabled' : ''} onchange="onDistOpt('mine', this.value)"></label>
+        <label>상위 <input type="number" id="ds-mine-pct" class="ds-pct" min="0.1" max="100" step="0.1" ${rankMode ? 'disabled' : ''} value="${dsPctOf(mineV)}" onchange="onDistPct(this.value)"> %</label>
         ${dsState.mine !== '' ? `<button type="button" class="ds-clear" onclick="onDistOpt('mine', '')">지우기</button>` : ''}<span id="ds-mine-text">${mineText}</span></div>
+      ${rankMode ? `<div class="ds-note" style="margin:-6px 0 8px">${dsState.day === 'DAILYPLUS' ? '매일+' : DS_DAY_KO[dsState.day] + '요일'} 목록 안 ${DS_RANKS.find(x => x[0] === dsState.rank)[1]} 순위로 세로축을 바꿨어요. 순위는 ${escapeHtml(cw.rankDate || '')} 수집값이고, 네이버가 그 목록 안에서 매긴 순서예요. 목록마다 작품 수가 달라 다른 요일과는 비교할 수 없어요.${rankMissing ? ` 목록에 순위가 없는 작품 ${rankMissing}개는 그림에서 뺐어요.` : ''}</div>` : ''}
       <div class="ds-chart" id="ds-chart"><div class="ds-stage"><div id="ds-svg">${svg}</div>
         <div class="ds-plotbox"><div class="ds-mini" id="ds-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div></div></div>
         <div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
@@ -2548,6 +2561,7 @@
     const rows = list.filter(r => !r.ended), all = list;   // 기준선(중앙값 등)은 연재 중인 작품만, 축 범위와 점은 완결 표시까지 포함
     const favs = rows.map(r => r.fav).sort((a, b) => a - b), allFavs = all.map(r => r.fav);
     const q50 = dsQuantile(favs, 0.5), q75 = dsQuantile(favs, 0.75), q90 = dsQuantile(favs, 0.9);
+    const rankMode = dsRankMode(), ylog = dsState.logY && !rankMode, V = r => rankMode ? r.rv : r.fav;   // 순위 보기: 세로축은 목록 안 순위(위쪽이 1위), 일반 눈금
     const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;
     const v = dsView, zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
     const showStrip = !zoomed;                         // 확대하면 '연재일수 없음' 칸은 숨기고 그 자리까지 그림을 넓게 씀
@@ -2557,19 +2571,19 @@
     const maxFav = Math.max(1000, ...allFavs), minFav = Math.max(100, Math.min(...allFavs, 1e9));
     const lg = Math.log10;
     const xMin = dsState.logX ? lg(6) : -maxSpan * 0.01, xMax = dsState.logX ? lg(maxSpan) : maxSpan;
-    const yMin = dsState.logY ? lg(Math.max(100, minFav / 2.2)) : 0, yMax = dsState.logY ? lg(maxFav * 1.9) : maxFav * 1.2;
-    const tx = d => dsState.logX ? lg(Math.max(1, d)) : d, ty = f => dsState.logY ? lg(Math.max(1, f)) : f;
+    const yMin = rankMode ? -3 : ylog ? lg(Math.max(100, minFav / 2.2)) : 0, yMax = rankMode ? 103 : ylog ? lg(maxFav * 1.9) : maxFav * 1.2;
+    const tx = d => dsState.logX ? lg(Math.max(1, d)) : d, ty = f => ylog ? lg(Math.max(1, f)) : f;
     const X = d => px0 + (((tx(d) - xMin) / (xMax - xMin)) - v.x0) / (v.x1 - v.x0) * (px1 - px0);
     const Y = f => py1 - (((ty(f) - yMin) / (yMax - yMin)) - v.y0) / (v.y1 - v.y0) * (py1 - py0);
     const dAt = fr => { const t = xMin + fr * (xMax - xMin); return dsState.logX ? Math.pow(10, t) : t; };       // 가로 비율 → 연재일수
-    const fAt = fr => { const t = yMin + fr * (yMax - yMin); return dsState.logY ? Math.pow(10, t) : t; };       // 세로 비율 → 관심 수
+    const fAt = fr => { const t = yMin + fr * (yMax - yMin); return ylog ? Math.pow(10, t) : t; };       // 세로 비율 → 관심 수
     dsGeom = { W, H, px0, px1, py0, py1, STRIP, L };
     // 미니맵: 전체 범위를 작게 그리고 지금 보는 구간을 네모로 표시
     {
       const MW = 124, MH = 84;
       const fx = d => (tx(d) - xMin) / (xMax - xMin), fy = f => (ty(f) - yMin) / (yMax - yMin);
       let dots = '';
-      all.forEach(r => { if(r.span == null) return; const st = r.path ? (DS_PATH_STYLE[r.path] || DS_PATH_STYLE.unknown) : null; dots += `<circle cx="${(fx(r.span) * MW).toFixed(1)}" cy="${((1 - fy(r.fav)) * MH).toFixed(1)}" r="${st ? 1.8 : 1}" fill="${st ? st.color : 'var(--muted)'}" fill-opacity="${st ? 1 : 0.55}"/>`; });
+      all.forEach(r => { if(r.span == null) return; const st = r.path ? (DS_PATH_STYLE[r.path] || DS_PATH_STYLE.unknown) : null; dots += `<circle cx="${(fx(r.span) * MW).toFixed(1)}" cy="${((1 - fy(V(r))) * MH).toFixed(1)}" r="${st ? 1.8 : 1}" fill="${st ? st.color : 'var(--muted)'}" fill-opacity="${st ? 1 : 0.55}"/>`; });
       dsGeom.miniSvg = `<svg viewBox="0 0 ${MW} ${MH}" preserveAspectRatio="none" aria-label="전체 중 지금 보는 위치">${dots}<rect class="vp" x="${(v.x0 * MW).toFixed(1)}" y="${((1 - v.y1) * MH).toFixed(1)}" width="${((v.x1 - v.x0) * MW).toFixed(1)}" height="${((v.y1 - v.y0) * MH).toFixed(1)}"/></svg>`;
       dsGeom.zoomed = zoomed;
     }
@@ -2577,7 +2591,8 @@
     // 눈금: 후보를 만든 뒤 화면에서 너무 붙은 것은 솎아 냄
     const thin = (cands, pos, gap) => { const out = []; let last = -1e9; cands.forEach(c => { const p = pos(c); if(p > last + gap){ out.push(c); last = p; } }); return out; };
     let yCands = [];
-    if(dsState.logY){ for(let e = Math.floor(lg(fVis0)); e <= Math.ceil(lg(fVis1)); e++) [1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9].forEach(m => yCands.push(m * Math.pow(10, e))); }
+    if(rankMode){ for(let t = 0; t <= 100; t += 10) yCands.push(t); }
+    else if(ylog){ for(let e = Math.floor(lg(fVis0)); e <= Math.ceil(lg(fVis1)); e++) [1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9].forEach(m => yCands.push(m * Math.pow(10, e))); }
     else { const span = fVis1 - fVis0, stepBase = Math.pow(10, Math.floor(lg(span / 6))); const st = [1, 2, 2.5, 5, 10].map(m => m * stepBase).find(x => span / x <= 7) || stepBase * 10; for(let t = Math.ceil(fVis0 / st) * st; t <= fVis1; t += st) yCands.push(t); }
     yCands = yCands.filter(c => c >= fVis0 && c <= fVis1).sort((a, b) => b - a);
     const yTicks = thin(yCands, c => Y(c), 28);
@@ -2587,14 +2602,14 @@
     const xTicks = thin(xC, c => X(c[0]), 44);
     let g = `<defs><clipPath id="ds-clip-plot"><rect x="${px0 - (showStrip ? 10 : 0)}" y="${py0}" width="${px1 - px0 + (showStrip ? 10 : 0)}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-strip"><rect x="${L}" y="${py0}" width="${STRIP}" height="${py1 - py0}"/></clipPath><clipPath id="ds-clip-all"><rect x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}"/></clipPath></defs>`;
     g += `<rect class="plotbg" x="${L}" y="${py0}" width="${px1 - L}" height="${py1 - py0}" rx="2"/>`;
-    yTicks.forEach(f => { g += `<line class="gl" x1="${L}" x2="${px1}" y1="${Y(f)}" y2="${Y(f)}"/><text x="${L - 8}" y="${Y(f) + 4}" text-anchor="end">${dsFmt(Math.round(f))}</text>`; });
+    yTicks.forEach(f => { g += `<line class="gl" x1="${L}" x2="${px1}" y1="${Y(f)}" y2="${Y(f)}"/><text x="${L - 8}" y="${Y(f) + 4}" text-anchor="end">${rankMode ? (f >= 100 ? '1위' : f <= 0 ? '100%' : Math.round(100 - f) + '%') : dsFmt(Math.round(f))}</text>`; });
     xTicks.forEach(([d, t]) => { g += `<line class="gl" x1="${X(d)}" x2="${X(d)}" y1="${py0}" y2="${py1}" stroke-opacity=".5"/><text x="${X(d)}" y="${py1 + 18}" text-anchor="middle">${t}</text>`; });
     if(showStrip) g += `<line class="gl" x1="${L + STRIP + GAP / 2}" x2="${L + STRIP + GAP / 2}" y1="${py0}" y2="${py1}" stroke-dasharray="2 4"/><text x="${L + STRIP / 2}" y="${py1 + 16}" text-anchor="middle">연재일수</text><text x="${L + STRIP / 2}" y="${py1 + 29}" text-anchor="middle">없음</text>`;
-    g += `<text x="${(px0 + px1) / 2}" y="${H - 6}" text-anchor="middle">연재일수 (${dsState.logX ? '로그 눈금' : '일반 눈금'})</text><text transform="translate(14 ${(py0 + py1) / 2}) rotate(-90)" text-anchor="middle">관심 수 (${dsState.logY ? '로그 눈금' : '일반 눈금'})</text>`;
+    g += `<text x="${(px0 + px1) / 2}" y="${H - 6}" text-anchor="middle">연재일수 (${dsState.logX ? '로그 눈금' : '일반 눈금'})</text><text transform="translate(14 ${(py0 + py1) / 2}) rotate(-90)" text-anchor="middle">${rankMode ? (DS_RANKS.find(x => x[0] === dsState.rank)[1] + ' 순위 · ' + (dsState.day === 'DAILYPLUS' ? '매일+' : DS_DAY_KO[dsState.day] + '요일') + ' 목록 안 상위 %') : '관심 수 (' + (dsState.logY ? '로그 눈금' : '일반 눈금') + ')'}</text>`;
     let refs = '';
-    [[q50, '중앙값'], [q75, '상위 25%'], [q90, '상위 10%']].forEach(([val, t]) => { if(val != null){ const y = Y(val); if(y > py0 && y < py1) refs += `<line class="ref" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${px1 + 4}" y="${y - 2}">${t}</text><text x="${px1 + 4}" y="${y + 10}">${dsFmt(Math.round(val))}</text>`; } });
+    if(!rankMode) [[q50, '중앙값'], [q75, '상위 25%'], [q90, '상위 10%']].forEach(([val, t]) => { if(val != null){ const y = Y(val); if(y > py0 && y < py1) refs += `<line class="ref" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${px1 + 4}" y="${y - 2}">${t}</text><text x="${px1 + 4}" y="${y + 10}">${dsFmt(Math.round(val))}</text>`; } });
     const mineV = parseFloat(dsState.mine);
-    if(mineV > 0){ const y = Y(mineV); if(y > py0 && y < py1) refs += `<line class="mine" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${L + 4}" y="${y - 4}" style="fill:var(--new)">내 기준 ${dsFmt(mineV)}</text>`; }
+    if(!rankMode && mineV > 0){ const y = Y(mineV); if(y > py0 && y < py1) refs += `<line class="mine" x1="${L}" x2="${px1}" y1="${y}" y2="${y}"/><text x="${L + 4}" y="${y - 4}" style="fill:var(--new)">내 기준 ${dsFmt(mineV)}</text>`; }
     const hash = id => { let h = 0; for(const c of String(id)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
     const plain = [], tracked = [];
     all.forEach((r, i) => (r.path ? tracked : plain).push(i));
@@ -2602,7 +2617,7 @@
     const mk = (i, clip) => {
       const r = all[i], st = r.path ? DS_PATH_STYLE[r.path] || DS_PATH_STYLE.unknown : null;
       if(r.span == null && !showStrip) return '';
-      const x = r.span == null ? L + 9 + (hash(r.id) % (STRIP - 18)) : X(r.span), y = Y(r.fav);
+      const x = r.span == null ? L + 9 + (hash(r.id) % (STRIP - 18)) : X(r.span), y = Y(V(r));
       if(x < L - 12 || x > px1 + 12 || y < py0 - 12 || y > py1 + 12) return '';
       return `<g class="pt" data-i="${i}" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}" data-r="${((st ? 9 : 6) * zoomK).toFixed(1)}">${st ? dsMarker(st.shape, x, y, 6 * zoomK, st.color, 0.95, r.ended, r.adult ? DS_ADULT_COLOR : null) : dsMarker('circle', x, y, (r.ended ? 3.6 : r.adult ? 3.6 : 3.4) * zoomK, r.adult ? DS_ADULT_COLOR : 'var(--muted)', r.adult ? 0.8 : 0.5, r.ended)}<circle cx="${x}" cy="${y}" r="${((st ? 10 : 7) * zoomK).toFixed(1)}" fill="transparent"/></g>`;
     };
@@ -3045,7 +3060,8 @@
     tip.style.top = (cy + 14 + h > window.innerHeight ? cy - h - 10 : cy + 14) + 'px';
   }
 
-  function onDistOpt(key, value){ dsState[key] = value; if(key !== 'mine') dsView = { x0: 0, x1: 1, y0: 0, y1: 1 }; renderDistPage(); }
+  function onDistRank(k, on){ dsState.rank = on ? k : ''; if(on) dsState.ended = false; onDistOpt('rank', dsState.rank); }
+  function onDistOpt(key, value){ dsState[key] = value; if(key === 'day' && value === 'all') dsState.rank = ''; if(key !== 'mine') dsView = { x0: 0, x1: 1, y0: 0, y1: 1 }; renderDistPage(); }
   function onDistStartSave(id){
     const el = document.getElementById(`ds-start-${id}`);
     if(!el || !isValidOfficialDate(el.value)){ if(el) el.style.outline = '1px solid #e66767'; return; }
