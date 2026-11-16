@@ -5,30 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>스카우팅 데스크 — 베스트도전 모니터링</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
   :root{
-    --ink:#14151A;
-    --surface:#1B1D25;
-    --surface-2:#22242E;
-    --hairline:#33353F;
-    --paper:#EDEAE1;
-    --muted:#8B8D98;
+    --ink:#0F1013;
+    --surface:#17181D;
+    --surface-2:#1F2127;
+    --hairline:#2A2C34;
+    --paper:#F4F4F5;
+    --muted:#9A9CA6;
     --rise:#E8A33D;
     --new:#5FA8D3;
     --stable:#5C5E68;
+    --g:#03C75A;
+    --gt:#2FE07F;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--ink);
     color:var(--paper);
-    font-family:'Inter',system-ui,sans-serif;
+    font-family:'Pretendard',-apple-system,'Noto Sans KR',system-ui,sans-serif;
     font-variant-numeric:tabular-nums;
     -webkit-font-smoothing:antialiased;
   }
-  .serif{font-family:'Noto Serif KR',serif;}
+  .serif{font-family:inherit;}
 
   /* ── 상단 헤더 ── */
   header{
@@ -158,7 +160,7 @@
   .an-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);margin:14px 0 4px;}
   .an-tile{background:var(--ink);padding:12px 14px;}
   .an-tile .k{font-size:11px;color:var(--muted);}
-  .an-tile .v{font-size:22px;margin-top:4px;font-family:'Noto Serif KR',serif;}
+  .an-tile .v{font-size:22px;margin-top:4px;font-family:inherit;}
   .an-tile .v.dim{color:var(--muted);}
   .an-sec{margin-top:30px;}
   .an-sec h3{font-size:15px;font-weight:600;margin:0 0 4px;}
@@ -224,7 +226,7 @@
   .metric .value{
     font-size:28px;
     font-weight:600;
-    font-family:'Noto Serif KR',serif;
+    font-family:inherit;
   }
   .metric .value.rise{color:var(--rise);}
 
@@ -282,7 +284,7 @@
     font-size:15px;
     font-weight:500;
     margin:0;
-    font-family:'Noto Serif KR',serif;
+    font-family:inherit;
   }
   .sort-select{
     background:var(--surface);
@@ -767,7 +769,7 @@
   .detail-radar{width:240px;height:200px;flex-shrink:0;}
   .detail-side{flex:1;min-width:200px;}
   .fit-score{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
-  .fit-score .num{font-size:28px;font-weight:600;font-family:'Noto Serif KR',serif;color:var(--new);}
+  .fit-score .num{font-size:28px;font-weight:600;font-family:inherit;color:var(--new);}
   .fit-score .of{font-size:12px;color:var(--muted);}
   .fit-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
   .tag{font-size:11px;padding:3px 9px;border-radius:2px;border:1px solid var(--hairline);color:var(--muted);}
@@ -937,6 +939,38 @@
     .ds-table td:nth-child(2){white-space:nowrap;}
     .ds-legend{gap:6px 12px;}
   }
+
+  /* ══ 디자인 레이어 (1단계): 글꼴·색·메뉴·제목·입력창 ══ */
+  header{padding:26px 40px 18px;border-bottom:none;}
+  header h1{font-size:26px;font-weight:800;letter-spacing:-.8px;}
+  header h1 em, header h1 .accent{font-style:normal;color:var(--g);}
+  header .subtitle{font-size:14px;margin-top:6px;}
+  .data-note{font-size:12px;font-weight:600;border-radius:8px;border-color:rgba(242,177,60,.35);}
+  .pagenav{padding:0 40px;gap:6px;border-bottom:1px solid var(--hairline);}
+  .pagenav-link{font-size:16px;font-weight:700;padding:14px 14px;}
+  .pagenav-link.active{border-bottom:3px solid var(--g);}
+  .pagenav-badge{font-weight:700;border-radius:999px;color:var(--gt);border-color:rgba(47,224,127,.4);}
+  .wl-page-header h2, .an-head h2, .ds-head h2{font-size:26px;font-weight:800;letter-spacing:-.8px;}
+  .list-header h2{font-size:20px;font-weight:800;letter-spacing:-.4px;}
+  .an-sec h3{font-weight:800;}
+  .sort-select,.search-input,.wl-status-select{background:var(--surface-2);border:none;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:600;}
+  .search-input{font-weight:500;}
+  .search-input:focus{outline:2px solid rgba(47,224,127,.5);}
+  .export-btn{border-radius:10px;font-weight:700;padding:8px 14px;}
+  .trend-range-btn{border:none;border-radius:999px;background:var(--surface-2);font-size:12.5px;font-weight:600;padding:6px 14px;}
+  .trend-range-btn.active{background:var(--paper);color:#111;}
+  .detail-tab-btn{font-size:14px;font-weight:700;padding:10px 14px;}
+  .detail-tab-btn.active{border-bottom-color:var(--g);}
+  .rail button{font-weight:600;}
+  .rail button.active{color:var(--paper);font-weight:800;border-left-color:var(--g);}
+  .label-link{color:var(--gt);font-weight:600;}
+  .title-cell .name{font-weight:800;letter-spacing:-.3px;}
+  input[type=checkbox],input[type=radio],input[type=range]{accent-color:var(--g);}
+  button:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid var(--gt);outline-offset:2px;}
+  .label-save-btn{background:var(--g);border-color:var(--g);color:#06130B;font-weight:700;border-radius:8px;}
+  .ds-zoom button.on,.bd-seg button.on,.ds-missing button{background:var(--g);border-color:var(--g);color:#06130B;font-weight:700;}
+  .axis-row input[type=range]::-webkit-slider-thumb{background:var(--g);}
+  .axis-row input[type=range]::-moz-range-thumb{background:var(--g);}
 </style>
 </head>
 <body>
@@ -4046,14 +4080,14 @@
     mkTrend(`trend-${titleId}`, titleId, {
       type: 'line',
       data: { labels: agg.dates, datasets: [{
-        data: agg.values, borderColor: '#E8A33D', backgroundColor: 'rgba(232,163,61,0.1)',
-        pointBackgroundColor: markColor(marks, '#E8A33D'), pointBorderColor: markColor(marks, '#E8A33D'),
+        data: agg.values, borderColor: '#03C75A', backgroundColor: 'rgba(3,199,90,0.10)',
+        pointBackgroundColor: markColor(marks, '#03C75A'), pointBorderColor: markColor(marks, '#03C75A'),
         pointRadius: marks.map(m => m ? 5 : 3), pointHoverRadius: 6, borderWidth: 2, tension: 0.25, fill: true }] },
       xTicks: episodeTicks(marks)
     }, agg.dates.length, false);
     mkTrend(`trend-bar-${titleId}`, `bar${titleId}`, {
       type: 'bar',
-      data: { labels: incrementDates, datasets: [{ data: increments, backgroundColor: markColor(marks.slice(1), 'rgba(95,168,211,0.55)'), borderRadius: 2 }] },
+      data: { labels: incrementDates, datasets: [{ data: increments, backgroundColor: markColor(marks.slice(1), 'rgba(3,199,90,0.55)'), borderRadius: 3 }] },
       xTicks: episodeTicks(marks.slice(1))
     }, incrementDates.length, true);
     bindTrendScroll(titleId);
@@ -4088,7 +4122,7 @@
   }
 
   // ── 새 화가 올라온 날짜 표시 ─────────────────────────────────────────
-  const EP_LATEST = '#5FC77E', EP_EARLIER = '#C792EA', TICK_BASE = '#8B8D98';
+  const EP_LATEST = '#FFD25A', EP_EARLIER = '#C792EA', TICK_BASE = '#8B8D98';
 
   function naverToIso(s){
     const m = /^(\d{2})\.(\d{2})\.(\d{2})/.exec(s || '');
