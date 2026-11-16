@@ -1839,16 +1839,15 @@
     const btns = Object.entries(BADGE_KINDS).map(([k, n]) => `<button type="button" data-k="${k}" onclick="onBadgeKind(${id}, '${k}')">${n}</button>`).join('');
     const hid = new Set(hiddenTagsOf(id).map(h => tagKey(h.path, h.when, h.sub)));
     const research = (PATH_TAGS[String(id)] || []).filter(t => !hid.has(tagKey(t[0], t[1], t[2])))
-      .map(t => `<span class="badge-mine ${t[5] === '추정' ? 'est' : ''}" title="조사 자료에서 온 배지예요 (근거: ${escapeHtml(PATH_CONF[t[4]] || t[4])}). 삭제해도 data 파일은 그대로고, labels.json에 '지운 배지'로 기록돼요.">${escapeHtml([pathName(t[0]), t[1], t[2], t[3]].filter(Boolean).join(' '))}${t[5] === '추정' ? ' (추정)' : ''} <a onclick="onTagHide(${id}, '${escapeHtml(tagKey(t[0], t[1], t[2])).replace(/'/g, '')}')" title="이 조사 배지 삭제">×</a></span>`).join('');
-    const hidden = hiddenTagsOf(id).map(h => `<span class="badge-mine est">${escapeHtml([pathName(h.path), h.when, h.sub].filter(Boolean).join(' '))} <a onclick="onTagRestore(${id}, '${escapeHtml(tagKey(h.path, h.when, h.sub)).replace(/'/g, '')}')" title="다시 보이게">되살리기</a></span>`).join('');
-    const researchRow = research || hidden ? `<span class="label-official-title">조사 배지</span>${research || '<span class="badge-hint">없음</span>'}${hidden ? `<span class="badge-hint">지운 배지:</span>${hidden}` : ''}<br>` : '';
-    return `${researchRow}<span class="label-official-title">선정 배지 추가</span>${chips}
+      .map(t => `<span class="badge-mine ${t[5] === '추정' ? 'est' : ''}" title="조사 자료에서 온 배지예요 (근거: ${escapeHtml(PATH_CONF[t[4]] || t[4])}). 삭제해도 data 파일은 그대로고, labels.json에 '지운 배지'로 기록돼요(내보낸 파일을 올려야 저장).">${escapeHtml([pathName(t[0]), t[1], t[2], t[3]].filter(Boolean).join(' '))}${t[5] === '추정' ? ' (추정)' : ''} <a onclick="onTagHide(${id}, '${escapeHtml(tagKey(t[0], t[1], t[2])).replace(/'/g, '')}')" title="이 조사 배지 삭제">×</a></span>`).join('');
+    const researchRow = research ? `<br><span class="label-official-title">조사 배지</span>${research}` : '';
+    return `<span class="label-official-title">선정 배지 추가</span>${chips}
       <span class="bd-seg">${btns}</span>
       <input type="month" class="bd-when" title="선정 시기 (연-월)">
       <span class="bd-sub-wrap"><input type="text" class="bd-sub" placeholder="당시 명칭 (선택) 예: 2기, 달달 승격" autocomplete="off"
             oninput="renderBadgeSuggest(${id})" onfocus="renderBadgeSuggest(${id})" onblur="closeBadgeSuggest(${id})" onkeydown="onBadgeSuggestKey(event, ${id})"><div class="bd-suggest" id="bd-suggest-${id}"></div></span>
       <button type="button" class="label-save-btn" onclick="onBadgeAdd(${id})">추가</button>
-      <span class="badge-hint" id="bd-hint-${id}">${label ? '경로를 고르고 월을 정해 추가해요. 당시 명칭은 적어도 되고 안 적어도 돼요.' : '분류를 먼저 고른 뒤 추가해 주세요.'}</span>`;
+      <span class="badge-hint" id="bd-hint-${id}">${label ? '경로를 고르고 월을 정해 추가해요. 당시 명칭은 적어도 되고 안 적어도 돼요.' : '분류를 먼저 고른 뒤 추가해 주세요.'}</span>${researchRow}`;
   }
   // 당시 명칭 추천: 이미 데이터에 있는 명칭(배지의 세부·괄호 안 이름·프로그램 이름)을 경로별로 모아 많이 쓴 순서로 보여줌
   function badgeNameSuggestions(kind){
