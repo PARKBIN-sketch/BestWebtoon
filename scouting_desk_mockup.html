@@ -722,6 +722,14 @@
   }
   .trend-range-btn.active{color:var(--new);border-color:rgba(95,168,211,.4);}
   .trend-range-btn:disabled{opacity:.35;cursor:not-allowed;}
+  .trend-row{display:flex; width:100%; max-width:900px; height:var(--h);}
+  .trend-row-bar{margin-top:22px;}
+  .trend-yaxis{flex:0 0 68px; width:68px; min-width:0; overflow:hidden; position:relative; height:100%;}
+  .trend-yin{width:136px; height:100%; position:relative;}   /* Chart.js는 세로축 폭을 그림 폭의 절반까지만 줘서, 두 배 폭으로 그리고 왼쪽 절반만 보여 줌 */
+  .trend-scroll{flex:1 1 auto; min-width:0; overflow-x:auto; overflow-y:hidden; cursor:grab; scrollbar-width:thin; -webkit-overflow-scrolling:touch;}
+  .trend-scroll.drag{cursor:grabbing; user-select:none;}
+  .trend-inner{position:relative; height:100%;}
+  .trend-slide-hint{color:var(--new);}
   .trend-chart-tall{width:100%;max-width:640px;height:240px;}
   .trend-chart-bar{margin-top:22px;height:140px;}
   .trend-caption{font-size:11px;color:var(--muted);margin-top:8px;}
@@ -902,7 +910,13 @@
     .list-header h2{white-space:normal;}
     .list-header input.search-input, .list-header select.sort-select{max-width:100%; width:100%; box-sizing:border-box;}
     .main{min-width:0;}
-    .row{grid-template-columns:20px 36px minmax(0,1fr) 58px 24px 16px 14px; gap:6px;}
+    .row{grid-template-columns:16px 44px minmax(0,1fr) 78px 22px 16px 12px; gap:5px; padding:12px 0;}
+    .thumb{width:44px; height:58px;}
+    .item-detail{padding-left:0;}
+    .row .num{font-size:12.5px; line-height:1.3; text-align:right;}
+    .view-daily-avg{font-size:10.5px;}
+    .watch-btn, .dismiss-btn{font-size:15px;}
+    .row.head > div{font-size:12px;}
     .ds-wrap{padding-left:16px; padding-right:16px;}
     .ds-controls{gap:10px 14px;}
     .ds-mine-row{gap:8px 12px;}
@@ -3976,67 +3990,94 @@
 
     const incrementLabel = {day:'일별', week:'주별', month:'월별'}[effectiveRange];
 
-    wrap.innerHTML = `<div class="trend-chart-tall"><canvas id="trend-${titleId}"></canvas></div>
-      <p class="trend-caption">${RANGE_LABELS[effectiveRange]} 조회수 추이 · 실제 크롤링 데이터 (${item.viewDates[0]} ~ ${item.viewDates[item.viewDates.length-1]})</p>
-      <div class="trend-chart-tall trend-chart-bar"><canvas id="trend-bar-${titleId}"></canvas></div>
-      <p class="trend-caption">${incrementLabel} 증가분 (신규 독자) · 누적 그래프는 항상 우상향처럼 보이지만, 이 그래프는 실제로 ${effectiveRange==='day'?'하루하루':effectiveRange==='week'?'한 주마다':'한 달마다'} 얼마나 늘었는지 보여줍니다</p>
-      <p class="trend-caption trend-legend"><span style="color:${EP_LATEST}">●</span> 최신 회차 업로드일 &nbsp;<span style="color:${EP_EARLIER}">●</span> 이전 회차 업로드일 — 색이 입혀진 날짜·점·막대가 새 화가 올라온 날이에요 (${legendNote})</p>`;
+    // 그래프는 데이터 개수에 비례해 가로로 길어지고, 옆으로 밀어서(드래그·스와이프) 지난 기간을 봐요. 세로축은 왼쪽에 고정해 둬요.
+    const PX = { day: 14, week: 36, month: 60 }[effectiveRange];     // 지점 하나당 가로 픽셀
+    const XH = 58;                                                     // 가로축 눈금 영역 높이 (두 그림이 같은 높이로 맞아야 세로축이 어긋나지 않음)
+    const row = (id, h, extra) => `<div class="trend-row ${extra || ''}" style="--h:${h}px"><div class="trend-yaxis"><div class="trend-yin"><canvas id="${id}-y"></canvas></div></div><div class="trend-scroll"><div class="trend-inner"><canvas id="${id}"></canvas></div></div></div>`;
+    wrap.innerHTML = `${row(`trend-${titleId}`, 240)}
+      <p class="trend-caption">${RANGE_LABELS[effectiveRange]} 조회수 추이 · 실제 크롤링 데이터 (${item.viewDates[0]} ~ ${item.viewDates[item.viewDates.length-1]}) <span class="trend-slide-hint" id="trend-hint-${titleId}"></span></p>
+      ${row(`trend-bar-${titleId}`, 150, 'trend-row-bar')}
+      <p class="trend-caption">${incrementLabel} 증가분 (신규 독자) · 누적 그래프는 항상 우상향처럼 보이지만, 이 그래프는 실제로 ${effectiveRange==='day'?'하루하루':effectiveRange==='week'?'한 주마다':'한 달마다'} 얼마나 늘었는지 보여 줘요</p>
+      <p class="trend-caption trend-legend"><span style="color:${EP_LATEST}">●</span> 최신 회차 업로드일 &nbsp;<span style="color:${EP_EARLIER}">●</span> 이전 회차 업로드일. 색이 입혀진 날짜·점·막대가 새 화가 올라온 날이에요 (${legendNote})</p>`;
 
-    const ctx = document.getElementById(`trend-${titleId}`);
-    if(trendChartInstances[titleId]) trendChartInstances[titleId].destroy();
-    trendChartInstances[titleId] = new Chart(ctx, {
-      type:'line',
-      data:{
-        labels: agg.dates,
-        datasets:[{
-          data: agg.values,
-          borderColor:'#E8A33D',
-          backgroundColor:'rgba(232,163,61,0.1)',
-          pointBackgroundColor: markColor(marks, '#E8A33D'),
-          pointBorderColor: markColor(marks, '#E8A33D'),
-          pointRadius: marks.map(m => m ? 5 : 3),
-          pointHoverRadius: 6,
-          borderWidth:2,
-          tension:0.25,
-          fill:true
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{ticks: episodeTicks(marks), grid:{color:'#33353F'}},
-          y:{ticks:{color:'#8B8D98',font:{size:10}}, grid:{color:'#33353F'}}
-        }
-      }
-    });
-
-    // 증가분 = 이번 구간 누적 - 직전 구간 누적. 집계된(agg) 지점 기준으로 계산하므로
-    // 주별/월별일 때도 그 구간만큼의 순증가가 정확히 나옴
     const increments = agg.values.slice(1).map((v, i) => v - agg.values[i]);
     const incrementDates = agg.dates.slice(1);
 
-    const barCtx = document.getElementById(`trend-bar-${titleId}`);
-    if(trendBarChartInstances[titleId]) trendBarChartInstances[titleId].destroy();
-    trendBarChartInstances[titleId] = new Chart(barCtx, {
-      type:'bar',
-      data:{
-        labels: incrementDates,
-        datasets:[{
-          data: increments,
-          backgroundColor: markColor(marks.slice(1), 'rgba(95,168,211,0.55)'),
-          borderRadius:2,
-        }]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{display:false}},
-        scales:{
-          x:{ticks: episodeTicks(marks.slice(1)), grid:{color:'#33353F'}},
-          y:{ticks:{color:'#8B8D98',font:{size:10}}, grid:{color:'#33353F'}, beginAtZero:true}
+    // 한 개 그림: 넓은 본체(세로축 숨김) + 왼쪽에 고정된 세로축 전용 그림. 본체가 계산한 세로 범위를 축 그림에 그대로 넘김.
+    const mkTrend = (id, key, cfg, n, isBar) => {
+      const canvas = document.getElementById(id), scroller = canvas.closest('.trend-scroll'), inner = canvas.parentElement;
+      inner.style.width = Math.max(scroller.clientWidth, n * PX) + 'px';
+      const gridColor = '#33353F', tick = { color: '#8B8D98', font: { size: 10 } };
+      if(trendChartInstances[key]) trendChartInstances[key].destroy();
+      const main = new Chart(canvas, {
+        type: cfg.type, data: cfg.data,
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { display: false } }, layout: { padding: { top: 8 } },
+          scales: {
+            x: { ticks: cfg.xTicks, grid: { color: gridColor }, afterFit: sc => { sc.height = XH; } },
+            y: { beginAtZero: isBar, grid: { color: gridColor }, border: { display: false }, ticks: { display: false }, afterFit: sc => { sc.width = 0; } }
+          }
         }
-      }
+      });
+      trendChartInstances[key] = main;
+      const ys = main.scales.y;
+      if(trendChartInstances[key + ':y']) trendChartInstances[key + ':y'].destroy();
+      trendChartInstances[key + ':y'] = new Chart(document.getElementById(id + '-y'), {
+        type: 'line', data: { labels: [''], datasets: [] },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } }, layout: { padding: { top: 8 } },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { display: false }, afterFit: sc => { sc.height = XH; } },
+            y: { min: ys.min, max: ys.max, grid: { display: false }, border: { color: gridColor }, ticks: { ...tick, callback: v => Number(v).toLocaleString() } }
+          }
+        }
+      });
+      scroller.scrollLeft = scroller.scrollWidth;                     // 처음엔 가장 최근 쪽이 보이게
+    };
+    mkTrend(`trend-${titleId}`, titleId, {
+      type: 'line',
+      data: { labels: agg.dates, datasets: [{
+        data: agg.values, borderColor: '#E8A33D', backgroundColor: 'rgba(232,163,61,0.1)',
+        pointBackgroundColor: markColor(marks, '#E8A33D'), pointBorderColor: markColor(marks, '#E8A33D'),
+        pointRadius: marks.map(m => m ? 5 : 3), pointHoverRadius: 6, borderWidth: 2, tension: 0.25, fill: true }] },
+      xTicks: episodeTicks(marks)
+    }, agg.dates.length, false);
+    mkTrend(`trend-bar-${titleId}`, `bar${titleId}`, {
+      type: 'bar',
+      data: { labels: incrementDates, datasets: [{ data: increments, backgroundColor: markColor(marks.slice(1), 'rgba(95,168,211,0.55)'), borderRadius: 2 }] },
+      xTicks: episodeTicks(marks.slice(1))
+    }, incrementDates.length, true);
+    bindTrendScroll(titleId);
+  }
+
+  // 두 그래프(누적·증가분)가 같이 움직이고, 마우스로 끌어서도 밀 수 있게 함
+  let trendDragging = null;
+  function bindTrendScroll(titleId){
+    const wrap = document.getElementById(`trend-chart-wrap-${titleId}`); if(!wrap) return;
+    const els = [...wrap.querySelectorAll('.trend-scroll')];
+    let lock = false;
+    const canScroll = els.some(e => e.scrollWidth > e.clientWidth + 2);
+    const hint = document.getElementById(`trend-hint-${titleId}`);
+    if(hint) hint.textContent = canScroll ? '· 옆으로 밀면 지난 기간이 보여요' : '';
+    els.forEach(el => {
+      el.addEventListener('scroll', () => {
+        if(lock) return; lock = true;
+        const ratio = el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth);
+        els.forEach(o => { if(o !== el) o.scrollLeft = ratio * (o.scrollWidth - o.clientWidth); });
+        lock = false;
+      });
+      el.addEventListener('mousedown', ev => {
+        if(ev.button !== 0) return;
+        trendDragging = { el, x: ev.clientX, left: el.scrollLeft }; el.classList.add('drag');
+      });
     });
+    if(!window._trendDragBound){
+      window._trendDragBound = true;
+      window.addEventListener('mousemove', ev => { if(trendDragging) trendDragging.el.scrollLeft = trendDragging.left - (ev.clientX - trendDragging.x); });
+      window.addEventListener('mouseup', () => { if(trendDragging){ trendDragging.el.classList.remove('drag'); trendDragging = null; } });
+    }
   }
 
   // ── 새 화가 올라온 날짜 표시 ─────────────────────────────────────────
