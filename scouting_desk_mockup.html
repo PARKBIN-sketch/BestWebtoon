@@ -890,6 +890,32 @@
     }
     .watchlist-body{max-height:160px;}
   }
+
+  /* ── 모바일 보완 (640px 이하) ── */
+  @media (max-width:640px){
+    header{padding:16px 20px;}
+    .data-note{font-size:11.5px;}
+    .pagenav{overflow-x:auto; flex-wrap:nowrap; gap:0; padding:0 12px; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
+    .pagenav::-webkit-scrollbar{display:none;}
+    .pagenav-link{flex:0 0 auto; white-space:nowrap; padding:12px 12px;}
+    .list-header{flex-direction:column; align-items:stretch; gap:10px;}
+    .list-header h2{white-space:normal;}
+    .list-header input.search-input, .list-header select.sort-select{max-width:100%; width:100%; box-sizing:border-box;}
+    .main{min-width:0;}
+    .row{grid-template-columns:20px 36px minmax(0,1fr) 58px 24px 16px 14px; gap:6px;}
+    .ds-wrap{padding-left:16px; padding-right:16px;}
+    .ds-controls{gap:10px 14px;}
+    .ds-mine-row{gap:8px 12px;}
+    .ds-mine-row > label:first-child{flex:1 1 100%; flex-wrap:wrap;}
+    .ds-mine-row input.ds-range{flex:1 1 160px; width:auto; min-width:140px;}
+    .ds-chart text{font-size:13.5px;}
+    .ds-chart{padding:4px;}
+    .ds-zoom{right:8px; bottom:46px;}
+    .ds-mini{width:104px; height:72px;}
+    .ds-table td, .ds-table th{padding:6px 6px; font-size:12px;}
+    .ds-table td:nth-child(2){white-space:nowrap;}
+    .ds-legend{gap:6px 12px;}
+  }
 </style>
 </head>
 <body>
@@ -968,7 +994,7 @@
             관심없음 숨기기 (<span id="dismissed-count">0</span>)
           </label>
           <select class="sort-select" id="label-filter" title="공지 확인 대기·연재 확정 등 분류별로 모아보기"></select>
-          <button class="export-btn" onclick="exportLabels()" title="공지 분류, 작품 검토, ★ 찜·✕ 관심없음·워치리스트 메모를 labels.json으로 저장합니다. 저장소 data/labels.json에 올리면 다음 자동 빌드부터 모든 기기에 반영돼요">기록 내보내기</button>
+          <button class="export-btn" onclick="exportLabels()" title="공지 분류, 작품 검토, ★ 찜·✕ 관심없음·워치리스트 메모를 labels.json으로 저장해요. 저장소 data/labels.json에 올리면 다음 자동 빌드부터 모든 기기에 반영돼요">기록 내보내기</button>
         </div>
       </div>
 
@@ -1023,27 +1049,28 @@
 </section>
 
 <footer>
-  <b>데이터</b> — GitHub Actions가 매일 새벽 수집한 <code>REAL_DATA</code>(<span id="footer-data-summary"></span>)를 그대로 사용하며,
-  사이트 데이터는 매일 자동으로 갱신됩니다.
+  <b>데이터</b> 매일 새벽 자동으로 수집해요. 지금은 <span id="footer-data-summary"></span>가 들어 있고, 수집이 끝나면 사이트도 자동으로 갱신돼요.
   <br><br>
-  <b>신호 체계</b> — 공식 신호(오늘의 픽·신규 승격: 네이버가 준 값), 활동 내역(최근 활동·공지 확인·연재 확정),
-  관심도(초반 강세·확인 필요·육성관찰, 그리고 그 옆의 조회수 추이 그래프) 세 그룹입니다. 배지에 마우스를 올리면 각 기준이 보입니다.
-  완결·장기 휴재로 보이는 작품은 별도 표시 없이 관심도 신호가 꺼지고 정렬에서 뒤로 밀립니다
-  (<code>finish</code> 필드가 실제 상태와 다른 경우가 있어, 완결을 단정해서 표시하지 않습니다).
+  <b>신호 체계</b> 신호는 세 그룹이에요. 공식 신호(오늘의 픽·신규 승격, 네이버가 준 값), 활동 내역(최근 활동·공지 확인·연재 확정), 관심도(초반 강세·확인 필요·육성관찰과 조회수 추이 그래프)예요.
+  배지에 마우스를 올리면 기준이 보여요. 완결이나 장기 휴재로 보이는 작품은 관심도 신호를 끄고 정렬에서 뒤로 보내요.
+  네이버의 완결 표시가 실제 상태와 다른 경우가 있어서, 완결로 단정해 표시하지는 않아요.
   <br><br>
-  <b>공지 확인과 연재 확정</b> — 최신 회차 제목에 공지성 키워드가 있고 최근 30일 이내이며 최근 3일 안에 상세 확인한 정보면 "공지 확인" 알림이 켜집니다(알림 대상은 크롤러가 매일 다시 확인해서, 지워진 공지에는 알림이 남지 않습니다).
-  알림이 뜬 작품은 사람이 네이버에서 내용을 확인하고 아코디언에서 분류합니다(연재 확정·공모전 수상·타 플랫폼/타사 계약·중단/완결·리메이크·해당 없음).
-  분류 결과는 브라우저에 저장되고, [기록 내보내기]로 받은 JSON을 저장소(<code>data/labels.json</code>)에 올리면
-  다음 자동 빌드부터 모든 기기에 반영됩니다. 연재 확정 작품은 정식 작품 주소를 입력해 두면 오픈 후 관심 수와 연재 진행이 매일 기록됩니다(정식 웹툰은 작품 번호가 달라서 직접 입력이 필요하고, 조회수는 공개되지 않는 것으로 알려져 있습니다). 이렇게 모은 연재 확정 사례는 이후 지표 분석(상관분석·로지스틱 회귀)의 정답 데이터로 씁니다.
+  <b>공지 확인과 연재 확정</b> 최신 회차 제목에 공지성 키워드가 있고, 최근 30일 안이며, 최근 3일 안에 상세 확인한 작품에 “공지 확인” 알림이 떠요.
+  지워진 공지는 크롤러가 매일 다시 확인해서 알림이 사라져요. 알림이 뜬 작품은 사람이 네이버에서 내용을 확인하고 분류해요
+  (연재 확정·공모전 수상·타 플랫폼/타사 계약·중단/완결·리메이크·해당 없음).
+  분류는 브라우저에 저장되고, [기록 내보내기]로 받은 파일을 저장소에 올리면 다음 빌드부터 모든 기기에 반영돼요.
+  연재 확정 작품은 정식 작품 주소를 입력하면 오픈 후 관심 수와 연재 진행이 매일 쌓여요.
+  정식 웹툰은 작품 번호가 달라서 직접 입력해야 하고, 조회수는 공개되지 않는 걸로 알고 있어요.
+  이렇게 모은 사례는 지표 분석(상관분석·로지스틱 회귀)의 정답 데이터로 써요.
   <br><br>
-  <b>독자 증가/감소를 뺀 이유</b> — 2026-10-05 기준 1,316개 작품에서 측정해보니, 최근 3일 vs 이전 3일 비교에서는 36%가 감소·43%가 증가,
-  7일 비교에서는 42%가 감소·30%가 증가로 판정됐습니다. 전체의 상당 비율에 켜지고 비교 구간 길이에 따라 판정이 바뀌어
-  (주 1회 업데이트 주기의 영향) 관심 신호로 부적합하다고 판단했습니다.
+  <b>독자 증가·감소를 뺀 이유</b> 2026-10-05 기준 1,316개 작품으로 측정해 보니, 최근 3일을 이전 3일과 비교하면 36%가 감소, 43%가 증가로 나왔어요.
+  7일 비교에서는 42%가 감소, 30%가 증가로 나왔어요. 많은 작품에 신호가 켜지고 비교 구간 길이에 따라 판정이 바뀌어서(주 1회 업데이트 주기의 영향),
+  관심 신호로는 적합하지 않다고 판단했어요.
   <br><br>
-  <b>작품 검토</b> — 해외 진출 적합도 점수는 해외 성과 데이터가 없어 검증할 수 없어서 없앴습니다. 대신 사람이 판단하는 부분을
-  점수가 아닌 체크리스트(예/아니오/모름)로 기록합니다: 공통 검토(비주얼 임팩트·연출 가독성·N차 확장성·리스크)와 해외 전개 관점(보조).
-  해외 시장 근거는 2025 만화산업백서에서 확인된 4개 장르(액션·판타지·로맨스·무협사극)만 카드로 보여주고, 나머지 장르는 "판단 보류"로 둡니다.
-  기록한 날짜와 그때의 지표를 같이 저장하므로, 나중에 연재 확정 결과와 비교해 내 판단이 맞았는지 볼 수 있습니다.
+  <b>작품 검토</b> 해외 진출 적합도 점수는 해외 성과 데이터가 없어 검증할 수 없어서 없앴어요. 대신 사람이 판단하는 부분을 점수가 아니라 체크리스트(예/아니오/모름)로 기록해요.
+  공통 검토(비주얼 임팩트·연출 가독성·N차 확장성·리스크)와 해외 전개 관점(보조)이 있어요.
+  해외 시장 근거는 2025 만화산업백서에서 확인된 4개 장르(액션·판타지·로맨스·무협사극)만 카드로 보여 주고, 나머지 장르는 “판단 보류”로 둬요.
+  기록한 날짜와 그때의 지표를 같이 저장하니, 나중에 연재 확정 결과와 비교해 내 판단이 맞았는지 볼 수 있어요.
 </footer>
 
 <script>
@@ -1756,7 +1783,7 @@
             ${Object.entries(LABEL_STATUS).map(([k, v]) => `<option value="${k}" ${k===status?'selected':''}>${v}</option>`).join('')}
           </select>
           <div class="label-note-wrap">
-            <textarea class="label-note" rows="${noteRows(label ? label.note : '')}" placeholder="메모 (선택) — 길어도 괜찮아요. Enter는 줄바꿈, Ctrl+Enter는 저장이에요."
+            <textarea class="label-note" rows="${noteRows(label ? label.note : '')}" placeholder="메모 (선택) 길어도 괜찮아요. Enter는 줄바꿈, Ctrl+Enter는 저장이에요."
                       oninput="onLabelNoteInput(${item.titleId}, this)" onchange="onLabelSave(${item.titleId})" onkeydown="onLabelNoteKey(event, ${item.titleId})">${escapeHtml(label ? label.note : '')}</textarea>
             <div class="label-note-side">
               <button type="button" class="label-save-btn" onclick="onLabelSave(${item.titleId})">저장</button>
@@ -1781,7 +1808,7 @@
 
   // ── 정식연재 경로 (독자픽·챌린저스·수상작·컨택) ──
   // 분석에서 경로별로 나눠 보려고 연재 확정 작품에 경로를 기록함. 직접 고른 값만 "확정", 메모·공지 제목 키워드로 읽은 값은 "추정"으로 따로 구분함.
-  const AN_PATHS = { reader: '독자픽', challengers: '챌린저스', award: '수상작·공모', contact: '지최대 수상실패 후 컨택', other: '기타', unknown: '경로 미상' };
+  const AN_PATHS = { reader: '독자픽', challengers: '챌린저스', award: '수상작·공모', contact: '컨택', other: '기타', unknown: '경로 미상' };
   const AN_PATH_ORDER = ['award', 'challengers', 'contact', 'reader', 'other', 'unknown'];
 
   function guessPathFromLabel(label){
@@ -1994,9 +2021,9 @@
     const link = `<a class="label-link" href="https://comic.naver.com/webtoon/list?titleId=${id}" target="_blank" rel="noopener">정식 페이지 ↗</a>`;
     const t = OFFICIAL_TRACKING[String(id)];
     if(!t || !(t.dates || []).length){
-      return `번호 ${id} · ${link} · 추적 대기 중 — 기록 내보내기 후 저장소에 올리면 다음 크롤링부터 기록돼요`;
+      return `번호 ${id} · ${link} · 추적 대기 중. 기록 내보내기 후 저장소에 올리면 다음 크롤링부터 기록돼요`;
     }
-    const warn = t.status === 'invalid' ? ' <span class="label-warn">⚠ 도전만화 번호예요 — 정식 작품 번호가 맞는지 확인하세요</span>'
+    const warn = t.status === 'invalid' ? ' <span class="label-warn">⚠ 도전만화 번호예요. 정식 작품 번호가 맞는지 확인하세요</span>'
                : t.status === 'error' ? ' <span class="label-warn">⚠ 마지막 조회가 실패했어요</span>' : '';
     const fav = (t.favorite || []).filter(v => v != null);
     const last = fav.length ? fav[fav.length - 1] : null;
@@ -2530,7 +2557,7 @@
     const missing = all.filter(r => r.span == null).sort((a, b) => b.fav - a.fav);
     const unsynced = Object.keys(localStarts).filter(k => localStarts[k] && localStarts[k].date && (!SAVED_STARTS[k] || SAVED_STARTS[k].date !== localStarts[k].date));
     const exportBar = `<div class="ds-exportbar"><button type="button" class="export-btn" onclick="exportLabels()" title="분류·메모·직접 입력한 연재 시작일을 labels.json으로 내려받아요. 받은 파일을 data/labels.json에 덮어쓰고 올리면 사이트에 반영돼요.">⇩ 기록 내보내기</button>
-      <span class="ds-note">${unsynced.length ? `<b style="color:var(--new)">저장소에 아직 안 올린 입력 ${unsynced.length}개</b> — 내보낸 labels.json을 data 폴더에 덮어쓰고 올려야 반영돼요.` : '입력한 연재 시작일은 모두 저장소 기준으로 반영돼 있어요.'}</span></div>`;
+      <span class="ds-note">${unsynced.length ? `<b style="color:var(--new)">저장소에 아직 안 올린 입력 ${unsynced.length}개</b>: 내보낸 labels.json을 data 폴더에 덮어쓰고 올려야 반영돼요.` : '입력한 연재 시작일은 모두 저장소 기준으로 반영돼 있어요.'}</span></div>`;
     const missHtml = (missing.length || unsynced.length) ? `<div class="ds-sec"><h3>연재일수를 모르는 작품 ${missing.length}개</h3>
       ${exportBar}
       ${missing.length ? `<div class="ds-note">대부분 성인 인증이 필요한 작품이라 회차 목록을 읽지 못했어요. 첫 화 날짜를 알면 입력해 주세요. 저장하면 이 작품도 그림의 연재일수 위치에 찍혀요. 입력한 값은 이 브라우저에 저장되고, [기록 내보내기]로 받은 labels.json을 올리면 사이트에 반영돼요.</div>` : '<div class="ds-note">지금은 연재일수를 모르는 작품이 없어요.</div>'}
@@ -2540,7 +2567,7 @@
     const links = dsAutoLinks(), autoN = Object.keys(links.auto).length;
     const candHtml = (autoN || links.cands.length) ? `<div class="ds-sec"><h3>정식 번호 자동 연결</h3>
       <div class="ds-note">정식 번호를 안 적은 확정·수상 작품을 현재 연재 목록과 <b>제목이 같고(공백·기호 무시, 겹치는 제목 없음) 날짜가 맞을 때</b> 자동으로 이어요. 날짜는 입력한 오픈일(±3일), 없으면 분류 시점이 첫 화보다 최대 2년 앞서거나 14일 뒤까지 인정해요. 계산만 하고 저장하지 않으며, 직접 입력한 번호가 항상 우선이에요. 동명이작일 수 있으니 점에 올려 “자동 연결” 표시를 확인해 주세요. 자동 연결 ${autoN}개: ${Object.values(links.auto).map(a => escapeHtml(a.title)).join(', ') || '없음'}</div>
-      ${links.cands.length ? `<div class="ds-note" style="margin-top:6px"><b>연결 후보 ${links.cands.length}개</b> — 자동으로 잇지 않았어요. 맞으면 작품 카드에 정식 번호를 직접 입력해 주세요.</div>
+      ${links.cands.length ? `<div class="ds-note" style="margin-top:6px"><b>연결 후보 ${links.cands.length}개</b>: 자동으로 잇지 않았어요. 맞으면 작품 카드에 정식 번호를 직접 입력해 주세요.</div>
       ${links.cands.map(c => `<div class="ds-missing"><span class="t">${escapeHtml(c.title)}</span><span class="ds-note">${escapeHtml(c.why)}</span><span class="ds-links"><a class="label-link" href="https://comic.naver.com/bestChallenge/list?titleId=${encodeURIComponent(c.benchId)}" target="_blank" rel="noopener">베스트도전 ↗</a>${c.ids.map(id => `<a class="label-link" href="https://comic.naver.com/webtoon/list?titleId=${encodeURIComponent(id)}" target="_blank" rel="noopener">정식연재 ${escapeHtml(id)} ↗</a>`).join('')}</span></div>`).join('')}` : ''}</div>` : '';
 
     body.innerHTML = `<div class="ds-wrap">
@@ -2562,7 +2589,7 @@
       <div class="ds-chart" id="ds-chart"><div class="ds-stage"><div id="ds-svg">${svg}</div>
         <div class="ds-plotbox"><div class="ds-mini" id="ds-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div></div></div>
         <div class="ds-zoom"><button type="button" title="확대" onclick="dsZoom(1.6)">+</button><button type="button" title="축소" onclick="dsZoom(1 / 1.6)">−</button><button type="button" id="ds-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="dsToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="dsResetView()">⟲</button></div></div>
-      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 확대: 왼쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요.</div>${legend}
+      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 오른쪽 아래 <b>＋ −</b>로 확대·축소하고, <b>▭</b>를 켠 뒤 드래그하면 그 영역을 확대해요. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고 작은 지도가 나타나는데, 누르면 그 위치로 이동해요. 점에 마우스를 올리거나 누르면 작품 정보가 나와요.</div>${legend}
       <div class="ds-sec"><h3>요일별 관심 수</h3>${dayTable}</div>
       <div class="ds-sec"><h3>내가 추적 중인 작품은 어디쯤일까</h3>${pathTable}
         <div class="ds-note">“전체 중 위치”는 그 경로 작품들의 중앙값이 지금 보이는 작품 전체에서 상위 몇 %인지예요.</div></div>
@@ -2587,7 +2614,7 @@
     const favs = rows.map(r => r.fav).sort((a, b) => a - b), allFavs = all.map(r => r.fav);
     const q50 = dsQuantile(favs, 0.5), q75 = dsQuantile(favs, 0.75), q90 = dsQuantile(favs, 0.9);
     const rankMode = dsRankMode(), ylog = dsState.logY && !rankMode, V = r => rankMode ? r.rv : r.fav;   // 순위 보기: 세로축은 목록 안 순위(위쪽이 1위), 일반 눈금
-    const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;
+    const narrow = window.innerWidth < 640, W = narrow ? 560 : 920, H = narrow ? 470 : 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;   // 좁은 화면은 그림 폭을 줄여 글자가 읽히게 함
     const v = dsView, zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
     const showStrip = !zoomed;                         // 확대하면 '연재일수 없음' 칸은 숨기고 그 자리까지 그림을 넓게 씀
     const px0 = L + (showStrip ? STRIP + GAP : 0), px1 = W - R, py0 = T, py1 = H - B;
@@ -2603,6 +2630,7 @@
     const dAt = fr => { const t = xMin + fr * (xMax - xMin); return dsState.logX ? Math.pow(10, t) : t; };       // 가로 비율 → 연재일수
     const fAt = fr => { const t = yMin + fr * (yMax - yMin); return ylog ? Math.pow(10, t) : t; };       // 세로 비율 → 관심 수
     dsGeom = { W, H, px0, px1, py0, py1, STRIP, L };
+    requestAnimationFrame(() => chartFit('ds-chart', dsGeom));
     // 미니맵: 전체 범위를 작게 그리고 지금 보는 구간을 네모로 표시
     {
       const MW = 124, MH = 84;
@@ -2651,6 +2679,18 @@
     const plotPts = order.filter(i => all[i].span != null).map(i => mk(i)).join('');
     return `<svg viewBox="0 0 ${W} ${H}" id="ds-svgel" class="${dsBox ? 'boxmode' : (zoomed ? 'zoomed' : '')}" role="img" aria-label="연재일수와 관심 수 분포도. 작품 ${rows.length}개${all.length > rows.length ? `, 완결 탭 작품 ${all.length - rows.length}개 포함` : ''}">${g}<g clip-path="url(#ds-clip-all)">${refs}</g><g clip-path="url(#ds-clip-strip)">${stripPts}</g><g clip-path="url(#ds-clip-plot)">${plotPts}</g></svg>`;
   }
+  // 확대 버튼·미니맵이 놓이는 '그림 영역' 위치를 그림 크기(W,H)에 맞춰 계산 (화면 폭에 따라 W,H가 달라짐)
+  function chartFit(id, g){
+    const pb = document.querySelector('#' + id + ' .ds-plotbox'); if(!pb || !g) return;
+    pb.style.left = (g.L / g.W * 100) + '%'; pb.style.right = ((g.W - g.px1) / g.W * 100) + '%';
+    pb.style.top = (g.py0 / g.H * 100) + '%'; pb.style.bottom = ((g.H - g.py1) / g.H * 100) + '%';
+  }
+  let chartNarrow = window.innerWidth < 640;
+  window.addEventListener('resize', () => {           // 폭이 좁은/넓은 경계를 넘으면 그림을 다시 그림
+    const n = window.innerWidth < 640; if(n === chartNarrow) return; chartNarrow = n;
+    if(document.getElementById('ds-svg')) dsRefreshChart();
+    if(document.getElementById('ps-svg')) psRefreshChart();
+  });
   function dsRefreshChart(){ const el = document.getElementById('ds-svg'); if(el){ dsHideTip(); el.innerHTML = dsChartSvg(dsShown); } dsFillMini(); const bb = document.getElementById('ds-boxbtn'); if(bb) bb.classList.toggle('on', dsBox); }
   function dsFillMini(){
     const mi = document.getElementById('ds-mini'); if(!mi || !dsGeom) return;
@@ -2843,7 +2883,7 @@
       <div class="ds-chart" id="ps-chart"><div class="ds-stage"><div id="ps-svg"></div>
         <div class="ds-plotbox"><div class="ds-mini" id="ps-mini" style="display:none" title="지금 보는 위치 (눌러서 이동)"></div></div></div>
         <div class="ds-zoom"><button type="button" title="확대" onclick="psZoom(1.6)">+</button><button type="button" title="축소" onclick="psZoom(1 / 1.6)">−</button><button type="button" id="ps-boxbtn" title="영역 확대: 켜고 드래그한 네모 영역을 확대" onclick="psToggleBox()">▭</button><button type="button" title="처음 크기로" onclick="psResetView()">⟲</button></div></div>
-      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 확대: 오른쪽 아래 <b>＋ −</b> 버튼, 또는 <b>▭</b>를 켠 뒤 드래그한 네모 영역. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고, 오른쪽 아래에 지금 보는 위치를 보여 주는 작은 지도가 나타나요(눌러서 이동). 점에 마우스를 올리면 그 도형에 하얀 테두리가 생겨요. <span id="ps-chartnote"></span></div>
+      <div class="ds-note" style="margin-top:6px">눈금은 로그예요(1,000 → 1만 → 10만처럼 10배씩 같은 간격). 오른쪽 아래 <b>＋ −</b>로 확대·축소하고, <b>▭</b>를 켠 뒤 드래그하면 그 영역을 확대해요. 확대한 뒤에는 드래그로 이동하고 <b>⟲</b>로 되돌려요. 확대하면 “연재일수 없음” 칸은 숨겨지고 작은 지도가 나타나는데, 누르면 그 위치로 이동해요. 점에 마우스를 올리거나 누르면 작품 정보가 나와요. <span id="ps-chartnote"></span></div>
       <div class="ds-legend">${PS_ORDER.map(g => `<span>${psSwatch(g)} ${PS_NAMES[g]}${g === 1 ? ' (공식 추적·정식 연재 확정)' : ''}</span>`).join('')}<span><span class="ps-del">삭제 많음</span> 마지막 회차 번호와 남은 회차 수의 차이가 ${PS_DEL_MIN}개 이상 (표시만 하고 통계에서는 빼지 않아요)</span></div>
       <div class="ds-sec"><h3>집단별 위치</h3><div id="ps-tbl"></div><div class="ds-note" id="ps-tblnote"></div></div>
       <div class="ds-sec"><h3>비슷한 수준의 작품</h3><div id="ps-lst"></div><div class="ds-note" id="ps-lstnote"></div></div>
@@ -2879,9 +2919,9 @@
     let h = '<table class="ds-table"><thead><tr><th>집단</th><th>작품 수</th><th>관심 중앙값</th><th>입력값 백분위</th><th>비슷한 수준</th><th>삭제 많음</th></tr></thead><tbody>';
     PS_ORDER.forEach(g => {
       const r = P.filter(x => x.g === g && !(x.id in exc)), n = r.length;
-      if(!n){ h += `<tr><td>${psSwatch(g)} ${PS_NAMES[g]}</td><td>0</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>`; return; }
+      if(!n){ h += `<tr><td style="white-space:nowrap">${psSwatch(g)} ${PS_NAMES[g]}</td><td>0</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>`; return; }
       const pc = Math.round(r.filter(x => x.fav <= v).length / n * 100);
-      h += `<tr><td>${psSwatch(g)} ${PS_NAMES[g]}</td><td>${psFmt(n)}</td><td>${psFmt(psMed(r.map(x => x.fav)))}</td><td><b>${pc}%</b></td><td>${r.filter(x => x.fav >= lo && x.fav <= hi).length}</td><td>${r.filter(x => x.del != null && x.del >= PS_DEL_MIN).length}</td></tr>`;
+      h += `<tr><td style="white-space:nowrap">${psSwatch(g)} ${PS_NAMES[g]}</td><td>${psFmt(n)}</td><td>${psFmt(psMed(r.map(x => x.fav)))}</td><td><b>${pc}%</b></td><td>${r.filter(x => x.fav >= lo && x.fav <= hi).length}</td><td>${r.filter(x => x.del != null && x.del >= PS_DEL_MIN).length}</td></tr>`;
     });
     document.getElementById('ps-tbl').innerHTML = h + '</tbody></table>';
     document.getElementById('ps-tblnote').textContent = `백분위는 그 집단 작품 중 관심 등록 수가 ${psFmt(v)} 이하인 비율이에요. 비슷한 수준은 ${psFmt(lo)}~${psFmt(hi)} 범위의 작품 수예요. 이력이 특이해 통계에서 뺀 작품이 ${Object.keys(exc).length}개 있어요 (아래 주의할 점).`;
@@ -2915,7 +2955,7 @@
   // ── 그림: 관심도 분포의 그림(dsChartSvg)과 같은 방식·같은 모양 (확대·축소·영역 확대·미니맵) ──
   function psChartSvg(list){
     const all = list;
-    const W = 920, H = 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;
+    const narrow = window.innerWidth < 640, W = narrow ? 560 : 920, H = narrow ? 470 : 520, L = 64, R = 78, T = 16, B = 48, STRIP = 44, GAP = 18;   // 좁은 화면은 그림 폭을 줄여 글자가 읽히게 함
     const v = psView, zoomed = v.x0 > 0 || v.x1 < 1 || v.y0 > 0 || v.y1 < 1;
     const showStrip = !zoomed;
     const px0 = L + (showStrip ? STRIP + GAP : 0), px1 = W - R, py0 = T, py1 = H - B;
@@ -2931,6 +2971,7 @@
     const dAt = fr => { const t = xMin + fr * (xMax - xMin); return psState.logX ? Math.pow(10, t) : t; };
     const fAt = fr => { const t = yMin + fr * (yMax - yMin); return psState.logY ? Math.pow(10, t) : t; };
     psGeom = { W, H, px0, px1, py0, py1, STRIP, L };
+    requestAnimationFrame(() => chartFit('ps-chart', psGeom));
     {
       const MW = 124, MH = 84;
       const fx = d => (tx(d) - xMin) / (xMax - xMin), fy = f => (ty(f) - yMin) / (yMax - yMin);
@@ -3108,6 +3149,7 @@
 
     document.querySelectorAll('.pagenav-link').forEach(link => {
       link.classList.toggle('active', link.dataset.route === route);
+      if(link.dataset.route === route && link.scrollIntoView) link.scrollIntoView({ inline: 'center', block: 'nearest' });   // 좁은 화면에서 메뉴가 가로로 밀릴 때 현재 탭이 보이게
     });
 
     if(route === 'watchlist') renderWatchlistPage();
@@ -3119,7 +3161,7 @@
 
   // ── 정식연재 분석 페이지 (#/analysis) ──
   // 계산은 이 페이지를 열 때마다 브라우저에서 다시 함 (기준 사례 ANALYSIS.cases + 이 브라우저의 분류). 빌드 때 파이썬(build_analysis.py)이 같은 방식으로 계산해 검증용으로 남김.
-  const AN_GROUP_LABELS = { official: '정식연재', none: '정식연재 없음', award: '수상작', ended: '완결', blank: '뱃지 칸 비어 있음', other: '분류 불가' };
+  const AN_GROUP_LABELS = { official: '정식연재', none: '정식연재 없음', award: '수상작', ended: '완결', blank: '배지 칸 비어 있음', other: '분류 불가' };
 
   function anP(p){ return p < 0.001 ? '<0.001' : String(p); }
 
@@ -3340,7 +3382,7 @@
     const rows = [];
     cases.forEach(c => { if(c.group !== 'official' && c.group !== 'none') return; const m = metrics(c); if(m) rows.push({ y: c.group === 'official' ? 1 : 0, m }); });
     const out = { alpha: AN_ALPHA, groups, compared: rows.length, comparedOfficial: rows.reduce((s, r) => s + r.y, 0), indicators: [], logistic: null };
-    if(rows.length < 10 || out.comparedOfficial < 3){ out.error = '비교할 작품이 너무 적어 계산하지 않았습니다.'; return out; }
+    if(rows.length < 10 || out.comparedOfficial < 3){ out.error = '비교할 작품이 너무 적어 계산하지 않았어요.'; return out; }
 
     AN_INDICATORS.forEach(([key, label]) => {
       const pairs = rows.filter(r => r.m[key] != null).map(r => [r.y, r.m[key]]);
@@ -3376,8 +3418,8 @@
             p: anRound(anTwoSidedNormal(b / se), 3),
             verdict: lo < 0 && 0 < hi ? '구간이 1을 포함 → 방향 확정 불가' : (b > 0 ? '정식연재 가능성 증가' : '정식연재 가능성 감소') });
         });
-      } else L.error = '회귀가 수렴하지 않았습니다 (표본이 너무 적거나 값이 한쪽으로 치우침).';
-    } else L.error = '회귀를 돌리기에 표본이 부족합니다.';
+      } else L.error = '회귀가 수렴하지 않았어요 (표본이 너무 적거나 값이 한쪽으로 치우쳤어요).';
+    } else L.error = '회귀를 돌리기에 표본이 부족해요.';
     out.logistic = L;
     return out;
   }
@@ -3453,7 +3495,7 @@
       <div class="sub">같은 “정식연재”라도 올라온 경로가 다르면 베스트도전 때의 모습이 다를 수 있어서 나눠 봤어요. 칸의 값은 중앙값, 괄호 안은 그 값이 있는 작품 수예요.</div>
       <label class="an-toggle"><input type="checkbox" ${anPathConfirmedOnly ? 'checked' : ''} onchange="onAnalysisPathToggle(this)"> 내가 직접 고른 경로만 사용 <span class="hint">(끄면 메모·공지 제목 키워드로 읽은 추정 경로도 포함)</span></label>
       <div class="an-tablewrap"><table class="an-table"><thead><tr><th>경로</th><th>작품 수</th>${cols.map(([k, n]) => `<th>${n}${AN_UNRELIABLE.has(k) ? '<br><span class="an-n">참고용</span>' : ''}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
-      <div class="an-box warn"><b>읽을 때 주의</b> — 경로별 작품이 20개 안팎이라 차이를 확정하지 않고 경향만 봐요(표본이 작아 유의성 검정은 하지 않았어요). <b>화수</b>는 챌린저스·수상작이 베스트도전에 1~3화만 남기는 경우가 많아 경로의 영향을 그대로 받으니 참고용으로만 보세요. ‘추정’ 경로는 메모에 적힌 단어로 읽은 값이라 틀릴 수 있어요.</div></div>`;
+      <div class="an-box warn"><b>읽을 때 주의.</b> 경로별 작품이 20개 안팎이라 차이를 확정하지 않고 경향만 봐요(표본이 작아 유의성 검정은 하지 않았어요). <b>화수</b>는 챌린저스·수상작이 베스트도전에 1~3화만 남기는 경우가 많아 경로의 영향을 그대로 받으니 참고용으로만 보세요. ‘추정’ 경로는 메모에 적힌 단어로 읽은 값이라 틀릴 수 있어요.</div></div>`;
   }
 
   function anDaysBetween(a, b){ return Math.round((Date.parse(b) - Date.parse(a)) / 86400000); }
@@ -3512,7 +3554,7 @@
       <h4 class="an-sub-h">베스트도전 시절 지표는 연재 후 관심 획득 속도를 설명할까?</h4>
       <div class="sub">지표 ${inds.length}개를 함께 보므로 보정 기준은 p &lt; ${anRound(alpha, 4)}예요.</div>
       ${corrHtml}
-      <div class="an-box warn"><b>읽을 때 주의</b> — 누적 관심 수는 오픈한 지 오래될수록 커서, 일수로 나눠도 초반에 몰려 쌓인 효과가 남아요. 최근 증가량은 정식 작품 기록이 쌓인 기간(지금은 길어야 2주 안팎)만 반영해서 아직 짧고, 휴재·완결 작품은 빠져요. 정식 작품 번호가 입력된 작품만 있어서 모든 연재 확정 작품을 대표하지 않아요.</div></div>`;
+      <div class="an-box warn"><b>읽을 때 주의.</b> 누적 관심 수는 오픈한 지 오래될수록 커서, 일수로 나눠도 초반에 몰려 쌓인 효과가 남아요. 최근 증가량은 정식 작품 기록이 쌓인 기간(지금은 길어야 2주 안팎)만 반영해서 아직 짧고, 휴재·완결 작품은 빠져요. 정식 작품 번호가 입력된 작품만 있어서 모든 연재 확정 작품을 대표하지 않아요.</div></div>`;
   }
 
   function renderAnalysisPage(){
@@ -3569,7 +3611,7 @@
         <td class="verdict ${status[1] ? 'sig' : ''}">${status[0]}</td></tr>`;
     }).join('');
     const mineWarn = (anIncludeMine && corr > 0 && !onlyUnreliable)
-      ? `<div class="an-box warn"><b>해석 주의</b> — 내 분류를 합치자 유의한 지표가 생겼어요. 분류로 만든 두 그룹은 구성 방식이 달라서(연재 확정은 공지로 골라낸 작품, 해당없음은 공지가 연재와 무관했던 작품) 지표 차이가 작품 나이·선택 방식에서 왔을 수 있어요. 분류 반영 전후 값은 위 체크박스로 바로 비교할 수 있어요.</div>`
+      ? `<div class="an-box warn"><b>해석 주의.</b> 내 분류를 합치자 유의한 지표가 생겼어요. 분류로 만든 두 그룹은 구성 방식이 달라서(연재 확정은 공지로 골라낸 작품, 해당없음은 공지가 연재와 무관했던 작품) 지표 차이가 작품 나이·선택 방식에서 왔을 수 있어요. 분류 반영 전후 값은 위 체크박스로 바로 비교할 수 있어요.</div>`
       : '';
     const sec1 = `<div class="an-sec"><h3>① 지표별 비교 (스피어만 상관)</h3>
       <div class="sub">정식연재 ${nOff}개 vs 정식연재 없음 ${nNone}개. 막대가 오른쪽이면 정식연재 쪽이 그 지표가 높은 경향, 속이 빈 막대는 우연과 구분되지 않는다는 뜻이에요.</div>
@@ -3600,7 +3642,7 @@
         <div class="sub">여러 지표를 한꺼번에 넣고, 다른 지표가 같을 때 그 지표 하나가 정식연재 가능성에 주는 영향을 봐요. 지표는 평균 0·표준편차 1로 맞춰서 넣었어요. 오즈비 1이면 영향 없음, 2면 정식연재일 승산이 2배예요. 신뢰구간이 1을 포함하면 늘어나는지 줄어드는지조차 확정하지 못해요.</div>
         ${inner}
         <div class="an-box ${L.sampleOk ? '' : 'warn'}"><b>표본이 충분한가?</b> 분석 표본 ${L.n}개 중 정식연재 ${L.events}개, 독립변수 ${L.variables}개 → 변수당 사건 수(EPV) <b>${L.epv}</b> (경험칙 ${L.epvMin} 이상).
-          ${L.sampleOk ? '기준을 충족해요.' : '<b>표본 부족</b> — 추정이 불안정할 수 있어서 오즈비는 방향을 가늠하는 참고용이에요.'}
+          ${L.sampleOk ? '기준을 충족해요.' : '<b>표본 부족.</b> 추정이 불안정할 수 있어서 오즈비는 방향을 가늠하는 참고용이에요.'}
           <span style="color:var(--muted)">(기준 출처: Peduzzi 외, 1996, J Clin Epidemiol)</span></div></div>`;
     }
 
@@ -3624,7 +3666,7 @@
           ? ` + 내가 분류한 작품(연재 확정 ${mine.official}건 → 정식연재, 해당없음 ${mine.none}건 → 정식연재 없음)${mine.overlap ? ` · 조사 목록과 겹쳐 분류 쪽으로 덮어쓴 ${mine.overlap}건` : ''}${mine.dupOfficial ? ` · 같은 정식 작품 번호라 한 번만 센 ${mine.dupOfficial}건` : ''}`
           : ' (내 분류는 뺐어요)'}${anIncludeScanned ? ` + 전 회차를 훑어 공지가 없던 작품 ${mine.scannedNone}건(정식연재 없음)` : ''}.
         ${anFilterActive() ? `<br>대조군 조건: ${anFilter.months > 0 ? `마지막 업데이트 최근 ${anFilter.months}개월 이내(정식연재 없음 쪽)` : ''}${anFilter.months > 0 && anFilter.minEp > 1 ? ' · ' : ''}${anFilter.minEp > 1 ? `${anFilter.basis === 'lastNo' ? '마지막 회차 번호' : '남아 있는 회차'} ${anFilter.minEp}개 이상(${anFilter.scope === 'both' ? '양쪽' : '정식연재 없음 쪽'})` : ''} → 정식연재 없음 ${mine.filtDroppedNone}개${mine.filtDroppedOfficial ? `, 정식연재 ${mine.filtDroppedOfficial}개` : ''} 제외.` : ''}
-    합친 뒤 ${escapeHtml(groupText)} 입니다. 완결·타 플랫폼·리메이크·수상 분류(${mine.skipped}건)는 비교에서 뺐어요.<br>
+    합친 뒤 ${escapeHtml(groupText)}예요. 완결·타 플랫폼·리메이크·수상 분류(${mine.skipped}건)는 비교에서 뺐어요.<br>
         <span style="color:var(--muted)">‘해당없음’은 공지를 확인했더니 연재 소식이 아니었다는 뜻이라 ‘정식연재 없음’으로 취급해요 (이후 정식연재가 될 수도 있어요).
         이 수치는 페이지를 열 때마다 지금 브라우저의 분류로 다시 계산해요. 추적 데이터 기준일 ${escapeHtml(A.historyLastDate || '–')} ·
         ${A.referenceSource ? '기준 사례 출처: ' + escapeHtml(A.referenceSource) : ''}</span></div></div>`;
@@ -3832,8 +3874,8 @@
     const ev = GENRE_EVIDENCE[item.genre];
     const label = GENRE_LABELS[item.genre] || item.genre;
     return ev
-      ? `<div class="evidence-box">📄 <b>${escapeHtml(label)} 장르 · ${escapeHtml(ev.region)}에서 인기</b> — ${escapeHtml(ev.evidence)}</div>`
-      : `<div class="no-evidence">${escapeHtml(label)} 장르는 백서에서 해외 지역 매칭 근거를 찾지 못했어요 — 판단 보류</div>`;
+      ? `<div class="evidence-box">📄 <b>${escapeHtml(label)} 장르 · ${escapeHtml(ev.region)}에서 인기</b>: ${escapeHtml(ev.evidence)}</div>`
+      : `<div class="no-evidence">${escapeHtml(label)} 장르는 백서에서 해외 지역 매칭 근거를 찾지 못했어요. 판단 보류</div>`;
   }
 
   function reviewCounts(review, group){
