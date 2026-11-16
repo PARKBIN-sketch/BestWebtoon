@@ -252,7 +252,9 @@ def load_position(history: dict) -> dict:
         fav = w.get("favoriteCount")
         if not fav:
             continue
-        tag = (tags.get(tid) or [{}])[0] if isinstance(tags.get(tid), list) and tags.get(tid) else {}
+        _hid = _hidden_tag_keys(labels, tid)
+        _tl = [t for t in (tags.get(tid) or []) if isinstance(t, dict) and (t.get("path") or "", t.get("when") or "", t.get("sub") or "") not in _hid] if isinstance(tags.get(tid), list) else []
+        tag = _tl[0] if _tl else {}
         path = tag.get("path") or ""
         lb = labels.get(tid) or {}
         if path == "챌린저스":
@@ -312,6 +314,12 @@ def load_past_notices() -> dict:
         return {"scanned": {}}
     scanned = data.get("scanned") if isinstance(data, dict) else None
     return {"scanned": scanned if isinstance(scanned, dict) else {}}
+
+
+def _hidden_tag_keys(labels: dict, tid) -> set:
+    """(화면에서는 사이트가 직접 숨기고, 여기서는 집단 분류 계산에만 씀) 사이트에서 '지운 배지'로 기록한 조사 배지 (labels.json의 hideTags) → {(경로, 시기, 세부)}."""
+    lb = labels.get(str(tid)) or {}
+    return {(h.get("path") or "", h.get("when") or "", h.get("sub") or "") for h in (lb.get("hideTags") or []) if isinstance(h, dict)}
 
 
 def load_path_tags(history: dict) -> dict:

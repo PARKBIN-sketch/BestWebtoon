@@ -474,8 +474,8 @@
       "updatedAt": "2026-11-11T07:38:10.077Z"
     }
   },
-  "exportedAt": "2026-11-13T04:35:06.646Z",
-  "count": 477,
+  "exportedAt": "2026-11-16T04:29:54.906Z",
+  "count": 478,
   "reviewCount": 0,
   "personalCount": 3,
   "labels": {
@@ -1790,10 +1790,10 @@
       "status": "none",
       "note": "",
       "titleName": "카나와 초나",
-      "subtitle": "효녀의 근황",
-      "noticeDate": "26.09.22",
-      "checkedAt": "2026-10-07",
-      "updatedAt": "2026-10-07T04:41:48.531Z",
+      "subtitle": "엄마의 근황",
+      "noticeDate": "26.11.15",
+      "checkedAt": "2026-11-16",
+      "updatedAt": "2026-11-16T04:23:48.803Z",
       "snapshot": {
         "viewCount": 7416105,
         "starScore": 9.84,
@@ -1977,6 +1977,23 @@
         "cadenceDays": 57,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "717924": {
+      "status": "remake",
+      "note": "",
+      "titleName": "나비 이야기",
+      "subtitle": "재연재 공지!",
+      "noticeDate": "26.11.14",
+      "checkedAt": "2026-11-16",
+      "updatedAt": "2026-11-16T04:29:44.298Z",
+      "snapshot": {
+        "viewCount": 705141,
+        "starScore": 9.87224,
+        "episodeCount": 3,
+        "cadenceDays": 1414,
+        "growthPct": 0.1,
+        "trackedDays": 2
       }
     },
     "718033": {
@@ -8021,21 +8038,22 @@
       }
     },
     "839665": {
-      "status": "none",
-      "note": "시즌 1후기 휴재",
+      "status": "confirmed",
+      "note": "",
       "titleName": "우리 언니가 무당이 되었다",
-      "subtitle": "시즌 1 후기",
-      "noticeDate": "26.10.28",
-      "checkedAt": "2026-10-29",
-      "updatedAt": "2026-10-29T01:06:12.606Z",
+      "subtitle": "! 공지 !",
+      "noticeDate": "26.11.13",
+      "checkedAt": "2026-11-16",
+      "updatedAt": "2026-11-16T04:24:21.530Z",
       "snapshot": {
-        "viewCount": 1323790,
-        "starScore": 9.55909,
-        "episodeCount": 108,
-        "cadenceDays": 4,
-        "growthPct": 38.1,
-        "trackedDays": 50
-      }
+        "viewCount": 1365808,
+        "starScore": 9.56695,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 42.4,
+        "trackedDays": 68
+      },
+      "path": "challengers"
     },
     "839876": {
       "status": "remake",
