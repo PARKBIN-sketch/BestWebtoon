@@ -797,7 +797,7 @@
    "n": 120,
    "significant": true,
    "verdict": "유의",
-   "note": "정식연재 쪽이 높음 · 기준(p<0.05)은 통과, 보정 전 결과",
+   "note": "정식 연재 쪽이 높음 · 기준(p<0.05)은 통과, 보정 전 결과",
    "significantCorrected": false
   },
   {
@@ -811,7 +811,7 @@
    "n": 119,
    "significant": false,
    "verdict": "확정 못 함 (우연일 수 있음)",
-   "note": "정식연재 쪽이 높음 · 경계선 수준 (확정 못 함)",
+   "note": "정식 연재 쪽이 높음 · 경계선 수준 (확정 못 함)",
    "significantCorrected": false
   },
   {

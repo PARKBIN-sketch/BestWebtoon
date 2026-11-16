@@ -1,5 +1,5 @@
 """
-build_analysis.py — 정식연재 여부와 지표의 관계를 계산해서 data/analysis.json으로 저장합니다.
+build_analysis.py — 정식 연재 여부와 지표의 관계를 계산해서 data/analysis.json으로 저장합니다.
 
 입력
   - data/history.json          : 크롤러가 쌓은 작품별 추적 데이터 (별점·조회수·화수)
@@ -7,8 +7,8 @@ build_analysis.py — 정식연재 여부와 지표의 관계를 계산해서 da
 출력
   - data/analysis.json         : 사이트의 분석 페이지(#/analysis)가 그대로 읽는 계산 결과
 
-계산 (정식연재 = 1, 정식연재 없음 = 0 인 작품만 비교, 수상작·완결·분류 불가는 제외)
-  1) 지표별 스피어만 상관: 지표 값 순위와 정식연재 여부가 얼마나 같이 움직이는지 (p < 0.05면 유의)
+계산 (정식 연재 = 1, 정식 연재 없음 = 0 인 작품만 비교, 수상작·완결·분류 불가는 제외)
+  1) 지표별 스피어만 상관: 지표 값 순위와 정식 연재 여부가 얼마나 같이 움직이는지 (p < 0.05면 유의)
   2) 로지스틱 회귀: 별점·로그 조회수·관심 전환율을 표준화해 넣고 1 표준편차 증가당 오즈비와 95% 신뢰구간
   3) 표본 점검: 변수당 사건 수(EPV) — 경험칙 10 미만이면 추정이 불안정할 수 있음 (Peduzzi 외, 1996)
   4) 다중검정 보정: 지표 6개를 동시에 검정하므로 유의 기준(0.05)을 지표 수로 나눈 값(본페로니)으로도 함께 판정
@@ -71,10 +71,10 @@ def interpret(rho: float, p: float, ratio):
         return "거의 차이 없음"
     side = "높음" if rho > 0 else "낮음"
     if p < ALPHA:
-        return f"정식연재 쪽이 {side} · 기준(p<{ALPHA})은 통과, 보정 전 결과"
+        return f"정식 연재 쪽이 {side} · 기준(p<{ALPHA})은 통과, 보정 전 결과"
     if p < 0.1:
-        return f"정식연재 쪽이 {side} · 경계선 수준 (확정 못 함)"
-    return f"정식연재 쪽이 {side}으로 보이나 우연일 수 있음"
+        return f"정식 연재 쪽이 {side} · 경계선 수준 (확정 못 함)"
+    return f"정식 연재 쪽이 {side}으로 보이나 우연일 수 있음"
 
 
 def logistic_fit(X, y):
@@ -193,7 +193,7 @@ def compute(history: dict, reference: dict) -> dict:
                     "lo": round(float(math.exp(lo)), 2), "hi": round(float(math.exp(hi)), 2),
                     "p": round(float(pval), 3),
                     "verdict": "구간이 1을 포함 → 방향 확정 불가" if includes_one
-                               else ("정식연재 가능성 증가" if beta[i] > 0 else "정식연재 가능성 감소"),
+                               else ("정식 연재 가능성 증가" if beta[i] > 0 else "정식 연재 가능성 감소"),
                 })
         else:
             logistic["error"] = "회귀가 수렴하지 않았습니다 (표본이 너무 적거나 값이 한쪽으로 치우침)."
@@ -214,7 +214,7 @@ def main() -> None:
     if result.get("error"):
         print(f"[분석] {result['error']}")
     else:
-        print(f"[분석] 비교 {result['compared']}개(정식연재 {result['comparedOfficial']}) · 유의한 지표 {result['significantCount']}/{result['indicatorCount']} → {ANALYSIS_PATH}")
+        print(f"[분석] 비교 {result['compared']}개(정식 연재 {result['comparedOfficial']}) · 유의한 지표 {result['significantCount']}/{result['indicatorCount']} → {ANALYSIS_PATH}")
 
 
 if __name__ == "__main__":
