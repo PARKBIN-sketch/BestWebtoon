@@ -3948,8 +3948,8 @@
           </div>
           <div class="growth">${growthBlock(item)}</div>
           <div class="actions">
-            <button class="watch-btn ${watchSet.has(item.titleId) ? 'active' : ''}" onclick="event.stopPropagation(); toggleWatch(${item.titleId})" title="찜">★</button>
-            <button class="dismiss-btn ${dismissedSet.has(item.titleId) ? 'active' : ''}" onclick="event.stopPropagation(); toggleDismiss(${item.titleId})" title="관심없음">✕</button>
+            <button class="watch-btn ${watchSet.has(item.titleId) ? 'active' : ''}" onclick="event.stopPropagation(); toggleWatch(${item.titleId})" data-tip-label="${watchSet.has(item.titleId) ? '찜한 작품' : '찜'}" title="${watchSet.has(item.titleId) ? '워치리스트에 담겨 있어요 — 다시 누르면 찜이 해제돼요' : '워치리스트에 담아요 — 워치리스트 페이지에서 메모를 남기고 상태를 관리할 수 있어요'}">★</button>
+            <button class="dismiss-btn ${dismissedSet.has(item.titleId) ? 'active' : ''}" onclick="event.stopPropagation(); toggleDismiss(${item.titleId})" data-tip-label="${dismissedSet.has(item.titleId) ? '관심없음 표시됨' : '관심없음'}" title="${dismissedSet.has(item.titleId) ? '관심없음으로 표시한 작품이에요 — 다시 누르면 표시가 해제돼요' : '관심 없는 작품으로 표시해요 — 목록에서 흐리게 보이고, ‘관심없음 숨기기’를 켜면 사라져요'}">✕</button>
             <div class="caret">▶</div>
           </div>
         </div>
@@ -4430,7 +4430,8 @@
 
 <script>
 (function(){
-  const SEL = '.sb, .path-tag, .signal-slot';
+  const SEL = '.sb, .path-tag, .signal-slot';           // 마우스 올림 + 모바일 탭 둘 다
+  const SEL_HOVER = SEL + ', .watch-btn, .dismiss-btn'; // ★·✕는 마우스 올림에서만 (모바일은 탭하면 바로 동작)
   const tip = document.createElement('div'); tip.id = 'sd-tip'; tip.setAttribute('role','tooltip'); document.body.appendChild(tip);
   let cur = null;
   const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -4440,7 +4441,7 @@
     const raw = el.dataset.tip; if(!raw){ hide(); return; }
     let parts = raw.split(' — ');
     if(parts.length === 1 && raw.includes(' · 근거:')) parts = raw.split(' · 근거:').map((x,i) => i ? '근거:' + x : x);
-    const label = el.textContent.trim();
+    const label = el.dataset.tipLabel || el.textContent.trim();
     tip.innerHTML = `<b>${esc(label)}</b><span>${esc(parts[0])}</span>` + (parts.length > 1 ? `<i>${esc(parts.slice(1).join(' '))}</i>` : '');
     tip.style.display = 'block'; cur = el;
     const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
@@ -4452,11 +4453,12 @@
   const canHover = () => matchMedia('(hover:hover)').matches;
   document.addEventListener('mouseover', e => {
     if(!canHover()) return;
-    const el = e.target.closest ? e.target.closest(SEL) : null;
+    const el = e.target.closest ? e.target.closest(SEL_HOVER) : null;
     if(el){ prep(el); if(el !== cur) show(el); } else if(cur) hide();
   });
   document.addEventListener('click', e => {
     const el = e.target.closest ? e.target.closest(SEL) : null;
+    if(cur && !el) hide();
     if(el && !canHover()){ e.stopPropagation(); e.preventDefault(); cur === el ? hide() : show(el); return; }
     if(!el) hide();
   }, true);
