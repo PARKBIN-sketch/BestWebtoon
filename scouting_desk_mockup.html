@@ -1126,6 +1126,98 @@ html,body{max-width:100%;overflow-x:hidden}
 @media (max-width:370px){
   .growth{grid-row:6;justify-self:stretch;justify-content:space-between;margin-top:10px;}
 }
+/* ══ 디자인 레이어 (3단계): 입력창·워치리스트·분석·위치·분포 (스카우팅 목록 펼침 영역은 기존 모양 유지) ══ */
+:root{color-scheme:dark;}
+/* 입력창 통일 (펼침 영역 안의 입력은 그대로 둠) */
+.an-filter-sel,.wl-memo,.ds-controls select,.ds-controls input[type=number],.ds-mine-row input[type=number]{
+  background:var(--surface-2);border:1px solid transparent;border-radius:10px;color:var(--paper);font-family:inherit;font-size:13px;font-weight:500;padding:9px 12px;}
+.an-filter-sel{background:var(--ink);font-weight:600;}
+.an-filter-sel:focus,.wl-memo:focus,.ds-controls select:focus,.ds-controls input:focus,.ds-mine-row input:focus{outline:none;border-color:rgba(47,224,127,.55);}
+.ds-controls select{font-weight:600;}
+.ds-mine-row .ds-clear{border:none;border-radius:999px;background:var(--surface-2);padding:6px 14px;font-weight:600;}
+.ds-mine-row input[type=number]{width:116px;}
+.ds-mine-row input.ds-pct{width:84px;}
+input[type=range].ds-range,.ds-controls input[type=range]{accent-color:var(--g);}
+/* 워치리스트: 스카우팅 목록처럼 [썸네일 | 제목·배지 | 상태] → 숫자 → 메모 */
+.wl-card{background:var(--surface);border:none;border-radius:14px;padding:16px 18px;margin-bottom:12px;}
+.wl-card.status-컨택예정{box-shadow:inset 3px 0 0 var(--rise);}
+.wl-card.status-컨택함{box-shadow:inset 3px 0 0 var(--g);}
+.wl-card.status-보류{box-shadow:inset 3px 0 0 var(--stable);}
+.wl-top{display:flex;gap:14px;align-items:flex-start;}
+.wl-top .thumb{width:62px;height:80px;flex:0 0 auto;border-radius:8px;}
+.wl-main{flex:1 1 auto;min-width:0;}
+.wl-main .name{font-size:17px;font-weight:800;letter-spacing:-.3px;width:fit-content;max-width:100%;cursor:pointer;}
+.wl-main .name:hover{color:var(--gt);}
+.wl-main .meta{font-size:12.5px;color:var(--muted);margin-top:3px;}
+.wl-main .sb-row{margin-top:8px;}
+.wl-ctl{display:flex;align-items:center;gap:8px;flex:0 0 auto;}
+.wl-remove{color:var(--dim,#6B6D77);font-size:12px;font-weight:600;}
+.wl-remove:hover{color:#FF6B5A;}
+.wl-card-stats{gap:10px 22px;margin-top:14px;}
+.wl-stat{font-size:12.5px;}
+.wl-stat b{font-weight:700;font-size:14px;}
+.wl-stat.rise b{color:var(--gt);}
+.wl-fit-mini{border:none;border-radius:999px;background:var(--surface-2);color:var(--gt);font-size:12.5px;font-weight:700;padding:7px 14px;margin-left:auto;}
+.wl-fit-mini:hover{background:var(--hairline);}
+.wl-memo{width:100%;line-height:1.6;min-height:44px;margin-top:14px;}
+/* 작품 검토 창 (워치리스트에서 제자리로 열림) */
+#review-modal{position:fixed;inset:0;z-index:900;display:none;background:rgba(0,0,0,.62);align-items:center;justify-content:center;padding:24px;}
+#review-modal.open{display:flex;}
+.rm-panel{background:var(--surface);border-radius:16px;width:min(780px,100%);max-height:calc(100vh - 48px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.rm-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--surface-2);}
+.rm-sub{font-size:12px;color:var(--muted);font-weight:600;}
+.rm-head b{font-size:18px;font-weight:800;letter-spacing:-.3px;}
+.rm-close{width:36px;height:36px;border-radius:10px;background:var(--surface-2);color:var(--muted);font-size:15px;}
+.rm-body{overflow-y:auto;padding:14px 20px 24px;-webkit-overflow-scrolling:touch;}
+/* 분석 페이지 */
+.an-page{max-width:920px;}
+.an-filter{border:none;border-radius:14px;background:var(--surface);padding:16px 18px;}
+.an-filter-title{font-size:14px;font-weight:800;}
+.an-summary{border:none;border-radius:14px;background:var(--surface);box-shadow:inset 4px 0 0 var(--g);padding:18px 20px;}
+.an-summary b{color:var(--gt);font-weight:800;}
+.an-tiles{gap:10px;background:none;border:none;grid-template-columns:repeat(4,minmax(0,1fr));}
+.an-tile{background:var(--surface);border-radius:12px;padding:14px 16px;}
+.an-tile .k{font-size:12px;font-weight:600;}
+.an-tile .v{font-size:26px;font-weight:800;letter-spacing:-.6px;}
+.an-tablewrap{border:none;border-radius:14px;background:var(--surface);}
+.an-table th{background:transparent;font-weight:600;border-bottom-color:var(--surface-2);}
+.an-table td{border-bottom-color:var(--surface-2);}
+.an-table .sig,.an-table .verdict.sig{color:var(--gt);}
+.an-box{border:none;border-radius:12px;background:var(--surface);}
+.an-box.warn{box-shadow:inset 3px 0 0 var(--rise);}
+.an-sec h3{font-size:18px;font-weight:800;letter-spacing:-.3px;}
+/* 스피어만 막대: 가운데(0) 기준선 + 양 끝 눈금 + 초록 */
+.an-rho{height:18px;background:linear-gradient(var(--stable),var(--stable)) left center/1px 12px no-repeat,linear-gradient(var(--stable),var(--stable)) right center/1px 12px no-repeat;}
+.an-rho::before{top:1px;bottom:1px;background:var(--muted);opacity:.6;z-index:1;}
+.an-rho::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--hairline);}
+.an-rho i{top:5px;height:8px;border-radius:2px;z-index:2;}
+.an-rho i.pos{background:var(--g);}
+.an-rho i.pos.hollow{background:transparent;border-color:var(--g);}
+/* 위치·분포 */
+.ds-wrap{max-width:1200px;padding:0 40px;}
+.ds-controls{background:var(--surface);border-radius:14px;padding:12px 16px;gap:10px 18px;}
+.ds-mine-row{background:var(--surface);border-radius:14px;padding:12px 16px;gap:8px 14px;}
+.ds-sec h3{font-size:16px;font-weight:800;}
+@media (max-width:720px){
+  .ds-wrap{padding:0 20px;}
+  .an-tiles{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .wl-card{padding:14px 14px;}
+  .wl-top{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px 12px;}
+  .wl-top .thumb{width:56px;height:74px;}
+  .wl-ctl{grid-column:1 / -1;justify-content:flex-end;}
+  .wl-card-stats{gap:12px 16px;}
+  .wl-stat{display:flex;flex-direction:column;gap:2px;font-size:11.5px;}
+  .wl-fit-mini{flex:1 1 100%;margin-left:0;text-align:center;}
+  #review-modal{padding:0;align-items:flex-end;}
+  .rm-panel{width:100%;max-height:92vh;border-radius:16px 16px 0 0;}
+}
+.rm-close:focus{outline:none;}
+.rm-close:focus-visible{outline:2px solid var(--gt);}
+.wl-growth{margin-left:auto;}
+.wl-card-stats .wl-fit-mini{margin-left:0;}
+@media (max-width:720px){
+  .wl-growth{flex:1 1 100%;margin-left:0;justify-content:space-between;flex-direction:row-reverse;}
+}
 </style>
 </head>
 <body>
@@ -1133,9 +1225,9 @@ html,body{max-width:100%;overflow-x:hidden}
 <header>
   <div>
     <h1 class="serif">스카우팅 데스크</h1>
-    <div class="subtitle">🔍 지금 확인해봐야 할 신호가 있는 작품부터 찾아드려요</div>
+    <div class="subtitle">지금 확인해봐야 할 신호가 있는 작품부터 찾아드려요</div>
   </div>
-  <div class="data-note" id="data-note">✅ 데이터 불러오는 중…</div>
+  <div class="data-note" id="data-note">데이터 불러오는 중…</div>
 </header>
 
 <nav class="pagenav">
@@ -1763,7 +1855,7 @@ html,body{max-width:100%;overflow-x:hidden}
 
   function onReviewNoteInput(titleId, el){
     growTextarea(el);
-    const saved = document.getElementById(`review-saved-${titleId}`);
+    const saved = document.getElementById(`${reviewModalId === titleId ? 'm-' : ''}review-saved-${titleId}`);
     if(saved) saved.textContent = '수정 중 · 저장을 눌러 주세요';
   }
 
@@ -1771,7 +1863,7 @@ html,body{max-width:100%;overflow-x:hidden}
     const item = REAL_DATA.find(d => d.titleId === titleId);
     if(!item) return;
     saveReview(item, next => { next.note = note; });
-    const saved = document.getElementById(`review-saved-${titleId}`);
+    const saved = document.getElementById(`${reviewModalId === titleId ? 'm-' : ''}review-saved-${titleId}`);
     const r = getReview(titleId);
     if(saved) saved.textContent = r ? `저장됨 · ${r.checkedAt}` : '기록 삭제됨';
     renderLabelFilterOptions();
@@ -2472,7 +2564,7 @@ html,body{max-width:100%;overflow-x:hidden}
     });
     const text = `${first} ~ ${last} 실제 크롤링 데이터 (${REAL_DATA.length.toLocaleString()}개 작품, 최대 ${maxDays}일 추적)`;
     const note = document.getElementById('data-note');
-    if(note) note.textContent = `✅ ${text} · 작품 검토는 점수 없이 판단만 기록`;
+    if(note) note.textContent = `${text} · 작품 검토는 점수 없이 판단만 기록`;
     const foot = document.getElementById('footer-data-summary');
     if(foot) foot.textContent = text;
   }
@@ -2562,17 +2654,16 @@ html,body{max-width:100%;overflow-x:hidden}
       const status = wlStatus[item.titleId] || WL_STATUS_OPTIONS[0];
       return `
       <div class="wl-card status-${status}">
-        <div class="wl-card-head">
-          <div style="display:flex; gap:10px; align-items:flex-start;">
-            <div class="thumb" style="flex-shrink:0;" onclick="openImagePreview(${item.titleId})" title="이미지 크게 보기">
-              ${item.thumbnailUrl ? `<img src="${item.thumbnailUrl}" alt="${item.titleName}" loading="lazy">` : ''}
-            </div>
-            <div>
-              <div class="name link" onclick="window.open('${item.titleUrl}', '_blank')" title="네이버 베스트도전에서 보기">👁 ${item.titleName} ↗</div>
-              <div class="meta">${authorLine(item)} · ${GENRE_LABELS[item.genre] || item.genre}</div>
-            </div>
+        <div class="wl-top">
+          <div class="thumb" onclick="openImagePreview(${item.titleId})" title="이미지 크게 보기">
+            ${item.thumbnailUrl ? `<img src="${item.thumbnailUrl}" alt="${item.titleName}" loading="lazy">` : ''}
           </div>
-          <div style="display:flex; align-items:center; gap:8px;">
+          <div class="wl-main">
+            <div class="name link" onclick="window.open('${item.titleUrl}', '_blank')" title="네이버 베스트도전에서 보기">${item.titleName} ↗</div>
+            <div class="meta">${authorLine(item)} · ${GENRE_LABELS[item.genre] || item.genre}</div>
+            ${activeBadgesHtml(item)}
+          </div>
+          <div class="wl-ctl">
             <select class="wl-status-select" onchange="wlStatus[${item.titleId}]=this.value; savePersonal(${item.titleId}); renderWatchlistPage();">
               ${WL_STATUS_OPTIONS.map(s => `<option value="${s}" ${s===status?'selected':''}>${s}</option>`).join('')}
             </select>
@@ -2580,12 +2671,10 @@ html,body{max-width:100%;overflow-x:hidden}
           </div>
         </div>
         <div class="wl-card-stats">
-          ${sparklineSVG(item.viewHistory)}
           <span class="wl-stat">조회수 <b>${item.viewCount.toLocaleString()}</b></span>
-          <span class="wl-stat ${item.growthPct>=GROWTH_THRESHOLD?'rise':''}">5일 성장률 <b>${growthText}</b></span>
           <span class="wl-stat">별점 <b>${item.starScore.toFixed(2)}</b></span>
-          <button class="wl-fit-mini" onclick="jumpToReview(${item.titleId})">작품 검토 ${reviewAnsweredCount(item.titleId)}/${REVIEW_TOTAL} 보기 →</button>
-          ${signalBadgesCompact(item)}
+          <div class="growth wl-growth">${growthBlock(item)}</div>
+          <button class="wl-fit-mini" onclick="openReviewModal(${item.titleId})">작품 검토 ${reviewAnsweredCount(item.titleId)}/${REVIEW_TOTAL}</button>
         </div>
         <textarea class="wl-memo" placeholder="이 작품을 왜 찜했는지, 어떤 걸 지켜볼지 메모해 두세요."
           oninput="wlNotes[${item.titleId}] = this.value; savePersonal(${item.titleId}); growTextarea(this);">${wlNotes[item.titleId] || ""}</textarea>
@@ -3499,7 +3588,7 @@ html,body{max-width:100%;overflow-x:hidden}
     return `<div class="an-filter">
       <div class="an-filter-title">대조군 조건 <span class="hint">비슷하게 활동하는 작품끼리 비교해 보기 (기본은 걸러내지 않음)</span></div>
       <div class="an-filter-row"><span>마지막 업데이트</span>${sel('months', [[0, '제한 없음'], [3, '최근 3개월 이내'], [6, '최근 6개월 이내'], [12, '최근 12개월 이내']])}<span class="hint">정식 연재 없음 쪽에만 적용</span></div>
-      <div class="an-filter-row"><span>회차 수</span>${sel('minEp', [[1, '제한 없음'], [3, '3개 이상'], [5, '5개 이상'], [10, '10개 이상']])}${sel('basis', [['remain', '남아 있는 회차 기준'], ['lastNo', '마지막 회차 번호 기준']])}${sel('scope', [['control', '정식 연재 없음 쪽만'], ['both', '양쪽 모두']])}${anFilter.basis === 'lastNo' && anFilter.minEp > 1 ? '<span class="hint">마지막 회차 번호는 아직 확인하지 못한 작품이 많아서, 값이 없는 작품은 조건에서 빠져요</span>' : ''}</div>
+      <div class="an-filter-row"><span>회차 수</span>${sel('minEp', [[1, '제한 없음'], [3, '3개 이상'], [5, '5개 이상'], [10, '10개 이상']])}${sel('basis', [['remain', '남아 있는 회차 기준'], ['lastNo', '마지막 회차 번호 기준']])}${sel('scope', [['control', '정식 연재 없음 쪽만'], ['both', '양쪽 모두']])}${anFilter.basis === 'lastNo' && anFilter.minEp > 1 ? '<span class="hint">마지막 회차 번호는 아직 확인하지 못한 작품이 많아서, 값이 없는 작품은 조건에서 빠집니다</span>' : ''}</div>
       ${eff}</div>`;
   }
 
@@ -3626,7 +3715,7 @@ html,body{max-width:100%;overflow-x:hidden}
     const rows = [];
     cases.forEach(c => { if(c.group !== 'official' && c.group !== 'none') return; const m = metrics(c); if(m) rows.push({ y: c.group === 'official' ? 1 : 0, m }); });
     const out = { alpha: AN_ALPHA, groups, compared: rows.length, comparedOfficial: rows.reduce((s, r) => s + r.y, 0), indicators: [], logistic: null };
-    if(rows.length < 10 || out.comparedOfficial < 3){ out.error = '비교할 작품이 너무 적어 계산하지 않았어요.'; return out; }
+    if(rows.length < 10 || out.comparedOfficial < 3){ out.error = '비교할 작품이 너무 적어 계산하지 않았습니다.'; return out; }
 
     AN_INDICATORS.forEach(([key, label]) => {
       const pairs = rows.filter(r => r.m[key] != null).map(r => [r.y, r.m[key]]);
@@ -3662,8 +3751,8 @@ html,body{max-width:100%;overflow-x:hidden}
             p: anRound(anTwoSidedNormal(b / se), 3),
             verdict: lo < 0 && 0 < hi ? '구간이 1을 포함 → 방향 확정 불가' : (b > 0 ? '정식 연재 가능성 증가' : '정식 연재 가능성 감소') });
         });
-      } else L.error = '회귀가 수렴하지 않았어요 (표본이 너무 적거나 값이 한쪽으로 치우쳤어요).';
-    } else L.error = '회귀를 돌리기에 표본이 부족해요.';
+      } else L.error = '회귀가 수렴하지 않았습니다 (표본이 너무 적거나 값이 한쪽으로 치우쳤습니다).';
+    } else L.error = '회귀를 돌리기에 표본이 부족합니다.';
     out.logistic = L;
     return out;
   }
@@ -3732,14 +3821,14 @@ html,body{max-width:100%;overflow-x:hidden}
       + cols.map(([k]) => `<td class="${AN_UNRELIABLE.has(k) ? 'dim' : ''}">${anMedCell(list, r => r.m[k])}</td>`).join('') + '</tr>';
     const shown = AN_PATH_ORDER.filter(k => groups[k].length);
     const total = shown.reduce((s, k) => s + groups[k].length, 0);
-    if(!total) return `<div class="an-sec"><h3>③ 정식 연재 경로별 비교 (베스트도전 시절 지표)</h3><div class="an-box">경로를 비교할 연재 확정 작품이 아직 없어요.</div></div>`;
+    if(!total) return `<div class="an-sec"><h3>③ 정식 연재 경로별 비교 (베스트도전 시절 지표)</h3><div class="an-box">경로를 비교할 연재 확정 작품이 아직 없습니다.</div></div>`;
     const rows = shown.map(k => row(AN_PATHS[k], groups[k], k === 'unknown' ? '메모·공지 제목에서 경로를 못 읽은 작품' : srcText(groups[k]))).join('')
       + row('비교: 해당없음', none, '정식 연재로 이어지지 않은 작품');
     return `<div class="an-sec"><h3>③ 정식 연재 경로별 비교 (베스트도전 시절 지표)</h3>
-      <div class="sub">같은 “정식 연재”라도 올라온 경로가 다르면 베스트도전 때의 모습이 다를 수 있어서 나눠 봤어요. 칸의 값은 중앙값, 괄호 안은 그 값이 있는 작품 수예요.</div>
+      <div class="sub">같은 “정식 연재”라도 올라온 경로가 다르면 베스트도전 때의 모습이 다를 수 있어서 나눠 봤습니다. 칸의 값은 중앙값, 괄호 안은 그 값이 있는 작품 수입니다.</div>
       <label class="an-toggle"><input type="checkbox" ${anPathConfirmedOnly ? 'checked' : ''} onchange="onAnalysisPathToggle(this)"> 내가 직접 고른 경로만 사용 <span class="hint">(끄면 메모·공지 제목 키워드로 읽은 추정 경로도 포함)</span></label>
       <div class="an-tablewrap"><table class="an-table"><thead><tr><th>경로</th><th>작품 수</th>${cols.map(([k, n]) => `<th>${n}${AN_UNRELIABLE.has(k) ? '<br><span class="an-n">참고용</span>' : ''}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
-      <div class="an-box warn"><b>읽을 때 주의.</b> 경로별 작품이 20개 안팎이라 차이를 확정하지 않고 경향만 봐요(표본이 작아 유의성 검정은 하지 않았어요). <b>화수</b>는 챌린저스·수상작이 베스트도전에 1~3화만 남기는 경우가 많아 경로의 영향을 그대로 받으니 참고용으로만 보세요. ‘추정’ 경로는 메모에 적힌 단어로 읽은 값이라 틀릴 수 있어요.</div></div>`;
+      <div class="an-box warn"><b>읽을 때 주의.</b> 경로별 작품이 20개 안팎이라 차이를 확정하지 않고 경향만 봅니다(표본이 작아 유의성 검정은 하지 않았습니다). <b>화수</b>는 챌린저스·수상작이 베스트도전에 1~3화만 남기는 경우가 많아 경로의 영향을 그대로 받으니 참고용으로만 보십시오. ‘추정’ 경로는 메모에 적힌 단어로 읽은 값이라 틀릴 수 있습니다.</div></div>`;
   }
 
   function anDaysBetween(a, b){ return Math.round((Date.parse(b) - Date.parse(a)) / 86400000); }
@@ -3773,7 +3862,7 @@ html,body{max-width:100%;overflow-x:hidden}
   function anOfficialSection(){
     const title = '④ 정식 연재 후 반응 (정식 작품 관심 수)';
     const rows = anOfficialRows(anPathConfirmedOnly);
-    if(rows.length < 5) return `<div class="an-sec"><h3>${title}</h3><div class="an-box">정식 작품 번호와 오픈일을 입력하고 크롤러가 관심 수를 기록한 작품이 아직 ${rows.length}개예요. 기록이 쌓이면 이곳에 채워져요.</div></div>`;
+    if(rows.length < 5) return `<div class="an-sec"><h3>${title}</h3><div class="an-box">정식 작품 번호와 오픈일을 입력하고 크롤러가 관심 수를 기록한 작품이 아직 ${rows.length}개입니다. 기록이 쌓이면 이곳에 채워집니다.</div></div>`;
     const med = (list, g) => anMedCell(list, g);
     const groupsOf = AN_PATH_ORDER.map(k => [k, rows.filter(r => r.path === k)]).filter(([, l]) => l.length);
     const line = (name, list) => `<tr><td class="nm">${name}${list.length < 15 ? '<span class="an-flag">표본 적음</span>' : ''}</td><td>${list.length}</td>
@@ -3790,15 +3879,15 @@ html,body{max-width:100%;overflow-x:hidden}
     });
     const corrHtml = corrRows.length ? `<div class="an-tablewrap"><table class="an-table"><thead><tr><th>베스트도전 시절 지표</th><th>스피어만 ρ</th><th>p값</th><th>표본</th><th style="text-align:left">판정</th></tr></thead><tbody>
       ${corrRows.map(c => `<tr><td class="nm">${escapeHtml(c.label)}</td><td>${c.rho > 0 ? '+' : ''}${c.rho}</td><td class="${c.p < AN_ALPHA ? 'sig' : ''}">${anP(anRound(c.p, 3))}</td><td>${c.n}</td>
-        <td class="verdict ${c.p < alpha ? 'sig' : ''}">${c.p < alpha ? '보정 후에도 유의' : c.p < AN_ALPHA ? `p<${AN_ALPHA} · 보정 후 확정 못 함` : '확정 못 함'}</td></tr>`).join('')}</tbody></table></div>` : '<div class="an-box">상관을 계산할 만큼 표본이 모이지 않았어요.</div>';
+        <td class="verdict ${c.p < alpha ? 'sig' : ''}">${c.p < alpha ? '보정 후에도 유의' : c.p < AN_ALPHA ? `p<${AN_ALPHA} · 보정 후 확정 못 함` : '확정 못 함'}</td></tr>`).join('')}</tbody></table></div>` : '<div class="an-box">상관을 계산할 만큼 표본이 모이지 않았습니다.</div>';
     const span = rows.map(r => r.days).filter(x => x != null);
     return `<div class="an-sec"><h3>${title}</h3>
-      <div class="sub">연재가 시작된 작품이 정식 연재에서 얼마나 관심을 얻는지 봐요. 순위는 완결·휴재 작품과 비교하기 어려워서, 쌓인 관심 수를 <b>오픈 후 일수로 나눈 값</b>과 <b>최근 14일 증가량</b>(연재 중인 작품만)으로 비교해요.</div>
+      <div class="sub">연재가 시작된 작품이 정식 연재에서 얼마나 관심을 얻는지 봅니다. 순위는 완결·휴재 작품과 비교하기 어려워서, 쌓인 관심 수를 <b>오픈 후 일수로 나눈 값</b>과 <b>최근 14일 증가량</b>(연재 중인 작품만)으로 비교합니다.</div>
       <div class="an-tablewrap"><table class="an-table"><thead><tr><th>경로</th><th>작품 수</th><th>오픈 후 일수</th><th>누적 관심</th><th>일평균 관심<br><span class="an-n">누적÷일수</span></th><th>최근 일평균 증가<br><span class="an-n">연재 중만</span></th></tr></thead><tbody>${tableRows}</tbody></table></div>
       <h4 class="an-sub-h">베스트도전 시절 지표는 연재 후 관심 획득 속도를 설명할까?</h4>
-      <div class="sub">지표 ${inds.length}개를 함께 보므로 보정 기준은 p &lt; ${anRound(alpha, 4)}예요.</div>
+      <div class="sub">지표 ${inds.length}개를 함께 보므로 보정 기준은 p &lt; ${anRound(alpha, 4)}입니다.</div>
       ${corrHtml}
-      <div class="an-box warn"><b>읽을 때 주의.</b> 누적 관심 수는 오픈한 지 오래될수록 커서, 일수로 나눠도 초반에 몰려 쌓인 효과가 남아요. 최근 증가량은 정식 작품 기록이 쌓인 기간(지금은 길어야 2주 안팎)만 반영해서 아직 짧고, 휴재·완결 작품은 빠져요. 정식 작품 번호가 입력된 작품만 있어서 모든 연재 확정 작품을 대표하지 않아요.</div></div>`;
+      <div class="an-box warn"><b>읽을 때 주의.</b> 누적 관심 수는 오픈한 지 오래될수록 커서, 일수로 나눠도 초반에 몰려 쌓인 효과가 남습니다. 최근 증가량은 정식 작품 기록이 쌓인 기간(지금은 길어야 2주 안팎)만 반영해서 아직 짧고, 휴재·완결 작품은 빠집니다. 정식 작품 번호가 입력된 작품만 있어서 모든 연재 확정 작품을 대표하지 않습니다.</div></div>`;
   }
 
   function renderAnalysisPage(){
@@ -3808,12 +3897,12 @@ html,body{max-width:100%;overflow-x:hidden}
     const A = Object.assign({}, ANALYSIS, anCompute(built.cases, built.byId));   // 기준 사례 + 내 분류로 지금 다시 계산한 값
     const mine = built.mine;
     const head = `<div class="an-head"><h2 class="serif">정식 연재 지표 분석</h2>
-      <span class="hint">정식 연재로 이어진 작품과 그렇지 않은 작품의 지표를 비교해요. 결론이 아니라, 데이터가 어디까지 말해 주는지를 보여주는 페이지예요.</span>
+      <span class="hint">정식 연재로 이어진 작품과 그렇지 않은 작품의 지표를 비교합니다. 결론이 아니라, 데이터가 어디까지 말해 주는지를 보여주는 페이지입니다.</span>
       <label class="an-toggle"><input type="checkbox" ${anIncludeMine ? 'checked' : ''} onchange="onAnalysisInclude(this)"> 내가 분류한 작품 포함 <span class="hint">(연재 확정 ${mine.official}건 · 해당없음 ${mine.none}건)</span></label>
       ${Object.keys(PAST_NOTICES.scanned || {}).length ? `<label class="an-toggle"><input type="checkbox" ${anIncludeScanned ? 'checked' : ''} onchange="onAnalysisScanned(this)"> 전 회차를 훑어 공지가 없던 작품도 ‘정식 연재 없음’에 포함 <span class="hint">(최근 1년 안 업데이트된 작품만${anIncludeScanned ? ` · ${mine.scannedNone}건` : ''})</span></label>` : ''}
       ${anFilterPanelHtml(mine)}</div>`;
     if(!(ANALYSIS.cases || []).length || !(A.indicators || []).length){
-      body.innerHTML = head + `<div class="an-empty">${escapeHtml(A.error || '아직 분석할 기준 사례가 없어요. 저장소에 data/reference_cases.json을 올리고 build_site.py를 실행하면 채워져요.')}</div>`;
+      body.innerHTML = head + `<div class="an-empty">${escapeHtml(A.error || '아직 분석할 기준 사례가 없습니다. 저장소에 data/reference_cases.json을 올리고 build_site.py를 실행하면 채워집니다.')}</div>`;
       return;
     }
     const m = A.indicatorCount, sig = A.significantCount, corr = A.significantCorrectedCount || 0;
@@ -3823,18 +3912,18 @@ html,body{max-width:100%;overflow-x:hidden}
     const corrKeys = A.indicators.filter(i => i.significantCorrected).map(i => i.key);
     const onlyUnreliable = corrKeys.length > 0 && corrKeys.every(k => AN_UNRELIABLE.has(k));
     if(onlyUnreliable){
-      verdict = `지표 ${m}개 중 <b>${corr}개</b>가 보정을 거치고도 유의했지만, 모두 화수·화당 조회수처럼 <b>경로(챌린저스·수상작은 베스트도전에 1~3화만 남음)와 글 삭제의 영향을 받는 지표</b>예요. 그래서 이번 비교만으로는 정식 연재 여부를 가르는 지표를 확인하지 못했어요.`;
+      verdict = `지표 ${m}개 중 <b>${corr}개</b>가 보정을 거치고도 유의했지만, 모두 화수·화당 조회수처럼 <b>경로(챌린저스·수상작은 베스트도전에 1~3화만 남음)와 글 삭제의 영향을 받는 지표</b>입니다. 그래서 이번 비교만으로는 정식 연재 여부를 가르는 지표를 확인하지 못했습니다.`;
     } else if(corr > 0){
-      verdict = `지표 ${m}개 중 <b>${corr}개</b>는 여러 지표를 함께 검정하는 보정(p &lt; ${A.alphaCorrected})을 거치고도 유의했어요. 다만 정식 연재 사례가 ${nOff}개뿐이라 해석에 주의가 필요해요.`;
+      verdict = `지표 ${m}개 중 <b>${corr}개</b>는 여러 지표를 함께 검정하는 보정(p &lt; ${A.alphaCorrected})을 거치고도 유의했습니다. 다만 정식 연재 사례가 ${nOff}개뿐이라 해석에 주의가 필요합니다.`;
     } else if(sig > 0){
-      verdict = `지표 ${m}개 중 <b>${sig}개</b>(${sigNames.map(escapeHtml).join(', ')})가 기준(p &lt; ${A.alpha})을 통과했어요. 하지만 지표 ${m}개를 한꺼번에 검정하면 우연히 하나쯤 나올 수 있어서, 보정 기준(p &lt; ${A.alphaCorrected})으로 다시 보면 <b>유의한 지표는 없어요</b>.`;
+      verdict = `지표 ${m}개 중 <b>${sig}개</b>(${sigNames.map(escapeHtml).join(', ')})가 기준(p &lt; ${A.alpha})을 통과했습니다. 하지만 지표 ${m}개를 한꺼번에 검정하면 우연히 하나쯤 나올 수 있어서, 보정 기준(p &lt; ${A.alphaCorrected})으로 다시 보면 <b>유의한 지표는 없습니다</b>.`;
     } else {
-      verdict = `지표 ${m}개 <b>모두</b> 우연과 구분되지 않았어요.`;
+      verdict = `지표 ${m}개 <b>모두</b> 우연과 구분되지 않았습니다.`;
     }
     const conclusion = (corr > 0 && !onlyUnreliable)
       ? ''
-      : ' 지금 데이터로는 “이 지표가 높으면 정식 연재 가능성이 높다”고 말할 수 없어요.';
-    const summary = `<div class="an-summary">정식 연재 작품 <b>${nOff}개</b>와 정식 연재 없음 <b>${nNone}개</b>를 비교했어요. ${verdict}${conclusion}</div>
+      : ' 지금 데이터로는 “이 지표가 높으면 정식 연재 가능성이 높다”고 말할 수 없습니다.';
+    const summary = `<div class="an-summary">정식 연재 작품 <b>${nOff}개</b>와 정식 연재 없음 <b>${nNone}개</b>를 비교했습니다. ${verdict}${conclusion}</div>
       <div class="an-tiles">
         <div class="an-tile"><div class="k">비교한 작품</div><div class="v">${A.compared}</div></div>
         <div class="an-tile"><div class="k">그중 정식 연재</div><div class="v">${nOff}</div></div>
@@ -3855,17 +3944,17 @@ html,body{max-width:100%;overflow-x:hidden}
         <td class="verdict ${status[1] ? 'sig' : ''}">${status[0]}</td></tr>`;
     }).join('');
     const mineWarn = (anIncludeMine && corr > 0 && !onlyUnreliable)
-      ? `<div class="an-box warn"><b>해석 주의.</b> 내 분류를 합치자 유의한 지표가 생겼어요. 분류로 만든 두 그룹은 구성 방식이 달라서(연재 확정은 공지로 골라낸 작품, 해당없음은 공지가 연재와 무관했던 작품) 지표 차이가 작품 나이·선택 방식에서 왔을 수 있어요. 분류 반영 전후 값은 위 체크박스로 바로 비교할 수 있어요.</div>`
+      ? `<div class="an-box warn"><b>해석 주의.</b> 내 분류를 합치자 유의한 지표가 생겼습니다. 분류로 만든 두 그룹은 구성 방식이 달라서(연재 확정은 공지로 골라낸 작품, 해당없음은 공지가 연재와 무관했던 작품) 지표 차이가 작품 나이·선택 방식에서 왔을 수 있습니다. 분류 반영 전후 값은 위 체크박스로 바로 비교할 수 있습니다.</div>`
       : '';
     const sec1 = `<div class="an-sec"><h3>① 지표별 비교 (스피어만 상관)</h3>
-      <div class="sub">정식 연재 ${nOff}개 vs 정식 연재 없음 ${nNone}개. 막대가 오른쪽이면 정식 연재 쪽이 그 지표가 높은 경향, 속이 빈 막대는 우연과 구분되지 않는다는 뜻이에요.</div>
+      <div class="sub">정식 연재 ${nOff}개 vs 정식 연재 없음 ${nNone}개. 막대가 오른쪽이면 정식 연재 쪽이 그 지표가 높은 경향, 속이 빈 막대는 우연과 구분되지 않는다는 뜻입니다.</div>
       <div class="an-tablewrap"><table class="an-table"><thead><tr>
         <th>지표</th><th>정식 연재<br>중앙값</th><th>없음<br>중앙값</th><th>배율</th><th>스피어만 ρ</th><th>p값</th><th>표본</th><th style="text-align:left">판정</th></tr></thead>
         <tbody>${indRows}</tbody></table></div>
       ${mineWarn}
       <details class="an-read"><summary>읽는 법</summary>
-        <p><b>스피어만 ρ</b>: −1~1. 0이면 관계가 없고, 클수록 그 지표가 높은 작품이 정식 연재인 경향이 있어요. 조회수처럼 편차가 큰 값은 순위로 비교해요.</p>
-        <p><b>p값</b>: 이 정도 차이가 우연히 나올 확률이에요. ${A.alpha}보다 작으면 우연이 아니라고 볼 근거가 생겨요. 다만 지표를 ${m}개 동시에 보면 우연히 하나쯤 작게 나올 수 있어서, 기준을 ${m}로 나눈 ${A.alphaCorrected}로도 함께 판정해요(본페로니 보정).</p>
+        <p><b>스피어만 ρ</b>: −1~1. 0이면 관계가 없고, 클수록 그 지표가 높은 작품이 정식 연재인 경향이 있습니다. 조회수처럼 편차가 큰 값은 순위로 비교합니다.</p>
+        <p><b>p값</b>: 이 정도 차이가 우연히 나올 확률입니다. ${A.alpha}보다 작으면 우연이 아니라고 볼 근거가 생깁니다. 다만 지표를 ${m}개 동시에 보면 우연히 하나쯤 작게 나올 수 있어서, 기준을 ${m}로 나눈 ${A.alphaCorrected}로도 함께 판정합니다(본페로니 보정).</p>
       </details></div>`;
 
     // ② 로지스틱 회귀
@@ -3880,13 +3969,13 @@ html,body{max-width:100%;overflow-x:hidden}
           ${L.rows.map(r => `<tr><td class="nm">${escapeHtml(r.label)}</td><td>${r.or}</td><td>${r.lo} ~ ${r.hi}</td><td style="text-align:center">${anCiBar(r, lim)}</td><td>${anP(r.p)}</td><td class="verdict">${escapeHtml(r.verdict)}</td></tr>`).join('')}
           </tbody></table></div>`;
       } else {
-        inner = `<div class="an-box">${escapeHtml(L.error || '회귀를 계산하지 못했어요.')}</div>`;
+        inner = `<div class="an-box">${escapeHtml(L.error || '회귀를 계산하지 못했습니다.')}</div>`;
       }
       sec2 = `<div class="an-sec"><h3>② 로지스틱 회귀 (정식 연재 여부 ~ 지표들)</h3>
-        <div class="sub">여러 지표를 한꺼번에 넣고, 다른 지표가 같을 때 그 지표 하나가 정식 연재 가능성에 주는 영향을 봐요. 지표는 평균 0·표준편차 1로 맞춰서 넣었어요. 오즈비 1이면 영향 없음, 2면 정식 연재일 승산이 2배예요. 신뢰구간이 1을 포함하면 늘어나는지 줄어드는지조차 확정하지 못해요.</div>
+        <div class="sub">여러 지표를 한꺼번에 넣고, 다른 지표가 같을 때 그 지표 하나가 정식 연재 가능성에 주는 영향을 봅니다. 지표는 평균 0·표준편차 1로 맞춰서 넣었습니다. 오즈비 1이면 영향 없음, 2면 정식 연재일 승산이 2배입니다. 신뢰구간이 1을 포함하면 늘어나는지 줄어드는지조차 확정하지 못합니다.</div>
         ${inner}
         <div class="an-box ${L.sampleOk ? '' : 'warn'}"><b>표본이 충분한가?</b> 분석 표본 ${L.n}개 중 정식 연재 ${L.events}개, 독립변수 ${L.variables}개 → 변수당 사건 수(EPV) <b>${L.epv}</b> (경험칙 ${L.epvMin} 이상).
-          ${L.sampleOk ? '기준을 충족해요.' : '<b>표본 부족.</b> 추정이 불안정할 수 있어서 오즈비는 방향을 가늠하는 참고용이에요.'}
+          ${L.sampleOk ? '기준을 충족합니다.' : '<b>표본 부족.</b> 추정이 불안정할 수 있어서 오즈비는 방향을 가늠하는 참고용입니다.'}
           <span style="color:var(--muted)">(기준 출처: Peduzzi 외, 1996, J Clin Epidemiol)</span></div></div>`;
     }
 
@@ -3899,7 +3988,7 @@ html,body{max-width:100%;overflow-x:hidden}
     const backlogCount = REAL_DATA.filter(d => noticeBacklog(d)).length;
     const groupText = Object.entries(A.groups || {}).map(([k, v]) => `${AN_GROUP_LABELS[k] || k} ${v}`).join(' · ');
     const sec3 = `<div class="an-sec"><h3>⑤ 분류 현황</h3>
-      <div class="sub">공지를 직접 확인해 분류한 사례예요. 이 숫자는 지금 이 브라우저에서 보이는 분류를 그대로 센 값이에요.</div>
+      <div class="sub">공지를 직접 확인해 분류한 사례입니다. 이 숫자는 지금 이 브라우저에서 보이는 분류를 그대로 센 값입니다.</div>
       <div class="an-status">
         ${Object.entries(LABEL_STATUS).map(([k, v]) => `<div><span>${v}</span><span>${byStatus[k] || 0}</span></div>`).join('')}
         <div><span>정식 작품 번호 입력</span><span>${officialLinked}</span></div>
@@ -3908,27 +3997,27 @@ html,body{max-width:100%;overflow-x:hidden}
       </div>
       <div class="an-box"><b>분석에 쓰인 데이터</b>: 조사 목록 기준 사례 ${(ANALYSIS.cases || []).length}개${anIncludeMine
           ? ` + 내가 분류한 작품(연재 확정 ${mine.official}건 → 정식 연재, 해당없음 ${mine.none}건 → 정식 연재 없음)${mine.overlap ? ` · 조사 목록과 겹쳐 분류 쪽으로 덮어쓴 ${mine.overlap}건` : ''}${mine.dupOfficial ? ` · 같은 정식 작품 번호라 한 번만 센 ${mine.dupOfficial}건` : ''}`
-          : ' (내 분류는 뺐어요)'}${anIncludeScanned ? ` + 전 회차를 훑어 공지가 없던 작품 ${mine.scannedNone}건(정식 연재 없음)` : ''}.
+          : ' (내 분류는 뺐습니다)'}${anIncludeScanned ? ` + 전 회차를 훑어 공지가 없던 작품 ${mine.scannedNone}건(정식 연재 없음)` : ''}.
         ${anFilterActive() ? `<br>대조군 조건: ${anFilter.months > 0 ? `마지막 업데이트 최근 ${anFilter.months}개월 이내(정식 연재 없음 쪽)` : ''}${anFilter.months > 0 && anFilter.minEp > 1 ? ' · ' : ''}${anFilter.minEp > 1 ? `${anFilter.basis === 'lastNo' ? '마지막 회차 번호' : '남아 있는 회차'} ${anFilter.minEp}개 이상(${anFilter.scope === 'both' ? '양쪽' : '정식 연재 없음 쪽'})` : ''} → 정식 연재 없음 ${mine.filtDroppedNone}개${mine.filtDroppedOfficial ? `, 정식 연재 ${mine.filtDroppedOfficial}개` : ''} 제외.` : ''}
-    합친 뒤 ${escapeHtml(groupText)}예요. 완결·타 플랫폼·리메이크·수상 분류(${mine.skipped}건)는 비교에서 뺐어요.<br>
-        <span style="color:var(--muted)">‘해당없음’은 공지를 확인했더니 연재 소식이 아니었다는 뜻이라 ‘정식 연재 없음’으로 취급해요 (이후 정식 연재가 될 수도 있어요).
-        이 수치는 페이지를 열 때마다 지금 브라우저의 분류로 다시 계산해요. 추적 데이터 기준일 ${escapeHtml(A.historyLastDate || '–')} ·
+    합친 뒤 ${escapeHtml(groupText)}입니다. 완결·타 플랫폼·리메이크·수상 분류(${mine.skipped}건)는 비교에서 뺐습니다.<br>
+        <span style="color:var(--muted)">‘해당없음’은 공지를 확인했더니 연재 소식이 아니었다는 뜻이라 ‘정식 연재 없음’으로 취급합니다 (이후 정식 연재가 될 수도 있습니다).
+        이 수치는 페이지를 열 때마다 지금 브라우저의 분류로 다시 계산합니다. 추적 데이터 기준일 ${escapeHtml(A.historyLastDate || '–')} ·
         ${A.referenceSource ? '기준 사례 출처: ' + escapeHtml(A.referenceSource) : ''}</span></div></div>`;
 
     // ④ 한계
     const excluded = Object.entries(A.groups || {}).filter(([k]) => k !== 'official' && k !== 'none').reduce((a, [, v]) => a + v, 0);
     const limits = [
-      ['표본 크기', (A.logistic && A.logistic.sampleOk) ? `정식 연재 사례 ${nOff}개로 전체 비교는 가능하지만(회귀 변수당 사건 수 ${A.logistic.epv}), 경로별로 나누면 20개 안팎이라 신뢰구간이 넓어요.` : `정식 연재 사례가 ${nOff}개뿐이라 신뢰구간이 넓고, 로지스틱 회귀는 변수당 사건 수가 경험칙에 못 미쳐요.`, '전체 비교는 확정 기준으로, 경로별 비교는 경향으로만 읽고 사례가 늘면 같은 방식으로 다시 계산해요.'],
-      ['여러 지표를 함께 검정', `지표 ${m}개를 동시에 보면 아무 관계가 없어도 p < ${A.alpha}가 하나쯤 나올 수 있어요.`, `기준을 ${A.alphaCorrected}로 낮춘 보정 결과를 같이 보여줘요.`],
-      ['선택 편향', '조사 목록은 공지가 있던 작품 위주라 베스트도전 전체를 대표하지 않아요.', '공지 없는 작품을 비교군으로 늘리거나 한계로 명시해요.'],
-      ['대조군 조건', '정식 연재 없음 쪽에서 방치된 작품을 걸러내면 비슷하게 활동하는 작품끼리 비교할 수 있지만, 회차 수는 글 삭제와 경로(챌린저스·수상작은 1~3화만 남김)의 영향을 받아요. 회차 조건을 양쪽에 걸면 이런 정식 연재 작품이 빠져요.', '조건을 바꿔 가며 결론이 유지되는지 보고, 마지막 회차 번호 기준도 함께 확인해요. 마지막 업데이트 조건은 정식 연재 쪽에 걸지 않아요(승격 뒤엔 베스트도전 업데이트가 멈추는 게 정상이라서).'],
-      ['측정 시점', '정식 연재 작품의 수치는 승격 뒤(마지막 추적값)에 잰 값이라 “예측”이 아니라 “비교”예요.', '앞으로는 일일 추적 데이터에서 공지 이전 시점의 지표를 써요.'],
-      ['누적값의 시대 편향', '누적 조회수·관심 수는 오래된 작품일수록 커서 작품 나이의 영향이 섞여요.', '누적값에 큰 비중을 두지 않고 비율·최근 변화 지표를 함께 봐요.'],
-      ['제외한 작품', `조사 목록의 수상작·완결·분류 불가 ${excluded}개와 내 분류 중 완결·타 플랫폼·리메이크·수상 ${mine.skipped}개(합계 ${excluded + mine.skipped}개)는 이번 비교에서 뺐어요.`, '수상작은 별도 분석, 완결은 사유별로 나눈 뒤 다시 검토해요.'],
-      ['경로 구성', '경로별 비교는 작품이 20개 안팎이고, 메모·공지 제목 키워드로 읽은 ‘추정’ 경로가 섞여 있어요.', '직접 고른 경로만 쓰는 옵션을 두고, 추정값은 확정 버튼으로 하나씩 확인해요.'],
-      ['정식 관심 수의 나이 효과', '누적 관심 수는 오픈한 지 오래된 작품에 유리해서 일수로 나눠도 초반 효과가 남고, 최근 증가량은 기록 기간이 아직 짧아요.', '기록이 쌓이면 오픈 후 같은 시점(예: 90일)의 관심 수로 맞춰 비교해요.'],
-      ['분류가 늘면 값이 바뀜', '분류를 하나 더할 때마다 수치가 움직여요. 특히 정식 연재 사례가 적은 동안은 크게 흔들려요.', '유의하게 나올 때까지 분류를 고르지 않고, 분류 순서와 상관없이 전부 분류한 뒤의 값을 기준으로 봐요.'],
-      ['수동 입력 값', '뱃지와 관심 수는 사람이 직접 정리한 값이라 입력 오류가 있을 수 있어요.', '크롤러가 조회할 수 있는 값(정식 작품 관심 수)은 자동 기록으로 대체해요.'],
+      ['표본 크기', (A.logistic && A.logistic.sampleOk) ? `정식 연재 사례 ${nOff}개로 전체 비교는 가능하지만(회귀 변수당 사건 수 ${A.logistic.epv}), 경로별로 나누면 20개 안팎이라 신뢰구간이 넓습니다.` : `정식 연재 사례가 ${nOff}개뿐이라 신뢰구간이 넓고, 로지스틱 회귀는 변수당 사건 수가 경험칙에 못 미칩니다.`, '전체 비교는 확정 기준으로, 경로별 비교는 경향으로만 읽고 사례가 늘면 같은 방식으로 다시 계산합니다.'],
+      ['여러 지표를 함께 검정', `지표 ${m}개를 동시에 보면 아무 관계가 없어도 p < ${A.alpha}가 하나쯤 나올 수 있습니다.`, `기준을 ${A.alphaCorrected}로 낮춘 보정 결과를 같이 보여 줍니다.`],
+      ['선택 편향', '조사 목록은 공지가 있던 작품 위주라 베스트도전 전체를 대표하지 않습니다.', '공지 없는 작품을 비교군으로 늘리거나 한계로 명시합니다.'],
+      ['대조군 조건', '정식 연재 없음 쪽에서 방치된 작품을 걸러내면 비슷하게 활동하는 작품끼리 비교할 수 있지만, 회차 수는 글 삭제와 경로(챌린저스·수상작은 1~3화만 남김)의 영향을 받습니다. 회차 조건을 양쪽에 걸면 이런 정식 연재 작품이 빠집니다.', '조건을 바꿔 가며 결론이 유지되는지 보고, 마지막 회차 번호 기준도 함께 확인합니다. 마지막 업데이트 조건은 정식 연재 쪽에 걸지 않습니다(승격 뒤엔 베스트도전 업데이트가 멈추는 게 정상이라서).'],
+      ['측정 시점', '정식 연재 작품의 수치는 승격 뒤(마지막 추적값)에 잰 값이라 “예측”이 아니라 “비교”입니다.', '앞으로는 일일 추적 데이터에서 공지 이전 시점의 지표를 씁니다.'],
+      ['누적값의 시대 편향', '누적 조회수·관심 수는 오래된 작품일수록 커서 작품 나이의 영향이 섞입니다.', '누적값에 큰 비중을 두지 않고 비율·최근 변화 지표를 함께 봅니다.'],
+      ['제외한 작품', `조사 목록의 수상작·완결·분류 불가 ${excluded}개와 내 분류 중 완결·타 플랫폼·리메이크·수상 ${mine.skipped}개(합계 ${excluded + mine.skipped}개)는 이번 비교에서 뺐습니다.`, '수상작은 별도 분석, 완결은 사유별로 나눈 뒤 다시 검토합니다.'],
+      ['경로 구성', '경로별 비교는 작품이 20개 안팎이고, 메모·공지 제목 키워드로 읽은 ‘추정’ 경로가 섞여 있습니다.', '직접 고른 경로만 쓰는 옵션을 두고, 추정값은 확정 버튼으로 하나씩 확인합니다.'],
+      ['정식 관심 수의 나이 효과', '누적 관심 수는 오픈한 지 오래된 작품에 유리해서 일수로 나눠도 초반 효과가 남고, 최근 증가량은 기록 기간이 아직 짧습니다.', '기록이 쌓이면 오픈 후 같은 시점(예: 90일)의 관심 수로 맞춰 비교합니다.'],
+      ['분류가 늘면 값이 바뀜', '분류를 하나 더할 때마다 수치가 움직입니다. 특히 정식 연재 사례가 적은 동안은 크게 흔들립니다.', '유의하게 나올 때까지 분류를 고르지 않고, 분류 순서와 상관없이 전부 분류한 뒤의 값을 기준으로 봅니다.'],
+      ['수동 입력 값', '뱃지와 관심 수는 사람이 직접 정리한 값이라 입력 오류가 있을 수 있습니다.', '크롤러가 조회할 수 있는 값(정식 작품 관심 수)은 자동 기록으로 대체합니다.'],
     ];
     const sec4 = `<div class="an-sec"><h3>⑥ 결과를 읽을 때의 한계</h3>
       <ul class="an-limits">${limits.map(([t, d, r]) => `<li><b>${escapeHtml(t)}</b>${escapeHtml(d)}<br><span>대응: ${escapeHtml(r)}</span></li>`).join('')}</ul></div>`;
@@ -4055,7 +4144,7 @@ html,body{max-width:100%;overflow-x:hidden}
     return `
       <div class="serial-info">
         <span class="field">화수 <b>${item.episodeCount ?? '-'}화</b></span>
-        <span class="field">연재주기 <b>${item.cadenceDays != null ? item.cadenceDays + '일' : '미확인'}</b></span>
+        <span class="field" title="가장 최근 올라온 회차들 사이 간격의 중앙값이에요. 한 화를 만드는 데 걸린 시간이 아니라 업로드 간격이에요.">최신 연재주기 <b>${item.cadenceDays != null ? item.cadenceDays + '일' : '미확인'}</b></span>
         <span class="field ${isAlert?'alert':''}">최신 회차 키워드 <b>${keywordText}</b></span>
         ${item.latestSubtitle ? `<span class="field">최신 부제 <b>${item.latestSubtitle}</b></span>` : ''}
         <span class="field">관심 수 <b>${favoriteLabel(item)}</b><span class="field-note"> (누적값 · 오래된 작품일수록 큼)</span></span>
@@ -4143,6 +4232,29 @@ html,body{max-width:100%;overflow-x:hidden}
     </div>`;
   }
 
+  let reviewModalId = null;      // 워치리스트에서 연 검토 창의 작품 번호 (없으면 null)
+  function openReviewModal(titleId){
+    const item = REAL_DATA.find(d => d.titleId === titleId);
+    if(!item) return;
+    reviewModalId = titleId;
+    document.getElementById('rm-title').textContent = item.titleName;
+    document.getElementById('review-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderReviewTab(titleId);
+    document.getElementById('rm-body').scrollTop = 0;
+  }
+  function closeReviewModal(){
+    const id = reviewModalId;
+    reviewModalId = null;
+    document.getElementById('review-modal').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('rm-body').innerHTML = '';
+    if(id == null) return;
+    if(document.getElementById(`detail-body-${id}`) && detailTab[id] === 'review') renderReviewTab(id);   // 스카우팅 목록에 열려 있던 검토 화면도 새 값으로
+    if(location.hash === '#/watchlist') renderWatchlistPage();                                              // 카드의 '작품 검토 n/9' 갱신
+  }
+  document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && reviewModalId != null) closeReviewModal(); });
+
   function reviewAnsweredCount(titleId){
     const r = getReview(titleId);
     return r ? Object.values(r.answers || {}).filter(Boolean).length : 0;
@@ -4150,7 +4262,8 @@ html,body{max-width:100%;overflow-x:hidden}
 
   function renderReviewTab(titleId){
     const item = REAL_DATA.find(d => d.titleId === titleId);
-    const bodyEl = document.getElementById(`detail-body-${titleId}`);
+    const inModal = reviewModalId === titleId, RP = inModal ? 'm-' : '';   // 검토 창에서 열었을 때는 칸 번호가 겹치지 않게 앞에 m-을 붙임
+    const bodyEl = inModal ? document.getElementById('rm-body') : document.getElementById(`detail-body-${titleId}`);
     const review = getReview(titleId);
     const sections = REVIEW_SECTIONS.map(sec => `
       <div class="review-section">
@@ -4162,13 +4275,13 @@ html,body{max-width:100%;overflow-x:hidden}
       <div class="review">
         <div class="review-head">
           <span class="review-progress">${REVIEW_TOTAL}개 중 ${reviewAnsweredCount(titleId)}개 체크</span>
-          <span class="review-saved" id="review-saved-${titleId}">${review ? `저장됨 · ${escapeHtml(review.checkedAt || '')}` : ''}</span>
+          <span class="review-saved" id="${RP}review-saved-${titleId}">${review ? `저장됨 · ${escapeHtml(review.checkedAt || '')}` : ''}</span>
         </div>
         ${sections}
-        <textarea class="note-editor" id="review-note-${titleId}" rows="${noteRows(review ? review.note : '')}" placeholder="이 작품을 이렇게 판단한 이유를 남겨 보세요. (예: 첫 화 연출, 비슷한 해외 반응, 걸리는 소재 등)"
+        <textarea class="note-editor" id="${RP}review-note-${titleId}" rows="${noteRows(review ? review.note : '')}" placeholder="이 작품을 이렇게 판단한 이유를 남겨 보세요. (예: 첫 화 연출, 비슷한 해외 반응, 걸리는 소재 등)"
           oninput="onReviewNoteInput(${titleId}, this)" onkeydown="if(event.key==='Enter' && (event.ctrlKey||event.metaKey)){event.preventDefault(); onReviewNote(${titleId}, this.value);}">${escapeHtml(review ? review.note : '')}</textarea>
         <div class="note-actions">
-          <button type="button" class="label-save-btn" onclick="onReviewNote(${titleId}, document.getElementById('review-note-${titleId}').value)">저장</button>
+          <button type="button" class="label-save-btn" onclick="onReviewNote(${titleId}, document.getElementById('${RP}review-note-${titleId}').value)">저장</button>
           <span class="label-saved">Ctrl+Enter로도 저장돼요</span>
         </div>
         <p class="review-foot">점수는 매기지 않아요. "예"는 항상 유리한 쪽이에요. 체크는 이 브라우저에 저장되고 [기록 내보내기]에 같이 담겨요.</p>
@@ -4518,5 +4631,11 @@ html,body{max-width:100%;overflow-x:hidden}
   addEventListener('scroll', hide, {passive:true});
 })();
 </script>
+<div id="review-modal" onclick="if(event.target===this) closeReviewModal()">
+  <div class="rm-panel" role="dialog" aria-modal="true" aria-labelledby="rm-title">
+    <div class="rm-head"><div><div class="rm-sub">작품 검토</div><b id="rm-title"></b></div><button class="rm-close" onclick="closeReviewModal()" aria-label="닫기">✕</button></div>
+    <div class="rm-body" id="rm-body"></div>
+  </div>
+</div>
 </body>
 </html>
