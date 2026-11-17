@@ -1071,6 +1071,14 @@
   .list-toggles{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 14px;}
   .list-toggles .dismiss-toggle{height:36px;font-size:13px;}
   .list-header{padding-bottom:12px;}
+  /* 설명 박스: 브라우저 기본 툴팁 대신 사이트 테마에 맞춘 박스 (데스크탑은 마우스 올림, 모바일은 탭) */
+  #sd-tip{position:fixed;z-index:1000;max-width:300px;background:var(--hairline);color:var(--paper);border-radius:10px;padding:11px 13px;box-shadow:0 8px 24px rgba(0,0,0,.5);font-size:12.5px;line-height:1.55;display:none;pointer-events:none;}
+  #sd-tip b{display:block;font-size:12.5px;font-weight:800;margin-bottom:3px;}
+  #sd-tip span{display:block;color:#D4D2CA;}
+  #sd-tip i{display:block;margin-top:5px;font-style:normal;color:var(--muted);font-size:11.5px;}
+  .sb,.path-tag,.signal-slot{cursor:pointer;}
+  .range-hint{font-size:12px;color:var(--muted);margin:-2px 0 12px;}
+  .label-link-note{font-size:11.5px;color:var(--muted);margin-left:8px;font-weight:500;}
 </style>
 </head>
 <body>
@@ -1816,7 +1824,7 @@
   function pastHitsRow(item){
     const c = pastClassified(item);
     if(!c || (!c.strong.length && !c.weak.length)) return '';
-    const mk = h => `<a class="label-link" href="https://comic.naver.com/bestChallenge/detail?titleId=${item.titleId}&no=${h.no}" target="_blank" rel="noopener" title="${escapeHtml((h.w || []).join(', '))}">${escapeHtml(h.t || '(제목 없음)')}${h.d ? ` · ${escapeHtml(h.d)}` : ''} ↗</a>`;
+    const mk = h => `<a class="label-link" href="https://comic.naver.com/bestChallenge/detail?titleId=${item.titleId}&no=${h.no}" target="_blank" rel="noopener">${escapeHtml(h.t || '(제목 없음)')}${h.d ? ` · ${escapeHtml(h.d)}` : ''} ↗</a>${(h.w || []).length ? `<span class="label-link-note">키워드: ${(h.w || []).map(escapeHtml).join(', ')}</span>` : ''}`;
     const recent = arr => arr.slice().reverse().slice(0, 8);                 // 최근 회차부터
     const rec = pastRecord(item);
     const note = c.dropped ? ` <span class="label-age">오탐 ${c.dropped}건 제외</span>` : '';
@@ -1962,7 +1970,7 @@
         <div class="label-panel-title">공지 확인·분류 ${flag}</div>
         <div class="label-panel-row">
           <span>${noticeInfo}${hitInfo} · <span class="label-age">${checkedInfo}</span></span>
-          <a class="label-link" href="${escapeHtml(latestEpisodeUrl(item))}" target="_blank" rel="noopener" title="${item.latestNo != null ? '알림이 뜬 최신 회차로 바로 이동' : '작품 목록으로 이동 (최신 회차 번호는 다음 상세 확인 때 기록돼요)'}">네이버에서 확인 ↗</a>
+          <a class="label-link" href="${escapeHtml(latestEpisodeUrl(item))}" target="_blank" rel="noopener" >네이버에서 확인 ↗</a><span class="label-link-note">${item.latestNo != null ? '알림이 뜬 최신 회차로 이동해요' : '작품 목록으로 이동해요 (최신 회차 번호는 다음 상세 확인 때 기록돼요)'}</span>
         </div>
         <div class="label-panel-row label-basis" id="label-basis-${item.titleId}">${labelBasisHtml(item, label)}</div>
         ${pastHitsRow(item)}
@@ -2438,7 +2446,7 @@
     // 행에 있는 배지 라벨은 다른 배지들과 너비를 맞추기 위해 고정 텍스트로 둠
     if(slot.key === 'growth' && item && item.growthPct != null){
       const sign = item.growthPct >= 0 ? '+' : '';
-      return `${SIGNAL_DESC.growth} · 현재 ${sign}${item.growthPct}%`;
+      return `${SIGNAL_DESC.growth} · 현재 ${sign}${Math.round(item.growthPct).toLocaleString()}%`;
     }
     return SIGNAL_DESC[slot.key];
   }
@@ -4133,12 +4141,15 @@
     const rangeButtons = Object.keys(RANGE_LABELS).map(r => {
       const enabled = daysAvailable >= RANGE_MIN_DAYS[r];
       return `<button class="trend-range-btn ${range===r?'active':''}" ${enabled?'':'disabled'}
-        onclick="${enabled?`setTrendRange(${titleId},'${r}')`:''}"
-        title="${enabled?'':`최소 ${RANGE_MIN_DAYS[r]}일치 데이터 필요 (현재 ${daysAvailable}일)`}">${RANGE_LABELS[r]}</button>`;
+        onclick="${enabled?`setTrendRange(${titleId},'${r}')`:''}">${RANGE_LABELS[r]}</button>`;
     }).join('');
+    const lockedRanges = Object.keys(RANGE_LABELS).filter(r => daysAvailable < RANGE_MIN_DAYS[r]);
+    const rangeHint = lockedRanges.length
+      ? `<div class="range-hint">데이터 ${daysAvailable}일째예요 · ${lockedRanges.map(r => `${RANGE_LABELS[r]}은 ${RANGE_MIN_DAYS[r]}일치부터`).join(', ')} 볼 수 있어요.</div>` : '';
 
     bodyEl.innerHTML = `
       <div class="trend-range-tabs">${rangeButtons}</div>
+      ${rangeHint}
       <div id="trend-chart-wrap-${titleId}"></div>
     `;
 
@@ -4417,5 +4428,40 @@
   showRoute();
 </script>
 
+<script>
+(function(){
+  const SEL = '.sb, .path-tag, .signal-slot';
+  const tip = document.createElement('div'); tip.id = 'sd-tip'; tip.setAttribute('role','tooltip'); document.body.appendChild(tip);
+  let cur = null;
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function prep(el){ if(el.hasAttribute('title')){ el.dataset.tip = el.getAttribute('title'); el.removeAttribute('title'); } }
+  function show(el){
+    prep(el);
+    const raw = el.dataset.tip; if(!raw){ hide(); return; }
+    let parts = raw.split(' — ');
+    if(parts.length === 1 && raw.includes(' · 근거:')) parts = raw.split(' · 근거:').map((x,i) => i ? '근거:' + x : x);
+    const label = el.textContent.trim();
+    tip.innerHTML = `<b>${esc(label)}</b><span>${esc(parts[0])}</span>` + (parts.length > 1 ? `<i>${esc(parts.slice(1).join(' '))}</i>` : '');
+    tip.style.display = 'block'; cur = el;
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = Math.min(Math.max(8, r.left), innerWidth - w - 8), y = r.bottom + 8;
+    if(y + h > innerHeight - 8) y = r.top - h - 8;
+    tip.style.left = x + 'px'; tip.style.top = Math.max(8, y) + 'px';
+  }
+  function hide(){ tip.style.display = 'none'; cur = null; }
+  const canHover = () => matchMedia('(hover:hover)').matches;
+  document.addEventListener('mouseover', e => {
+    if(!canHover()) return;
+    const el = e.target.closest ? e.target.closest(SEL) : null;
+    if(el){ prep(el); if(el !== cur) show(el); } else if(cur) hide();
+  });
+  document.addEventListener('click', e => {
+    const el = e.target.closest ? e.target.closest(SEL) : null;
+    if(el && !canHover()){ e.stopPropagation(); e.preventDefault(); cur === el ? hide() : show(el); return; }
+    if(!el) hide();
+  }, true);
+  addEventListener('scroll', hide, {passive:true});
+})();
+</script>
 </body>
 </html>
