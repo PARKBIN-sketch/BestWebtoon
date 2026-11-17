@@ -13,6 +13,10 @@
       "date": "2023-09-11",
       "updatedAt": "2026-11-11T07:07:17.044Z"
     },
+    "817859": {
+      "date": "2023-11-05",
+      "updatedAt": "2026-11-17T07:37:37.422Z"
+    },
     "819696": {
       "date": "2023-12-16",
       "updatedAt": "2026-11-09T06:52:53.703Z"
@@ -472,12 +476,20 @@
     "856709": {
       "date": "2026-11-08",
       "updatedAt": "2026-11-11T07:38:10.077Z"
+    },
+    "857113": {
+      "date": "2026-11-11",
+      "updatedAt": "2026-11-17T07:37:01.847Z"
+    },
+    "857377": {
+      "date": "2026-11-11",
+      "updatedAt": "2026-11-17T07:37:11.567Z"
     }
   },
-  "exportedAt": "2026-11-16T05:49:00.000Z",
-  "count": 487,
+  "exportedAt": "2026-11-17T07:39:56.719Z",
+  "count": 490,
   "reviewCount": 0,
-  "personalCount": 3,
+  "personalCount": 11,
   "labels": {
     "15067": {
       "status": "moved",
@@ -1790,10 +1802,10 @@
       "status": "none",
       "note": "",
       "titleName": "카나와 초나",
-      "subtitle": "효녀의 근황",
-      "noticeDate": "26.09.22",
-      "checkedAt": "2026-10-07",
-      "updatedAt": "2026-10-07T04:41:48.531Z",
+      "subtitle": "엄마의 근황",
+      "noticeDate": "26.11.15",
+      "checkedAt": "2026-11-16",
+      "updatedAt": "2026-11-16T04:23:48.803Z",
       "snapshot": {
         "viewCount": 7416105,
         "starScore": 9.84,
@@ -1977,6 +1989,23 @@
         "cadenceDays": 57,
         "growthPct": 0,
         "trackedDays": 36
+      }
+    },
+    "717924": {
+      "status": "remake",
+      "note": "",
+      "titleName": "나비 이야기",
+      "subtitle": "재연재 공지!",
+      "noticeDate": "26.11.14",
+      "checkedAt": "2026-11-16",
+      "updatedAt": "2026-11-16T04:29:44.298Z",
+      "snapshot": {
+        "viewCount": 705141,
+        "starScore": 9.87224,
+        "episodeCount": 3,
+        "cadenceDays": 1414,
+        "growthPct": 0.1,
+        "trackedDays": 2
       }
     },
     "718033": {
@@ -2616,6 +2645,17 @@
         "trackedDays": 36
       }
     },
+    "752287": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-01",
+          "sub": ""
+        }
+      ]
+    },
     "752341": {
       "status": "moved",
       "note": "카카오 ",
@@ -3027,6 +3067,17 @@
         "trackedDays": 36
       }
     },
+    "772780": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-04",
+          "sub": ""
+        }
+      ]
+    },
     "772836": {
       "status": "remake",
       "note": "리메이크본: 830868 (도전만화, 지최대)",
@@ -3182,6 +3233,17 @@
         "growthPct": 0,
         "trackedDays": 36
       }
+    },
+    "779079": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-02",
+          "sub": ""
+        }
+      ]
     },
     "781414": {
       "status": "none",
@@ -3441,6 +3503,17 @@
         "growthPct": 1.5,
         "trackedDays": 28
       }
+    },
+    "791969": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-02",
+          "sub": ""
+        }
+      ]
     },
     "792063": {
       "status": "ended",
@@ -4927,6 +5000,17 @@
         "trackedDays": 35
       }
     },
+    "811046": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-01",
+          "sub": ""
+        }
+      ]
+    },
     "811155": {
       "status": "none",
       "note": "연재 공지",
@@ -5453,6 +5537,17 @@
         "trackedDays": 34
       },
       "officialOpenDate": "2026-03-22"
+    },
+    "816046": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-03",
+          "sub": ""
+        }
+      ]
     },
     "816057": {
       "status": "none",
@@ -8021,20 +8116,20 @@
       }
     },
     "839665": {
-      "status": "none",
-      "note": "시즌 1후기 휴재",
+      "status": "confirmed",
+      "note": "",
       "titleName": "우리 언니가 무당이 되었다",
-      "subtitle": "시즌 1 후기",
-      "noticeDate": "26.10.28",
-      "checkedAt": "2026-10-29",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "subtitle": "! 공지 !",
+      "noticeDate": "26.11.13",
+      "checkedAt": "2026-11-17",
+      "updatedAt": "2026-11-17T07:38:41.790Z",
       "snapshot": {
-        "viewCount": 1323790,
-        "starScore": 9.55909,
-        "episodeCount": 108,
-        "cadenceDays": 4,
-        "growthPct": 38.1,
-        "trackedDays": 50
+        "viewCount": 1366353,
+        "starScore": 9.56716,
+        "episodeCount": 1,
+        "cadenceDays": null,
+        "growthPct": 42.5,
+        "trackedDays": 69
       },
       "hideTags": [
         {
@@ -8042,7 +8137,8 @@
           "when": "2025-11",
           "sub": ""
         }
-      ]
+      ],
+      "path": "challengers"
     },
     "839876": {
       "status": "remake",
@@ -8150,6 +8246,23 @@
         "cadenceDays": 0,
         "growthPct": 10.2,
         "trackedDays": 36
+      }
+    },
+    "840964": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "대마법소녀의 시대",
+      "subtitle": "휴재공지",
+      "noticeDate": "26.11.16",
+      "checkedAt": "2026-11-17",
+      "updatedAt": "2026-11-17T07:39:46.654Z",
+      "snapshot": {
+        "viewCount": 464163,
+        "starScore": 9.51432,
+        "episodeCount": 67,
+        "cadenceDays": 7,
+        "growthPct": 26.1,
+        "trackedDays": 69
       }
     },
     "840974": {
@@ -8327,6 +8440,17 @@
         "trackedDays": 36
       }
     },
+    "842915": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2026-03",
+          "sub": ""
+        }
+      ]
+    },
     "844566": {
       "status": "ended",
       "note": "생계문제",
@@ -8377,6 +8501,17 @@
         "growthPct": 4.6,
         "trackedDays": 34
       }
+    },
+    "847897": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2025-12",
+          "sub": ""
+        }
+      ]
     },
     "848293": {
       "status": "moved",
@@ -8618,6 +8753,34 @@
         "trackedDays": 28
       }
     },
+    "851292": {
+      "status": "none",
+      "note": "휴재",
+      "titleName": "확신의 용사",
+      "subtitle": "휴재 공지",
+      "noticeDate": "26.11.13",
+      "checkedAt": "2026-11-17",
+      "updatedAt": "2026-11-17T07:39:27.574Z",
+      "snapshot": {
+        "viewCount": 15556,
+        "starScore": 8.47689,
+        "episodeCount": 14,
+        "cadenceDays": 10,
+        "growthPct": 141.3,
+        "trackedDays": 69
+      }
+    },
+    "851297": {
+      "status": "",
+      "updatedAt": "2026-11-16T05:49:00.000Z",
+      "hideTags": [
+        {
+          "path": "독자PICK(달달 승격)",
+          "when": "2025-11",
+          "sub": ""
+        }
+      ]
+    },
     "851646": {
       "status": "none",
       "note": "지원 사업 연재 제안 중 휴재",
@@ -8840,119 +9003,74 @@
         "trackedDays": 8
       }
     },
-    "752287": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-01",
-          "sub": ""
-        }
-      ]
-    },
-    "772780": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-04",
-          "sub": ""
-        }
-      ]
-    },
-    "779079": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-02",
-          "sub": ""
-        }
-      ]
-    },
-    "791969": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-02",
-          "sub": ""
-        }
-      ]
-    },
-    "811046": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-01",
-          "sub": ""
-        }
-      ]
-    },
-    "816046": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-03",
-          "sub": ""
-        }
-      ]
-    },
-    "842915": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2026-03",
-          "sub": ""
-        }
-      ]
-    },
-    "847897": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2025-12",
-          "sub": ""
-        }
-      ]
-    },
-    "851292": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2025-12",
-          "sub": ""
-        }
-      ]
-    },
-    "851297": {
-      "status": "",
-      "updatedAt": "2026-11-16T05:49:00.000Z",
-      "hideTags": [
-        {
-          "path": "독자PICK(달달 승격)",
-          "when": "2025-11",
-          "sub": ""
-        }
-      ]
+    "855689": {
+      "status": "none",
+      "note": "1화 리뉴얼",
+      "titleName": "관종에게 죽음을",
+      "subtitle": "[공지]",
+      "noticeDate": "26.11.16",
+      "checkedAt": "2026-11-17",
+      "updatedAt": "2026-11-17T07:38:22.910Z",
+      "snapshot": {
+        "viewCount": 17465,
+        "starScore": 8.37113,
+        "episodeCount": 4,
+        "cadenceDays": 17,
+        "growthPct": 1744.2,
+        "trackedDays": 27
+      }
     }
   },
   "reviews": {},
   "personal": {
+    "618334": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:05.012Z"
+    },
+    "660396": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": "2026-11-17T05:40:06.901Z",
+      "updatedAt": "2026-11-17T05:40:07.861Z"
+    },
+    "701701": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": "2026-11-17T05:40:05.851Z",
+      "updatedAt": "2026-11-17T07:05:30.119Z"
+    },
+    "751850": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:10.059Z"
+    },
+    "779079": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:08.436Z"
+    },
+    "811046": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:06.676Z"
+    },
     "825641": {
       "watch": false,
       "dismissed": false,
@@ -8976,6 +9094,22 @@
       "note": "",
       "addedAt": null,
       "updatedAt": "2026-10-07T06:57:50.492Z"
+    },
+    "831293": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:12.267Z"
+    },
+    "845976": {
+      "watch": false,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": null,
+      "updatedAt": "2026-11-17T04:38:11.468Z"
     }
   }
 }
