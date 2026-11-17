@@ -1104,6 +1104,28 @@ html,body{max-width:100%;overflow-x:hidden}
   .metric .lb-sub{display:block;font-size:10px;font-weight:500;opacity:.8;}
   .metric:nth-child(-n+3) .label{min-height:calc(1.3 * 11.5px + 1.3 * 10px);}
 }
+/* 모바일 목록 행 재배치: [썸네일 | 제목·정보 | ★✕] → 배지·태그 → 조회수·별점 | 증가율·그래프 */
+@media (max-width:720px){
+  .row{grid-template-columns:62px minmax(0,1fr) 36px;grid-template-rows:auto 1fr auto auto auto auto;gap:0 12px;padding:14px 12px 12px;}
+  .title-cell{display:contents;}
+  .thumb{grid-column:1;grid-row:1 / 3;width:62px;height:78px;align-self:start;}
+  .title-cell .name{grid-column:2;grid-row:1;align-self:start;margin:2px 0 0;font-size:17px;line-height:1.3;white-space:normal;}
+  .title-cell .meta{grid-column:2;grid-row:2;align-self:start;margin:3px 0 0;font-size:12.5px;line-height:1.4;}
+  .actions{grid-column:3;grid-row:1 / 3;flex-direction:column;align-self:start;gap:6px;margin:0;}
+  .actions .caret{display:none;}
+  .watch-btn,.dismiss-btn{width:36px;height:36px;}
+  .path-tags{grid-column:1 / -1;grid-row:3;margin:10px 0 0;}
+  .sb-row{grid-column:1 / -1;grid-row:4;margin:8px 0 0;}
+  .path-tags:not(:empty) + .sb-row{margin-top:6px;}
+  .stats{grid-column:1 / -1;grid-row:5;justify-self:start;align-self:end;display:flex;gap:18px;margin-top:12px;}
+  .growth{grid-column:1 / -1;grid-row:5;justify-self:end;align-self:end;flex-direction:row-reverse;gap:10px;margin-top:12px;}
+  .growth .g-text{min-width:0;text-align:right;}
+  .g-n{font-size:20px;}
+  .sp{width:84px;height:40px;}
+}
+@media (max-width:370px){
+  .growth{grid-row:6;justify-self:stretch;justify-content:space-between;margin-top:10px;}
+}
 </style>
 </head>
 <body>
