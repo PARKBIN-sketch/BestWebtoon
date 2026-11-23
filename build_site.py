@@ -361,6 +361,30 @@ def to_js_literal(obj) -> str:
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
+def load_levelup_dates() -> dict:
+    """일별 스냅샷(data/YYYY-MM-DD.json)에서 작품별 '신규 승격 표시가 새로 켜진 날'을 구합니다.
+    네이버의 승격 표시는 약 4주(28일)만 붙어 있어서, 사이트가 6주 동안 보여 주려면
+    표시가 처음 잡힌 날을 따로 기억해야 합니다. 수집을 시작한 첫날부터 이미 켜져 있던
+    작품은 시작일을 알 수 없어 제외합니다."""
+    pat = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
+    files = sorted(p for p in Path("data").glob("*.json") if pat.match(p.name))
+    since: dict = {}
+    prev = None
+    for p in files:
+        try:
+            items = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:   # noqa: BLE001
+            continue
+        if not isinstance(items, list):
+            continue
+        cur = {str(it["titleId"]) for it in items if isinstance(it, dict) and it.get("bestChallengeLevelUp")}
+        if prev is not None:
+            for tid in cur - prev:
+                since[tid] = p.stem
+        prev = cur
+    return since
+
+
 def main() -> None:
     if not HISTORY_PATH.exists():
         print(f"[build_site] {HISTORY_PATH}가 없습니다 — 크롤러가 먼저 실행돼야 합니다.")
@@ -379,6 +403,12 @@ def main() -> None:
 
     history = json.loads(HISTORY_PATH.read_text(encoding="utf-8"))
     real_data = build_real_data(history)
+    # 신규 승격 표시가 새로 켜진 날 (사이트가 승격 후 6주 동안 신규 승격으로 보여 주는 데 씀)
+    levelup = load_levelup_dates()
+    for row in real_data:
+        d = levelup.get(str(row["titleId"]))
+        if d:
+            row["levelUpDate"] = d
     data_literal = to_js_literal(real_data)
 
     html = SITE_PATH.read_text(encoding="utf-8")
