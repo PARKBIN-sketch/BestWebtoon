@@ -486,10 +486,10 @@
       "updatedAt": "2026-11-17T07:37:11.567Z"
     }
   },
-  "exportedAt": "2026-11-17T07:39:56.719Z",
-  "count": 490,
+  "exportedAt": "2026-11-23T06:08:32.595Z",
+  "count": 492,
   "reviewCount": 0,
-  "personalCount": 11,
+  "personalCount": 12,
   "labels": {
     "15067": {
       "status": "moved",
@@ -4125,6 +4125,24 @@
       "officialTitleId": 833361,
       "officialOpenDate": "2024-11-22"
     },
+    "806846": {
+      "status": "confirmed",
+      "note": "챌린저스 선정 감사인사",
+      "titleName": "곱은 궤",
+      "subtitle": "무한감사편",
+      "noticeDate": "26.11.21",
+      "checkedAt": "2026-11-23",
+      "updatedAt": "2026-11-23T06:08:13.167Z",
+      "snapshot": {
+        "viewCount": 30294,
+        "starScore": 9.55603,
+        "episodeCount": 9,
+        "cadenceDays": 22.5,
+        "growthPct": 9,
+        "trackedDays": 74
+      },
+      "path": "challengers"
+    },
     "807374": {
       "status": "none",
       "note": "휴재",
@@ -7721,6 +7739,23 @@
         "trackedDays": 28
       }
     },
+    "833662": {
+      "status": "none",
+      "note": "한 에피소드 완결",
+      "titleName": "금요일엔 빨간 단편을",
+      "subtitle": "미안, 경은이가 싫어해 6화 (완결)",
+      "noticeDate": "26.11.20",
+      "checkedAt": "2026-11-23",
+      "updatedAt": "2026-11-23T06:02:18.731Z",
+      "snapshot": {
+        "viewCount": 468418,
+        "starScore": 9.53254,
+        "episodeCount": 87,
+        "cadenceDays": 7,
+        "growthPct": 7.7,
+        "trackedDays": 74
+      }
+    },
     "833852": {
       "status": "confirmed",
       "note": "",
@@ -8755,12 +8790,12 @@
     },
     "851292": {
       "status": "none",
-      "note": "휴재",
+      "note": "휴재 복귀 공지",
       "titleName": "확신의 용사",
-      "subtitle": "휴재 공지",
-      "noticeDate": "26.11.13",
-      "checkedAt": "2026-11-17",
-      "updatedAt": "2026-11-17T07:39:27.574Z",
+      "subtitle": "공지",
+      "noticeDate": "26.11.21",
+      "checkedAt": "2026-11-23",
+      "updatedAt": "2026-11-23T06:04:50.243Z",
       "snapshot": {
         "viewCount": 15556,
         "starScore": 8.47689,
@@ -9110,6 +9145,14 @@
       "note": "",
       "addedAt": null,
       "updatedAt": "2026-11-17T04:38:11.468Z"
+    },
+    "856707": {
+      "watch": true,
+      "dismissed": false,
+      "status": null,
+      "note": "",
+      "addedAt": "2026-11-23T04:39:36.183Z",
+      "updatedAt": "2026-11-23T04:39:36.184Z"
     }
   }
 }
