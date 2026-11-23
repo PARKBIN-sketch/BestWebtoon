@@ -1342,15 +1342,38 @@ footer{margin-top:48px}
 .an-box.warn{border-left-color:#FF6B5A;box-shadow:inset 3px 0 0 #FF6B5A}
 .label-warn,.label-saved.dirty,.label-saved.warn{color:#FF6B5A}
 .serial-info .field.alert b{color:#FF6B5A}
+
+/* 제목: 로고 마크 + 영문 윗줄 */
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{width:44px;height:44px;border-radius:12px;background:var(--g);display:flex;align-items:center;justify-content:center;flex:none}
+.brand-mark svg{width:26px;height:26px}
+.brand-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--gt);font-weight:700;line-height:1.2}
+.brand h1{margin:2px 0 0}
+header .subtitle{margin-top:12px}
+@media (max-width:720px){
+  .brand{gap:12px}
+  .brand-mark{width:38px;height:38px;border-radius:10px}
+  .brand-mark svg{width:22px;height:22px}
+  .brand-eyebrow{font-size:10px}
+  header h1{font-size:23px}
+  header .subtitle{margin-top:10px}
+}
+
+/* 제목: 기울임 + 두 단어 색 구분 */
+.brand-title{margin:0;font-weight:900;letter-spacing:-1px}
+.brand-title .bt-a{display:inline-block;transform:skewX(-9deg);transform-origin:left bottom;color:var(--g);margin-right:.08em}
+.brand-title .bt-b{color:var(--paper)}
+header .subtitle{margin-top:8px}
+@media (max-width:720px){header h1.brand-title{font-size:26px}header .subtitle{margin-top:8px}}
 </style>
 </head>
 <body>
 
 <div class="top">
 <header>
-  <div>
-    <h1 class="serif">스카우팅 데스크</h1>
-    <div class="subtitle">지금 확인해봐야 할 신호가 있는 작품부터 찾아드려요</div>
+  <div class="brand-wrap">
+    <h1 class="serif brand-title"><span class="bt-a">스카우팅</span> <span class="bt-b">데스크</span></h1>
+    <div class="subtitle">베스트도전 웹툰 스카우팅 대시보드</div>
   </div>
   <div class="data-note" id="data-note">데이터 불러오는 중…</div>
 </header>
