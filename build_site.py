@@ -288,7 +288,15 @@ def load_position(history: dict) -> dict:
                 fav_age = max((base - _dt.date.fromisoformat(fd)).days, 0)
             except ValueError:
                 pass
-        rows.append([int(tid), w.get("titleName") or "", group, int(fav), days, deleted, fav_age])
+        vh, vd = w.get("viewHistory") or [], (w.get("viewDates") or [""])[-1]
+        view = int(vh[-1]) if vh and isinstance(vh[-1], (int, float)) and vh[-1] > 0 else None
+        view_age = None
+        if vd:
+            try:
+                view_age = max((base - _dt.date.fromisoformat(vd)).days, 0)
+            except ValueError:
+                pass
+        rows.append([int(tid), w.get("titleName") or "", group, int(fav), days, deleted, fav_age, w.get("genre") or "", view, view_age])
     return {"updated": base.isoformat(), "favFrom": min(fav_dates) if fav_dates else None, "favTo": max(fav_dates) if fav_dates else None,
             "exc": exc, "works": rows}
 

@@ -494,8 +494,8 @@
       "updatedAt": "2026-11-17T07:37:11.567Z"
     }
   },
-  "exportedAt": "2026-11-23T06:23:40.551Z",
-  "count": 492,
+  "exportedAt": "2026-11-26T04:27:59.440Z",
+  "count": 496,
   "reviewCount": 0,
   "personalCount": 12,
   "labels": {
@@ -2600,6 +2600,23 @@
         "cadenceDays": 7,
         "growthPct": 0.2,
         "trackedDays": 35
+      }
+    },
+    "747122": {
+      "status": "moved",
+      "note": "조선 맴버쉽 c (조선일보)",
+      "titleName": "직업 : 며느리",
+      "subtitle": "공지",
+      "noticeDate": "26.11.25",
+      "checkedAt": "2026-11-26",
+      "updatedAt": "2026-11-26T04:23:33.736Z",
+      "snapshot": {
+        "viewCount": 2332671,
+        "starScore": 9.52033,
+        "episodeCount": 77,
+        "cadenceDays": 14,
+        "growthPct": 0.8,
+        "trackedDays": 26
       }
     },
     "747155": {
@@ -5772,6 +5789,23 @@
         "trackedDays": 28
       }
     },
+    "819775": {
+      "status": "none",
+      "note": "손 부상으로 인한 휴재",
+      "titleName": "셀크리아드 마법학교",
+      "subtitle": "휴재 관련 공지입니다",
+      "noticeDate": "26.11.23",
+      "checkedAt": "2026-11-26",
+      "updatedAt": "2026-11-26T04:24:32.088Z",
+      "snapshot": {
+        "viewCount": 366569,
+        "starScore": 8.88125,
+        "episodeCount": 72,
+        "cadenceDays": 9,
+        "growthPct": 7.7,
+        "trackedDays": 77
+      }
+    },
     "820108": {
       "status": "moved",
       "note": "케이툰 > 네이버 시리즈",
@@ -6796,6 +6830,23 @@
         "cadenceDays": 8,
         "growthPct": 0.3,
         "trackedDays": 34
+      }
+    },
+    "826992": {
+      "status": "none",
+      "note": "포스타입 이벤트 안내",
+      "titleName": "구미호 사제",
+      "subtitle": "포스타입 이벤트 공지!",
+      "noticeDate": "26.11.25",
+      "checkedAt": "2026-11-26",
+      "updatedAt": "2026-11-26T04:24:03.984Z",
+      "snapshot": {
+        "viewCount": 978688,
+        "starScore": 9.46177,
+        "episodeCount": 81,
+        "cadenceDays": null,
+        "growthPct": 19.3,
+        "trackedDays": 77
       }
     },
     "828330": {
@@ -9027,6 +9078,23 @@
         "cadenceDays": 14,
         "growthPct": 160.5,
         "trackedDays": 13
+      }
+    },
+    "854951": {
+      "status": "none",
+      "note": "정식 연재 협의 중",
+      "titleName": "고수레!",
+      "subtitle": "공지",
+      "noticeDate": "26.11.23",
+      "checkedAt": "2026-11-26",
+      "updatedAt": "2026-11-26T04:25:18.256Z",
+      "snapshot": {
+        "viewCount": 6286,
+        "starScore": 9.45562,
+        "episodeCount": 5,
+        "cadenceDays": 13,
+        "growthPct": 967.2,
+        "trackedDays": 57
       }
     },
     "854960": {
