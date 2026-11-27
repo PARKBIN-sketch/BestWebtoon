@@ -384,7 +384,7 @@ def load_official_tags() -> dict:
     for v in raw.values():
         for t in v.get("tags") or []:
             cnt[t] = cnt.get(t, 0) + 1
-    names = [t for t, c in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0])) if c >= 5]
+    names = [t for t, c in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0])) if c >= 1]
     idx = {t: i for i, t in enumerate(names)}
     works = {}
     for tid, v in raw.items():
