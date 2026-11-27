@@ -28,6 +28,7 @@ OFFICIAL_PATH = Path("data") / "official_tracking.json"
 # build_analysis.py가 계산한 정식연재 지표 분석 결과 (사이트의 #/analysis 페이지가 읽음)
 ANALYSIS_PATH = Path("data") / "analysis.json"
 POSITION_EXC_PATH = Path("data") / "position_exceptions.json"   # 관심도 위치 탭: 통계에서 뺄 작품 {번호: 사유}
+TAGS_OFF_PATH = Path("data") / "tags_official.json"        # 정식 연재 웹툰 태그 (collect_tags.py --official이 모음)
 CURRENT_PATH = Path("data") / "current_webtoons.json"       # 현재 연재작 관심 수·연재 시작일 (collect_current.py가 모음)
 BADGE_NAMES_PATH = Path("data") / "badge_names.json"       # 선정 배지 "당시 명칭" 추천 목록 (경로별 이름)
 PATH_TAGS_PATH = Path("data") / "path_tags.json"           # 공식 명단·라벨 메모로 확인된 선정 경로 (titleId별 목록)
@@ -369,6 +370,34 @@ def to_js_literal(obj) -> str:
     return json.dumps(obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
+def load_official_tags() -> dict:
+    """정식 연재 웹툰의 태그를 사이트용으로 줄여 가져옵니다. 없으면 빈 값 (분포도 페이지가 태그 구역을 숨김).
+    태그 이름은 목록(names)에 한 번만 두고 작품에는 번호로 적어 용량을 줄입니다.
+    works[작품번호] = [장르 태그 번호(없으면 -1), [태그 번호, ...]]"""
+    if not TAGS_OFF_PATH.exists():
+        return {}
+    try:
+        raw = json.loads(TAGS_OFF_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    cnt: dict = {}
+    for v in raw.values():
+        for t in v.get("tags") or []:
+            cnt[t] = cnt.get(t, 0) + 1
+    names = [t for t, c in sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0])) if c >= 5]
+    idx = {t: i for i, t in enumerate(names)}
+    works = {}
+    for tid, v in raw.items():
+        tags = [idx[t] for t in (v.get("tags") or []) if t in idx]
+        if not tags:
+            continue
+        g = (v.get("genre") or [None])[0]
+        works[tid] = [idx.get(g, -1), tags]
+    if not works:
+        return {}
+    return {"updated": max((v.get("at") or "") for v in raw.values()), "names": names, "works": works}
+
+
 def load_levelup_dates() -> dict:
     """일별 스냅샷(data/YYYY-MM-DD.json)에서 작품별 '신규 승격 표시가 새로 켜진 날'을 구합니다.
     네이버의 승격 표시는 약 4주(28일)만 붙어 있어서, 사이트가 6주 동안 보여 주려면
@@ -489,6 +518,13 @@ def main() -> None:
             new_html = new_html[:m.start()] + f"  const {const_name} = {to_js_literal(value)};\n" + new_html[m.end():]
         else:
             print(f"[build_site] {const_name} 선언부를 못 찾아 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
+
+    # 관심도 분포 탭용 정식 연재 웹툰 태그(OFFICIAL_TAGS)
+    tg_match = re.compile(r"  const OFFICIAL_TAGS = \{.*?\};\n", re.DOTALL).search(new_html)
+    if tg_match:
+        new_html = new_html[:tg_match.start()] + f"  const OFFICIAL_TAGS = {to_js_literal(load_official_tags())};\n" + new_html[tg_match.end():]
+    else:
+        print("[build_site] OFFICIAL_TAGS 선언부를 못 찾아 태그 구역 반영을 건너뜁니다 (HTML을 최신 버전으로 올려주세요).")
 
     # 관심도 위치 탭용 베스트도전 작품 목록(BC_POSITION)
     pos_match = re.compile(r"  const BC_POSITION = \{.*?\};\n", re.DOTALL).search(new_html)
